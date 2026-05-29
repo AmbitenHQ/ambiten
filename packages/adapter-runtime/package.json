@@ -1,0 +1,50 @@
+{
+  "name": "@tenra/adapter-runtime",
+  "version": "1.0.0",
+  "description": "Runtime utilities for Tenra multi-tenancy adapters",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "pnpm -r run build:rtime",
+    "build:rtime": "tsc -p tsconfig.json",
+    "test": "jest --detectOpenHandles --coverage",
+    "changeset": "pnpm run changeset",
+    "release": "pnpm changeset version",
+    "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^25.5.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.9",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "@tenra/adapter-types": "workspace:*",
+    "@tenra/core": "workspace:*"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=10.20.0"
+  }
+}

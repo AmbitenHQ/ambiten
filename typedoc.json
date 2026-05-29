@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
+  "out": "docs/api",
+  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "theme": "vitepress",
+  "hideBreadcrumbs": false,
+  "hidePageTitle": false,
+  "entryDocument": "index.md",
+  "flattenOutputFiles": true,
+  "identifiersForUniqueSymbols": true
+}

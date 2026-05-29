@@ -1,0 +1,33 @@
+{
+	"logger": {
+		"type": "object",
+		"properties": {
+			"level": {
+				"type": "string",
+				"enum": [
+					"debug",
+					"info",
+					"warn",
+					"error",
+					"fatal",
+					"trace"
+				]
+			},
+			"colorize": {
+				"type": "boolean"
+			},
+			"json": {
+				"type": "boolean"
+			},
+			"excludedSources": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				}
+			},
+			"enableMetrics": {
+				"type": "boolean"
+			}
+		}
+	}
+}

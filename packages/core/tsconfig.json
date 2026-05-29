@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.base.json", // Inherit common settings
+  "compilerOptions": {                                                                                   
+    "rootDir": "src",
+    "outDir": "dist",                                                                                                                                                                     
+    "composite": true,
+    "declaration": true,  
+    "resolveJsonModule": true,  
+    "types": ["node", "jest"],
+    "emitDeclarationOnly": false,   
+    "tsBuildInfoFile": "dist/.tsbuildinfo"                     
+  },
+  "include": [
+    "src",
+    "src/**/*.json",
+    "package.json",
+    "assets"
+  ],
+  "references": [
+    { "path": "../logger" }, // Reference to other local packages
+    {"path": "../adapter-types"}
+  ],
+  "exclude": [
+    "node_modules",
+    "examples",
+    "**/__tests__/**"
+  ],
+}

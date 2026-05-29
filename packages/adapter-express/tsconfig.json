@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "target": "ES2020",
+    "composite": true,
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+  },
+    "references": [
+    {"path": "../adapter-runtime"},
+    { "path": "../adapter-types" }, // Reference to other local packages
+   ],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/__test__/*"]
+}

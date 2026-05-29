@@ -1,0 +1,24 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
+  "changelog": "@changesets/changelog-git",
+  "commit": false,
+  "linked": [
+    [
+      "@tenra/core",
+      "@tenra/logger",
+      "@tenra/adapter-runtime",
+      "@tenra/adapter-types",
+      "@tenra/adapter-express",
+      "@tenra/adapter-fastify",
+      "@tenra/adapter-graphql",
+      "@tenra/adapter-nestjs",
+      "@tenra/adapter-lambda"
+    ]
+  ],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "snapshot": {"useCalculatedVersion": true},
+  "ignore": [],
+  "npmClient": "npm"
+}

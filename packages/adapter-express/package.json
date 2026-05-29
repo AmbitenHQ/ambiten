@@ -1,0 +1,54 @@
+{
+  "name": "@tenra/adapter-express",
+  "version": "1.0.0",
+  "description": "Tenra multi-tenancy adapter for Express.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "pnpm -r run build:script",
+    "build:script": "tsc -p tsconfig.json",
+    "test": "jest --detectOpenHandles --coverage",
+    "changeset": "pnpm run changeset",
+    "release": "pnpm changeset version",
+    "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0",
+  "peerDependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@types/express": "^5.0.6",
+    "@types/express-serve-static-core": "^5.1.1",
+    "@types/jest": "^29.5.14",
+    "express": "5.1.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.9",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@tenra/adapter-runtime": "workspace:*",
+    "@tenra/adapter-types": "workspace:*"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=10.20.0"
+  }
+}

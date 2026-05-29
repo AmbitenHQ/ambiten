@@ -1,0 +1,42 @@
+{
+  "extends": "../../tsconfig.base.json", // Inherit common settings
+  "compilerOptions": {                                                                                   
+    "rootDir": "src",
+    "outDir": "dist",                                                                                                                                                                     
+    "composite": true,
+    "declaration": true,  
+    "resolveJsonModule": true,  
+    "types": ["node", "jest"],
+    "emitDeclarationOnly": false,  
+    // "tsBuildInfoFile": "./dist/.tsbuildinfo",                       
+  },
+  "include": [
+    "src",
+    "src/**/*.json",
+    "package.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/**"
+  ],
+}
+
+
+// {
+//   "extends": "../../tsconfig.base.json",
+//   "compilerOptions": {
+//   "rootDir": "./src",
+//   "outDir": "./dist",
+//   "composite": true,
+//   "declaration": true,
+//   "types": ["node", "jest"],
+//   },
+//     "include": [
+//     "src"
+//     ],
+//   "exclude": [
+//     "node_modules",
+//     // "../setupTest.ts" 
+//     "./**/*.test.ts" 
+//   ], 
+// }

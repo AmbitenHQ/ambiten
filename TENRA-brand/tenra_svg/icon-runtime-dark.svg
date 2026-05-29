@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#60A5FA"/>
+    <stop offset="100%" stop-color="#818CF8"/>
+  </linearGradient>
+  <style>
+    .s0{stroke:#FFFFFF}
+    .s1{stroke:url(#g)}
+    .s2{stroke:#60A5FA}
+    .fill0{fill:#FFFFFF}
+    .fill1{fill:url(#g)}
+    .round{stroke-linecap:round;stroke-linejoin:round}
+    .nofill{fill:none}
+  </style>
+</defs>
+
+<rect width="512" height="512" fill="#050816"/>
+
+    <g transform="translate(128 128)">
+      <circle cx="128" cy="128" r="96" class="nofill s1 round" stroke-width="10" stroke-dasharray="418 124"/>
+      <circle cx="128" cy="128" r="74" class="nofill s2 round" stroke-width="7" stroke-dasharray="2 18" opacity="0.62"/>
+      <circle cx="128" cy="20" r="12" class="nofill s1" stroke-width="7"/>
+      <circle cx="236" cy="128" r="12" class="nofill s1" stroke-width="7"/>
+      <circle cx="128" cy="236" r="12" class="nofill s1" stroke-width="7"/>
+      <circle cx="20" cy="128" r="12" class="nofill s1" stroke-width="7"/>
+      
+      <path d="M128 72 L180 102 V154 L128 184 L76 154 V102 Z" class="nofill s0 round" stroke-width="8"/>
+      <path d="M110 126 H140" class="nofill s1 round" stroke-width="10"/>
+      <path d="M134 110 L154 126 L134 142" class="nofill s1 round" stroke-width="10"/>
+    
+    </g>
+    
+</svg>

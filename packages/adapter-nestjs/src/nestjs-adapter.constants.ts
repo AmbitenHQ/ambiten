@@ -1,0 +1,1 @@
+export const TENRA_ADAPTER_OPTIONS = Symbol('TENRA_ADAPTER_OPTIONS');

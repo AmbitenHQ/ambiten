@@ -1,0 +1,10 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "../../docs/api/core",
+  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "theme": "markdown",
+  "hideBreadcrumbs": false,
+  "hidePageTitle": false,
+  "flattenOutputFiles": true,
+}

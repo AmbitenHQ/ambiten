@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420" fill="none">
+
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#22D3EE"/>
+    <stop offset="55%" stop-color="#2563EB"/>
+    <stop offset="100%" stop-color="#6366F1"/>
+  </linearGradient>
+  <linearGradient id="gDark" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#60A5FA"/>
+    <stop offset="100%" stop-color="#818CF8"/>
+  </linearGradient>
+  <style>
+    .s0{stroke:#0B1220}
+    .s1{stroke:url(#g)}
+    .s2{stroke:#2563EB}
+    .fill0{fill:#0B1220}
+    .fill1{fill:url(#g)}
+    .round{stroke-linecap:round;stroke-linejoin:round}
+    .nofill{fill:none}
+  </style>
+</defs>
+
+
+
+<g transform="translate(20 20)">
+  <g transform="translate(0 0) scale(0.66)">
+    <path d="M192 8 L360 104 V296 L192 392 L24 296 V104 Z" class="nofill s1 round" stroke-width="24"/>
+    <path d="M24 192 L24 296 M360 192 L360 296" class="nofill s1 round" stroke-width="24"/>
+    <path d="M96 136 H288 M192 136 V308" class="nofill s0 round" stroke-width="28"/>
+    <path d="M170 308 L192 324 L214 308 Z" class="fill0"/>
+  </g>
+  <g font-family="Inter, Space Grotesk, Arial, sans-serif" font-size="152" font-weight="700" letter-spacing="18" fill="#0B1220" transform="translate(320 90)">
+    <text x="0" y="130">TENR</text>
+  </g>
+  <path d="M1240 240 L1304 108 L1368 240" stroke="#0B1220" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1304 198 L1332 240 L1276 240 Z" fill="url(#g)"/>
+  <text x="320" y="318" font-family="Inter, Space Grotesk, Arial, sans-serif" font-size="40" font-weight="500" letter-spacing="6" fill="#475467">A RUNTIME AND CONTEXT-AWARE FRAMEWORK</text>
+</g>
+
+</svg>

@@ -1,0 +1,100 @@
+{
+  "name": "@tenra/logger",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/tenra-logger.js",
+  "module": "dist/tenra-logger.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "browser": {
+    "async_hooks": false,
+    "http2": false
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/tenra-logger.js",
+      "require": "./dist/tenra-logger.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node --project tsconfig.json src/index.ts",
+    "build": "webpack --config webpack.config.js",
+    "test": "jest --detectOpenHandles --coverage",
+    "changeset": "changeset",
+    "release": "pnpm changeset version && pnpm install && pnpm build && changeset publish",
+    "typedoc": "typedoc --options typedoc.json",
+    "clean": "rimraf dist",
+    "prepublishOnly": "pnpm run build",
+    "prepack": "pnpm build",
+    "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
+  },
+  "keywords": [
+    "tenra",
+    "logger",
+    "Advance logging"
+  ],
+  "author": "Emmanuel Nodolomwanyi",
+  "maintainers": [
+    {
+      "name": "Emmanuel Nodolomwanyi"
+    }
+  ],
+  "license": "ISC",
+  "description": "",
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/tenrahq/tenra"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@changesets/cli": "^2.29.8",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.19.3",
+    "@types/webpack": "^5.28.5",
+    "@types/ws": "^8.18.1",
+    "babel-jest": "^29.7.0",
+    "babel-loader": "^10.0.0",
+    "jest": "^29.7.0",
+    "path-browserify": "^1.0.1",
+    "ts-jest": "^29.4.6",
+    "ts-loader": "^9.5.4",
+    "ts-node": "10.9.2",
+    "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "tslib": "2.8.1",
+    "tsx": "^4.21.0",
+    "typedoc": "^0.28.15",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "5.9.3",
+    "webpack": "5.104.1",
+    "webpack-cli": "6.0.1",
+    "webpack-remove-debug": "0.1.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.28.4",
+    "axios": "^1.13.2"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=10.20.0"
+  }
+}

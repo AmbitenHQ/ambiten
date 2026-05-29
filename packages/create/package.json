@@ -1,0 +1,81 @@
+{
+  "name": "@tenra/create",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/bin/tenra_create.d.ts",
+  "bin": {
+    "tenra-create": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/bin/tenra_create.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build:generator": "webpack --config webpack.config.js",
+    "build": "pnpm build:generator",
+    "lint": "eslint src",
+    "changeset": "pnpm run changeset",
+    "release": "pnpm changeset version",
+    "prepublishOnly": "pnpm run build",
+    "prepack": "pnpm build && node ../../scripts/copy-figlet-fonts.js .",
+    "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "keywords": [],
+  "author": "Emmanuel Nodolomwanyi",
+  "maintainers": [
+    "Emmanuel Nodolomwanyi"
+  ],
+  "license": "ISC",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tenrahq/tenra"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.7.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.19.3",
+    "@types/webpack": "^5.28.5",
+    "@typescript-eslint/eslint-plugin": "^8.51.0",
+    "@typescript-eslint/parser": "^8.51.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "ts-loader": "^9.5.4",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3",
+    "webpack": "5.104.1",
+    "webpack-cli": "6.0.1"
+  },
+  "dependencies": {
+    "@tenra/logger": "workspace:*",
+    "commander": "^14.0.2",
+    "figlet": "^1.9.4",
+    "fs-extra": "^11.3.3",
+    "inquirer": "^12.11.1",
+    "simple-git": "^3.30.0"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=10.20.0"
+  },
+  "description": ""
+}

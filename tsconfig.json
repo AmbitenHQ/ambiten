@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/logger" },
+    { "path": "packages/core" },
+    { "path": "packages/create" },
+    { "path":  "packages/adapter-runtime"},
+    { "path": "packages/adapter-types" },
+    { "path": "packages/adapter-express"},
+    { "path": "packages/adapter-fastify" },
+    { "path": "packages/adapter-nestjs" },
+    { "path": "packages/adapter-graphql" },
+    { "path": "packages/adapter-lambda" }
+  ]
+}
