@@ -30,6 +30,17 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
+  "repository": {
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/tenrahq/tenra.git",
+      "directory": "packages/adapter-express"
+    },
+    "bugs": {
+      "url": "https://github.com/tenrahq/tenra/issues"
+    },
+    "homepage": "https://tenra.dev"
+  },
   "peerDependencies": {
     "express": "^5.1.0"
   },

@@ -73,9 +73,15 @@
   ],
   "license": "ISC",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/tenrahq/tenra",
-    "directory": "packages/core"
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/tenrahq/tenra.git",
+      "directory": "packages/core"
+    },
+    "bugs": {
+      "url": "https://github.com/tenrahq/tenra/issues"
+    },
+    "homepage": "https://tenra.dev"
   },
   "dependencies": {
     "@babel/runtime": "7.28.4",

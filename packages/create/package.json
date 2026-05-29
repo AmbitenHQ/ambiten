@@ -47,8 +47,15 @@
   "license": "ISC",
   "type": "commonjs",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/tenrahq/tenra"
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/tenrahq/tenra.git",
+      "directory": "packages/create"
+    },
+    "bugs": {
+      "url": "https://github.com/tenrahq/tenra/issues"
+    },
+    "homepage": "https://tenra.dev"
   },
   "devDependencies": {
     "@types/figlet": "^1.7.0",
