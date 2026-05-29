@@ -1,2 +1,15 @@
 packages:
   - 'packages/*'
+allowBuilds:
+  '@apollo/protobufjs': set this to true or false
+  '@nestjs/core': set this to true or false
+  '@parcel/watcher': set this to true or false
+  esbuild: set this to true or false
+  mongodb-memory-server: set this to true or false
+  sharp: set this to true or false
+
+overrides:
+  'graphql': "16.11.0"
+  "glob": "^8.0.0"
+  "rimraf": "^3.0.0"
+  "inflight": "1.0.6"
