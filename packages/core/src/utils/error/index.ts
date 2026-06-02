@@ -1,2 +1,2 @@
-export * from './tenraError-handler';
-export * from './errorTypes';
+export * from './ambitenError-handler';
+export * from './errorTypes'; 

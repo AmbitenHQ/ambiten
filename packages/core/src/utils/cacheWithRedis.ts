@@ -1,14 +1,14 @@
 import { redis } from '../redis-manager';
-import { TenraCache } from '../tenra-cache';
+import { AmbitenCache } from '../ambiten-cache';
 
 /**
  * Options for caching behavior.
  */
-interface TenraCacheOptions {
+interface AmbitenCacheOptions {
   ttlSeconds?: number;
-  prefix?: string; 
-  tenantId?: string; 
-  namespace?: string; 
+  prefix?: string;
+  tenantId?: string;
+  namespace?: string;
 }
 
 /**
@@ -18,7 +18,7 @@ interface TenraCacheOptions {
  *
  * @param {string} key - The cache key to use.
  * @param {() => Promise<T>} fetcher - A function that fetches the value if not cached.
- * @param {TenraCacheOptions} options - Options for caching behavior.
+ * @param {AmbitenCacheOptions} options - Options for caching behavior.
  * @returns {Promise<T>} - The cached or fetched value.
  * @example
  * const value = await cacheWithRedis(redisClient, 'myKey', async () => {
@@ -29,8 +29,8 @@ export async function cacheWithRedis<T>(
   client: typeof redis,
   key: string,
   fetcher: () => Promise<T>,
-  options: TenraCacheOptions = {}
+  options: AmbitenCacheOptions = {}
 ): Promise<T> {
-  const cache = new TenraCache(client);
+  const cache = new AmbitenCache(client);
   return await cache.wrap(key, fetcher, options);
 }

@@ -1,21 +1,21 @@
 /**
- * @author Emmanuel Nodolomwanyi - Tenra Team
- * @package - @tenra/core
+ * @author Emmanuel Nodolomwanyi - Ambiten Team
+ * @package - @Ambiten/core
  * @version 1.0.0
  */
 
 import { RedisService } from './redis-manager';
 
 /**
- * Tenra Core Library
- * This library provides core functionalities for Tenra, ORM/ODM solution
+ * Ambiten Core Library
+ * This library provides core functionalities for Ambiten, ORM/ODM solution
  * for MongoDB in Node.js and Browser environments.
- * @module Tenra Core Library
+ * @module Ambiten Core Library
  * @version 1.0.0
  */
 
 
-console.log('Tenra Core Library Loaded. \n (Node.js environment detected.)');
+console.log('Ambiten Core Library Loaded. \n (Node.js environment detected.)');
 
 
 export const initializeRedis = async (
@@ -24,7 +24,7 @@ export const initializeRedis = async (
 	if (useRedis) {
 		const redisClient = RedisService.getInstance();
 		const client = await redisClient.getClient();
-		
+
 		if (!client.isOpen) {
 			await client.connect();
 		}
@@ -41,6 +41,7 @@ export * from './context';
 export * from './plugins';
 export * from './instrumentation';
 export * from './debug';
+export * from './ambiten-cache';
 
 export * from './init-cli/generate.project';
 export * from './middleware';
@@ -49,6 +50,7 @@ export * from './utils';
 export * from './utils/builders';
 export * from './gc';
 export * from './types';
+export type { AmbitenRuntime } from './types/ambiten-runtime-type';
 export type { SchemaType } from './types/schema.type';
 export type { Document } from './types/document';
 export type { ErrorType } from './utils/error/errorTypes';

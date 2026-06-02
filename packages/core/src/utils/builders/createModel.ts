@@ -1,12 +1,12 @@
-import { TenraModel, TenraClient } from "../../lib-core"
-import { TenraModelOptions, Document } from "../../types"; // Ensure the correct path to the document module
+import { AmbitenModel, AmbitenClient } from "../../lib-core"
+import { AmbitenModelOptions, Document } from "../../types"; // Ensure the correct path to the document module
 
 
 /**
  * Parameters for creating a new model.
  * @template T - The type of the document in the collection.
  */
-type CreateModelParams<T extends Document = any> = TenraModelOptions<T>;
+type CreateModelParams<T extends Document = any> = AmbitenModelOptions<T>;
 
 /**
  * Creates a new model for a MongoDB collection.
@@ -16,7 +16,7 @@ type CreateModelParams<T extends Document = any> = TenraModelOptions<T>;
  * This allows you to create models for different tenants without having to specify the tenantId each time. Then a tenantId or db instance or client instance is required to create a model.
  * @template T - The type of the document in the collection.
  * @param {CreateModelParams<T>} params - The parameters for creating the model.
- * @returns {TENRAModel<T>} The created model.
+ * @returns {AmbitenModel<T>} The created model.
  *
  * @example
  * const userSchema = createSchema({
@@ -37,9 +37,9 @@ type CreateModelParams<T extends Document = any> = TenraModelOptions<T>;
  */
 export const Model = <T extends Document = any>(
   options: CreateModelParams<T>
-): TenraModel<T> => {
-  return new TenraModel<T>({
+): AmbitenModel<T> => {
+  return new AmbitenModel<T>({
     ...options,
-    provider: options.provider ?? TenraClient.init()
+    provider: options.provider ?? AmbitenClient.init()
   });
 }

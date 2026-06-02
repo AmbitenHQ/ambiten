@@ -1,4 +1,4 @@
-import { setupLogger, LogLevel } from "@tenra/logger";
+import { setupLogger, LogLevel } from "@ambiten/logger";
 import { EventType, ILogger } from "../types";
 
 /**
@@ -115,15 +115,15 @@ export function logEvent(
 ) {
 	const eventDesc = describeEvent(eventType);
 	const logMsg = message
-		? `[TENRA EVENT]: ${eventDesc}: ${message}`
-		: `[TENRA] Event: ${eventDesc}`;
-	
+		? `[Ambiten EVENT]: ${eventDesc}: ${message}`
+		: `[Ambiten] Event: ${eventDesc}`;
+
 	const log = {
 		level,
 		message: logMsg,
 		context
 	};
-	
+
 	logger.info(`${log.level}${log.message} ${log.context ? JSON.stringify(log.context) : ''}`);
 }
 

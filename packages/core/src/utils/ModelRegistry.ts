@@ -1,31 +1,31 @@
-import { TenraModel } from '../lib-core';
+import { AmbitenModel } from '../lib-core';
 import type { Document } from '../types';
 
-const modelRegistry = new Set<TenraModel<any>>();
+const modelRegistry = new Set<AmbitenModel<any>>();
 
 /**
- * TenraModelRegistry manages registered Tenra model instances.
+ * AmbitenModelRegistry manages registered Ambiten model instances.
  */
-export const TenraModelRegistry = {
-  registerModel(model: TenraModel<any>): void {
+export const AmbitenModelRegistry = {
+  registerModel(model: AmbitenModel<any>): void {
     modelRegistry.add(model);
   },
 
   getRegisteredModel<T extends Document = Document>(
-    model: TenraModel<T>
-  ): TenraModel<T> | null {
+    model: AmbitenModel<T>
+  ): AmbitenModel<T> | null {
     return modelRegistry.has(model) ? model : null;
   },
 
-  isModelRegistered(model: TenraModel<any>): boolean {
+  isModelRegistered(model: AmbitenModel<any>): boolean {
     return modelRegistry.has(model);
   },
 
-  unregisterModel(model: TenraModel<any>): void {
+  unregisterModel(model: AmbitenModel<any>): void {
     modelRegistry.delete(model);
   },
 
-  getAllModels(): TenraModel<any>[] {
+  getAllModels(): AmbitenModel<any>[] {
     return [...modelRegistry];
   },
 
@@ -34,11 +34,11 @@ export const TenraModelRegistry = {
   }
 };
 
-const registeredModels: TenraModel<any>[] = [];
+const registeredModels: AmbitenModel<any>[] = [];
 
 export function clearModelRegistryForTests(): void {
   for (const model of registeredModels) {
-    TenraModelRegistry.unregisterModel(model);
+    AmbitenModelRegistry.unregisterModel(model);
   }
 
   registeredModels.length = 0;

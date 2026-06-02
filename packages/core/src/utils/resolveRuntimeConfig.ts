@@ -1,6 +1,6 @@
 import type { ClientSession } from 'mongodb';
-import { TenraContext } from '../context';
-import { resolveTenraOption } from './resolveTenraOption';
+import { AmbitenContext } from '../context';
+import { resolveAmbitenOption } from './resolveAmbitenOption';
 
 export interface RuntimeResolutionInput {
 	methodTenantId?: string;
@@ -28,26 +28,26 @@ export interface RuntimeResolutionOutput {
 export function resolveRuntimeConfig(
 	input: RuntimeResolutionInput
 ): RuntimeResolutionOutput {
-	const ctx = TenraContext.get();
+	const ctx = AmbitenContext.get();
 
 	return {
-		tenantId: resolveTenraOption([
+		tenantId: resolveAmbitenOption([
 			input.methodTenantId,
 			ctx?.tenantId,
 			input.modelTenantId
 		]),
-		dbName: resolveTenraOption([
+		dbName: resolveAmbitenOption([
 			input.methodDbName,
-			ctx?.dbName, 
+			ctx?.dbName,
 			input.modelDbName,
 			input.clientDbName
 		]),
-		collectionName: resolveTenraOption([
+		collectionName: resolveAmbitenOption([
 			input.methodCollectionName,
 			ctx?.collectionName,
 			input.modelCollectionName
 		]),
-		session: resolveTenraOption([
+		session: resolveAmbitenOption([
 			input.methodSession,
 			ctx?.session,
 			input.modelSession

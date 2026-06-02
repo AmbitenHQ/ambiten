@@ -1,5 +1,5 @@
 import { Db } from 'mongodb';
-import { TenraClient } from '../../lib-core';
+import { AmbitenClient } from '../../lib-core';
 
 const dbCache: Map<string, Db> = new Map();
 
@@ -17,7 +17,7 @@ export const getTenantDB = async (tenantId: string): Promise<Db> => {
     return dbCache.get(tenantId)!;
   }
 
-  const db = TenraClient.init().withDatabase(tenantId);
+  const db = AmbitenClient.init().withDatabase(tenantId);
   if (!db) throw new Error(`Database not found for tenant: ${tenantId}`);
   dbCache.set(tenantId, await db.db());
   return await db.db();

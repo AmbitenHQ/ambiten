@@ -21,8 +21,8 @@ export async function invalidateTenantCache(
   namespace?: string
 ) {
   const pattern = namespace
-    ? `TENRA:${tenantId}:${namespace}:*`
-    : `TENRA:${tenantId}:*`;
+    ? `ambiten:${tenantId}:${namespace}:*`
+    : `ambiten:${tenantId}:*`;
 
   const keys = await client.keys(pattern);
   if (keys.length) {

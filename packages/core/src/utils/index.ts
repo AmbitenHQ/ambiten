@@ -4,7 +4,7 @@ export * from './ensureModelNameSafe';
 export * from './ModelRegistry';
 export * from './castId';
 export * from './symbols';
-export * from './error/tenraError-handler';
+export * from './error/ambitenError-handler';
 export * from './error';
 export * from './AuthUtils'
 export * from './events';
@@ -15,8 +15,8 @@ export * from './time';
 export * from './modelLoader';
 export * from './scaffoldLoger';
 export * from './ensureRedis';
-export * from './resolveTenraOption';
+export * from './resolveAmbitenOption';
 export * from './resolveRuntimeConfig';
-export * from './configureTenraContext';
+export * from './configureAmbitenContext';
 export * from './color-palatte'
 export * from './detect-package-manager'

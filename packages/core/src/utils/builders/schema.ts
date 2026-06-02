@@ -1,10 +1,10 @@
-import { TenraSchema } from "../../lib-core";
+import { AmbitenSchema } from "../../lib-core";
 import { Document, SchemaDefinition } from "../../types";
 
 /**
- * Creates a new TenraSchema instance with the provided schema definition.
+ * Creates a new AmbitenSchema instance with the provided schema definition.
  * @param {SchemaDefinition<T> | Record<keyof T, any>} schema - The schema definition for the document.
- * @returns {TenraSchema<T>} The created TenraSchema instance.
+ * @returns {AmbitenSchema<T>} The created AmbitenSchema instance.
  *
  * @template T - The type of the document.
  * @example 
@@ -13,7 +13,7 @@ import { Document, SchemaDefinition } from "../../types";
  *  age: { type: Number, required: true },
  *  email: { type: String, required: true },
  * });
- * const userModel = new TenraModel(userSchema, 'users', db);
+ * const userModel = new AmbitenModel(userSchema, 'users', db);
  * 	
  * const user = await userModel.create({ name: 'John Doe', age: 30, email: 'example.com' });
  * console.log(user); // { _id: '...', name: 'John Doe', age: 30, email: 'example.com' }
@@ -22,6 +22,6 @@ import { Document, SchemaDefinition } from "../../types";
 
 export const createSchema = <T extends Document>(
 	schema: SchemaDefinition<T> | Record<keyof T, any>
-): TenraSchema<T> => {
-	return new TenraSchema<T>(schema as Record<keyof T, any>);
+): AmbitenSchema<T> => {
+	return new AmbitenSchema<T>(schema as Record<keyof T, any>);
 }

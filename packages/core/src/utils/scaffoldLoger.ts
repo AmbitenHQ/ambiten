@@ -1,6 +1,6 @@
 import path from 'path';
 import { colorize } from './color-palatte';
-import type { TenraConfig } from '../types';
+import type { AmbitenConfig } from '../types';
 
 export interface ScaffoldLog {
   files: string[];
@@ -25,7 +25,7 @@ export function createScaffoldLogger(projectRoot: string) {
       log.dirs.push(normalize(dirPath) + '/');
     },
 
-    printSummary(projectName: string, options: TenraConfig, durationMs: number) {
+    printSummary(projectName: string, options: AmbitenConfig, durationMs: number) {
       const enabledFeatures = [
         options.multiTenant?.enabled ? 'Multi-tenancy' : null,
         options.graphql?.enabled ? 'GraphQL' : null,
