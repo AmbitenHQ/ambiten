@@ -1,8 +1,8 @@
 // __test__/fastify-adapter.test.ts
 import { createFastifyAdapter } from '../src/fastify-adapter';
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 
-jest.mock('@tenra/adapter-runtime', () => ({
+jest.mock('@ambiten/adapter-runtime', () => ({
   runWithAdapterContext: jest.fn()
 }));
 
@@ -15,7 +15,7 @@ describe('createFastifyAdapter', () => {
     );
   });
 
-  it('should install Fastify preHandler hook and run with Tenra adapter context', async () => {
+  it('should install Fastify preHandler hook and run with Ambiten adapter context', async () => {
     let registeredHook: any;
 
     const app = {

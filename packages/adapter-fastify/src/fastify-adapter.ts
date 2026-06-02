@@ -4,11 +4,11 @@ import type {
   FastifyRequest
 } from 'fastify';
 import type {
-  TenraAdapter,
+  AmbitenAdapter,
   AdapterContextOptions,
-  TenraRequestLike
-} from '@tenra/adapter-types';
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
+  AmbitenRequestLike
+} from '@ambiten/adapter-types';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 
 function normalizeParams(
   params: FastifyRequest['params']
@@ -69,7 +69,7 @@ function normalizeQuery(
   return normalized;
 }
 
-function toTenraRequestLike(req: FastifyRequest): TenraRequestLike {
+function toAmbitenRequestLike(req: FastifyRequest): AmbitenRequestLike {
   return {
     headers: req.headers as Record<string, string | string[] | undefined>,
     url: req.url,
@@ -85,7 +85,7 @@ function toTenraRequestLike(req: FastifyRequest): TenraRequestLike {
   };
 }
 
-export function createFastifyAdapter(): TenraAdapter<FastifyInstance> {
+export function createFastifyAdapter(): AmbitenAdapter<FastifyInstance> {
   return {
     name: 'fastify',
 
@@ -93,12 +93,12 @@ export function createFastifyAdapter(): TenraAdapter<FastifyInstance> {
       app.addHook(
         'preHandler',
         async (request: FastifyRequest, _reply: FastifyReply) => {
-          const adaptedRequest = toTenraRequestLike(request);
+          const adaptedRequest = toAmbitenRequestLike(request);
 
           await runWithAdapterContext(
             adaptedRequest,
             async () => {
-              // Enter Tenra runtime context for downstream request lifecycle.
+              // Enter Ambiten runtime context for downstream request lifecycle.
             },
             options
           );
