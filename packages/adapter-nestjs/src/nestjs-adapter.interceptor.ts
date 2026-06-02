@@ -6,10 +6,10 @@ import {
   NestInterceptor
 } from '@nestjs/common';
 import type { Observable } from 'rxjs';
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
-import type { TenraRequestLike } from '@tenra/adapter-types';
-import type { NestjsTenraAdapterOptions } from './nestjs-adapter.types';
-import { TENRA_ADAPTER_OPTIONS } from './nestjs-adapter.constants';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
+import type { AmbitenRequestLike } from '@ambiten/adapter-types';
+import type { NestjsAmbitenAdapterOptions } from './nestjs-adapter.types';
+import { AMBITEN_ADAPTER_OPTIONS } from './nestjs-adapter.constants';
 
 function normalizeParams(params: unknown): Record<string, string> {
   if (!params || typeof params !== 'object') {
@@ -68,7 +68,7 @@ function normalizeQuery(
   return normalized;
 }
 
-function toTenraRequestLike(req: any): TenraRequestLike {
+function toAmbitenRequestLike(req: any): AmbitenRequestLike {
   const headers =
     (req?.headers ?? {}) as Record<string, string | string[] | undefined>;
 
@@ -88,11 +88,11 @@ function toTenraRequestLike(req: any): TenraRequestLike {
 }
 
 @Injectable()
-export class TenraNestInterceptor implements NestInterceptor {
+export class AmbitenNestInterceptor implements NestInterceptor {
   constructor(
-    @Inject(TENRA_ADAPTER_OPTIONS)
-    private readonly options: NestjsTenraAdapterOptions = {}
-  ) {}
+    @Inject(AMBITEN_ADAPTER_OPTIONS)
+    private readonly options: NestjsAmbitenAdapterOptions = {}
+  ) { }
 
   async intercept(
     context: ExecutionContext,
@@ -101,7 +101,7 @@ export class TenraNestInterceptor implements NestInterceptor {
     const http = context.switchToHttp();
     const req = http.getRequest();
 
-    const adaptedRequest = toTenraRequestLike(req);
+    const adaptedRequest = toAmbitenRequestLike(req);
 
     return runWithAdapterContext(
       adaptedRequest,

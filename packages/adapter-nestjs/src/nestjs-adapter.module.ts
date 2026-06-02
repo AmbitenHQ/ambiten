@@ -4,25 +4,25 @@ import {
   Provider
 } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { TENRA_ADAPTER_OPTIONS } from './nestjs-adapter.constants';
-import { TenraNestInterceptor } from './nestjs-adapter.interceptor';
-import type { NestjsTenraAdapterOptions } from './nestjs-adapter.types';
+import { AMBITEN_ADAPTER_OPTIONS } from './nestjs-adapter.constants';
+import { AmbitenNestInterceptor } from './nestjs-adapter.interceptor';
+import type { NestjsAmbitenAdapterOptions } from './nestjs-adapter.types';
 
 @Module({})
-export class TenraNestAdapterModule {
-  static forRoot(options: NestjsTenraAdapterOptions = {}): DynamicModule {
+export class AmbitenNestAdapterModule {
+  static forRoot(options: NestjsAmbitenAdapterOptions = {}): DynamicModule {
     const optionsProvider: Provider = {
-      provide: TENRA_ADAPTER_OPTIONS,
+      provide: AMBITEN_ADAPTER_OPTIONS,
       useValue: options
     };
 
     const interceptorProvider: Provider = {
       provide: APP_INTERCEPTOR,
-      useClass: TenraNestInterceptor
+      useClass: AmbitenNestInterceptor
     };
 
     return {
-      module: TenraNestAdapterModule,
+      module: AmbitenNestAdapterModule,
       providers: [
         optionsProvider,
         interceptorProvider

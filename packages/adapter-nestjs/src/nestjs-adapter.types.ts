@@ -1,3 +1,3 @@
-import type { AdapterContextOptions } from '@tenra/adapter-types';
+import type { AdapterContextOptions } from '@ambiten/adapter-types';
 
-export interface NestjsTenraAdapterOptions extends AdapterContextOptions { }
+export interface NestjsAmbitenAdapterOptions extends AdapterContextOptions { }
