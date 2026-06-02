@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import type { TenraConfig } from '../../types';
+import type { AmbitenConfig } from '../../types';
 import {
   colorize,
   createScaffoldLogger,
@@ -12,14 +12,14 @@ import { DEFAULT_CONFIG_CONTENT } from '../generateDefaultConfigContent';
 import { generateGCManager } from '../generateGCManagerFile';
 import { generateGCRunner } from '../generateGCRunnerFile';
 
-function buildPackageJson(options: TenraConfig) {
+function buildPackageJson(options: AmbitenConfig) {
   const dependencies: Record<string, string> = {
-    '@tenra/core': '^1.0.0',
+    '@ambiten/core': '^1.0.0',
     mongodb: '^6.14.2',
   };
 
   if (options.logger?.enabled) {
-    dependencies['@tenra/logger'] = '^1.0.0';
+    dependencies['@ambiten/logger'] = '^1.0.0';
   }
 
   if (options.graphql?.enabled) {
@@ -32,8 +32,8 @@ function buildPackageJson(options: TenraConfig) {
   }
 
   return {
-    name: options.projectName ?? 'my-tenra-app',
-    description: 'A Tenra-powered application',
+    name: options.projectName ?? 'my-ambiten-app',
+    description: 'A Ambiten-powered application',
     private: true,
     version: '1.0.0',
     type: 'commonjs',
@@ -82,31 +82,15 @@ function buildTsConfig() {
   };
 }
 
-function generateInitTenraTS(): string {
-  return `import { TenraBootstrapFactory } from '@tenra/core';
+function generateInitAmbitenTS(): string {
+  return `import { AmbitenBootstrapFactory } from '@ambiten/core';
+import type { AmbitenRuntime } from '@ambiten/core';
 
-export async function run() {
-  return TenraBootstrapFactory.create();
+export async function run(): Promise<AmbitenRuntime> {
+  return AmbitenBootstrapFactory.create();
 }
 `;
 }
-// function generateInitTenraTS(options: TenraConfig): string {
-//   return `import { TenraBootstrapFactory } from '@tenra/core';
-// ${options.multiTenant?.enabled ? `import { createExpressAdapter } from '@tenra/adapter-express';` : ''}
-
-// export async function run() {
-//   ${options.multiTenant?.enabled
-//       ? `const adapter = createExpressAdapter();
-//   const bootstrap = await TenraBootstrapFactory.create();`
-//       : `const bootstrap = new TenraBootstrapFactory();`
-//     }
-
-//   await bootstrap.initialize();
-
-//   return bootstrap;
-// }
-// `;
-// }
 
 function generateGraphqlStarterTS(): string {
   return `/**
@@ -122,7 +106,7 @@ export {};
 
 export async function generateAppStructure(
   projectRoot: string,
-  options: TenraConfig,
+  options: AmbitenConfig,
   logger?: ReturnType<typeof createScaffoldLogger>
 ): Promise<void> {
   const srcDir = path.join(projectRoot, 'src');
@@ -162,9 +146,9 @@ export async function generateAppStructure(
   await fs.writeFile(mainPath, generateMainTS(options));
   logger?.addFile(mainPath);
 
-  const initTenraPath = path.join(coreDir, 'initTenra.ts');
-  await fs.writeFile(initTenraPath, generateInitTenraTS());
-  logger?.addFile(initTenraPath);
+  const initAmbitenPath = path.join(coreDir, 'initAmbiten.ts');
+  await fs.writeFile(initAmbitenPath, generateInitAmbitenTS());
+  logger?.addFile(initAmbitenPath);
 
   const helperPath = path.join(utilsDir, 'helper.ts');
   await fs.writeFile(helperPath, `export function noop(): void {}\n`);
@@ -213,7 +197,7 @@ export async function generateAppStructure(
     logger?.addFile(gcRunnerPath);
   }
 
-  const configPath = path.join(projectRoot, 'tenra.config.json');
+  const configPath = path.join(projectRoot, 'ambiten.config.json');
   await fs.writeFile(configPath, DEFAULT_CONFIG_CONTENT(options));
   logger?.addFile(configPath);
 

@@ -1,5 +1,5 @@
 /**
- * Represents the types of events supported by TENRA.
+ * Represents the types of events supported by Ambiten.
  */
 export type EventType =
 	| 'pre-save'

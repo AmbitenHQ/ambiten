@@ -2,14 +2,14 @@ import 'dotenv/config';
 import { createClient, RedisClientType } from 'redis';
 
 
-type TenraRedisClient = {
+type AmbitenRedisClient = {
   isOpen: boolean;
   connect(): Promise<any>;
   disconnect(): Promise<any>;
   quit?: () => Promise<any>;
   publish(channel: string, message: string): Promise<any>;
   subscribe(channel: string, listener: any): Promise<any>;
-  duplicate(): TenraRedisClient;
+  duplicate(): AmbitenRedisClient;
   get(key: string): Promise<string | null>;
   set(key: string, value: any, options?: any): Promise<any>;
   del(...keys: string[]): Promise<number>;
@@ -23,9 +23,9 @@ const DEFAULT_RECONNECT = (retries: number) =>
 
 const redisUrl = process.env.REDIS_URI as string | undefined;
 
-let currentClient: TenraRedisClient | null = null;
+let currentClient: AmbitenRedisClient | null = null;
 
-type RedisLike = TenraRedisClient & {
+type RedisLike = AmbitenRedisClient & {
   isOpen: boolean;
   scan?: (...args: any[]) => Promise<any>;
 };
@@ -79,7 +79,7 @@ export const redis: any = {
         socket: {
           reconnectStrategy: DEFAULT_RECONNECT,
         },
-      }) as TenraRedisClient;
+      }) as AmbitenRedisClient;
 
       await client.connect();
 
@@ -200,114 +200,4 @@ export async function connectRedis() {
     connect: async (url?: string) => redis.getClient(url),
   };
 }
-
-
-
-// import 'dotenv/config';
-// import { createClient, RedisClientType } from 'redis';
-
-// const DEFAULT_RECONNECT = (retries: number) => Math.min(retries * 50, 1000);
-// const redisUrl = process.env.REDIS_URI as string | undefined;
-
-// let currentClient: RedisClientType | null = null;
-
-// const createStub = () => ({
-//   isOpen: false,
-//   connect: async () => Promise.resolve(),
-//   disconnect: async () => Promise.resolve(),
-//   publish: async () => Promise.resolve(),
-//   subscribe: async () => Promise.resolve(),
-//   duplicate: () => createStub(),
-//   set: async () => Promise.resolve(),
-//   exists: async () => Promise.resolve(0),
-// });
-
-// export const redis: any = {
-//   async get(uri?: string) {
-//     if (currentClient && currentClient.isOpen) return currentClient;
-
-//     const url = uri || redisUrl;
-//     if (!url) return createStub();
-
-//     try {
-//       const client = createClient({ url, socket: { reconnectStrategy: DEFAULT_RECONNECT } }) as RedisClientType;
-//       await client.connect();
-//       currentClient = client;
-//       return client;
-//     } catch (err) {
-//       return createStub();
-//     }
-//   },
-
-//   async disconnect() {
-//     if (currentClient) {
-//       try {
-//         if (currentClient.isOpen && typeof currentClient.disconnect === 'function') {
-//           await currentClient.disconnect();
-//         } else if (currentClient.isOpen && typeof (currentClient as any).quit === 'function') {
-//           await (currentClient as any).quit();
-//         }
-//       } catch (err) {
-//         // swallow errors on disconnect
-//       }
-//     }
-//     currentClient = null;
-//     return Promise.resolve();
-//   },
-
-//   get isOpen() {
-//     return !!(currentClient && currentClient.isOpen);
-//   },
-
-//   publish: async () => Promise.resolve(),
-//   subscribe: async () => Promise.resolve(),
-//   duplicate: () => ({
-//     isOpen: false,
-//     connect: async () => Promise.resolve(),
-//     disconnect: async () => Promise.resolve(),
-//     publish: async () => Promise.resolve(),
-//     subscribe: async () => Promise.resolve(),
-//   }),
-//   set: async (key: string, value: any, options?: any) => Promise.resolve(),
-//   exists: async (key: string) => Promise.resolve(0),
-//   multi: () => ({
-//     commands: [] as Array<[string, ...any[]]>,
-//     incr(command: string) {
-//       this.commands.push(['incr', command]);
-//       return this;
-//     },
-//     expire(command: string, seconds: number) {
-//       this.commands.push(['expire', command, seconds]);
-//       return this;
-//     },
-//     exec: async () => Promise.resolve([]),
-//   }),
-// };
-
-// export class RedisService {
-//   static getInstance(): RedisService {
-//     return new RedisService();
-//   }
-//   async connect(url?: string) {
-//     await redis.get(url);
-//   }
-
-//   /**
-//  * 
-//  * @returns {`Promise<RedisClientType>`} The connected Redis client.
-//  * @throws Error if Redis is not connected.
-//  */
-//   getClient(): Promise<RedisClientType> {
-//     return Promise.resolve(redis.get());
-//   }
-//   async close() {
-//     await redis.disconnect();
-//   }
-// }
-
-// export async function connectRedis() {
-//   return {
-//     connect: async (url?: string) => await redis.get(url),
-//   };
-// }
 

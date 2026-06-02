@@ -1,10 +1,10 @@
 import { MultiTenantManager } from '../MultiTenantManager';
-import { TenraConfig } from '../../types/index';
+import { AmbitenConfig } from '../../types/index';
 import { MongoClient } from 'mongodb';
 
 export interface InitMultiTenancyOptions {
   lazy?: boolean;
-  config?: TenraConfig['logger']
+  config?: AmbitenConfig['logger']
 }
 
 /**
@@ -14,7 +14,7 @@ export interface InitMultiTenancyOptions {
  * @param {Record<string, string>} tenants - A record of tenant IDs mapped to their MongoDB URIs.
  * @param {InitMultiTenancyOptions} [options={}] - Optional configuration for multi-tenancy initialization.
  * @param {boolean} [options.lazy=false] - If `true`, tenants are registered lazily (connected on-demand).
- * @param {TenraConfig} [options.config] - Optional configuration, including a logger for logging messages.
+ * @param {AmbitenConfig} [options.config] - Optional configuration, including a logger for logging messages.
  * @returns {Promise<void>} A promise that resolves when all tenants are registered.
  * @throws {Error} If a tenant's MongoDB URI is invalid or missing.
  * @throws {Error} If a tenant is already registered and `lazy` is `false`.

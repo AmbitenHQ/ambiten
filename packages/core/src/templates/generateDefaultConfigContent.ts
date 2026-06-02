@@ -1,4 +1,4 @@
-import type { TenraConfig } from "../types";
+import type { AmbitenConfig } from "../types";
 
 export interface LoggerFormatOptions {
   timestamp?: boolean | (() => string); // true = ISO, function = custom
@@ -9,17 +9,17 @@ export interface LoggerFormatOptions {
 }
 
 
-export function DEFAULT_CONFIG_CONTENT(options: TenraConfig): string {
+export function DEFAULT_CONFIG_CONTENT(options: AmbitenConfig): string {
   const config = {
     configVersion: '1.0.0',
-    projectName: options.projectName ?? 'my-tenra-app',
+    projectName: options.projectName ?? 'my-ambiten-app',
     connection: {
-      uri: options.connection?.uri ?? 'mongodb://localhost:27017/my-tenra-app',
+      uri: options.connection?.uri ?? 'mongodb://localhost:27017/my-ambiten-app',
       options: {
         dbName:
           options.connection?.options?.dbName ??
           options.projectName ??
-          'my-Tenra-app',
+          'my-ambiten-app',
       },
     },
     ...(options.multiTenant?.enabled
@@ -51,7 +51,7 @@ export function DEFAULT_CONFIG_CONTENT(options: TenraConfig): string {
             {
               "type": "rotating-file",
               "options": {
-                "filename": "./logs/tenra.log",
+                "filename": "./logs/ambiten.log",
                 "frequency": "hourly",
                 "maxSize": 200,
                 "compress": false,

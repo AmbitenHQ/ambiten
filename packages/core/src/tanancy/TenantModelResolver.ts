@@ -1,15 +1,15 @@
 import type { Db, Document } from "mongodb";
 import { Model } from '../utils/builders';
 import { MultiTenantManager } from "./MultiTenantManager";
-import type { TenraSchema } from "../lib-core";
+import type { AmbitenSchema } from "../lib-core";
 import type { DbProvider, ModelContext } from "../types";
-import { TenraContext } from "../context";
+import { AmbitenContext } from "../context";
 // import { ensureModelNameSafe } from "../utils";
 
 
 export type GetTenantModelParams<T extends Document> = {
   collectionName: string;
-  schema: TenraSchema<T>;
+  schema: AmbitenSchema<T>;
   tenantId?: string;
   dbName?: string;
 };
@@ -38,7 +38,7 @@ export const getTenantModel = async <T extends Document>(
 ): Promise<any> => {
 
   const collectionName = params?.collectionName?.trim();
-  const tenantId = params?.tenantId ?? TenraContext.getTenantId();
+  const tenantId = params?.tenantId ?? AmbitenContext.getTenantId();
 
   if (!collectionName) {
     throw new Error("collectionName is required.");
@@ -75,7 +75,7 @@ export const getTenantModel = async <T extends Document>(
 };
 
 
-// import { TENRASchema } from '../lib-core';
+// import { AmbitenSchema } from '../lib-core';
 // import { MultiTenantManager } from './MultiTenantManager';
 // import { TenantContext } from './TenantContext';
 // import { Model } from '../utils/builders/createModel';
@@ -92,7 +92,7 @@ export const getTenantModel = async <T extends Document>(
 // export type GetTanantModelParams<T extends Document> = {
 //   collectionName: string;
 //   tenantId: string;
-//   schema?: TENRASchema<T>;
+//   schema?: AmbitenSchema<T>;
 // };
 
 // const tenantModelsCache: Map<string, Map<string, ReturnType<typeof Model>>> = new Map();
@@ -104,7 +104,7 @@ export const getTenantModel = async <T extends Document>(
 //  * @template T - The type of the document in the model.
 //  * @param {GetTanantModelParams<T>} param - The parameters required to resolve the model.
 //  * @param {string} param.modelName - The name of the model to resolve.
-//  * @param {TENRASchema<T>} [param.schema] - The schema definition for the model (optional).
+//  * @param {AmbitenSchema<T>} [param.schema] - The schema definition for the model (optional).
 //  * @param {string} param.tenantId - The ID of the tenant for which the model is being resolved.
 //  * @returns {Promise<any>} A promise that resolves to the tenant-specific model instance.
 //  * @throws {Error} If no tenant context is found or the tenant is not registered.

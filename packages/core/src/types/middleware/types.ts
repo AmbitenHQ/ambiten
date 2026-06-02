@@ -1,7 +1,13 @@
-import type { ClientSession, Filter, UpdateFilter, Document, AnyBulkWriteOperation } from 'mongodb';
-import { TenraOperationMeta } from '../tenra.model.type';
+import type {
+  ClientSession,
+  Filter,
+  UpdateFilter,
+  Document,
+  AnyBulkWriteOperation
+} from 'mongodb';
+import { AmbitenOperationMeta } from '../ambiten.model.type';
 
-export type TenraMiddlewareOperation =
+export type AmbitenMiddlewareOperation =
   | 'find'
   | 'findOne'
   | 'create'
@@ -21,8 +27,8 @@ export type TenraMiddlewareOperation =
   | 'restoreMany'
   | 'runGC';
 
-export interface TenraMiddlewareContext<T extends Document = Document> {
-  operation: TenraMiddlewareOperation;
+export interface AmbitenMiddlewareContext<T extends Document = Document> {
+  operation: AmbitenMiddlewareOperation;
   modelName?: string;
   collectionName: string;
   tenantId?: string;
@@ -39,10 +45,10 @@ export interface TenraMiddlewareContext<T extends Document = Document> {
   onlyDeleted?: boolean;
   hardDelete?: boolean;
   result?: unknown;
-  meta?: TenraOperationMeta;
+  meta?: AmbitenOperationMeta;
 }
 
-export type TenraMiddlewareHandler<T extends Document = Document> =
-  (ctx: TenraMiddlewareContext<T>) => Promise<void> | void;
+export type AmbitenMiddlewareHandler<T extends Document = Document> =
+  (ctx: AmbitenMiddlewareContext<T>) => Promise<void> | void;
 
 

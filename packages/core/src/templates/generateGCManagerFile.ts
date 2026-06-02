@@ -1,5 +1,5 @@
 export function generateGCManager(): string {
-  return `import { TenraModel } from '@tenra/core';
+  return `import { AmbitenModel } from '@ambiten/core';
 import { ObjectId } from 'mongodb';
 
 export interface GarbageCollectorOptions {
@@ -11,7 +11,7 @@ export interface GarbageCollectorOptions {
 }
 
 export async function runGarbageCollector(
-  model: TenraModel<any>,
+  model: AmbitenModel<any>,
   options: GarbageCollectorOptions = {}
 ): Promise<void> {
   const retentionPeriod = options.retentionPeriod ?? 7;

@@ -1,14 +1,14 @@
-import type { TenraConfig } from '../types';
+import type { AmbitenConfig } from '../types';
 
-export function generateMainTS(options: TenraConfig): string {
-  return `import { run } from './core/initTenra';
+export function generateMainTS(options: AmbitenConfig): string {
+  return `import { run } from './core/initAmbiten';
 
 async function main() {
   const app = await run();
 
   if (typeof app?.onConnect === 'function') {
      app.onConnect(() => {
-      console.log('✅ Tenra application initialized successfully.');
+      console.log('✅ Ambiten application initialized successfully.');
     });
   }
 
