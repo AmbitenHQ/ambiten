@@ -6,11 +6,11 @@ const path = require('path');
 
 // Copy the central CLI splash into the package so `pnpm pack` and `npm pack`
 // include it in the published tarball. This keeps a single source of truth
-// (TENRA-brand/extras/cli_splash.txt) while ensuring the package contains
+// (Ambiten-brand/extras/cli_splash.txt) while ensuring the package contains
 // the file at pack/publish time.
 
 const repoRoot = path.resolve(__dirname, '..');
-const source = path.join(repoRoot, 'TENRA-brand', 'extras', 'cli_splash.txt');
+const source = path.join(repoRoot, 'Ambiten-brand', 'extras', 'cli_splash.txt');
 const destDir = path.join(repoRoot, 'packages', 'core', 'brand');
 const dest = path.join(destDir, 'cli_splash.txt');
 

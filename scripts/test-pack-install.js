@@ -21,17 +21,17 @@ function run(cmd, args, opts = {}) {
 }
 
 function isCommandAvailable(cmd) {
-  try {
-    const res = spawnSync(cmd, ['--version'], { stdio: 'ignore' });
-    if (res.error) {
-      if (res.error.code === 'ENOENT') return false;
-      // some other error, assume not available
-      return false;
-    }
-    return res.status === 0 || res.status === null || typeof res.status === 'undefined';
-  } catch (e) {
-    return false;
-  }
+	try {
+		const res = spawnSync(cmd, ['--version'], { stdio: 'ignore' });
+		if (res.error) {
+			if (res.error.code === 'ENOENT') return false;
+			// some other error, assume not available
+			return false;
+		}
+		return res.status === 0 || res.status === null || typeof res.status === 'undefined';
+	} catch (e) {
+		return false;
+	}
 }
 
 async function main() {
@@ -57,9 +57,9 @@ async function main() {
 	const tarPath = path.join(pkgDir, tar);
 
 	// 2) create a temp consumer dir and test `npm install` and `pnpm add`
-	const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'TENRA-test-'));
+	const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'Ambiten-test-'));
 	console.log('Using temp dir', tmp);
-	fs.writeFileSync(path.join(tmp, 'package.json'), JSON.stringify({ name: 'TENRA-test', version: '0.0.0' }));
+	fs.writeFileSync(path.join(tmp, 'package.json'), JSON.stringify({ name: 'Ambiten-test', version: '0.0.0' }));
 
 	// npm install
 	if (isCommandAvailable('npm')) {

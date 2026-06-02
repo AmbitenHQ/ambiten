@@ -14,9 +14,9 @@ const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
 
 // hardcode known versions (or read them dynamically from monorepo)
 const versions = {
-  "@tenra/adapter-types": "1.0.0",
-  "@tenra/core": "1.0.0",
-  "@tenra/logger": "1.0.0",
+  "@Ambiten/adapter-types": "1.0.0",
+  "@Ambiten/core": "1.0.0",
+  "@Ambiten/logger": "1.0.0",
 };
 
 function patchDeps(obj) {

@@ -13,8 +13,8 @@ const pkgPath = path.join(deployDir, "package.json");
 const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
 
 const local = {
-  "@tenra/adapter-types": "file:C:\\Users\\User\\Documents\\GitHub\\tenra\\packages\\adapter-types",
-  "@tenra/core": "file:C:\\Users\\User\\Documents\\GitHub\\tenra\\packages\\core",
+  "@Ambiten/adapter-types": "file:C:\\Users\\User\\Documents\\GitHub\\Ambiten\\packages\\adapter-types",
+  "@Ambiten/core": "file:C:\\Users\\User\\Documents\\GitHub\\Ambiten\\packages\\core",
 };
 
 pkg.dependencies = pkg.dependencies || {};

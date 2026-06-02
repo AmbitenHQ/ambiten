@@ -33,7 +33,7 @@ function main() {
 		const placeholder = header + [
 			`# No releases published yet`,
 			``,
-			`We haven't published any releases for the new scoped @TENRA packages yet.`,
+			`We haven't published any releases for the new scoped @Ambiten packages yet.`,
 			`This repository is being re-scoped and the first public releases will start at version 1.0.0.`,
 			``,
 			`What this means for the docs:`,
@@ -41,7 +41,7 @@ function main() {
 			`- When packages are released, the changelog generator will populate this page automatically.`,
 			``,
 			`Planned next steps:`,
-			`- Publish scoped packages under the @TENRA scope starting at v1.0.0.`,
+			`- Publish scoped packages under the @Ambiten scope starting at v1.0.0.`,
 			`- Run the changelog generator (e.g. changesets/auto-changelog) and then this script to populate the changelog page.`,
 			``,
 			`If you maintain a local changelog file in \`packages/core/CHANGELOG.md\`, run the changelog generator or create that file and then run:`,

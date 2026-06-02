@@ -4,8 +4,8 @@ const generator = require('../packages/core/src/templates/scaffold/structureGene
 
 (async () => {
 	try {
-		const out = path.resolve('C:/Users/User/OneDrive/Desktop/tenra-scaffold-test');
-		await generator.generateAppStructure(out, { projectName: 'tenra-scaffold-test', graphql: { enabled: true }, advanced: { autoInstall: false } });
+		const out = path.resolve('C:/Users/User/OneDrive/Desktop/Ambiten-scaffold-test');
+		await generator.generateAppStructure(out, { projectName: 'Ambiten-scaffold-test', graphql: { enabled: true }, advanced: { autoInstall: false } });
 		console.log('Scaffold generated at', out);
 	} catch (err) {
 		console.error('Scaffold failed', err);

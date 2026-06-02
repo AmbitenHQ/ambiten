@@ -8,8 +8,8 @@ const path = require('path');
 const argv = require('minimist')(process.argv.slice(2));
 const { visibleLength } = require('./wcwidth');
 
-const input = argv._[0] || path.join('TENRA-brand', 'extras', 'cli_splash.txt');
-const out = argv.o || path.join('TENRA-brand', 'extras', 'cli_splash.txt');
+const input = argv._[0] || path.join('Ambiten-brand', 'extras', 'cli_splash.txt');
+const out = argv.o || path.join('Ambiten-brand', 'extras', 'cli_splash.txt');
 const preview = !!(argv.preview || argv.p || argv.stdout || argv.s);
 const noHeader = !!(argv.noheader || argv.n);
 
@@ -48,7 +48,7 @@ function makeAnsiBox(lines, hpad = 2, vpad = 1, preImage = '') {
 	// use visibleLength to account for ANSI escapes and wide glyphs
 	const contentMax = lines.reduce((m, l) => Math.max(m, visibleLength(l)), 0);
 	const inner = contentMax + hpad * 2;
-	// TENRA brand teal: #00C4B4 -> rgb(0,196,180)
+	// Ambiten brand teal: #00C4B4 -> rgb(0,196,180)
 	const border = esc(0, 196, 180);
 	const text = esc(255, 255, 255);
 	// rounded corners
@@ -68,7 +68,7 @@ function makeAnsiBox(lines, hpad = 2, vpad = 1, preImage = '') {
 	}
 	for (let i = 0; i < vpad; i++) outLines.push(empty);
 	for (const l of lines) {
-		// color the subtitle (user request): "MongoDB toolkit" in TENRA teal
+		// color the subtitle (user request): "MongoDB toolkit" in Ambiten teal
 		let colored;
 		if (/MongoDB toolkit/i.test(l)) {
 			colored = esc(0, 196, 180) + l + reset();
@@ -86,13 +86,13 @@ function makeAnsiBox(lines, hpad = 2, vpad = 1, preImage = '') {
 // attempt to discover a brand logo file
 function findLogo() {
 	const candidates = [
-		'TENRA-brand/logo_horizontal.png',
-		'TENRA-brand/logo_light.png',
-		'TENRA-brand/logo_dark.png',
-		'TENRA-brand/logo_monochrome_white.png',
-		'TENRA-brand/logo_monochrome_black.png',
-		'TENRA-brand/icon_gradient.png',
-		'TENRA-brand/standalone_A.png',
+		'Ambiten-brand/logo_horizontal.png',
+		'Ambiten-brand/logo_light.png',
+		'Ambiten-brand/logo_dark.png',
+		'Ambiten-brand/logo_monochrome_white.png',
+		'Ambiten-brand/logo_monochrome_black.png',
+		'Ambiten-brand/icon_gradient.png',
+		'Ambiten-brand/standalone_A.png',
 	];
 	for (const c of candidates) if (fs.existsSync(c)) return c;
 	return null;
@@ -160,9 +160,9 @@ async function run() {
 	// normalize wide glyphs (circled A / emoji) to plain 'A' for consistent width
 	const normalizeWide = s => s.replace(/🅰|Ⓐ/g, 'A');
 	const plainLines = contentLines.map(normalizeWide);
-	// remove any leading standalone icon/token (emoji/circled A or ASCII 'A') that prefixes 'TENRA'
+	// remove any leading standalone icon/token (emoji/circled A or ASCII 'A') that prefixes 'Ambiten'
 	for (let i = 0; i < plainLines.length; i++) {
-		plainLines[i] = plainLines[i].replace(/^\s*(?:🅰|Ⓐ|A)\s+(?=TENRA\b)/i, '');
+		plainLines[i] = plainLines[i].replace(/^\s*(?:🅰|Ⓐ|A)\s+(?=Ambiten\b)/i, '');
 	}
 	// ANSI lines mirror plain lines (no icon);
 	const ansiLines = plainLines.slice();
@@ -184,27 +184,27 @@ async function run() {
 			// `pnpm add figlet` in their environment.
 			// Use a compact font to keep the banner narrow.
 			const figlet = require('figlet');
-			const fig = figlet.textSync('TENRA', { font: 'Small' });
+			const fig = figlet.textSync('Ambiten', { font: 'Small' });
 			const lines = String(fig).split(/\r?\n/).map(l => l.replace(/\s+$/u, ''));
-			// Ensure a single-line literal 'TENRA' exists for tests and
+			// Ensure a single-line literal 'Ambiten' exists for tests and
 			// simple consumers that look for the plain wordmark. Append a
 			// centered literal if absent.
-			if (!lines.some(l => l.trim() === 'TENRA')) {
-				lines.push('                     TENRA                    ');
+			if (!lines.some(l => l.trim() === 'Ambiten')) {
+				lines.push('                     Ambiten                    ');
 			}
 			return lines;
 		} catch (e) {
 			return [
-			'	888888888888888888888888b    8888888888b.        d8888   ',
-			'			888    888       8888b   888888   Y88b      d88888   ',
-			'			888    888       88888b  888888    888     d88P888   ',
-			'			888    8888888   888Y88b 888888   d88P    d88P 888   ',
-			'			888    888       888 Y88b8888888888P"    d88P  888   ',
-			'			888    888       888  Y88888888 T88b    d88P   888   ',
-			'			888    888       888   Y8888888  T88b  d8888888888   ',
-			'			888    8888888888888    Y888888   T88bd88P     888   ',
-			'                                                          ',
-			'                           TENRA                          '
+				'	888888888888888888888888b    8888888888b.        d8888   ',
+				'			888    888       8888b   888888   Y88b      d88888   ',
+				'			888    888       88888b  888888    888     d88P888   ',
+				'			888    8888888   888Y88b 888888   d88P    d88P 888   ',
+				'			888    888       888 Y88b8888888888P"    d88P  888   ',
+				'			888    888       888  Y88888888 T88b    d88P   888   ',
+				'			888    888       888   Y8888888  T88b  d8888888888   ',
+				'			888    8888888888888    Y888888   T88bd88P     888   ',
+				'                                                          ',
+				'                           Ambiten                          '
 			];
 		}
 	}
@@ -232,8 +232,8 @@ async function run() {
 		if (isAsciiArtLine(t)) return false;
 		if (headerTrim.includes(t)) return false;
 		if (/^=+$/.test(t)) return false;
-		// only exclude exact TENRA line; keep 'TENRA — ...' title
-		if (/^TENRA\s*$/i.test(t)) return false;
+		// only exclude exact Ambiten line; keep 'Ambiten — ...' title
+		if (/^Ambiten\s*$/i.test(t)) return false;
 		return true;
 	});
 
@@ -244,19 +244,19 @@ async function run() {
 		if (isAsciiArtLine(t)) return false;
 		if (headerTrim.includes(t)) return false;
 		if (/^=+$/.test(t)) return false;
-		if (/^TENRA\s*$/i.test(t)) return false;
+		if (/^Ambiten\s*$/i.test(t)) return false;
 		return true;
 	});
 
 	// Ensure the box contains the title line. If it was removed by filtering,
 	// reinsert the canonical title at the top of the box.
-	const hasTitle = cleanedPlainLines.some(l => /^TENRA\b/i.test(l));
+	const hasTitle = cleanedPlainLines.some(l => /^Ambiten\b/i.test(l));
 	if (!hasTitle) {
-		const titleFromInput = plainLines.find(l => /^TENRA\b/i.test(l));
-		const titleToInsert = titleFromInput || 'TENRA — fast, multi-tenant';
+		const titleFromInput = plainLines.find(l => /^Ambiten\b/i.test(l));
+		const titleToInsert = titleFromInput || 'Ambiten — fast, multi-tenant';
 		cleanedPlainLines.unshift(titleToInsert);
 		// for ANSI, try to find an ANSI-wrapped version; otherwise insert plain title
-		const ansiTitleFromInput = ansiLines.find(a => a.replace(new RegExp(String.fromCharCode(27) + '\\[[0-9;]*m', 'g'), '').match(/^TENRA\b/i));
+		const ansiTitleFromInput = ansiLines.find(a => a.replace(new RegExp(String.fromCharCode(27) + '\\[[0-9;]*m', 'g'), '').match(/^Ambiten\b/i));
 		cleanedAnsiLines.unshift(ansiTitleFromInput || titleToInsert);
 	}
 

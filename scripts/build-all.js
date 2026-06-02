@@ -26,6 +26,23 @@ function runPnpm(args, { capture = false } = {}) {
   return { out, ms: Date.now() - t0 };
 }
 
+// function runPnpm(args, options = {}) {
+//   const command = process.platform === 'win32'
+//     ? 'pnpm.cmd'
+//     : 'pnpm';
+
+//   return execFileSync(command, args, {
+//     cwd: options.cwd ?? process.cwd(),
+//     env: {
+//       ...process.env,
+//       ...(options.env ?? {}),
+//     },
+//     encoding: 'utf8',
+//     stdio: options.stdio ?? 'pipe',
+//     shell: process.platform === 'win32',
+//   });
+// }
+
 
 function toFilterArgs(filters) {
   const out = [];
@@ -299,42 +316,42 @@ function main() {
 
   // logger
   summary.push({
-    label: "@tenra/logger",
-    ...buildGroup(["@tenra/logger"], "@tenra/logger", opts),
+    label: "@ambiten/logger",
+    ...buildGroup(["@ambiten/logger"], "@ambiten/logger", opts),
   });
 
   // adapter-types (once)
   summary.push({
-    label: "@tenra/adapter-types",
-    ...buildGroup(["@tenra/adapter-types"], "@tenra/adapter-types", opts),
+    label: "@ambiten/adapter-types",
+    ...buildGroup(["@ambiten/adapter-types"], "@ambiten/adapter-types", opts),
   });
 
   // core
   summary.push({
-    label: "@tenra/core",
-    ...buildGroup(["@tenra/core"], "@tenra/core", opts),
+    label: "@ambiten/core",
+    ...buildGroup(["@ambiten/core"], "@ambiten/core", opts),
   });
 
-    // adapter-runtime (once, before other adapters that depend on it)
+  // adapter-runtime (once, before other adapters that depend on it)
   summary.push({
-    label: "@tenra/adapter-runtime",
-    ...buildGroup(["@tenra/adapter-runtime"], "@tenra/adapter-runtime", opts),
+    label: "@ambiten/adapter-runtime",
+    ...buildGroup(["@ambiten/adapter-runtime"], "@ambiten/adapter-runtime", opts),
   });
 
   // adapters excluding adapter-types (once)
   summary.push({
-    label: "adapters (@tenra/adapter-* excluding adapter-types and adapter-runtime)",
+    label: "adapters (@ambiten/adapter-* excluding adapter-types and adapter-runtime)",
     ...buildGroup(
-      ["@tenra/adapter-*", "!@tenra/adapter-types", "!@tenra/adapter-runtime"],
+      ["@ambiten/adapter-*", "!@ambiten/adapter-types", "!@ambiten/adapter-runtime"],
       "adapters (excluding adapter-types and adapter-runtime)",
       opts
     ),
   });
-  
+
   // create
   summary.push({
-    label: "@tenra/create",
-    ...buildGroup(["@tenra/create"], "@tenra/create", opts),
+    label: "@ambiten/create",
+    ...buildGroup(["@ambiten/create"], "@ambiten/create", opts),
   });
 
   console.log("\n================ Build Summary ================");

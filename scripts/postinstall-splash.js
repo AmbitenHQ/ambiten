@@ -7,8 +7,8 @@ const path = require('path');
 const https = require('https');
 
 // This script is intentionally simple and opt-in. It prints the curated
-// `TENRA-brand/extras/cli_splash.txt` file when the environment variable
-// TENRA_SHOW_SPLASH is truthy (1/true/yes). This keeps the postinstall
+// `Ambiten-brand/extras/cli_splash.txt` file when the environment variable
+// Ambiten_SHOW_SPLASH is truthy (1/true/yes). This keeps the postinstall
 // behavior non-intrusive for consumers.
 
 function isFalsy(v) {
@@ -16,11 +16,11 @@ function isFalsy(v) {
   return ['0', 'false', 'no'].includes(String(v).toLowerCase());
 }
 
-// If TENRA_SHOW_SPLASH is explicitly set to a falsy value, skip showing the splash.
-if (isFalsy(process.env.TENRA_SHOW_SPLASH)) process.exit(0);
+// If Ambiten_SHOW_SPLASH is explicitly set to a falsy value, skip showing the splash.
+if (isFalsy(process.env.Ambiten_SHOW_SPLASH)) process.exit(0);
 
-const splashPath = path.resolve(__dirname, '..', 'tenra-brand', 'extras', 'cli_splash.txt');
-const GITHUB_RAW = 'https://raw.githubusercontent.com/tenrahq/tenra/main/tenra-brand/extras/cli_splash.txt';
+const splashPath = path.resolve(__dirname, '..', 'Ambiten-brand', 'extras', 'cli_splash.txt');
+const GITHUB_RAW = 'https://raw.githubusercontent.com/Ambitenhq/Ambiten/main/Ambiten-brand/extras/cli_splash.txt';
 
 function fetchWithHttps(url) {
   return new Promise((resolve, reject) => {
@@ -78,7 +78,7 @@ async function tryPrintLocalOrRemote() {
 
   // last-resort friendly message so postinstall doesn't fail or hang
   try {
-    console.log('TENRA: install complete. Set TENRA_SHOW_SPLASH=1 to display CLI splash.');
+    console.log('Ambiten: install complete. Set Ambiten_SHOW_SPLASH=1 to display CLI splash.');
   } catch (e) {
     // noop
   }
