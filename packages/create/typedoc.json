@@ -8,18 +8,3 @@
   "hidePageTitle": false,
   "flattenOutputFiles": true,
 }
-
-// {
-//   "entryPoints": ["src/index.ts"],
-//   "out": "../../docs/website/docs/create/api",
-//   "logLevel": "Error",
-//   "tsconfig": "./tsconfig.json",
-//   "excludePrivate": true,
-//   "excludeInternal": true,
-//   "includeVersion": true,
-//   "theme": "default",
-// 	"readme": "none",
-//   "plugin": ["typedoc-plugin-markdown"],
-//   "hideGenerator": true,
-//   "exclude": ["**/node_modules/**", "**/docs/**", "**/tests/**", "**/*.spec.ts"]
-// }
