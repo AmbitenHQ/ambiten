@@ -33,7 +33,7 @@ docs/.vitepress/cache
 # Local environment files
 .env.local
 
-PROJECT-DELIVERABLES.md
+/PROJECT-DELIVERABLES
 
 .qodo
 
