@@ -1,3 +1,3 @@
-export * from './loadTenraConfig'
+export * from './loadAmbitenConfig'
 
 

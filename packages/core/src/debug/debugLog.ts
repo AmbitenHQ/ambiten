@@ -1,19 +1,19 @@
-import { TenraContext } from '../context';
+import { AmbitenContext } from '../context';
 
 export function debugLog(
   message: string,
   meta: Record<string, any> = {}
 ): void {
-  if (!TenraContext.isDebug()) return;
+  if (!AmbitenContext.isDebug()) return;
 
-  const logger = TenraContext.getLogger();
-  const loggerMeta = TenraContext.getLoggerMeta() ?? {};
+  const logger = AmbitenContext.getLogger();
+  const loggerMeta = AmbitenContext.getLoggerMeta() ?? {};
 
   const payload = {
-    tenantId: TenraContext.getTenantId(),
-    requestId: TenraContext.getRequestId(),
-    dbName: TenraContext.getDbName(),
-    collectionName: TenraContext.getCollectionName(),
+    tenantId: AmbitenContext.getTenantId(),
+    requestId: AmbitenContext.getRequestId(),
+    dbName: AmbitenContext.getDbName(),
+    collectionName: AmbitenContext.getCollectionName(),
     ...loggerMeta,
     ...meta
   };
@@ -23,5 +23,5 @@ export function debugLog(
     return;
   }
 
-  console.debug(`[Tenra_DEBUG] ${message}`, payload);
+  console.debug(`[AMBITEN_DEBUG] ${message}`, payload);
 }
