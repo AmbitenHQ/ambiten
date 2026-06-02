@@ -4,21 +4,20 @@ import { colorize } from "../../core/src/utils/color-palatte";
 
 (async () => {
   try {
-    const buildPath = path.resolve(__dirname, '../TENRA_core.node.js');
+    const buildPath = path.resolve(__dirname, '../ambiten_core.node.js');
 
     async function resolvePath(p: string) {
 
-      const TENRA = await import(buildPath);
+      const ambiten = await import(buildPath);
 
       const requiredExports = [
-        'TENRABootstrap',
-        'TENRABootstrapFactory',
-        'TENRASchema',
-        'TENRAModel',
+        'AmbitenBootstrapFactory',
+        'AmbitenSchema',
+        'AmbitenModel',
         'createModel',
         'createSchema',
-        'TENRAGraphQL',
-        'TENRAClient',
+        'AmbitenGraphQL',
+        'AmbitenClient',
         'applyMultitenancy',
         'connectRedis',
         'initializeRedis',
@@ -26,22 +25,22 @@ import { colorize } from "../../core/src/utils/color-palatte";
         'RedisService',
       ];
 
-      const missing = requiredExports.filter(key => !(key in TENRA));
+      const missing = requiredExports.filter(key => !(key in ambiten));
 
       if (missing.length > 0) {
-        console.error(colorize('❌ Missing exports in @TENRA/core build:', 'red'));
+        console.error(colorize('❌ Missing exports in @ambiten/core build:', 'red'));
         for (const name of missing) {
           console.error(`- ${name}`);
         }
         process.exit(1);
       }
 
-      console.log(colorize('✅ All required exports are present in @TENRA/core.', 'red'));
+      console.log(colorize('✅ All required exports are present in @ambiten/core.', 'red'));
       return path.isAbsolute(p) ? p : path.join(__dirname, p);
     }
     resolvePath(buildPath);
   } catch (err) {
-    console.error(colorize('❌ Failed to load @TENRA/core build output:', 'red'), err);
+    console.error(colorize('❌ Failed to load @ambiten/core build output:', 'red'), err);
     process.exit(1);
   }
 })()

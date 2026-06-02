@@ -10,7 +10,7 @@ function checkFileExists(relPath: string) {
   if (!fs.existsSync(fullPath)) errors.push(`Missing file: ${relPath}`);
 }
 
-console.log('🧪 Verifying TENRA_core publish configuration...');
+console.log('🧪 Verifying Ambiten core publish configuration...');
 
 checkFileExists(pkg.main || 'dist/index.js');
 checkFileExists(pkg.types || 'dist/index.d.ts');
