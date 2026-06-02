@@ -1,9 +1,9 @@
-import type { AdapterContextOptions, TenraRequestLike } from '@tenra/adapter-types';
+import type { AdapterContextOptions, AmbitenRequestLike } from '@ambiten/adapter-types';
 
-export interface GraphqlAdapterOptions extends AdapterContextOptions {}
+export interface GraphqlAdapterOptions extends AdapterContextOptions { }
 
 export interface GraphqlExecutionInput {
-  request: TenraRequestLike;
+  request: AmbitenRequestLike;
 }
 
 export type GraphqlContextFactory<TSource = unknown, TResult = unknown> = (

@@ -1,4 +1,4 @@
-import type { TenraRequestLike } from '@tenra/adapter-types';
+import type { AmbitenRequestLike } from '@ambiten/adapter-types';
 
 function normalizeHeaders(
   headers: unknown
@@ -81,17 +81,17 @@ export interface GraphqlRequestAdapterInput {
   body?: unknown;
 }
 
-export function toGraphqlTenraRequestLike(
+export function toGraphqlAmbitenRequestLike(
   input: GraphqlRequestAdapterInput
-): TenraRequestLike {
+): AmbitenRequestLike {
   const headers = normalizeHeaders(input.headers);
   const cookies = normalizeCookies(input.cookies);
 
   const params =
     input.params && typeof input.params === 'object'
       ? Object.fromEntries(
-          Object.entries(input.params).map(([key, value]) => [key, value ?? ''])
-        )
+        Object.entries(input.params).map(([key, value]) => [key, value ?? ''])
+      )
       : {};
 
   return {

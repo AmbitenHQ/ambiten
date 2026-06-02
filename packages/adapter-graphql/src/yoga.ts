@@ -1,19 +1,19 @@
 import type { GraphqlAdapterOptions } from './types';
-import { toGraphqlTenraRequestLike } from './graphql-request';
+import { toGraphqlAmbitenRequestLike } from './graphql-request';
 import {
   createGraphqlRuntimeContext,
-  type TenraGraphqlRuntimeContext
+  type AmbitenGraphqlRuntimeContext
 } from './graphql-context';
 
 export function createYogaContextFactory<TContext extends Record<string, unknown> = Record<string, unknown>>(
   options: GraphqlAdapterOptions = {},
   extend?: (
     input: { request: Request },
-    runtime: TenraGraphqlRuntimeContext
+    runtime: AmbitenGraphqlRuntimeContext
   ) => Promise<TContext> | TContext
 ) {
   return async (input: { request: Request }) => {
-    const adaptedRequest = toGraphqlTenraRequestLike({
+    const adaptedRequest = toGraphqlAmbitenRequestLike({
       headers: input.request.headers,
       url: input.request.url,
       method: input.request.method

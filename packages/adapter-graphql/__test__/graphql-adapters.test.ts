@@ -1,8 +1,8 @@
 import { createApolloContextFactory } from '../src/apollo';
 import { createYogaContextFactory } from '../src/yoga';
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 
-jest.mock('@tenra/adapter-runtime', () => ({
+jest.mock('@ambiten/adapter-runtime', () => ({
   runWithAdapterContext: jest.fn(),
   getAdapterRuntimeContext: jest.fn(() => ({
     tenantId: 'tenant-a',
@@ -24,7 +24,7 @@ describe('GraphQL adapter context factories', () => {
     );
   });
 
-  it('createApolloContextFactory should create Tenra GraphQL runtime context', async () => {
+  it('createApolloContextFactory should create Ambiten GraphQL runtime context', async () => {
     const factory = createApolloContextFactory(
       {
         tenancy: { header: 'x-tenant-id' },
@@ -87,7 +87,7 @@ describe('GraphQL adapter context factories', () => {
     );
   });
 
-  it('createYogaContextFactory should create Tenra GraphQL runtime context', async () => {
+  it('createYogaContextFactory should create Ambiten GraphQL runtime context', async () => {
     const request = new Request('https://example.com/graphql', {
       method: 'POST',
       headers: {
