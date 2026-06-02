@@ -1,18 +1,18 @@
-# Contributing to Tenra
+# Contributing to Ambiten
 
-First off, thank you for taking the time to contribute! It is people like you who make Tenra a great tool for the community.
+First off, thank you for taking the time to contribute! It is people like you who make Ambiten a great tool for the community.
 
 ## Development Environment
 
-Tenra is managed as a Monorepo using pnpm workspaces (or npm/yarn).
+Ambiten is managed as a Monorepo using pnpm workspaces (or npm/yarn).
 
 1. **Prerequisites:** Node.js >= 18 and a local MongoDB instance.
 
 2. **Clone & Install:**
 
 ```bash
-git clone https://github.com/NodEm9/tenra.git
-cd tenra
+git clone https://github.com/NodEm9/ambiten.git
+cd Ambiten
 npm install
 ```
 
@@ -27,7 +27,7 @@ npm run build
 We are specifically looking for help in these areas:
 
 - **Adapters:** Expanding support to frameworks like Hono, Elysia, or Koa.
-- **Core Logic:** Optimizing the TenraContext and AsyncLocalStorage implementation.
+- **Core Logic:** Optimizing the AmbitenContext and AsyncLocalStorage implementation.
 - **Documentation:** Improving the VitePress guides and adding "Real-world" examples.
 - **Integrations:** Enhancing Redis caching or GraphQL auto-generation.
 
@@ -53,7 +53,7 @@ We are specifically looking for help in these areas:
 
 - **TypeScript:** All new code must be strictly typed. Avoid any unless absolutely necessary.
 
-- **Context Awareness:** Ensure any new database-related features correctly utilize TenraContext.getStore().
+- **Context Awareness:** Ensure any new database-related features correctly utilize AmbitenContext.getStore().
 
 - **Orthogonality:** Keep adapters separate from core logic. Core should never depend on a specific web framework.
 
@@ -61,7 +61,7 @@ We are specifically looking for help in these areas:
 
 If you find a bug, please include:
 
-1. The version of @tenra/core and the specific adapter you are using.
+1. The version of @ambiten/core and the specific adapter you are using.
 
 2. Your Node.js version.
 
