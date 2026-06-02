@@ -1,7 +1,7 @@
 {
-  "name": "@tenra/adapter-runtime",
+  "name": "@ambiten/adapter-runtime",
   "version": "1.0.0",
-  "description": "Runtime utilities for Tenra multi-tenancy adapters",
+  "description": "Runtime utilities for Ambiten multi-tenancy adapters",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,10 @@
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "exports": {
     ".": {
@@ -31,6 +34,15 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/adapter-runtime"
+  },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "@types/jest": "^29.5.14",
@@ -40,11 +52,10 @@
     "typescript": "^6.0.2"
   },
   "dependencies": {
-    "@tenra/adapter-types": "workspace:*",
-    "@tenra/core": "workspace:*"
+    "@ambiten/adapter-types": "workspace:*",
+    "@ambiten/core": "workspace:*"
   },
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   }
 }

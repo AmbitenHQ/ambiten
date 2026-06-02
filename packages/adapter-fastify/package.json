@@ -1,5 +1,5 @@
 {
-  "name": "@tenra/adapter-fastify",
+  "name": "@ambiten/adapter-fastify",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -10,7 +10,10 @@
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "exports": {
     ".": {
@@ -30,6 +33,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/adapter-fastify"
+  },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -42,11 +54,10 @@
     "fastify": "^5.6.2"
   },
   "dependencies": {
-    "@tenra/adapter-runtime": "workspace:*",
-    "@tenra/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:*",
+    "@ambiten/adapter-types": "workspace:*"
   },
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   }
 }

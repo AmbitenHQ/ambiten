@@ -1,5 +1,5 @@
 {
-  "name": "tenra",
+  "name": "ambiten",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -12,9 +12,9 @@
     "test": "pnpm --recursive test",
     "lint": "pnpm -w exec eslint \"packages/**/src/**/*.{ts,tsx,js,jsx}\"",
     "lint:fix": "pnpm -w exec eslint \"packages/**/src/**/*.{ts,tsx,js,jsx}\" --fix",
-    "build:logger": "pnpm --filter @tenra/logger build",
-    "build:core": "pnpm --filter @tenra/core build",
-    "build:create": "pnpm --filter @tenra/create build",
+    "build:logger": "pnpm --filter @ambiten/logger build",
+    "build:core": "pnpm --filter @ambiten/core build",
+    "build:create": "pnpm --filter @ambiten/create build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "changeset publish",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tenrahq/tenra.git"
+    "url": "git+https://github.com/ambiten/ambiten.git"
   },
   "keywords": [],
   "author": "",
@@ -37,21 +37,18 @@
     "registry": "https://registry.npmjs.org/"
   },
   "bugs": {
-    "url": "https://github.com/tenrahq/tenra/issues"
+    "url": "https://github.com/ambiten/ambiten/issues"
   },
-  "homepage": "https://github.com/tenrahq/tenra#readme",
+  "homepage": "https://github.com/ambiten/ambiten#readme",
+  "packageManager": "pnpm@10.20.0",
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.1",
     "@changesets/changelog-github": "^0.5.2",
     "@changesets/cli": "^2.29.8",
     "@eslint/js": "^9.39.2",
-    "@tailwindcss/cli": "^4.1.18",
-    "@tailwindcss/postcss": "^4.2.2",
-    "@tailwindcss/typography": "^0.5.19",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.14",
     "@types/node": "^24.10.4",

@@ -1,13 +1,16 @@
 {
-  "name": "@tenra/adapter-types",
+  "name": "@ambiten/adapter-types",
   "version": "1.0.0",
-  "description": "Tenra multi-tenacy adapter types",
+  "description": "Ambiten multi-tenacy adapter types",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "exports": {
     ".": {
@@ -25,13 +28,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/adapter-types"
+  },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "packageManager": "pnpm@10.20.0",
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

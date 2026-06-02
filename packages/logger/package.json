@@ -1,16 +1,17 @@
 {
-  "name": "@tenra/logger",
+  "name": "@ambiten/logger",
   "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/tenra-logger.js",
-  "module": "dist/tenra-logger.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "package.json"
   ],
   "sideEffects": false,
   "browser": {
@@ -19,8 +20,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/tenra-logger.js",
-      "require": "./dist/tenra-logger.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
     "./package.json": "./package.json"
@@ -33,7 +34,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node --project tsconfig.json src/index.ts",
-    "build": "webpack --config webpack.config.js",
+    "build": "tsc -p tsconfig.json",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "changeset",
     "release": "pnpm changeset version && pnpm install && pnpm build && changeset publish",
@@ -44,7 +45,7 @@
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "keywords": [
-    "tenra",
+    "Ambiten",
     "logger",
     "Advance logging"
   ],
@@ -57,16 +58,14 @@
   "license": "ISC",
   "description": "",
   "repository": {
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/tenrahq/tenra.git",
-      "directory": "packages/logger"
-    },
-    "bugs": {
-      "url": "https://github.com/tenrahq/tenra/issues"
-    },
-    "homepage": "https://tenra.dev"
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/logger"
   },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
@@ -100,8 +99,8 @@
     "@babel/runtime": "^7.28.4",
     "axios": "^1.13.2"
   },
+  "packageManager": "pnpm@10.20.0",
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   }
 }

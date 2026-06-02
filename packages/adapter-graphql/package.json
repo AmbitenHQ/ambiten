@@ -1,7 +1,7 @@
 {
-  "name": "@tenra/adapter-graphql",
+  "name": "@ambiten/adapter-graphql",
   "version": "1.0.0",
-  "description": "Tenra adapter for GraphQL",
+  "description": "Ambiten adapter for GraphQL",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,10 @@
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "exports": {
     ".": {
@@ -30,6 +33,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/adapter-graphql"
+  },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -39,14 +51,13 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@tenra/adapter-runtime": "workspace:*",
-    "@tenra/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:*",
+    "@ambiten/adapter-types": "workspace:*"
   },
   "peerDependencies": {
     "graphql": "^16.0.0"
   },
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   }
 }

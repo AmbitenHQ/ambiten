@@ -1,7 +1,7 @@
 {
-  "name": "@tenra/adapter-express",
+  "name": "@ambiten/adapter-express",
   "version": "1.0.0",
-  "description": "Tenra multi-tenancy adapter for Express.js",
+  "description": "Ambiten multi-tenancy adapter for Express.js",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
@@ -9,7 +9,10 @@
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
   ],
   "exports": {
     ".": {
@@ -24,6 +27,7 @@
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "pnpm run changeset",
     "release": "pnpm changeset version",
+    "prepack": "pnpm build",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "keywords": [],
@@ -31,18 +35,16 @@
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
   "repository": {
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/tenrahq/tenra.git",
-      "directory": "packages/adapter-express"
-    },
-    "bugs": {
-      "url": "https://github.com/tenrahq/tenra/issues"
-    },
-    "homepage": "https://tenra.dev"
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/adapter-express"
   },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "peerDependencies": {
-    "express": "^5.1.0"
+    "express": "^4.18.0 || ^5.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -55,11 +57,10 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@tenra/adapter-runtime": "workspace:*",
-    "@tenra/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:*",
+    "@ambiten/adapter-types": "workspace:*"
   },
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   }
 }

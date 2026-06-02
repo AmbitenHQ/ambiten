@@ -4,21 +4,24 @@
   "commit": false,
   "linked": [
     [
-      "@tenra/core",
-      "@tenra/logger",
-      "@tenra/adapter-runtime",
-      "@tenra/adapter-types",
-      "@tenra/adapter-express",
-      "@tenra/adapter-fastify",
-      "@tenra/adapter-graphql",
-      "@tenra/adapter-nestjs",
-      "@tenra/adapter-lambda"
+      "@ambiten/core",
+      "@ambiten/logger",
+      "@ambiten/create",
+      "@ambiten/adapter-runtime",
+      "@ambiten/adapter-types",
+      "@ambiten/adapter-express",
+      "@ambiten/adapter-fastify",
+      "@ambiten/adapter-graphql",
+      "@ambiten/adapter-nestjs",
+      "@ambiten/adapter-lambda"
     ]
   ],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "snapshot": {"useCalculatedVersion": true},
+  "snapshot": {
+    "useCalculatedVersion": true
+  },
   "ignore": [],
   "npmClient": "npm"
 }

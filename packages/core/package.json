@@ -1,33 +1,34 @@
 {
-  "name": "@tenra/core",
+  "name": "@ambiten/core",
   "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Core library for Tenra, providing essential functionalities and utilities for building applications with Tenra.",
-  "main": "dist/tenra-core.js",
-  "module": "dist/tenra-core.js",
-  "browser": "dist/tenra-core-browser.js",
-  "types": "dist/index.d.ts",
+  "description": "Core library for Ambiten, providing essential functionalities and utilities for building applications with Ambiten.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "browser": "./dist/index-browser.js",
+  "types": "./dist/index.d.ts",
   "bin": {
-    "tenra": "bin/bootstrap.js"
+    "ambiten": "./bin/bootstrap.js"
   },
   "exports": {
     ".": {
-      "import": "./dist/tenra-core.js",
-      "require": "./dist/tenra-core.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
     "./browser": {
-      "import": "./dist/tenra-core-browser.js",
-      "require": "./dist/tenra-core-browser.js",
+      "import": "./dist/index-browser.js",
+      "require": "./dist/index-browser.js",
       "types": "./dist/browser.d.ts"
     },
     "./bin": {
-      "import": "./dist/tenra-core-cli.js",
-      "require": "./dist/tenra-core-cli.js",
+      "import": "./dist/index-cli.js",
+      "require": "./dist/index-cli.js",
       "types": "./dist/cli.d.ts"
     },
+    "./bundle": "./dist/ambiten-logger.js",
     "./package.json": "./package.json"
   },
   "sideEffects": false,
@@ -36,6 +37,7 @@
     "bin",
     "README.md",
     "LICENSE",
+    "package.json",
     "brand",
     "!dist/scripts"
   ],
@@ -51,6 +53,7 @@
     "typedoc": "typedoc --options typedoc.json",
     "release": "pnpm changeset version",
     "test": "jest --detectOpenHandles --coverage",
+    "prepack": "pnpm build",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "release": {
@@ -62,7 +65,7 @@
     "mongodb",
     "odm",
     "core",
-    "tenra",
+    "Ambiten",
     "library"
   ],
   "author": "Emmanuel Nodolomwanyi",
@@ -73,20 +76,18 @@
   ],
   "license": "ISC",
   "repository": {
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/tenrahq/tenra.git",
-      "directory": "packages/core"
-    },
-    "bugs": {
-      "url": "https://github.com/tenrahq/tenra/issues"
-    },
-    "homepage": "https://tenra.dev"
+    "type": "git",
+    "url": "git+https://github.com/ambiten/ambiten.git",
+    "directory": "packages/core"
   },
+  "bugs": {
+    "url": "https://github.com/ambiten/ambiten/issues"
+  },
+  "homepage": "https://ambiten.dev",
   "dependencies": {
     "@babel/runtime": "7.28.4",
     "@inquirer/prompts": "^8.3.2",
-    "@tenra/logger": "workspace:*",
+    "@ambiten/logger": "workspace:*",
     "buffer": "6.0.3",
     "commander": "14.0.2",
     "fs-extra": "11.3.3",
@@ -98,6 +99,8 @@
     "@graphql-tools/schema": "10.0.23",
     "ajv": "8.17.1",
     "ajv-formats": "3.0.1",
+    "express": "^5.1.0",
+    "express-serve-static-core": "^0.1.1",
     "graphql": "16.11.0",
     "graphql-http": "1.22.4",
     "graphql-redis-subscriptions": "2.7.0",
@@ -134,8 +137,10 @@
     "@semantic-release/github": "^11.0.6",
     "@semantic-release/npm": "^12.0.2",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "@tenra/adapter-types": "workspace:*",
+    "@ambiten/adapter-types": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
+    "@types/express": "^5.0.6",
+    "@types/express-serve-static-core": "^5.1.1",
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.19.3",
@@ -174,8 +179,8 @@
     "webpack-remove-debug": "0.1.0",
     "webpack-shebang-plugin": "1.1.8"
   },
+  "packageManager": "pnpm@10.20.0",
   "engines": {
-    "node": ">=22.13.0",
-    "pnpm": ">=11.0.0"
+    "node": ">=20.11.0"
   }
 }
