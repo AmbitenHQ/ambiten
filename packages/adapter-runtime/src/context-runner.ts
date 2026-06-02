@@ -1,12 +1,12 @@
-import { TenraContext } from '@tenra/core';
-import { resolveTenant } from '@tenra/adapter-types';
+import { AmbitenContext } from '@ambiten/core';
+import { resolveTenant } from '@ambiten/adapter-types';
 import type {
-  TenraRequestLike,
+  AmbitenRequestLike,
   AdapterContextOptions
-} from '@tenra/adapter-types';
+} from '@ambiten/adapter-types';
 
 function readHeader(
-  req: TenraRequestLike,
+  req: AmbitenRequestLike,
   name: string
 ): string | undefined {
   const value = req.headers?.[name.toLowerCase()];
@@ -15,7 +15,7 @@ function readHeader(
 }
 
 export async function runWithAdapterContext<T>(
-  req: TenraRequestLike,
+  req: AmbitenRequestLike,
   handler: () => T | Promise<T>,
   options: AdapterContextOptions = {}
 ): Promise<T> {
@@ -81,10 +81,10 @@ export async function runWithAdapterContext<T>(
   };
 
   if (enableTransactions) {
-    return TenraContext.run(ctx, () =>
-      TenraContext.withTransaction(async () => await handler())
+    return AmbitenContext.run(ctx, () =>
+      AmbitenContext.withTransaction(async () => await handler())
     );
   }
 
-  return TenraContext.run(ctx, async () => await handler());
+  return AmbitenContext.run(ctx, async () => await handler());
 }

@@ -1,5 +1,5 @@
-import { TenraContext } from '@tenra/core';
-import type { TenraOperationMeta } from '@tenra/core';
+import { AmbitenContext } from '@ambiten/core';
+import type { AmbitenOperationMeta } from '@ambiten/core';
 
 export interface AdapterRuntimeContextSnapshot {
   tenantId?: string;
@@ -8,11 +8,11 @@ export interface AdapterRuntimeContextSnapshot {
   collectionName?: string;
   debug?: boolean;
   loggerMeta?: Record<string, unknown>;
-  meta?: TenraOperationMeta;
+  meta?: AmbitenOperationMeta;
 }
 
 export function getAdapterRuntimeContext(): AdapterRuntimeContextSnapshot {
-  const ctx = TenraContext.get();
+  const ctx = AmbitenContext.get();
 
   return {
     tenantId: ctx.tenantId,

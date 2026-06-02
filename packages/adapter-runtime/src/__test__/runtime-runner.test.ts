@@ -1,5 +1,4 @@
 import { runWithAdapterContext } from '../context-runner';
-// import { shutdownCoreLogger } from '@tenra/core';
 
 describe('runWithAdapterContext', () => {
   beforeEach(async () => {
