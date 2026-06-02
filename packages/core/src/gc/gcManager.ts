@@ -1,4 +1,4 @@
-import { TenraModelRegistry } from '../utils/ModelRegistry';
+import { AmbitenModelRegistry } from '../utils/ModelRegistry';
 import { colorize } from '../utils';
 import type { ModelContext } from '../types';
 
@@ -21,7 +21,7 @@ export interface GarbageCollectorRunResult {
 }
 
 /**
- * Runs garbage collection on all registered Tenra model instances.
+ * Runs garbage collection on all registered Ambiten model instances.
  *
  * This delegates cleanup to each model's `runGC()` method so the operation
  * remains context-aware and preserves middleware, schema hooks, query
@@ -33,7 +33,7 @@ export interface GarbageCollectorRunResult {
 export async function runGarbageCollectorOnAllModels(
   options: GarbageCollectorRunOptions = {}
 ): Promise<GarbageCollectorRunResult> {
-  const models = TenraModelRegistry.getAllModels();
+  const models = AmbitenModelRegistry.getAllModels();
 
   const result: GarbageCollectorRunResult = {
     scanned: models.length,
@@ -84,9 +84,9 @@ export async function runGarbageCollectorOnAllModels(
 }
 
 /**
- * Runs garbage collection on a single Tenra model instance.
+ * Runs garbage collection on a single Ambiten model instance.
  *
- * @param model - Registered Tenra model instance.
+ * @param model - Registered Ambiten model instance.
  * @param ctx - Optional model execution context.
  */
 export async function runGarbageCollector(

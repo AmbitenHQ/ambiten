@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { generateAppStructure } from '../templates';
 import { createScaffoldLogger, colorize } from '../utils';
-import type { TenraConfig } from '../types';
+import type { AmbitenConfig } from '../types';
 
 export interface GeneratedProjectResult {
   projectRoot: string;
@@ -11,13 +11,13 @@ export interface GeneratedProjectResult {
 }
 
 export async function generateProject(
-  options: TenraConfig
+  options: AmbitenConfig
 ): Promise<GeneratedProjectResult> {
   const startedAt = Date.now();
 
-  const projectName = options.projectName?.trim() || 'Tenra-app';
+  const projectName = options.projectName?.trim() || 'Ambiten-app';
   const projectRoot = path.resolve(process.cwd(), projectName);
-  const configPath = path.join(projectRoot, 'tenra.config.json');
+  const configPath = path.join(projectRoot, 'Ambiten.config.json');
   const entryFilePath = path.join(projectRoot, 'src', 'main.ts');
 
   console.log(colorize(`\n🚀 Creating project "${projectName}"`, 'green'));
@@ -27,7 +27,7 @@ export async function generateProject(
 
   const logger = createScaffoldLogger(projectRoot);
 
-  const resolvedOptions: TenraConfig = {
+  const resolvedOptions: AmbitenConfig = {
     ...options,
     projectName,
   };
@@ -45,10 +45,10 @@ export async function generateProject(
 }
 
 export async function generateProjectWithConfig(
-  config: TenraConfig
+  config: AmbitenConfig
 ): Promise<GeneratedProjectResult> {
   return generateProject({
     ...config,
-    projectName: config.projectName || 'Tenra-app',
+    projectName: config.projectName || 'Ambiten-app',
   });
 }

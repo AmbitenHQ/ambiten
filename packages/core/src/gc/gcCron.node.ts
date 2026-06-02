@@ -1,6 +1,6 @@
 import * as cron from 'node-cron';
 import { runGarbageCollectorOnAllModels } from './gcManager';
-import { TenraModelRegistry } from '../utils/ModelRegistry';
+import { AmbitenModelRegistry } from '../utils/ModelRegistry';
 import { colorize } from '../utils';
 import type { ModelContext } from '../types';
 
@@ -14,7 +14,7 @@ export interface GarbageCollectorScheduleOptions {
  * Schedules registry-driven garbage collection.
  *
  * The cron task uses registered model instances and delegates cleanup to
- * `model.runGC()` so Tenra's runtime context, middleware, schema hooks,
+ * `model.runGC()` so Ambiten's runtime context, middleware, schema hooks,
  * instrumentation, cache invalidation, and events remain centralized.
  *
  * @param options - Cron expression or scheduler options.
@@ -40,7 +40,7 @@ export function scheduleGarbageCollector(
 
   return cron.schedule(cronExpr, async () => {
     try {
-      const models = TenraModelRegistry.getAllModels();
+      const models = AmbitenModelRegistry.getAllModels();
 
       if (models.length === 0) {
         console.warn(

@@ -1,1 +1,1 @@
-export * from './tenraGraphQL';
+export * from './ambitenGraphQL';
