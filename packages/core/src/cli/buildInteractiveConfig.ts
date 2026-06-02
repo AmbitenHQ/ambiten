@@ -1,5 +1,5 @@
 import prompts from 'prompts';
-import type { TenraConfig } from '../types';
+import type { AmbitenConfig } from '../types';
 import type { BootstrapCliOptions } from './types';
 
 
@@ -11,7 +11,7 @@ function wasProvided(value: unknown): boolean {
   return typeof value !== 'undefined';
 }
 
-function printScaffoldSummary(config: TenraConfig): void {
+function printScaffoldSummary(config: AmbitenConfig): void {
   const lines = [
     '',
     'Scaffold summary:',
@@ -32,14 +32,14 @@ function printScaffoldSummary(config: TenraConfig): void {
 export async function buildInteractiveConfig(
   projectNameArg: string | undefined,
   options: BootstrapCliOptions
-): Promise<TenraConfig> {
+): Promise<AmbitenConfig> {
   const response = await prompts(
     [
       {
         type: projectNameArg ? null : 'text',
         name: 'projectName',
         message: 'Project name',
-        initial: 'Tenra-app',
+        initial: 'Ambiten-app',
         validate: (value: string) =>
           value.trim().length > 0 ? true : 'Project name is required',
       },
@@ -48,7 +48,7 @@ export async function buildInteractiveConfig(
         name: 'uri',
         message: 'MongoDB URI',
         initial: (_prev: unknown, values: Record<string, any>) => {
-          const rawName = projectNameArg || values.projectName || 'Tenra-app';
+          const rawName = projectNameArg || values.projectName || 'Ambiten-app';
           const projectName = normalizeProjectName(rawName);
           return `mongodb://localhost:27017/${projectName}`;
         },
@@ -112,7 +112,7 @@ export async function buildInteractiveConfig(
   );
 
   const projectName = normalizeProjectName(
-    projectNameArg || response.projectName || 'Tenra-app'
+    projectNameArg || response.projectName || 'Ambiten-app'
   );
 
   const uri =
@@ -144,7 +144,7 @@ export async function buildInteractiveConfig(
     ? Boolean(options.install)
     : Boolean(response.install);
 
-  const config: TenraConfig = {
+  const config: AmbitenConfig = {
     projectName,
     connection: {
       uri,
@@ -210,24 +210,24 @@ export async function buildInteractiveConfig(
   printScaffoldSummary(config);
 
   const confirmResponse = await prompts(
-  {
-    type: 'toggle',
-    name: 'proceed',
-    message: 'Proceed with project generation?',
-    initial: true,
-    active: 'yes',
-    inactive: 'no',
-  },
-  {
-    onCancel: () => {
-      throw new Error('Project generation cancelled by user.');
+    {
+      type: 'toggle',
+      name: 'proceed',
+      message: 'Proceed with project generation?',
+      initial: true,
+      active: 'yes',
+      inactive: 'no',
     },
-  }
-);
+    {
+      onCancel: () => {
+        throw new Error('Project generation cancelled by user.');
+      },
+    }
+  );
 
-if (!confirmResponse.proceed) {
-  throw new Error('Project generation cancelled by user.');
-}
+  if (!confirmResponse.proceed) {
+    throw new Error('Project generation cancelled by user.');
+  }
 
   return config;
 }
