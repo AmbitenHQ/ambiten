@@ -1,7 +1,7 @@
 import { createExpressAdapter } from '../src/express-adapter';
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 
-jest.mock('@tenra/adapter-runtime', () => ({
+jest.mock('@ambiten/adapter-runtime', () => ({
   runWithAdapterContext: jest.fn()
 }));
 
@@ -14,7 +14,7 @@ describe('createExpressAdapter', () => {
     );
   });
 
-  it('should install Express middleware and run with Tenra adapter context', async () => {
+  it('should install Express middleware and run with Ambiten adapter context', async () => {
     let registeredMiddleware: any;
 
     const app = {
