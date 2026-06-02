@@ -1,5 +1,5 @@
 import { performance } from 'perf_hooks';
-import { TenraContext } from '../context/tenraContext';
+import { AmbitenContext } from '../context/ambitenContext';
 
 export interface QueryInstrumentationMeta {
 	operation: string;
@@ -15,28 +15,28 @@ export async function measureQuery<T>(
 	meta: QueryInstrumentationMeta,
 	executor: () => Promise<T>
 ): Promise<T> {
-	if (!TenraContext.hasActiveContext()) {
-		throw new Error('[Tenra] Missing runtime context.');
+	if (!AmbitenContext.hasActiveContext()) {
+		throw new Error('[Ambiten] Missing runtime context.');
 	}
 
-	const logger = TenraContext.getLogger();
-	const observer = TenraContext.getObserver();
-	const loggerMeta = TenraContext.getLoggerMeta() ?? {};
+	const logger = AmbitenContext.getLogger();
+	const observer = AmbitenContext.getObserver();
+	const loggerMeta = AmbitenContext.getLoggerMeta() ?? {};
 
-	const tenantId = TenraContext.getTenantId();
-	const requestId = TenraContext.getRequestId();
-	const dbName = TenraContext.getDbName();
+	const tenantId = AmbitenContext.getTenantId();
+	const requestId = AmbitenContext.getRequestId();
+	const dbName = AmbitenContext.getDbName();
 	const collectionName =
-		meta.collectionName ?? TenraContext.getCollectionName();
+		meta.collectionName ?? AmbitenContext.getCollectionName();
 
-	const budgetAfterIncrement = TenraContext.incrementQueries();
+	const budgetAfterIncrement = AmbitenContext.incrementQueries();
 	const start = performance.now();
 
 	try {
 		const result = await executor();
 
 		const durationMs = Math.round((performance.now() - start) * 100) / 100;
-		const budgetAfterTime = TenraContext.addQueryTime(durationMs);
+		const budgetAfterTime = AmbitenContext.addQueryTime(durationMs);
 
 		const payload = {
 			operation: meta.operation,
@@ -61,16 +61,16 @@ export async function measureQuery<T>(
 			observer?.onQuery?.(payload);
 
 			if (logger?.info) {
-				logger.info('[Tenra Query]', payload);
-			} else if (TenraContext.isDebug()) {
-				console.log('[Tenra Query]', payload);
+				logger.info('[Ambiten Query]', payload);
+			} else if (AmbitenContext.isDebug()) {
+				console.log('[Ambiten Query]', payload);
 			}
 		});
 
 		return result;
 	} catch (error: any) {
 		const durationMs = Math.round((performance.now() - start) * 100) / 100;
-		const budgetAfterTime = TenraContext.addQueryTime(durationMs);
+		const budgetAfterTime = AmbitenContext.addQueryTime(durationMs);
 
 		const payload = {
 			operation: meta.operation,
@@ -100,9 +100,9 @@ export async function measureQuery<T>(
 			});
 
 			if (logger?.error) {
-				logger.error('[Tenra Query Error]', payload);
-			} else if (TenraContext.isDebug()) {
-				console.error('[Tenra Query Error]', payload);
+				logger.error('[Ambiten Query Error]', payload);
+			} else if (AmbitenContext.isDebug()) {
+				console.error('[Ambiten Query Error]', payload);
 			}
 		});
 

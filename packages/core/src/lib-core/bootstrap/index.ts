@@ -1,1 +1,1 @@
-export * from './tenraBootstrap';
+export * from './ambitenBootstrap';

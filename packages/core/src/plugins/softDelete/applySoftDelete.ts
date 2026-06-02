@@ -1,5 +1,5 @@
 import type { Document, Filter, UpdateFilter } from 'mongodb';
-import type { TenraModel } from '../../lib-core';
+import type { AmbitenModel } from '../../lib-core';
 import type { SoftDeleteOptions } from './types';
 
 const DEFAULTS: Required<SoftDeleteOptions> = {
@@ -68,9 +68,9 @@ function buildSoftDeleteUpdate<T extends Document>(
 }
 
 export function applySoftDelete<T extends Document>(
-  model: TenraModel<T>,
+  model: AmbitenModel<T>,
   opts: SoftDeleteOptions = {}
-): TenraModel<T> {
+): AmbitenModel<T> {
   const options = { ...DEFAULTS, ...opts };
 
   if (!options.enabled) {
