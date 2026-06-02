@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+const webpack = require('webpack');
 const path = require('path');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 
@@ -9,10 +10,10 @@ module.exports = {
 	entry: './src/browser.ts',
 	target: 'web',
 	output: {
-		filename: 'tenra-core-browser.js',
+		filename: 'index-browser.js',
 		path: path.resolve(__dirname, 'dist'),
 		library: {
-			name: 'tenracore-browser', // global name if script loaded in <script> tag
+			name: 'ambitencore-browser', // global name if script loaded in <script> tag
 			type: 'umd', // Universal Module Definition for compatibility with CommonJS, AMD, and browser globals
 			umdNamedDefine: true, // Use named UMD definition
 		},

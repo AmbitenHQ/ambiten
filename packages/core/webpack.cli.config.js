@@ -6,10 +6,10 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
 	mode: 'production',
 	target: 'node',
-	entry: './src/cli/tenra-core-cli.ts',
+	entry: './src/cli/ambiten-core-cli.ts',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'tenra-core-cli.js',
+		filename: 'index-cli.js',
 	},
 	devtool: 'source-map', // Generate source maps for debugging
 	externalsType: 'umd',

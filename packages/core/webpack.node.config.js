@@ -11,10 +11,10 @@ module.exports = {
 	entry: './src/index.ts',
 	target: 'node',
 	output: {
-		filename: 'tenra-core.js',
+		filename: 'index.js',
 		path: path.resolve(__dirname, 'dist'),
 		library: {
-			name: 'tenra-core',
+			name: 'ambiten-core',
 			type: 'umd',
 			// umdNamedDefine: true, // Use named UMD definition
 		},
@@ -90,7 +90,7 @@ module.exports = {
 						onlyCompileBundledFiles: true,
 					}
 				},
-				exclude: [ /^node_modules/, /^examples\//i ],
+				exclude: [/^node_modules/, /^examples\//i],
 				// include: path.resolve(__dirname, 'src'),
 			},
 		]

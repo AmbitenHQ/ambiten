@@ -12,10 +12,10 @@ module.exports = {
 	target: 'node',
 	// devtool: 'source-map',
 	output: {
-		filename: 'tenra-logger.js',
+		filename: 'index.js',
 		path: path.resolve(__dirname, 'dist'),
 		library: {
-			name: 'tenra-logger',
+			name: 'ambiten-logger',
 			type: 'umd',
 		},
 		globalObject: 'this',

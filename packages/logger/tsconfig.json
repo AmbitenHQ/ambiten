@@ -8,35 +8,15 @@
     "resolveJsonModule": true,  
     "types": ["node", "jest"],
     "emitDeclarationOnly": false,  
-    // "tsBuildInfoFile": "./dist/.tsbuildinfo",                       
+    "tsBuildInfoFile": "dist/.tsbuildinfo",                       
   },
   "include": [
     "src",
-    "src/**/*.json",
-    "package.json"
+    "src/**/*",
+    // "package.json"
   ],
   "exclude": [
     "node_modules",
     "**/__tests__/**"
   ],
 }
-
-
-// {
-//   "extends": "../../tsconfig.base.json",
-//   "compilerOptions": {
-//   "rootDir": "./src",
-//   "outDir": "./dist",
-//   "composite": true,
-//   "declaration": true,
-//   "types": ["node", "jest"],
-//   },
-//     "include": [
-//     "src"
-//     ],
-//   "exclude": [
-//     "node_modules",
-//     // "../setupTest.ts" 
-//     "./**/*.test.ts" 
-//   ], 
-// }

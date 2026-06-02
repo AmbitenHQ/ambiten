@@ -13,4 +13,9 @@ module.exports = {
   },
   testMatch: ['**/__test__/**/*.test.ts', '**/__test__/**/*.spec.ts'],
   moduleFileExtensions: ['ts', 'js', 'json'],
+  moduleNameMapper: {
+    '^@ambiten/core$': '<rootDir>/../core/src/index.ts',
+    '^@ambiten/logger$': '<rootDir>/../logger/src/index.ts',
+    '^@ambiten/adapter-types$': '<rootDir>/../adapter-types/src/index.ts'
+  }
 };

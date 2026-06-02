@@ -20,7 +20,7 @@
    ],
   "include": [
   "src/**/*",    
-  "**/*.test.ts",
+  // "**/*.test.ts",
   "**/*.spec.ts"
   ],
   "exclude": ["node_modules", "dist", "**/__tests__/**"]

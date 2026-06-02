@@ -8,12 +8,12 @@
     "resolveJsonModule": true,  
     "types": ["node", "jest"],
     "emitDeclarationOnly": false,   
-    "tsBuildInfoFile": "dist/.tsbuildinfo"                     
+    "tsBuildInfoFile": "./dist/.tsbuildinfo"                     
   },
   "include": [
-    "src",
+    "src/**/*",
     "src/**/*.json",
-    "package.json",
+    // "package.json",
     "assets"
   ],
   "references": [

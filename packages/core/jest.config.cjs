@@ -11,7 +11,7 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     // Map workspace packages to local source folders so tests can require package imports
-    '^@tenra/(.*)$': '<rootDir>/../$1/src',
+    '^@ambiten/(.*)$': '<rootDir>/../$1/src',
   },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   // modulePathIgnorePatterns: ['<rootDir>/dist/'],

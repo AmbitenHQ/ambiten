@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './bin/tenra_create.ts',
+  entry: './bin/ambiten_create.ts',
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'dist'),
