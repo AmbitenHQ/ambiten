@@ -1,12 +1,12 @@
-import type { TenraRequestLike, TenancyOptions } from './types.js';
+import type { AmbitenRequestLike, TenancyOptions } from './types.js';
 
-function readHeader(req: TenraRequestLike, name: string): string | undefined {
+function readHeader(req: AmbitenRequestLike, name: string): string | undefined {
   const value = req.headers?.[name.toLowerCase()];
   if (!value) return undefined;
   return Array.isArray(value) ? value[0] : value;
 }
 
-function fromSubdomain(req: TenraRequestLike): string | undefined {
+function fromSubdomain(req: AmbitenRequestLike): string | undefined {
   const host = readHeader(req, 'host');
   if (!host) return undefined;
 
@@ -19,7 +19,7 @@ function fromSubdomain(req: TenraRequestLike): string | undefined {
 }
 
 export async function resolveTenant(
-  req: TenraRequestLike,
+  req: AmbitenRequestLike,
   opts: TenancyOptions = {}
 ): Promise<string | undefined> {
   const {

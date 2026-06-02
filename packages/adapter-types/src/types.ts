@@ -1,4 +1,4 @@
-export interface TenraRequestLike {
+export interface AmbitenRequestLike {
   headers: Record<string, string | string[] | undefined>;
   url?: string;
   method?: string;
@@ -9,13 +9,13 @@ export interface TenraRequestLike {
   get?(name: string): string | undefined;
 }
 
-export interface TenraResponseLike {
+export interface AmbitenResponseLike {
   status?(code: number): this | void;
   setHeader?(name: string, value: string): void;
 }
 
 export type TenantResolver = (
-  req: TenraRequestLike
+  req: AmbitenRequestLike
 ) => Promise<string | undefined> | string | undefined;
 
 export interface TenancyOptions {
@@ -30,7 +30,7 @@ export interface TenancyOptions {
 }
 
 export type ContextValueResolver<T> = (
-  req: TenraRequestLike
+  req: AmbitenRequestLike
 ) => Promise<T | undefined> | T | undefined;
 
 export interface AdapterContextResolvers {
@@ -52,7 +52,7 @@ export interface AdapterContextOptions {
   resolvers?: AdapterContextResolvers;
 }
 
-export interface TenraAdapter<TApp = unknown> {
+export interface AmbitenAdapter<TApp = unknown> {
   name: string;
   install(app: TApp, options?: AdapterContextOptions): void | Promise<void>;
 }
