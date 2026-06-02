@@ -1,8 +1,8 @@
 // __test__/lambda-adapter.test.ts
 import { createLambdaAdapter } from '../src/lambda-adapter';
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 
-jest.mock('@tenra/adapter-runtime', () => ({
+jest.mock('@ambiten/adapter-runtime', () => ({
   runWithAdapterContext: jest.fn()
 }));
 
@@ -15,7 +15,7 @@ describe('createLambdaAdapter', () => {
     );
   });
 
-  it('should wrap Lambda handler with Tenra adapter context', async () => {
+  it('should wrap Lambda handler with Ambiten adapter context', async () => {
     const handler = jest.fn().mockResolvedValue({
       statusCode: 200,
       body: 'ok'

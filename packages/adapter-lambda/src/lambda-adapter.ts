@@ -1,17 +1,17 @@
-import { runWithAdapterContext } from '@tenra/adapter-runtime';
+import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 import type {
   LambdaAdapterOptions,
   LambdaHandlerLike,
   LambdaRequestInput
 } from './types';
-import { toLambdaTenraRequestLike } from './lambda-request';
+import { toLambdaAmbitenRequestLike } from './lambda-request';
 
 export function createLambdaAdapter<TEvent extends LambdaRequestInput, TResult>(
   handler: LambdaHandlerLike<TEvent, TResult>,
   options: LambdaAdapterOptions = {}
 ): LambdaHandlerLike<TEvent, TResult> {
   return async (event: TEvent, context?: unknown): Promise<TResult> => {
-    const adaptedRequest = toLambdaTenraRequestLike(event);
+    const adaptedRequest = toLambdaAmbitenRequestLike(event);
 
     return runWithAdapterContext(
       adaptedRequest,

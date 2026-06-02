@@ -1,4 +1,4 @@
-import type { TenraRequestLike } from '@tenra/adapter-types';
+import type { AmbitenRequestLike } from '@ambiten/adapter-types';
 import type { LambdaRequestInput } from './types';
 
 function normalizeHeaders(
@@ -87,9 +87,9 @@ function normalizeBody(event: LambdaRequestInput): unknown {
   return event.body;
 }
 
-export function toLambdaTenraRequestLike(
+export function toLambdaAmbitenRequestLike(
   event: LambdaRequestInput
-): TenraRequestLike {
+): AmbitenRequestLike {
   const headers = normalizeHeaders(event.headers, event.multiValueHeaders);
 
   const params: Record<string, string> = {};
