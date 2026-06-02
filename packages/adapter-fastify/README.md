@@ -1,40 +1,40 @@
-# @tenra/adapter-fastify
+# @ambiten/adapter-fastify
 
-<p align="center"> <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra" width="250" /> </p> <p align="center"> <strong>Fastify integration for the Tenra runtime.</strong> </p> <p align="center"> Establish request-scoped execution boundaries, context propagation, multi-tenancy, and transaction-aware runtime behavior inside Fastify applications. </p> <p align="center"> <a href="https://www.npmjs.com/package/@tenra/adapter-fastify"> <img src="https://img.shields.io/npm/v/@tenra/adapter-fastify?style=flat-square" alt="npm version" /> </a> <a href="https://tenra.dev"> <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" /> </a> </p>
+<p align="center"> <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" /> </p> <p align="center"> <strong>Fastify integration for the Ambiten runtime.</strong> </p> <p align="center"> Establish request-scoped execution boundaries, context propagation, multi-tenancy, and transaction-aware runtime behavior inside Fastify applications. </p> <p align="center"> <a href="https://www.npmjs.com/package/@ambiten/adapter-fastify"> <img src="https://img.shields.io/npm/v/@ambiten/adapter-fastify?style=flat-square" alt="npm version" /> </a> <a href="https://ambiten.dev"> <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" /> </a> </p>
 
 ## Overview
 
-`@tenra/adapter-fastify` connects Fastify applications to the Tenra runtime.
+`@ambiten/adapter-fastify` connects Fastify applications to the Ambiten runtime.
 
 The adapter establishes request execution boundaries using Fastify's lifecycle hooks so runtime context remains available throughout the lifecycle of each request. Tenant information, request metadata, transactions, logging, instrumentation, and runtime services can then participate consistently across handlers, plugins, services, and model operations.
 
-The adapter does not replace Fastify. It allows Fastify to operate as an execution entry point for the Tenra runtime.
+The adapter does not replace Fastify. It allows Fastify to operate as an execution entry point for the Ambiten runtime.
 
 ## Installation
 
 ```text
-npm install @tenra/adapter-fastify
+npm install @ambiten/adapter-fastify
 ```
 
 If you are starting a new application, installing the core runtime is also recommended:
 
 ```bash
-npm install @tenra/core @tenra/adapter-fastify
+npm install @ambiten/core @ambiten/adapter-fastify
 ```
 
 ## Quick Start
 
 ```text
 import Fastify from "fastify";
-import { TenraBootstrapFactory } from "@tenra/core";
-import { createFastifyAdapter } from "@tenra/adapter-fastify";
+import { AmbitenBootstrapFactory } from "@ambiten/core";
+import { createFastifyAdapter } from "@ambiten/adapter-fastify";
 
 const app = Fastify();
 
 const adapter = createFastifyAdapter();
 
 const bootstrap =
-  await TenraBootstrapFactory.create({
+  await AmbitenBootstrapFactory.create({
     adapter
   });
 
@@ -45,7 +45,7 @@ await app.listen({
 });
 ```
 
-Once installed, incoming requests automatically participate in the Tenra execution model.
+Once installed, incoming requests automatically participate in the Ambiten execution model.
 
 ## What the Adapter Provides
 
@@ -62,9 +62,9 @@ Incoming Request
         ↓
 Fastify
         ↓
-Tenra Adapter
+Ambiten Adapter
         ↓
-TenraContext
+AmbitenContext
         ↓
 Models & Services
         ↓
@@ -90,7 +90,7 @@ Request
    ↓
 Tenant Resolution
    ↓
-TenraContext
+AmbitenContext
    ↓
 Tenant-Aware Execution
 ```
@@ -101,12 +101,12 @@ This allows models and services to operate against the correct tenant boundary w
 
 Complete documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 - Related Packages
-- @tenra/core
-- @tenra/logger
-- @tenra/create
+- @ambiten/core
+- @ambiten/logger
+- @ambiten/create
 
 ## License
 

@@ -1,11 +1,11 @@
-# @tenra/adapter-express
+# @ambiten/adapter-express
 
 <p align="center">
-  <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra" width="250" />
+  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" />
 </p>
 
 <p align="center">
-  <strong>Express integration for the Tenra runtime.</strong>
+  <strong>Express integration for the Ambiten runtime.</strong>
 </p>
 
 <p align="center">
@@ -13,11 +13,11 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@tenra/adapter-express">
-    <img src="https://img.shields.io/npm/v/@tenra/adapter-express?style=flat-square" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@ambiten/adapter-express">
+    <img src="https://img.shields.io/npm/v/@ambiten/adapter-express?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://tenra.dev">
-    <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+  <a href="https://ambiten.dev">
+    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
 </p>
 
@@ -25,37 +25,37 @@
 
 ## Overview
 
-`@tenra/adapter-express` connects Express applications to the Tenra runtime.
+`@ambiten/adapter-express` connects Express applications to the Ambiten runtime.
 
 The adapter establishes request execution boundaries so runtime context remains available throughout the lifecycle of an incoming request. Tenant information, request metadata, transactions, logging, instrumentation, and runtime services can then participate consistently across controllers, services, middleware, and model operations.
 
-The adapter does not replace Express. It allows Express to operate as an execution entry point for the Tenra runtime.
+The adapter does not replace Express. It allows Express to operate as an execution entry point for the Ambiten runtime.
 
 ## Installation
 
 ```bash
-npm install @tenra/adapter-express
+npm install @ambiten/adapter-express
 ```
 
 If you are starting a new application, installing the core runtime is also recommended:
 
 ```bash
-npm install @tenra/core @tenra/adapter-express
+npm install @ambiten/core @ambiten/adapter-express
 ```
 
 ## Quick Start
 
 ```ts
 import express from "express";
-import { TenraBootstrapFactory } from "@tenra/core";
-import { createExpressAdapter } from "@tenra/adapter-express";
+import { AmbitenBootstrapFactory } from "@ambiten/core";
+import { createExpressAdapter } from "@ambiten/adapter-express";
 
 const app = express();
 
 const adapter = createExpressAdapter();
 
 const bootstrap =
-  await TenraBootstrapFactory.create({
+  await AmbitenBootstrapFactory.create({
     adapter
   });
 
@@ -64,7 +64,7 @@ await bootstrap.registerMultiTenancy(app);
 app.listen(3000);
 ```
 
-Once installed, incoming requests automatically participate in the Tenra execution model.
+Once installed, incoming requests automatically participate in the Ambiten execution model.
 
 ## What the Adapter Provides
 
@@ -81,9 +81,9 @@ Incoming Request
         ↓
 Express
         ↓
-Tenra Adapter
+Ambiten Adapter
         ↓
-TenraContext
+AmbitenContext
         ↓
 Models & Services
         ↓
@@ -101,7 +101,7 @@ Request
    ↓
 Tenant Resolution
    ↓
-TenraContext
+AmbitenContext
    ↓
 Tenant-Aware Execution
 ```
@@ -112,13 +112,13 @@ This allows models and services to operate against the correct tenant boundary w
 
 Complete documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 ## Related Packages
 
-* `@tenra/core`
-* `@tenra/logger`
-* `@tenra/create`
+* `@ambiten/core`
+* `@ambiten/logger`
+* `@ambiten/create`
 
 ## License
 

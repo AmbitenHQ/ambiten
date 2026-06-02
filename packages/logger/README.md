@@ -1,7 +1,7 @@
-# @tenra/logger
+# @ambiten/logger
 
 <p align="center">
-  <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra Logger" width="250" />
+  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten Logger" width="250" />
 </p>
 
 <p align="center">
@@ -9,18 +9,18 @@
 </p>
 
 <p align="center">
-  Context-aware logs, transport pipelines, metrics tracking, resilience handling, and production-grade operational visibility for Tenra systems and standalone Node.js applications.
+  Context-aware logs, transport pipelines, metrics tracking, resilience handling, and production-grade operational visibility for Ambiten systems and standalone Node.js applications.
 </p>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/@tenra/logger">
-<img src="https://img.shields.io/npm/v/@tenra/logger?color=0ea5e9&label=npm&style=flat-square" alt="npm version" />
+<a href="https://www.npmjs.com/package/@ambiten/logger">
+<img src="https://img.shields.io/npm/v/@ambiten/logger?color=0ea5e9&label=npm&style=flat-square" alt="npm version" />
 </a>
-<a href="https://tenra.dev">
-<img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+<a href="https://ambiten.dev">
+<img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
 </a>
-<a href="https://github.com/tenrahq/tenra">
-<img src="https://img.shields.io/github/stars/tenrahq/tenra?style=flat-square" alt="github stars" />
+<a href="https://github.com/ambiten/ambiten">
+<img src="https://img.shields.io/github/stars/ambiten/ambiten?style=flat-square" alt="github stars" />
 </a>
 <img src="https://img.shields.io/badge/structured-logging-6366f1?style=flat-square" alt="structured logging" />
 <img src="https://img.shields.io/badge/context-aware-14b8a6?style=flat-square" alt="context aware" />
@@ -30,24 +30,24 @@
 
 ## Overview
 
-`@tenra/logger` provides the structured logging and telemetry layer for the Tenra ecosystem.
+`@ambiten/logger` provides the structured logging and telemetry layer for the Ambiten ecosystem.
 
 It is designed for runtime-aware systems where logs are not merely developer output, but operational events attached to execution boundaries.
 
-The logger can operate independently inside standard Node.js applications, APIs, workers, queues, GraphQL servers, and serverless environments. Inside the Tenra runtime, it becomes context-aware and can automatically enrich log entries with request identifiers, tenant metadata, database targets, collection names, runtime metadata, and execution context.
+The logger can operate independently inside standard Node.js applications, APIs, workers, queues, GraphQL servers, and serverless environments. Inside the Ambiten runtime, it becomes context-aware and can automatically enrich log entries with request identifiers, tenant metadata, database targets, collection names, runtime metadata, and execution context.
 
-Rather than treating logging as scattered console output, `@tenra/logger` treats logs as structured runtime events that can move through transport pipelines, observability systems, metrics tracking, resilience layers, and production debugging workflows.
+Rather than treating logging as scattered console output, `@ambiten/logger` treats logs as structured runtime events that can move through transport pipelines, observability systems, metrics tracking, resilience layers, and production debugging workflows.
 
 ## Installation
 
 ```bash
-npm install @tenra/logger
+npm install @ambiten/logger
 ```
 
 ## Quick Start
 
 ```ts
-import { createLogger, consoleTransport } from "@tenra/logger";
+import { createLogger, consoleTransport } from "@ambiten/logger";
 
 const logger = createLogger({
   level: "info",
@@ -71,13 +71,13 @@ logger.error("Query failed", {
 
 The logger keeps metadata structured internally so transports can serialize, batch, forward, or persist logs without reconstructing runtime meaning from formatted strings.
 
-## What Tenra Logger Is
+## What Ambiten Logger Is
 
-Tenra Logger is not a console wrapper.
+Ambiten Logger is not a console wrapper.
 
 It is a structured telemetry pipeline for runtime execution.
 
-Traditional loggers focus on writing messages. Tenra Logger focuses on preserving operational meaning as execution moves across requests, middleware, models, workers, transactions, queues, adapters, and distributed infrastructure.
+Traditional loggers focus on writing messages. Ambiten Logger focuses on preserving operational meaning as execution moves across requests, middleware, models, workers, transactions, queues, adapters, and distributed infrastructure.
 
 Every emitted log becomes a structured runtime event that can participate in formatting, filtering, buffering, batching, metrics tracking, transport routing, and resilience handling.
 
@@ -93,7 +93,7 @@ Observability Destination
 
 ## Structured Logging
 
-Tenra Logger preserves logs as structured runtime entries.
+Ambiten Logger preserves logs as structured runtime entries.
 
 ```ts
 logger.info("User created", {
@@ -111,10 +111,10 @@ Text output remains useful during local development, but the internal logging mo
 
 ## Context-Aware Logging
 
-When used with the Tenra runtime, the logger can inherit execution metadata from the active runtime context.
+When used with the Ambiten runtime, the logger can inherit execution metadata from the active runtime context.
 
 ```ts
-await TenraContext.run(
+await AmbitenContext.run(
   {
     tenantId: "enterprise-a",
     requestId: "req-992"
@@ -131,7 +131,7 @@ This is especially valuable in multi-tenant systems and distributed applications
 
 ## Transport Pipeline
 
-Tenra Logger separates log creation from log delivery.
+Ambiten Logger separates log creation from log delivery.
 
 Applications emit structured runtime events. Transports decide where those events go.
 
@@ -140,7 +140,7 @@ import {
   createLogger,
   consoleTransport,
   createRotatingFileTransporter
-} from "@tenra/logger";
+} from "@ambiten/logger";
 
 const logger = createLogger({
   json: true,
@@ -183,7 +183,7 @@ Production logging infrastructure can fail.
 
 Remote endpoints may become unavailable, networks may degrade, filesystems may stall, or observability backends may reject ingestion under pressure.
 
-Tenra Logger supports resilience patterns that help isolate logging failures from application execution.
+Ambiten Logger supports resilience patterns that help isolate logging failures from application execution.
 
 ```ts
 const transport = createResilientTransporter(
@@ -224,33 +224,33 @@ High-throughput systems should prefer buffering or asynchronous batching so logg
 
 ## Runtime Environments
 
-`@tenra/logger` is designed to operate across different execution environments.
+`@ambiten/logger` is designed to operate across different execution environments.
 
 It can be used in local development, production APIs, background workers, queue processors, GraphQL systems, serverless functions, and containerized infrastructure.
 
 The logging model remains consistent across environments because the logger operates on structured runtime entries before transport delivery occurs.
 
-## Relationship with Tenra
+## Relationship with Ambiten
 
-`@tenra/logger` is part of the wider Tenra runtime ecosystem.
+`@ambiten/logger` is part of the wider Ambiten runtime ecosystem.
 
-It complements `@tenra/core`, runtime instrumentation, adapter-driven execution, transaction-aware workflows, middleware pipelines, tenant-aware context propagation, and production observability tooling.
+It complements `@ambiten/core`, runtime instrumentation, adapter-driven execution, transaction-aware workflows, middleware pipelines, tenant-aware context propagation, and production observability tooling.
 
-The package can still be used independently in non-Tenra systems, but its full value appears when runtime context and structured execution metadata are available.
+The package can still be used independently in non-Ambiten systems, but its full value appears when runtime context and structured execution metadata are available.
 
 ## Documentation
 
-The official Tenra documentation includes guides for structured logging, context-aware telemetry, transport pipelines, production configuration, metrics tracking, resilience handling, testing, shutdown behavior, and observability integration.
+The official Ambiten documentation includes guides for structured logging, context-aware telemetry, transport pipelines, production configuration, metrics tracking, resilience handling, testing, shutdown behavior, and observability integration.
 
 Documentation:
 
-https://tenra.dev
+https://Ambiten.dev
 
 ## Philosophy
 
 > Logs should describe runtime behavior, not just developer intent.
 
-Tenra Logger exists to make operational behavior visible, structured, and traceable across modern runtime systems.
+Ambiten Logger exists to make operational behavior visible, structured, and traceable across modern runtime systems.
 
 ## License
 

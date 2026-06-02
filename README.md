@@ -1,7 +1,7 @@
-# Tenra
+# Ambiten
 
 <p align="center">
-  <img src="./tenra-brand/tenra-primary-logo-dark.png" alt="Tenra" />
+  <img src="./ambiten-brand/ambiten-primary-logo-dark.png" alt="Ambiten" />
 </p>
 
 <p align="center">
@@ -13,28 +13,28 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@tenra/core">
-    <img src="https://img.shields.io/npm/v/@tenra/core?style=flat-square" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@ambiten/core">
+    <img src="https://img.shields.io/npm/v/@ambiten/core?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://tenra.dev">
-    <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+  <a href="https://ambiten.dev">
+    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
-  <a href="https://github.com/tenrahq/tenra">
-    <img src="https://img.shields.io/github/stars/tenrahq/tenra?style=flat-square" alt="GitHub stars" />
+  <a href="https://github.com/ambiten/ambiten">
+    <img src="https://img.shields.io/github/stars/ambiten/ambiten?style=flat-square" alt="GitHub stars" />
   </a>
 </p>
 
 ---
 
-## What is Tenra?
+## What is Ambiten?
 
-Tenra is a runtime platform for MongoDB applications.
+Ambiten is a runtime platform for MongoDB applications.
 
-Most frameworks help structure code. Most ODMs help map data. Tenra focuses on something different: execution itself.
+Most frameworks help structure code. Most ODMs help map data. Ambiten focuses on something different: execution itself.
 
 As systems grow, infrastructure concerns begin spreading across application layers. Tenant routing, transaction handling, middleware execution, logging, instrumentation, caching, and operational policies become increasingly difficult to coordinate consistently.
 
-Tenra brings those concerns together behind a unified runtime model.
+Ambiten brings those concerns together behind a unified runtime model.
 
 Instead of manually passing execution state through services and handlers, applications execute inside a structured runtime boundary where context, transactions, middleware, observability, and infrastructure behavior remain coordinated automatically.
 
@@ -43,7 +43,7 @@ Request
    ↓
 Adapter
    ↓
-TenraContext
+AmbitenContext
    ↓
 Middleware
    ↓
@@ -58,13 +58,13 @@ The runtime carries execution state.
 
 ---
 
-## Why Tenra?
+## Why Ambiten?
 
 Modern systems are rarely limited by database access alone.
 
 The real challenge is maintaining consistent execution behavior across requests, services, workers, background jobs, APIs, and distributed infrastructure.
 
-Tenra provides a runtime foundation for:
+Ambiten provides a runtime foundation for:
 
 * Multi-tenant applications
 * Transaction-aware workflows
@@ -83,20 +83,20 @@ The result is a system that remains predictable as complexity grows.
 Install the core runtime:
 
 ```bash
-npm install @tenra/core mongodb
+npm install @ambiten/core mongodb
 ```
 
 Create a model:
 
 ```ts
 import {
-  TenraClient,
-  TenraContext,
-  TenraModel,
-  TenraSchema
-} from "@tenra/core";
+  AmbitenClient,
+  AmbitenContext,
+  AmbitenModel,
+  AmbitenSchema
+} from "@ambiten/core";
 
-const client = new TenraClient({
+const client = new AmbitenClient({
   uri: process.env.MONGO_URI,
   options: {
     dbName: "app"
@@ -105,16 +105,16 @@ const client = new TenraClient({
 
 await client.connect();
 
-const UserModel = new TenraModel({
+const UserModel = new AmbitenModel({
   collectionName: "users",
-  schema: new TenraSchema({
+  schema: new AmbitenSchema({
     name: String,
     email: String
   }),
   provider: client
 });
 
-await TenraContext.run(
+await AmbitenContext.run(
   {
     tenantId: "tenant-a"
   },
@@ -131,25 +131,25 @@ await TenraContext.run(
 
 ## Packages
 
-The repository contains the complete Tenra platform.
+The repository contains the complete Ambiten platform.
 
-### @tenra/core
+### @ambiten/core
 
 The runtime engine.
 
 Provides models, schemas, context propagation, transactions, middleware execution, instrumentation, provider resolution, and multi-tenancy support.
 
-### @tenra/logger
+### @ambiten/logger
 
 Structured logging and observability infrastructure.
 
 Provides context-aware logging, transport pipelines, batching, metrics, resilience handling, and production telemetry workflows.
 
-### @tenra/create
+### @ambiten/create
 
 Project scaffolding and runtime bootstrapping.
 
-Generate REST APIs, GraphQL services, Next.js applications, MERN projects, and production-ready Tenra environments.
+Generate REST APIs, GraphQL services, Next.js applications, MERN projects, and production-ready Ambiten environments.
 
 ### Adapters
 
@@ -167,7 +167,7 @@ Each adapter establishes execution boundaries so applications participate in the
 
 ## Runtime Philosophy
 
-Tenra is built around a simple idea:
+Ambiten is built around a simple idea:
 
 > Execution behavior should be enforced by the runtime, not maintained manually across application code.
 
@@ -179,7 +179,7 @@ Context, transactions, middleware, observability, and infrastructure concerns sh
 
 Comprehensive documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 Documentation covers:
 
@@ -197,11 +197,11 @@ Documentation covers:
 
 ## Project History
 
-Tenra evolved from the Abimongo project.
+Ambiten evolved from the Abimongo project.
 
 What began as a MongoDB ODM gradually expanded into a broader runtime architecture focused on execution coordination, operational visibility, and tenant-aware infrastructure.
 
-Future development continues under the Tenra platform.
+Future development continues under the Ambiten platform.
 
 ---
 

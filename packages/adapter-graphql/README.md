@@ -1,23 +1,23 @@
-# @tenra/adapter-graphql
+# @ambiten/adapter-graphql
 
 <p align="center">
-  <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra" width="250" />
+  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" />
 </p>
 
 <p align="center">
-  <strong>GraphQL integration for the Tenra runtime.</strong>
+  <strong>GraphQL integration for the Ambiten runtime.</strong>
 </p>
 
 <p align="center">
-  Establish context-aware execution boundaries for GraphQL queries, mutations, subscriptions, and resolver pipelines while preserving runtime continuity across the Tenra ecosystem.
+  Establish context-aware execution boundaries for GraphQL queries, mutations, subscriptions, and resolver pipelines while preserving runtime continuity across the Ambiten ecosystem.
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@tenra/adapter-graphql">
-    <img src="https://img.shields.io/npm/v/@tenra/adapter-graphql?style=flat-square" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@ambiten/adapter-graphql">
+    <img src="https://img.shields.io/npm/v/@ambiten/adapter-graphql?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://tenra.dev">
-    <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+  <a href="https://ambiten.dev">
+    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
 </p>
 
@@ -25,44 +25,44 @@
 
 ## Overview
 
-`@tenra/adapter-graphql` connects GraphQL execution to the Tenra runtime.
+`@ambiten/adapter-graphql` connects GraphQL execution to the Ambiten runtime.
 
 The adapter establishes execution boundaries for queries, mutations, and subscriptions so runtime context remains available throughout resolver execution. Tenant information, request metadata, transactions, logging, instrumentation, and runtime services can then participate consistently across GraphQL operations.
 
-The adapter does not replace GraphQL. It allows GraphQL execution to participate fully in the Tenra runtime model.
+The adapter does not replace GraphQL. It allows GraphQL execution to participate fully in the Ambiten runtime model.
 
 ## Installation
 
 ```bash
-npm install @tenra/adapter-graphql
+npm install @ambiten/adapter-graphql
 ```
 
 If you are starting a new application, installing the core runtime is also recommended:
 
 ```bash
-npm install @tenra/core @tenra/adapter-graphql
+npm install @ambiten/core @ambiten/adapter-graphql
 ```
 
 ## Quick Start
 
 ```ts
 import {
-  TenraBootstrapFactory
-} from "@tenra/core";
+  AmbitenBootstrapFactory
+} from "@ambiten/core";
 
 import {
   createGraphQLAdapter
-} from "@tenra/adapter-graphql";
+} from "@ambiten/adapter-graphql";
 
 const adapter = createGraphQLAdapter();
 
 const bootstrap =
-  await TenraBootstrapFactory.create({
+  await AmbitenBootstrapFactory.create({
     adapter
   });
 ```
 
-Once installed, GraphQL operations automatically participate in the Tenra execution model.
+Once installed, GraphQL operations automatically participate in the Ambiten execution model.
 
 ## What the Adapter Provides
 
@@ -79,7 +79,7 @@ GraphQL Request
         ↓
 GraphQL Adapter
         ↓
-TenraContext
+AmbitenContext
         ↓
 Resolvers
         ↓
@@ -119,7 +119,7 @@ GraphQL Request
         ↓
 Tenant Resolution
         ↓
-TenraContext
+AmbitenContext
         ↓
 Tenant-Aware Execution
 ```
@@ -136,13 +136,13 @@ Subscription events can participate in the same execution model used by queries 
 
 Complete documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 ## Related Packages
 
-* `@tenra/core`
-* `@tenra/logger`
-* `@tenra/create`
+* `@ambiten/core`
+* `@ambiten/logger`
+* `@ambiten/create`
 
 ## License
 

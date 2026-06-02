@@ -1,23 +1,23 @@
-# @tenra/adapter-runtime
+# @ambiten/adapter-runtime
 
 <p align="center">
-  <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra" width="250" />
+  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" />
 </p>
 
 <p align="center">
-  <strong>Shared execution runtime for Tenra adapters.</strong>
+  <strong>Shared execution runtime for Ambiten adapters.</strong>
 </p>
 
 <p align="center">
-  Provides the execution boundary, context propagation, tenant resolution, transaction coordination, and runtime lifecycle primitives used by the Tenra adapter ecosystem.
+  Provides the execution boundary, context propagation, tenant resolution, transaction coordination, and runtime lifecycle primitives used by the Ambiten adapter ecosystem.
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@tenra/adapter-runtime">
-    <img src="https://img.shields.io/npm/v/@tenra/adapter-runtime?style=flat-square" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@ambiten/adapter-runtime">
+    <img src="https://img.shields.io/npm/v/@ambiten/adapter-runtime?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://tenra.dev">
-    <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+  <a href="https://ambiten.dev">
+    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
 </p>
 
@@ -25,7 +25,7 @@
 
 ## Overview
 
-`@tenra/adapter-runtime` is the shared execution layer that powers the Tenra adapter ecosystem.
+`@ambiten/adapter-runtime` is the shared execution layer that powers the Ambiten adapter ecosystem.
 
 It provides the common runtime infrastructure used by framework integrations such as Express, Fastify, NestJS, GraphQL, and AWS Lambda.
 
@@ -35,15 +35,15 @@ The purpose of the package is to ensure that every adapter participates in the s
 
 ## Installation
 
-This package is installed automatically by Tenra adapter packages and typically does not need to be added manually.
+This package is installed automatically by Ambiten adapter packages and typically does not need to be added manually.
 
 ```bash
-npm install @tenra/adapter-runtime
+npm install @ambiten/adapter-runtime
 ```
 
 ## Runtime Responsibility
 
-The adapter runtime exists between the framework layer and the Tenra runtime.
+The adapter runtime exists between the framework layer and the Ambiten runtime.
 
 ```text
 Incoming Request
@@ -52,7 +52,7 @@ Framework Adapter
         ↓
 Adapter Runtime
         ↓
-TenraContext
+AmbitenContext
         ↓
 Models & Services
         ↓
@@ -63,7 +63,7 @@ The framework adapter establishes the entry point.
 
 The adapter runtime establishes the execution boundary.
 
-The Tenra runtime then carries execution state throughout the remainder of the operation.
+The Ambiten runtime then carries execution state throughout the remainder of the operation.
 
 ## What the Runtime Provides
 
@@ -84,7 +84,7 @@ Request
    ↓
 Execution Boundary
    ↓
-TenraContext
+AmbitenContext
    ↓
 Services
    ↓
@@ -97,7 +97,7 @@ This allows application code to remain focused on business behavior rather than 
 
 ## Multi-Tenancy
 
-The runtime provides shared tenant resolution primitives used by all Tenra adapters.
+The runtime provides shared tenant resolution primitives used by all Ambiten adapters.
 
 ```text
 Request
@@ -123,28 +123,28 @@ This behavior remains consistent across all supported adapters.
 
 Most developers should use one of the framework-specific adapters:
 
-* `@tenra/adapter-express`
-* `@tenra/adapter-fastify`
-* `@tenra/adapter-nestjs`
-* `@tenra/adapter-graphql`
-* `@tenra/adapter-lambda`
+* `@ambiten/adapter-express`
+* `@ambiten/adapter-fastify`
+* `@ambiten/adapter-nestjs`
+* `@ambiten/adapter-graphql`
+* `@ambiten/adapter-lambda`
 
-Direct usage of `@tenra/adapter-runtime` is generally reserved for adapter authors, framework integrations, and advanced runtime extensions.
+Direct usage of `@ambiten/adapter-runtime` is generally reserved for adapter authors, framework integrations, and advanced runtime extensions.
 
 ## Documentation
 
 Complete documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 ## Related Packages
 
-* `@tenra/core`
-* `@tenra/adapter-express`
-* `@tenra/adapter-fastify`
-* `@tenra/adapter-nestjs`
-* `@tenra/adapter-graphql`
-* `@tenra/adapter-lambda`
+* `@ambiten/core`
+* `@ambiten/adapter-express`
+* `@ambiten/adapter-fastify`
+* `@ambiten/adapter-nestjs`
+* `@ambiten/adapter-graphql`
+* `@ambiten/adapter-lambda`
 
 ## License
 

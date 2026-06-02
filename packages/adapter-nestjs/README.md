@@ -1,11 +1,11 @@
-# @tenra/adapter-nestjs
+# @ambiten/adapter-nestjs
 
 <p align="center">
-  <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra" width="250" />
+  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" />
 </p>
 
 <p align="center">
-  <strong>NestJS integration for the Tenra runtime.</strong>
+  <strong>NestJS integration for the Ambiten runtime.</strong>
 </p>
 
 <p align="center">
@@ -13,11 +13,11 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@tenra/adapter-nestjs">
-    <img src="https://img.shields.io/npm/v/@tenra/adapter-nestjs?style=flat-square" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@ambiten/adapter-nestjs">
+    <img src="https://img.shields.io/npm/v/@ambiten/adapter-nestjs?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://tenra.dev">
-    <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+  <a href="https://ambiten.dev">
+    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
 </p>
 
@@ -25,28 +25,28 @@
 
 ## Overview
 
-`@tenra/adapter-nestjs` connects NestJS applications to the Tenra runtime.
+`@ambiten/adapter-nestjs` connects NestJS applications to the Ambiten runtime.
 
 The adapter establishes execution boundaries using NestJS lifecycle mechanisms such as middleware, guards, interceptors, and request pipelines so runtime context remains available throughout the lifecycle of a request. Tenant information, request metadata, transactions, logging, instrumentation, and runtime services can then participate consistently across controllers, providers, services, and model operations.
 
-The adapter does not replace NestJS. It allows NestJS to operate as an execution entry point for the Tenra runtime.
+The adapter does not replace NestJS. It allows NestJS to operate as an execution entry point for the Ambiten runtime.
 
 ## Installation
 
 ```bash
-npm install @tenra/core @tenra/adapter-nestjs
+npm install @ambiten/core @ambiten/adapter-nestjs
 ```
 
 ## Quick Start
 
 ```ts
 import { Module } from '@nestjs/common';
-import { TenraBootstrapFactory } from '@tenra/core';
-import { createNestJSAdapter } from '@tenra/adapter-nestjs';
+import { AmbitenBootstrapFactory } from '@ambiten/core';
+import { createNestJSAdapter } from '@ambiten/adapter-nestjs';
 
 const adapter = createNestJSAdapter();
 
-await TenraBootstrapFactory.create({
+await AmbitenBootstrapFactory.create({
   adapter
 });
 
@@ -54,7 +54,7 @@ await TenraBootstrapFactory.create({
 export class AppModule {}
 ```
 
-Once installed, incoming requests automatically participate in the Tenra execution model.
+Once installed, incoming requests automatically participate in the Ambiten execution model.
 
 ## What the Adapter Provides
 
@@ -71,9 +71,9 @@ Incoming Request
         ↓
 NestJS
         ↓
-Tenra Adapter
+Ambiten Adapter
         ↓
-TenraContext
+AmbitenContext
         ↓
 Controllers
         ↓
@@ -117,7 +117,7 @@ Request
    ↓
 Tenant Resolution
    ↓
-TenraContext
+AmbitenContext
    ↓
 Tenant-Aware Execution
 ```
@@ -142,13 +142,13 @@ This provides a consistent operational view across controllers, services, reposi
 
 Complete documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 ## Related Packages
 
-* `@tenra/core`
-* `@tenra/logger`
-* `@tenra/create`
+* `@ambiten/core`
+* `@ambiten/logger`
+* `@ambiten/create`
 
 ## License
 

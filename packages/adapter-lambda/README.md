@@ -1,11 +1,11 @@
-# @tenra/adapter-lambda
+# @ambiten/adapter-lambda
 
 <p align="center">
-  <img src="../../tenra-brand/tenra_svg/tenra-primary-logo-dark.svg" alt="Tenra" width="250" />
+  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" />
 </p>
 
 <p align="center">
-  <strong>AWS Lambda integration for the Tenra runtime.</strong>
+  <strong>AWS Lambda integration for the Ambiten runtime.</strong>
 </p>
 
 <p align="center">
@@ -13,11 +13,11 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@tenra/adapter-lambda">
-    <img src="https://img.shields.io/npm/v/@tenra/adapter-lambda?style=flat-square" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@ambiten/adapter-lambda">
+    <img src="https://img.shields.io/npm/v/@ambiten/adapter-lambda?style=flat-square" alt="npm version" />
   </a>
-  <a href="https://tenra.dev">
-    <img src="https://img.shields.io/badge/docs-tenra.dev-22c55e?style=flat-square" alt="documentation" />
+  <a href="https://ambiten.dev">
+    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
 </p>
 
@@ -25,33 +25,33 @@
 
 ## Overview
 
-`@tenra/adapter-lambda` connects AWS Lambda functions to the Tenra runtime.
+`@ambiten/adapter-lambda` connects AWS Lambda functions to the Ambiten runtime.
 
 The adapter establishes an execution boundary for each Lambda invocation so runtime context remains available throughout the lifecycle of the function. Tenant information, request metadata, logging, instrumentation, transactions, and runtime services can then participate consistently across handlers, services, and model operations.
 
-The adapter does not replace Lambda. It allows serverless execution to participate fully in the Tenra runtime model.
+The adapter does not replace Lambda. It allows serverless execution to participate fully in the Ambiten runtime model.
 
 ## Installation
 
 ```bash
-npm install @tenra/core @tenra/adapter-lambda
+npm install @ambiten/core @ambiten/adapter-lambda
 ```
 
 ## Quick Start
 
 ```ts
 import {
-  TenraBootstrapFactory
-} from "@tenra/core";
+  AmbitenBootstrapFactory
+} from "@ambiten/core";
 
 import {
   createLambdaAdapter
-} from "@tenra/adapter-lambda";
+} from "@ambiten/adapter-lambda";
 
 const adapter = createLambdaAdapter();
 
 const bootstrap =
-  await TenraBootstrapFactory.create({
+  await AmbitenBootstrapFactory.create({
     adapter
   });
 
@@ -66,7 +66,7 @@ export const handler =
   });
 ```
 
-Each invocation automatically participates in the Tenra execution model.
+Each invocation automatically participates in the Ambiten execution model.
 
 ## What the Adapter Provides
 
@@ -83,7 +83,7 @@ Lambda Invocation
         ↓
 Lambda Adapter
         ↓
-TenraContext
+AmbitenContext
         ↓
 Services
         ↓
@@ -121,7 +121,7 @@ Lambda Event
       ↓
 Tenant Resolution
       ↓
-TenraContext
+AmbitenContext
       ↓
 Tenant-Aware Execution
 ```
@@ -146,13 +146,13 @@ This helps preserve operational visibility across distributed systems where requ
 
 Complete documentation is available at:
 
-https://tenra.dev
+https://ambiten.dev
 
 ## Related Packages
 
-* `@tenra/core`
-* `@tenra/logger`
-* `@tenra/create`
+* `@ambiten/core`
+* `@ambiten/logger`
+* `@ambiten/create`
 
 ## License
 
