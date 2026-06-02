@@ -1,5 +1,4 @@
 import { MultiTenantManager } from '../../tanancy';
-// import { bufferedTransporter } from '../../utils';
 
 
 describe('MultiTenantManager', () => {

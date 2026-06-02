@@ -1,14 +1,14 @@
 import cron from 'node-cron';
 import { scheduleGarbageCollector, runGarbageCollectorOnAllModels } from '../../gc';
-import { TenraModelRegistry } from '../../utils/ModelRegistry';
-// import { bufferedTransporter } from '../../utils';
+import { AmbitenModelRegistry } from '../../utils/ModelRegistry';
+
 
 jest.mock('node-cron', () => ({
   schedule: jest.fn()
 }));
 
 jest.mock('../../utils/ModelRegistry', () => ({
-  TenraModelRegistry: {
+  AmbitenModelRegistry: {
     getAllModels: jest.fn()
   }
 }));
@@ -34,14 +34,13 @@ describe('scheduleGarbageCollector', () => {
       }
     );
 
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
-    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(console, 'log').mockImplementation(() => { });
+    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    jest.spyOn(console, 'error').mockImplementation(() => { });
   });
 
   afterEach(async () => {
     jest.restoreAllMocks();
-    // await bufferedTransporter.stop();
   });
 
   it('should schedule the garbage collector with the provided cron expression', () => {
@@ -69,7 +68,7 @@ describe('scheduleGarbageCollector', () => {
       })
     };
 
-    (TenraModelRegistry.getAllModels as jest.Mock).mockReturnValue([mockModel]);
+    (AmbitenModelRegistry.getAllModels as jest.Mock).mockReturnValue([mockModel]);
     (runGarbageCollectorOnAllModels as jest.Mock).mockResolvedValue({
       scanned: 1,
       succeeded: 1,
@@ -88,7 +87,7 @@ describe('scheduleGarbageCollector', () => {
 
     await cronCallback!();
 
-    expect(TenraModelRegistry.getAllModels).toHaveBeenCalledTimes(1);
+    expect(AmbitenModelRegistry.getAllModels).toHaveBeenCalledTimes(1);
     expect(runGarbageCollectorOnAllModels).toHaveBeenCalledWith({
       ctx: undefined,
       continueOnError: true
@@ -96,7 +95,7 @@ describe('scheduleGarbageCollector', () => {
   });
 
   it('should skip when no registered models exist', async () => {
-    (TenraModelRegistry.getAllModels as jest.Mock).mockReturnValue([]);
+    (AmbitenModelRegistry.getAllModels as jest.Mock).mockReturnValue([]);
 
     scheduleGarbageCollector();
 
@@ -104,7 +103,7 @@ describe('scheduleGarbageCollector', () => {
 
     await cronCallback!();
 
-    expect(TenraModelRegistry.getAllModels).toHaveBeenCalledTimes(1);
+    expect(AmbitenModelRegistry.getAllModels).toHaveBeenCalledTimes(1);
     expect(runGarbageCollectorOnAllModels).not.toHaveBeenCalled();
     expect(console.warn).toHaveBeenCalled();
   });
@@ -114,7 +113,7 @@ describe('scheduleGarbageCollector', () => {
       getContext: jest.fn().mockReturnValue(undefined)
     };
 
-    (TenraModelRegistry.getAllModels as jest.Mock).mockReturnValue([
+    (AmbitenModelRegistry.getAllModels as jest.Mock).mockReturnValue([
       modelWithoutContext
     ]);
 
@@ -146,7 +145,7 @@ describe('scheduleGarbageCollector', () => {
 
     const error = new Error('GC failed');
 
-    (TenraModelRegistry.getAllModels as jest.Mock).mockReturnValue([mockModel]);
+    (AmbitenModelRegistry.getAllModels as jest.Mock).mockReturnValue([mockModel]);
     (runGarbageCollectorOnAllModels as jest.Mock).mockRejectedValue(error);
 
     scheduleGarbageCollector();
@@ -163,7 +162,7 @@ describe('scheduleGarbageCollector', () => {
       dbName: 'tenant-db'
     };
 
-    (TenraModelRegistry.getAllModels as jest.Mock).mockReturnValue([
+    (AmbitenModelRegistry.getAllModels as jest.Mock).mockReturnValue([
       {
         getContext: jest.fn().mockReturnValue({
           ctx: { collectionName: 'users' }
@@ -210,7 +209,7 @@ describe('scheduleGarbageCollector', () => {
       })
     };
 
-    (TenraModelRegistry.getAllModels as jest.Mock).mockReturnValue([
+    (AmbitenModelRegistry.getAllModels as jest.Mock).mockReturnValue([
       modelA,
       modelB
     ]);

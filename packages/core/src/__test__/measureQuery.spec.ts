@@ -1,4 +1,4 @@
-import { TenraContext } from '../context/tenraContext';
+import { AmbitenContext } from '../context/ambitenContext';
 import { measureQuery } from '../instrumentation';
 // import { bufferedTransporter } from '../utils';
 
@@ -8,7 +8,7 @@ describe('measureQuery', () => {
 	});
 
 	afterEach(async () => {
-	 jest.clearAllMocks();
+		jest.clearAllMocks();
 		// await bufferedTransporter.stop();
 	});
 
@@ -18,7 +18,7 @@ describe('measureQuery', () => {
 				{ operation: 'findOne' },
 				async () => ({ ok: true })
 			)
-		).rejects.toThrow('[Tenra] Missing runtime context.');
+		).rejects.toThrow('[Ambiten] Missing runtime context.');
 	});
 
 	it('should execute successfully, increment queries, add time, notify observer and logger', async () => {
@@ -28,7 +28,7 @@ describe('measureQuery', () => {
 			error: jest.fn()
 		};
 
-		await TenraContext.run(
+		await AmbitenContext.run(
 			{
 				tenantId: 'tenant-a',
 				requestId: 'req-1',
@@ -50,7 +50,7 @@ describe('measureQuery', () => {
 
 				expect(result).toEqual({ id: 1, email: 'john@example.com' });
 
-				const budget = TenraContext.getBudget();
+				const budget = AmbitenContext.getBudget();
 				expect(budget.queriesExecuted).toBe(1);
 				expect(budget.totalTimeMs).toBeGreaterThanOrEqual(0);
 
@@ -74,7 +74,7 @@ describe('measureQuery', () => {
 
 				expect(logger.info).toHaveBeenCalledTimes(1);
 				expect(logger.info).toHaveBeenCalledWith(
-					'[Tenra Query]',
+					'[Ambiten Query]',
 					expect.objectContaining({
 						operation: 'findOne',
 						status: "success",
@@ -94,7 +94,7 @@ describe('measureQuery', () => {
 			error: jest.fn()
 		};
 
-		await TenraContext.run(
+		await AmbitenContext.run(
 			{
 				tenantId: 'tenant-b',
 				requestId: 'req-2',
@@ -120,7 +120,7 @@ describe('measureQuery', () => {
 					)
 				).rejects.toThrow('DB exploded');
 
-				const budget = TenraContext.getBudget();
+				const budget = AmbitenContext.getBudget();
 				expect(budget.queriesExecuted).toBe(1);
 				expect(budget.totalTimeMs).toBeGreaterThanOrEqual(0);
 
@@ -147,7 +147,7 @@ describe('measureQuery', () => {
 
 				expect(logger.error).toHaveBeenCalledTimes(1);
 				expect(logger.error).toHaveBeenCalledWith(
-					'[Tenra Query Error]',
+					'[Ambiten Query Error]',
 					expect.objectContaining({
 						operation: 'updateOne',
 						status: "error",
@@ -160,7 +160,7 @@ describe('measureQuery', () => {
 	});
 
 	it('should enforce query budget limit', async () => {
-		await TenraContext.run(
+		await AmbitenContext.run(
 			{
 				tenantId: 'tenant-c',
 				budget: {
@@ -176,20 +176,20 @@ describe('measureQuery', () => {
 						async () => [{ id: 1 }]
 					)
 				).rejects.toThrow(
-					'[Tenra] Tenant tenant-c exceeded query budget for this request.'
+					'[Ambiten] Tenant tenant-c exceeded query budget for this request.'
 				);
 			}
 		);
 	});
 
 	it('should normalize a partial budget safely', async () => {
-		await TenraContext.run(
+		await AmbitenContext.run(
 			{
 				tenantId: 'tenant-d',
 				budget: { maxQueries: 3 }
 			},
 			async () => {
-				const budgetBefore = TenraContext.getBudget();
+				const budgetBefore = AmbitenContext.getBudget();
 
 				expect(budgetBefore).toEqual({
 					maxQueries: 3,
@@ -202,7 +202,7 @@ describe('measureQuery', () => {
 					async () => [{ id: 1 }, { id: 2 }]
 				);
 
-				const budgetAfter = TenraContext.getBudget();
+				const budgetAfter = AmbitenContext.getBudget();
 				expect(budgetAfter.queriesExecuted).toBe(1);
 				expect(budgetAfter.maxQueries).toBe(3);
 				expect(budgetAfter.totalTimeMs).toBeGreaterThanOrEqual(0);

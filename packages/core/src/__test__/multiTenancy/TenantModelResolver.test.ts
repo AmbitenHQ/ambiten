@@ -1,12 +1,12 @@
 import { getTenantModel, MultiTenantManager } from '../../tanancy';
 import { Model } from '../../utils/builders';
-import { TenraSchema } from '../../lib-core';
+import { AmbitenSchema } from '../../lib-core';
 import { DbProvider } from '../../types';
-import { TenraContext } from '../../context';
+import { AmbitenContext } from '../../context';
 
 
 jest.mock('../../tanancy/MultiTenantManager');
-jest.mock('../../context/TenraContext');
+jest.mock('../../context/AmbitenContext');
 jest.mock('../../utils/builders/createModel');
 jest.mock('../../utils/ensureModelNameSafe', () => ({
 	ensureModelNameSafe: jest.fn((name: string) => name + '_safe')
@@ -17,7 +17,7 @@ jest.mock('../../utils/index', () => ({}));
 describe('getTenantModel', () => {
 	const fakeClient = {};
 	const fakeModel = { model: true };
-	const fakeSchema = {} as TenraSchema<any>;
+	const fakeSchema = {} as AmbitenSchema<any>;
 	const tenantId = 'tenant123';
 	const collectionName = 'TestModel';
 
@@ -56,7 +56,7 @@ describe('getTenantModel', () => {
 	});
 
 	it('throws if tenantId is missing from context', async () => {
-		(TenraContext.getTenantId as jest.Mock).mockReturnValue(undefined);
+		(AmbitenContext.getTenantId as jest.Mock).mockReturnValue(undefined);
 		await expect(getTenantModel({ collectionName, tenantId: undefined as any, schema: fakeSchema }))
 			.rejects.toThrow('tenantId is required to run tenant context');
 	});

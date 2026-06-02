@@ -1,18 +1,18 @@
 import fs from 'fs-extra';
 import path from 'path'
-// import { BufferedTransporter } from '@tenra/logger';
+// import { BufferedTransporter } from '@ambiten/logger';
 
 
 
 describe('generateProject', () => {
-  const projectName = 'test-tenra-app';
+  const projectName = 'test-ambiten-app';
   const projectRoot = path.resolve(process.cwd(), projectName);
 
   const mockGenerateProject = jest.fn(async ({ projectName }) => {
     const projectPath = path.join(process.cwd(), projectName);
     await fs.ensureDir(projectPath);
     // Simulate creating a basic project structure
-    await fs.writeJson(path.join(projectPath, 'tenra.config.json'), { name: projectName });
+    await fs.writeJson(path.join(projectPath, 'ambiten.config.json'), { name: projectName });
     await fs.ensureDir(path.join(projectPath, 'src'));
     await fs.writeFile(path.join(projectPath, 'src', 'main.ts'), '// Main entry point');
     return projectPath;
@@ -36,14 +36,14 @@ describe('generateProject', () => {
 
   it('should create a configuration file', async () => {
     await mockGenerateProject({ projectName });
-    const configPath = path.join(projectRoot, 'tenra.config.json');
+    const configPath = path.join(projectRoot, 'ambiten.config.json');
     expect(await fs.pathExists(configPath)).toBe(true);
   });
 
   it('should generate project structure with default options', async () => {
     await mockGenerateProject({ projectName });
 
-    const configPath = path.join(projectRoot, 'tenra.config.json');
+    const configPath = path.join(projectRoot, 'ambiten.config.json');
     const mainTSPath = path.join(projectRoot, 'src', 'main.ts');
 
     expect(await fs.pathExists(configPath)).toBe(true);
