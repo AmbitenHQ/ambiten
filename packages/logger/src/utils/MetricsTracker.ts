@@ -58,7 +58,7 @@ export class MetricsTracker {
         if (this.options.reporter) {
           this.options.reporter(snapshot);
         } else if (process.env.NODE_ENV !== 'test') {
-          console.info('📈 Tenra Logger Metrics:', snapshot);
+          console.info('📈 Ambiten Logger Metrics:', snapshot);
         }
 
         this.resetForNextCycle();

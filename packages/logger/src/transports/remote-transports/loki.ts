@@ -16,7 +16,7 @@ export function createLokiTransport(
 
   return async (formattedMessage, entry) => {
     const streamLabels: Record<string, string> = {
-      app: 'tenra',
+      app: 'Ambiten',
       level: entry.level,
       ...labels,
     };

@@ -11,8 +11,8 @@ import {
 import type {
   Transporter,
   RemoteTransporter,
-	LoggerTransportConfig,
-	ResolveLoggerTransportsOptions,
+  LoggerTransportConfig,
+  ResolveLoggerTransportsOptions,
 } from '../types';
 
 
@@ -32,8 +32,8 @@ export function resolveLoggerTransports(
       case 'console': {
         return consoleTransport(
           transportConfig.options?.colorize ??
-            loggerConfig?.colorize ??
-            true
+          loggerConfig?.colorize ??
+          true
         );
       }
 
@@ -47,7 +47,7 @@ export function resolveLoggerTransports(
         const transportOptions = transportConfig.options ?? {};
 
         return new AdvancedRollingFileTransporter({
-          filename: transportOptions.filename ?? './logs/tenra.log',
+          filename: transportOptions.filename ?? './logs/ambiten.log',
           frequency: transportOptions.frequency ?? 'daily',
           maxSize: transportOptions.maxSize ?? 5 * 1024 * 1024,
           backupCount: transportOptions.backupCount ?? 10,

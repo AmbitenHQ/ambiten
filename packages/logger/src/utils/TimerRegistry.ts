@@ -24,7 +24,7 @@ export async function clearAllTimers() {
 
     intervals.clear();
     timeouts.clear();
-    process.env.TENRA_LOGGER_METRICS_INTERVAL = '0';
+    process.env.AMBITEN_LOGGER_METRICS_INTERVAL = '0';
 
   } catch (error) {
     console.error('Error clearing timers:', error);

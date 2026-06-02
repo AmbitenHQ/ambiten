@@ -1,7 +1,7 @@
 /**
  * @packageDocumentation
  *
- * Main entry point for the Tenra Logger package.
+ * Main entry point for the Ambiten Logger package.
  *
  * Exports the logger factory, transport implementations,
  * logger types, and resilience utilities.

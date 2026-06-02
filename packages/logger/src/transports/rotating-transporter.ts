@@ -25,7 +25,7 @@ export function createRotatingFileTransporter(
 ): Transporter {
   const filename =
     options?.filename ??
-    path.resolve(process.cwd(), 'logs', 'tenra.log');
+    path.resolve(process.cwd(), 'logs', 'ambiten.log');
 
   const rollingTransport = new AdvancedRollingFileTransporter({
     filename,

@@ -8,18 +8,3 @@
   "hidePageTitle": false,
   "flattenOutputFiles": true,
 }
-
-// {
-//   "entryPoints": ["src/index.ts"],
-//   "out": "../../docs/website/docs/logger/api",
-//   "logLevel": "Error",
-//   "plugin": ["typedoc-plugin-markdown"],
-//   "excludeExternals": false,
-//   "excludePrivate": true,
-//   "excludeProtected": false,
-//   "hideBreadcrumbs": true,
-//   "hidePageTitle": false,
-//   "categorizeByGroup": true,
-//   "readme": "none",
-//   "exclude": ["**/node_modules/**", "**/docs/**", "**/tests/**", "**/*.spec.ts"]
-// }

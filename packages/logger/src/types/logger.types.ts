@@ -1,5 +1,5 @@
 import { MetricsTracker } from "../utils";
-import { LoggerConfig } from "./tenraConfig";
+import { LoggerConfig } from "./ambitenConfig";
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
 
