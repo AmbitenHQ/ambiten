@@ -5,13 +5,13 @@ import { execSync } from 'child_process';
 import { TemplateOptions } from '../../utils/types';
 
 /**
- * Handles the creation of a Next.js application with optional Tenra integration.
+ * Handles the creation of a Next.js application with optional Ambiten integration.
  *
  * @param {string} projectName - The name of the project.
  * @param {TemplateOptions} options - Options for the template.
  */
 export async function handleNextApp(projectName: string, options: TemplateOptions) {
-  const { useTypeScript, useTenra, includeLogger } = options;
+  const { useTypeScript, useAmbiten, includeLogger } = options;
   const ext = useTypeScript ? 'ts' : 'js';
   const rootDir = path.resolve(process.cwd(), projectName);
 
@@ -28,19 +28,19 @@ export async function handleNextApp(projectName: string, options: TemplateOption
   fs.ensureDirSync(apiDir);
   fs.ensureDirSync(configDir);
 
-  // 2. API Route Example with Tenra Core if enabled
+  // 2. API Route Example with Ambiten Core if enabled
   const apiHandler = useTypeScript
     ? `import type { NextApiRequest, NextApiResponse } from 'next';
-${useTenra ? `import { initTenra } from '@tenra/core';` : ''}
+${useAmbiten ? `import { AmbitenBootstrapFactory } from '@ambiten/core';` : ''}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  ${useTenra ? 'conat Tenra = await initTenra(); \n const graphql = Tenra.getGraphQL();' : ''}
+  ${useAmbiten ? 'const ambiten = await AmbitenBootstrapFactory.create(); \n const graphql = ambiten.getGraphQL();' : ''}
   res.status(200).json({ message: 'Hello from API route!' });
 }
 `
-    : `${useTenra ? `const { initTenra } = require('@tenra/core');\n` : ''}
+    : `${useAmbiten ? `const { AmbitenBootstrapFactory } = require('@ambiten/core');\n` : ''}
 export default async function handler(req, res) {
-  ${useTenra ? 'conat Tenra = await initTenra(); \n const graphql = Tenra.getGraphQL();;' : ''}
+  ${useAmbiten ? 'const ambiten = await AmbitenBootstrapFactory.create(); \n const graphql = ambiten.getGraphQL();' : ''}
   res.status(200).json({ message: 'Hello from API route!' });
 }
 `;
@@ -53,14 +53,14 @@ export default async function handler(req, res) {
     `MONGO_URI=mongodb://localhost:27017/${projectName}`
   );
 
-  // 4. Create Tenra config
-  if (useTenra) {
-    const TenraConfig = useTypeScript
-      ? `import { TenraClient } from '@tenra/core';
+  // 4. Create Ambiten config
+  if (useAmbiten) {
+    const AmbitenConfig = useTypeScript
+      ? `import { AmbitenClient } from '@ambiten/core';
 
       const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/${projectName}';
 
-const client = new TenraClient(uri, options);
+const client = new AmbitenClient(uri, options);
 
 export async function createConnection() {
   // You can use a try-catch block to handle connection errors
@@ -73,9 +73,9 @@ export async function createConnection() {
   }
 }
 `
-      : `const { TenraClient } = require('@tenra/core');
+      : `const { AmbitenClient } = require('@ambiten/core');
 
-const client = new TenraClient({
+const client = new AmbitenClient({
   uri: process.env.MONGO_URI || 'mongodb://localhost:27017/${projectName}'
 });
 
@@ -88,7 +88,7 @@ async function createConnection() {
 module.exports = { createConnection };
 `;
 
-    fs.writeFileSync(path.join(configDir, `tenra.config.${ext}`), TenraConfig);
+    fs.writeFileSync(path.join(configDir, `Ambiten.config.${ext}`), AmbitenConfig);
   }
 
 
@@ -109,21 +109,21 @@ module.exports = { respondSuccess };`;
     fs.writeFileSync(path.join(utilsDir, `helper.${ext}`), utilCode);
   }
 
-  // 6. Install Tenra Core
-  if (useTenra) {
-    console.log(colorize('Installing @tenra/core...', 'yellow'));
-    execSync(`npm install @tenra/core`, { cwd: rootDir, stdio: 'inherit' });
+  // 6. Install Ambiten Core
+  if (useAmbiten) {
+    console.log(colorize('Installing @ambiten/core...', 'yellow'));
+    execSync(`npm install @ambiten/core`, { cwd: rootDir, stdio: 'inherit' });
   }
-  if(includeLogger && !useTenra) {
-    console.log(colorize('Installing @tenra/logger...', 'yellow'));
-    execSync(`npm install @tenra/logger`, { cwd: rootDir, stdio: 'inherit' });
+  if (includeLogger && !useAmbiten) {
+    console.log(colorize('Installing @ambiten/logger...', 'yellow'));
+    execSync(`npm install @ambiten/logger`, { cwd: rootDir, stdio: 'inherit' });
   }
   // 7. Final message
-  if(useTenra) {
-    console.log(colorize('Tenra Core installed successfully!', 'green'));
+  if (useAmbiten) {
+    console.log(colorize('Ambiten Core installed successfully!', 'green'));
   }
-  if(includeLogger && !useTenra) {
-    console.log(colorize('Tenra Logger installed successfully!', 'green'));
+  if (includeLogger && !useAmbiten) {
+    console.log(colorize('Ambiten Logger installed successfully!', 'green'));
   }
 
   console.log(colorize('\nNext.js app setup complete!\n', 'green'));

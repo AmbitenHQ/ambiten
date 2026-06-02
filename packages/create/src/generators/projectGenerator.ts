@@ -14,7 +14,7 @@ import { colorize } from '../utils/colorize';
  * @returns {Promise<void>} A promise that resolves when the project is generated.
  */
 export async function generateProject(choices: ProjectChoices) {
-  const { projectType, projectName, useTenra, useTypeScript, includeLogger } = choices;
+  const { projectType, projectName, useAmbiten, useTypeScript, includeLogger } = choices;
   const projectRoot = path.resolve(process.cwd(), projectName);
 
   // Check if the project folder already exists
@@ -25,19 +25,19 @@ export async function generateProject(choices: ProjectChoices) {
 
   // Create the project folder
   fs.mkdirSync(projectRoot, { recursive: true });
-  writeDefaultTenraConfig(projectRoot);
+  writeDefaultAmbitenConfig(projectRoot);
   console.log(colorize(`Creating ${projectType} project: ${projectName}`, 'blue'));
 
   // Handle project generation based on the project type
   switch (projectType) {
     case 'MERN Stack':
-      return await handleMERNStack(projectName, { useTypeScript, useTenra, includeLogger });;
+      return await handleMERNStack(projectName, { useTypeScript, useAmbiten, includeLogger });;
     case 'Next.js App':
-      return await handleNextApp(projectName, { useTypeScript, useTenra, includeLogger });
+      return await handleNextApp(projectName, { useTypeScript, useAmbiten, includeLogger });
     case 'REST API':
-      return await handleRestAPI(projectName, { useTypeScript, useTenra, includeLogger });
+      return await handleRestAPI(projectName, { useTypeScript, useAmbiten, includeLogger });
     case 'GraphQL API':
-      return await handleGraphQLAPI(projectName, { useTypeScript, useTenra, includeLogger });
+      return await handleGraphQLAPI(projectName, { useTypeScript, useAmbiten, includeLogger });
     default:
       console.log(colorize(`Unknown or Invalid project type: ${projectType}`, 'red'));
   }
@@ -47,13 +47,13 @@ export async function generateProject(choices: ProjectChoices) {
 
 
 
-function writeDefaultTenraConfig(projectPath: string) {
-  const configPath = path.join(projectPath, 'tenra.config.json');
+function writeDefaultAmbitenConfig(projectPath: string) {
+  const configPath = path.join(projectPath, 'ambiten.config.json');
 
   const defaultJson = {
-    /**If you prefer to get a config with more features, you can delete this file initialise Tenra vie commandline  */
-    /**Note: Bootstraping Tenra via commandline is Advanced. Read more: 'https://nodem9.github.io/Tenra/core/Tenra-bootstrap/TenraBootstrap' */
-    projectName: "my-tenra-app",
+    /**If you prefer to get a config with more features, you can delete this file initialise Ambiten vie commandline  */
+    /**Note: Bootstraping Ambiten via commandline is Advanced. Read more: 'https://nodem9.github.io/Ambiten/core/Ambiten-bootstrap/AmbitenBootstrap' */
+    projectName: "my-ambiten-app",
     database: {
       uri: "mongodb://localhost:27017/mydatabase",
       options: {}
@@ -69,7 +69,7 @@ function writeDefaultTenraConfig(projectPath: string) {
       transports: [
         {
           type: "file",
-          path: "./logs/app.log"
+          path: "./logs/ambiten.log"
         }
       ]
     }

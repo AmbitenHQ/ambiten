@@ -6,13 +6,13 @@ import { execSync } from 'child_process';
 import { TemplateOptions } from '../../utils/types';
 
 /**
- * Handles the creation of a MERN stack project with optional TypeScript and Tenra Core integration.
+ * Handles the creation of a MERN stack project with optional TypeScript and Ambiten Core integration.
  *
  * @param {string} projectName - The name of the project.
  * @param {TemplateOptions} options - Options for the template.
  */
 export async function handleMERNStack(projectName: string, options: TemplateOptions) {
-  const { useTypeScript, useTenra, includeLogger } = options;
+  const { useTypeScript, useAmbiten, includeLogger } = options;
   const ext = useTypeScript ? 'ts' : 'js';
   const rootDir = path.resolve(process.cwd(), projectName);
   const clientDir = path.join(rootDir, 'client');
@@ -33,16 +33,16 @@ export async function handleMERNStack(projectName: string, options: TemplateOpti
   const expressIndex = `import express from 'express';
 
 import { config } from 'dotenv';
-${useTenra ? `import { TenraClient } from '@tenra/core';` : ''}
+${useAmbiten ? `import { AmbitenClient } from '@ambiten/core';` : ''}
 
 config();
 const app = express();
 app.use(express.json() as express.Express);
 
-${useTenra ? `const client = new TenraClient({ uri: process.env.MONGO_URI });\nawait client.connect();\n` : ''}
+${useAmbiten ? `const client = new AmbitenClient({ uri: process.env.MONGO_URI });\nawait client.connect();\n` : ''}
 
 app.get('/', (_, res) => {
-  res.send('Hello Tenra user..');
+  res.send('Hello Ambiten user..');
 });
 
 // Start the server
@@ -52,24 +52,24 @@ app.listen(PORT, () => console.log(\`Server running on port \${PORT}\`));
 
   fs.writeFileSync(path.join(serverDir, `index.${ext}`), expressIndex);
 
-  // 4. Tenra Core configuration file
-  if (useTenra) {
-    const TenraConfig = useTypeScript
-      ? `import { TenraClient } from '@tenra/core';
+  // 4. Ambiten Core configuration file
+  if (useAmbiten) {
+    const AmbitenConfig = useTypeScript
+      ? `import { AmbitenClient } from '@ambiten/core';
 
 const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/${projectName}';
 
-export const client = new TenraClient(uri, options);
+export const client = new AmbitenClient(uri, options);
 
 export async function createConnection() {
   await client.connect();
 }
 `
-      : `const { TenraClient } = require('@tenra/core');
+      : `const { AmbitenClient } = require('@ambiten/core');
 
 const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/${projectName}';
 
-const client = new TenraClient(uri, options);
+const client = new AmbitenClient(uri, options);
 
 async function createConnectiono() {
   await client.connect();
@@ -78,7 +78,7 @@ async function createConnectiono() {
 module.exports = { createConnection };
 `;
 
-    fs.writeFileSync(path.join(serverDir, `tenra.config.${ext}`), TenraConfig);
+    fs.writeFileSync(path.join(serverDir, `Ambiten.config.${ext}`), AmbitenConfig);
   }
 
   // 5. Environment variables
@@ -91,7 +91,7 @@ module.exports = { createConnection };
   // 6. Backend package.json and dependencies
   execSync(`npm init -y`, { cwd: serverDir, stdio: 'inherit' });
 
-  execSync(`npm install express cors dotenv${useTenra ? ' @tenra/core' : ''}`, {
+  execSync(`npm install express cors dotenv${useAmbiten ? ' @ambiten/core' : ''}`, {
     cwd: serverDir,
     stdio: 'inherit'
   });

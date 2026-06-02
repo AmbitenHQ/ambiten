@@ -4,20 +4,20 @@ import { promptProjectOptions } from '../src/prompts/projectPrompts';
 import { generateProject } from '../src/generators/projectGenerator';
 import { showBanner } from '../src/utils/banner';
 
- 
+
 showBanner();
 
 const program = new Command();
 
 function initProject() {
   program
-    .name('tenra-create')
+    .name('ambiten-create')
     .description('CLI to generate and manage yout favorite framework projects')
     .version('1.0.0');
 
   program
-  .command('gc:run')
-  .description('Run Tenra Garbage Collector')
+    .command('gc:run')
+    .description('Run Ambiten Garbage Collector')
 
   program
     .command('init')

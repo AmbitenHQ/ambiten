@@ -3,7 +3,7 @@ import { colorize } from './colorize';
 
 export function showBanner() {
   try {
-    const banner = figlet.textSync('Tenra CLI', {
+    const banner = figlet.textSync('Ambiten CLI', {
       font: 'Standard',
       horizontalLayout: 'default',
       verticalLayout: 'default',
@@ -18,6 +18,6 @@ export function showBanner() {
     console.warn(
       colorize('⚠️ Figlet font not found or failed to load. Displaying fallback banner.', 'yellow')
     );
-    console.log(colorize('=== Tenra CLI ===', 'cyan'));
+    console.log(colorize('=== Ambiten CLI ===', 'cyan'));
   }
 }

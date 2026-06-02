@@ -29,15 +29,15 @@ import express from 'express';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import cors from 'cors';
-${options.useTenra ? `import { TenraGraphQL } from '@tenra/core';` : ''}
-${options.includeLogger ? `import { setupLogger, Logger } from '@tenra/create';` : ''}
+${options.useAmbiten ? `import { AmbitenGraphQL } from '@ambiten/core';` : ''}
+${options.includeLogger ? `import { setupLogger, Logger } from '@ambiten/create';` : ''}
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-${options.useTenra ? `
-const schema = await TenraGraphQL.getInsatnce();
+${options.useAmbiten ? `
+const schema = new AmbitenGraphQL();
 
 app.use('/graphql', graphqlHTTP({ schema.generateSchema(), graphiql: true }));
 ` : `
@@ -49,17 +49,17 @@ app.listen(PORT, () => console.log(\`GraphQL server running on port \${PORT}\`))
 `;
 
 
-  //Tenra config file
-  const { useTenra, useTypeScript, includeLogger } = options;
-  if (useTenra) {
+  //Ambiten config file
+  const { useAmbiten, useTypeScript, includeLogger } = options;
+  if (useAmbiten) {
     const configDir = path.join(rootDir, 'config');
     fs.ensureDirSync(configDir);
-    const TenraConfig = useTypeScript
-      ? `import { TenraClientOptions, TenraClient } from '@tenra/core';
-export const options: TenraClientOptions = {
-  // Add your Tenra client options here
+    const AmbitenConfig = useTypeScript
+      ? `import { AmbitenClientOptions, AmbitenClient } from '@ambiten/core';
+export const options: AmbitenClientOptions = {
+  // Add your Ambiten client options here
 };
-export const client = new TenraClient({
+export const client = new AmbitenClient({
   uri: process.env.MONGO_URI || 'mongodb://localhost:27017/${projectName}'
 });
 export async function createConnection() {
@@ -68,11 +68,11 @@ export async function createConnection() {
   return client;
 }
 `
-      : `const { TenraClient } = require('@tenra/core');  
+      : `const { AmbitenClient } = require('@ambiten/core');  
 const options = {
-  // Add your Tenra client options here
+  // Add your Ambiten client options here
 };
-const client = new TenraClient({
+const client = new AmbitenClient({
   uri: process.env.MONGO_URI || 'mongodb://localhost:27017/${projectName}'
 });
 async function createConnection() {
@@ -82,7 +82,7 @@ async function createConnection() {
 }
 module.exports = { createConnection };
 `;
-    fs.writeFileSync(path.join(configDir, `tenra.config.${ext}`), TenraConfig);
+    fs.writeFileSync(path.join(configDir, `Ambiten.config.${ext}`), AmbitenConfig);
   }
 
   fs.writeFileSync(path.join(srcDir, `index.${ext}`), entryFileContent.trimStart());
@@ -93,8 +93,8 @@ module.exports = { createConnection };
   // Step 3: Init & install dependencies
   execSync(`npm init -y`, { cwd: rootDir, stdio: 'inherit' });
 
-  const coreDeps = `dotenv@16.4.7 express-graphql graphql${options.useTenra ?
-    ' @tenra/core' : ''}${options.includeLogger ? ' @tenra/create' : ''}`;
+  const coreDeps = `dotenv@16.4.7 express-graphql graphql${options.useAmbiten ?
+    ' @ambiten/core' : ''}${options.includeLogger ? ' @ambiten/create' : ''}`;
   execSync(`npm install ${coreDeps}`, { cwd: rootDir, stdio: 'inherit' });
   console.log(colorize('\n Installing dependencies...', 'green'));
 

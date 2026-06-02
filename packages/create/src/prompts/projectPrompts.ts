@@ -23,15 +23,15 @@ export async function promptProjectOptions() {
       default: 'TypeScript'
     },
     {
-      name: 'useTenra',
+      name: 'useAmbiten',
       type: 'confirm',
-      message: 'Do you want to use(@tenra/core)? / This package uses npm by default, if your package is different you may want to choose "NO" and install it manually later.',
+      message: 'Do you want to use(@ambiten/core)? / This package uses npm by default, if your package is different you may want to choose "NO" and install it manually later.',
       default: true
     },
     {
       name: 'includeLogger',
       type: 'confirm',
-      message: 'Include (@tenra/logger)? / This package uses npm by default, if your package is different you may want to choose "NO" and install it manually later.',
+      message: 'Include (@ambiten/logger)? / This package uses npm by default, if your package is different you may want to choose "NO" and install it manually later.',
       default: true
     }
   ]);

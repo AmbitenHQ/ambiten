@@ -1,7 +1,7 @@
 
 export interface TemplateOptions {
   useTypeScript: boolean;
-  useTenra: boolean;
+  useAmbiten: boolean;
   includeLogger: boolean;
 }
 
@@ -22,10 +22,10 @@ export interface ProjectChoices {
    */
   projectName: string;
   /**
-   * Indicates whether to use Tenra or Tenra_core for MongoDB operations.
-   * Defaults to Tenra_core (recommended).
+   * Indicates whether to use Ambiten or Ambiten_core for MongoDB operations.
+   * Defaults to Ambiten_core (recommended).
    */
-  useTenra: boolean;
+  useAmbiten: boolean;
   /**
    * Indicates whether to use TypeScript or JavaScript.
    * Defaults to TypeScript (recommended).
@@ -33,11 +33,11 @@ export interface ProjectChoices {
    * If true, TypeScript will be used; otherwise, JavaScript will be used.
    * This is a boolean value.
    */
-	useTypeScript: boolean;
-	/**
-	 * Indicates whether to include Tenra_Utils (helper APIs) in the project.
-	 * Defaults to true.
-	 */
+  useTypeScript: boolean;
+  /**
+   * Indicates whether to include Ambiten_Utils (helper APIs) in the project.
+   * Defaults to true.
+   */
   includeLogger: boolean;
-  
+
 }
