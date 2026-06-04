@@ -2,7 +2,7 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.svg"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark.svg"
     width="120"
     alt="Ambiten"
   />
