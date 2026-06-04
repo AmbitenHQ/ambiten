@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiten Spirit Premium</title>
+  <desc id="desc">A premium Ambiten spirit mark combining a geometric predator head, Ambiten A execution core, and a runtime boundary ring.</desc>
+  <defs>
+    <linearGradient id="premiumGold" x1="82" y1="52" x2="430" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0B6"/>
+      <stop offset="0.44" stop-color="#D49F3D"/>
+      <stop offset="1" stop-color="#8D631A"/>
+    </linearGradient>
+    <linearGradient id="premiumGoldSoft" x1="124" y1="96" x2="388" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FEE9B5"/>
+      <stop offset="1" stop-color="#B47A25"/>
+    </linearGradient>
+    <linearGradient id="premiumBlue" x1="222" y1="134" x2="292" y2="356" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4DDBFF"/>
+      <stop offset="0.54" stop-color="#2F7EFF"/>
+      <stop offset="1" stop-color="#173EC7"/>
+    </linearGradient>
+    <linearGradient id="premiumInk" x1="256" y1="112" x2="256" y2="438" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#101929"/>
+      <stop offset="0.58" stop-color="#050C18"/>
+      <stop offset="1" stop-color="#020817"/>
+    </linearGradient>
+    <filter id="premiumGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 1
+                0 1 0 0 .72
+                0 0 1 0 .2
+                0 0 0 .42 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="premiumEyeGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 .13
+                0 0 0 0 .76
+                0 0 0 0 1
+                0 0 0 .72 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#premiumGlow)">
+    <path d="M150 74A203 203 0 0 1 362 74" stroke="url(#premiumGold)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M82 202A203 203 0 0 0 110 342" stroke="url(#premiumGold)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M430 202A203 203 0 0 1 402 342" stroke="url(#premiumGold)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M194 446A203 203 0 0 0 318 446" stroke="url(#premiumGold)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="256" cy="54" r="8" fill="url(#premiumGoldSoft)"/>
+    <circle cx="81" cy="256" r="7" fill="url(#premiumGoldSoft)"/>
+    <circle cx="431" cy="256" r="7" fill="url(#premiumGoldSoft)"/>
+    <circle cx="256" cy="486" r="7" fill="url(#premiumGoldSoft)"/>
+    <path d="M252 450h8v28h-8z" fill="url(#premiumGoldSoft)"/>
+  </g>
+
+  <g>
+    <path d="M256 108
+      C217 112 184 138 164 178
+      C138 233 145 309 181 362
+      C203 395 230 417 256 434
+      C282 417 309 395 331 362
+      C367 309 374 233 348 178
+      C328 138 295 112 256 108Z" fill="url(#premiumInk)"/>
+    <path d="M168 160L124 90C120 83 127 76 135 80L208 122" fill="#07111F"/>
+    <path d="M344 160L388 90C392 83 385 76 377 80L304 122" fill="#07111F"/>
+    <path d="M168 160L124 90C120 83 127 76 135 80L208 122" stroke="url(#premiumGold)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M344 160L388 90C392 83 385 76 377 80L304 122" stroke="url(#premiumGold)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M256 128L227 302C240 292 249 288 256 288C263 288 272 292 285 302L256 128Z" fill="url(#premiumBlue)"/>
+    <path d="M256 128L238 292" stroke="url(#premiumGoldSoft)" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M256 128L274 292" stroke="url(#premiumGoldSoft)" stroke-width="4.5" stroke-linecap="round"/>
+
+    <path d="M176 222C202 187 234 181 254 207" stroke="url(#premiumGold)" stroke-width="8" stroke-linecap="round"/>
+    <path d="M336 222C310 187 278 181 258 207" stroke="url(#premiumGold)" stroke-width="8" stroke-linecap="round"/>
+    <path d="M182 260C211 251 235 238 250 214" stroke="url(#premiumGoldSoft)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M330 260C301 251 277 238 262 214" stroke="url(#premiumGoldSoft)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M180 308C206 294 226 280 244 258" stroke="url(#premiumGoldSoft)" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M332 308C306 294 286 280 268 258" stroke="url(#premiumGoldSoft)" stroke-width="4.5" stroke-linecap="round"/>
+
+    <g filter="url(#premiumEyeGlow)">
+      <path d="M188 232C211 210 238 213 252 232C232 243 209 243 188 232Z" fill="url(#premiumGold)"/>
+      <path d="M324 232C301 210 274 213 260 232C280 243 303 243 324 232Z" fill="url(#premiumGold)"/>
+      <circle cx="223" cy="230" r="6" fill="#08111E"/>
+      <circle cx="289" cy="230" r="6" fill="#08111E"/>
+      <circle cx="227" cy="226" r="2.4" fill="#FFF8D9"/>
+      <circle cx="293" cy="226" r="2.4" fill="#FFF8D9"/>
+    </g>
+
+    <path d="M221 320C238 301 274 301 291 320C281 338 231 338 221 320Z" fill="url(#premiumGoldSoft)"/>
+    <path d="M208 350C229 338 242 344 256 358C270 344 283 338 304 350" stroke="url(#premiumGold)" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M256 358V384" stroke="url(#premiumGoldSoft)" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M230 396Q256 416 282 396" stroke="url(#premiumGoldSoft)" stroke-width="4.5" stroke-linecap="round"/>
+
+    <g stroke="url(#premiumGoldSoft)" stroke-width="3.5" stroke-linecap="round" opacity="0.9">
+      <path d="M206 356C176 351 151 356 132 370"/>
+      <path d="M206 376C177 379 152 389 132 404"/>
+      <path d="M306 356C336 351 361 356 380 370"/>
+      <path d="M306 376C335 379 360 389 380 404"/>
+    </g>
+
+    <g fill="url(#premiumGoldSoft)" opacity="0.88">
+      <ellipse cx="202" cy="180" rx="6" ry="11" transform="rotate(-24 202 180)"/>
+      <ellipse cx="310" cy="180" rx="6" ry="11" transform="rotate(24 310 180)"/>
+      <ellipse cx="186" cy="292" rx="5" ry="10" transform="rotate(-34 186 292)"/>
+      <ellipse cx="326" cy="292" rx="5" ry="10" transform="rotate(34 326 292)"/>
+      <ellipse cx="194" cy="146" rx="5" ry="8" transform="rotate(-16 194 146)"/>
+      <ellipse cx="318" cy="146" rx="5" ry="8" transform="rotate(16 318 146)"/>
+    </g>
+
+    <g stroke="url(#premiumGoldSoft)" stroke-width="2.6" opacity="0.72">
+      <path d="M128 154l14-6"/>
+      <path d="M384 154l-14-6"/>
+      <path d="M102 248l12 8"/>
+      <path d="M410 248l-12 8"/>
+      <path d="M190 436l8-10"/>
+      <path d="M322 436l-8-10"/>
+    </g>
+  </g>
+</svg>

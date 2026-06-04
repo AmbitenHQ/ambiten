@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Director Edition by Ambiten</title>
+  <desc id="desc">An Ambiten Director edition mark with a panther head, telemetry ring, and runtime signal markers focused on observability.</desc>
+  <defs>
+    <linearGradient id="directorGold" x1="84" y1="54" x2="424" y2="462" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0B7"/>
+      <stop offset="0.44" stop-color="#D8A846"/>
+      <stop offset="1" stop-color="#8B631B"/>
+    </linearGradient>
+    <linearGradient id="directorBlue" x1="108" y1="124" x2="404" y2="396" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3BD6FF"/>
+      <stop offset="0.58" stop-color="#2472FF"/>
+      <stop offset="1" stop-color="#1637C2"/>
+    </linearGradient>
+    <filter id="directorGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 .14
+                0 0 0 0 .74
+                0 0 0 0 1
+                0 0 0 .48 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="88" fill="#020817"/>
+
+  <g filter="url(#directorGlow)">
+    <circle cx="256" cy="256" r="176" fill="none" stroke="url(#directorBlue)" stroke-width="2.5" stroke-dasharray="10 14" opacity="0.7"/>
+    <circle cx="256" cy="256" r="150" fill="none" stroke="url(#directorBlue)" stroke-width="1.8" stroke-dasharray="4 10" opacity="0.46"/>
+    <path d="M128 118A202 202 0 0 1 384 118" stroke="url(#directorGold)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="256" cy="72" r="8" fill="url(#directorGold)"/>
+    <circle cx="112" cy="168" r="6" fill="url(#directorGold)"/>
+    <circle cx="400" cy="168" r="6" fill="url(#directorGold)"/>
+    <circle cx="88" cy="292" r="6" fill="url(#directorGold)"/>
+    <circle cx="424" cy="292" r="6" fill="url(#directorGold)"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 112
+      C217 116 184 138 164 178
+      C138 233 145 309 181 362
+      C203 395 230 417 256 434
+      C282 417 309 395 331 362
+      C367 309 374 233 348 178
+      C328 138 295 112 256 112Z" fill="#07111F" stroke="url(#directorGold)" stroke-width="11"/>
+    <path d="M168 160L124 90L206 122" stroke="url(#directorGold)" stroke-width="11"/>
+    <path d="M344 160L388 90L306 122" stroke="url(#directorGold)" stroke-width="11"/>
+    <path d="M176 222C202 187 234 181 254 207" stroke="url(#directorGold)" stroke-width="8"/>
+    <path d="M336 222C310 187 278 181 258 207" stroke="url(#directorGold)" stroke-width="8"/>
+    <path d="M190 232C211 210 238 213 252 232C232 243 209 243 190 232Z" fill="url(#directorGold)"/>
+    <path d="M322 232C301 210 274 213 260 232C280 243 303 243 322 232Z" fill="url(#directorGold)"/>
+    <circle cx="223" cy="230" r="6" fill="#06101E" stroke="none"/>
+    <circle cx="289" cy="230" r="6" fill="#06101E" stroke="none"/>
+    <path d="M221 320C238 301 274 301 291 320C281 338 231 338 221 320Z" fill="url(#directorGold)" stroke="none"/>
+    <path d="M208 350C229 338 242 344 256 358C270 344 283 338 304 350" stroke="url(#directorGold)" stroke-width="6.5"/>
+    <path d="M256 358V384" stroke="url(#directorGold)" stroke-width="4.5"/>
+    <path d="M230 396Q256 416 282 396" stroke="url(#directorGold)" stroke-width="4.5"/>
+  </g>
+
+  <g stroke="url(#directorBlue)" stroke-width="2.6" stroke-linecap="round" opacity="0.85">
+    <path d="M118 170L148 190"/>
+    <path d="M394 170L364 190"/>
+    <path d="M94 292L138 286"/>
+    <path d="M418 292L374 286"/>
+    <path d="M256 84V120"/>
+    <path d="M180 420L204 396"/>
+    <path d="M332 420L308 396"/>
+  </g>
+
+  <g fill="#8ED8FF">
+    <circle cx="148" cy="190" r="4"/>
+    <circle cx="364" cy="190" r="4"/>
+    <circle cx="138" cy="286" r="4"/>
+    <circle cx="374" cy="286" r="4"/>
+    <circle cx="256" cy="120" r="4"/>
+  </g>
+</svg>

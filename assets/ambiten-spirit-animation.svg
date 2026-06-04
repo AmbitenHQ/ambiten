@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiten Spirit Runtime Assembly Animation</title>
+  <desc id="desc">Animated Ambiten spirit sequence: runtime ring, context nodes, execution paths, panther head, eyes, and final wordmark.</desc>
+  <defs>
+    <linearGradient id="animGold" x1="270" y1="114" x2="1010" y2="612" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0B7"/>
+      <stop offset="0.44" stop-color="#D8A846"/>
+      <stop offset="1" stop-color="#8B631B"/>
+    </linearGradient>
+    <linearGradient id="animGoldSoft" x1="360" y1="168" x2="920" y2="550" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCE6A6"/>
+      <stop offset="1" stop-color="#B67B26"/>
+    </linearGradient>
+    <linearGradient id="animBlue" x1="596" y1="186" x2="684" y2="438" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#40D8FF"/>
+      <stop offset="0.58" stop-color="#2474FF"/>
+      <stop offset="1" stop-color="#163AC5"/>
+    </linearGradient>
+    <filter id="animGoldGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 1
+                0 1 0 0 .72
+                0 0 1 0 .2
+                0 0 0 .44 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="animBlueGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 .14
+                0 0 0 0 .76
+                0 0 0 0 1
+                0 0 0 .82 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .bg { fill: #020817; }
+      .ring, .gold-line, .gold-line-mid, .gold-line-thin {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .ring { stroke: url(#animGold); stroke-width: 14; }
+      .gold-line { stroke: url(#animGold); stroke-width: 11; }
+      .gold-line-mid { stroke: url(#animGold); stroke-width: 8; }
+      .gold-line-thin { stroke: url(#animGoldSoft); stroke-width: 5; }
+      .gold-fill { fill: url(#animGold); }
+      .gold-soft { fill: url(#animGoldSoft); }
+      .blue-fill { fill: url(#animBlue); }
+      .ink-fill { fill: #06101E; }
+      .shield-fill { fill: #07111F; }
+      .label { fill: #F4F7FF; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+      .wordmark { font-size: 108px; font-weight: 800; letter-spacing: 0.28em; }
+      .tagline { font-size: 30px; font-weight: 600; letter-spacing: 0.02em; }
+
+      #layer-01-ring path {
+        stroke-dasharray: 620;
+        stroke-dashoffset: 620;
+        animation: draw 0.55s ease forwards;
+      }
+      #ring-left { animation-delay: 0.38s; }
+      #ring-right { animation-delay: 0.56s; }
+      #ring-bottom { animation-delay: 0.74s; }
+
+      #layer-02-nodes > * {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: pop 0.22s ease forwards;
+      }
+      #node-top { animation-delay: 0.4s; }
+      #node-left { animation-delay: 0.6s; }
+      #node-right { animation-delay: 0.8s; }
+      #node-bottom, #node-bottom-stem { animation-delay: 1s; }
+
+      #layer-03-left-ear,
+      #layer-04-right-ear {
+        opacity: 0;
+        animation: reveal 0.45s ease forwards;
+      }
+      #layer-03-left-ear { animation-delay: 1.72s; }
+      #layer-04-right-ear { animation-delay: 1.82s; }
+
+      #layer-05-paths path {
+        stroke-dasharray: 420;
+        stroke-dashoffset: 420;
+        animation: draw 0.7s ease forwards;
+      }
+      #ambiten-a-core { opacity: 0; animation: reveal 0.45s ease forwards 1.2s; }
+      #a-left-rail { animation-delay: 1.2s; }
+      #a-right-rail { animation-delay: 1.28s; }
+      #left-brow-flow { animation-delay: 1.34s; }
+      #right-brow-flow { animation-delay: 1.42s; }
+      #left-cheek-flow-a { animation-delay: 1.48s; }
+      #right-cheek-flow-a { animation-delay: 1.54s; }
+      #left-cheek-flow-b { animation-delay: 1.6s; }
+      #right-cheek-flow-b { animation-delay: 1.66s; }
+      #left-jaw-flow { animation-delay: 1.72s; }
+      #right-jaw-flow { animation-delay: 1.78s; }
+
+      #layer-06-eyes {
+        opacity: 0;
+        animation: reveal 0.28s ease forwards 2s;
+      }
+      #left-eye, #right-eye {
+        animation: pulseEyes 1.9s ease-in-out 2.1s infinite;
+      }
+
+      #layer-07-face-lockup,
+      #layer-08-shield {
+        opacity: 0;
+        animation: reveal 0.45s ease forwards;
+      }
+      #layer-08-shield { animation-delay: 1.95s; }
+      #layer-07-face-lockup { animation-delay: 2.2s; }
+
+      #wordmark-group {
+        opacity: 0;
+        animation: reveal 0.55s ease forwards 2.8s;
+      }
+
+      @keyframes draw {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes pop {
+        0% { opacity: 0; transform: scale(.2); }
+        70% { opacity: 1; transform: scale(1.08); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      @keyframes reveal {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes pulseEyes {
+        0%, 100% { filter: brightness(1); }
+        50% { filter: brightness(1.18); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #layer-01-ring path,
+        #layer-02-nodes > *,
+        #layer-03-left-ear,
+        #layer-04-right-ear,
+        #layer-05-paths path,
+        #ambiten-a-core,
+        #layer-06-eyes,
+        #layer-07-face-lockup,
+        #layer-08-shield,
+        #wordmark-group {
+          animation: none !important;
+          opacity: 1 !important;
+          stroke-dashoffset: 0 !important;
+        }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1280" height="720"/>
+
+  <g transform="translate(384 92) scale(1.2)">
+    <g id="layer-01-ring" filter="url(#animGoldGlow)">
+      <path id="ring-top" class="ring" d="M150 74A203 203 0 0 1 362 74"/>
+      <path id="ring-left" class="ring" d="M82 202A203 203 0 0 0 110 342"/>
+      <path id="ring-right" class="ring" d="M430 202A203 203 0 0 1 402 342"/>
+      <path id="ring-bottom" class="ring" d="M194 446A203 203 0 0 0 318 446"/>
+    </g>
+
+    <g id="layer-02-nodes" filter="url(#animGoldGlow)">
+      <circle id="node-top" class="gold-soft" cx="256" cy="54" r="8"/>
+      <circle id="node-left" class="gold-soft" cx="81" cy="256" r="7"/>
+      <circle id="node-right" class="gold-soft" cx="431" cy="256" r="7"/>
+      <circle id="node-bottom" class="gold-soft" cx="256" cy="486" r="7"/>
+      <rect id="node-bottom-stem" class="gold-soft" x="252" y="450" width="8" height="28" rx="4"/>
+    </g>
+
+    <g id="layer-03-left-ear">
+      <path class="shield-fill" d="M168 160L124 90C120 83 127 76 135 80L208 122Z"/>
+      <path class="gold-line" d="M168 160L124 90C120 83 127 76 135 80L208 122"/>
+    </g>
+
+    <g id="layer-04-right-ear">
+      <path class="shield-fill" d="M344 160L388 90C392 83 385 76 377 80L304 122Z"/>
+      <path class="gold-line" d="M344 160L388 90C392 83 385 76 377 80L304 122"/>
+    </g>
+
+    <g id="layer-08-shield">
+      <path class="shield-fill" d="M256 108
+        C217 112 184 138 164 178
+        C138 233 145 309 181 362
+        C203 395 230 417 256 434
+        C282 417 309 395 331 362
+        C367 309 374 233 348 178
+        C328 138 295 112 256 108Z"/>
+      <path class="gold-line" d="M256 108
+        C217 112 184 138 164 178
+        C138 233 145 309 181 362
+        C203 395 230 417 256 434
+        C282 417 309 395 331 362
+        C367 309 374 233 348 178
+        C328 138 295 112 256 108Z"/>
+    </g>
+
+    <g id="layer-05-paths">
+      <path id="ambiten-a-core" class="blue-fill" d="M256 128L227 302C240 292 249 288 256 288C263 288 272 292 285 302Z"/>
+      <path id="a-left-rail" class="gold-line-thin" d="M256 128L238 292"/>
+      <path id="a-right-rail" class="gold-line-thin" d="M256 128L274 292"/>
+      <path id="left-brow-flow" class="gold-line" d="M176 222C202 187 234 181 254 207"/>
+      <path id="right-brow-flow" class="gold-line" d="M336 222C310 187 278 181 258 207"/>
+      <path id="left-cheek-flow-a" class="gold-line-mid" d="M182 260C211 251 235 238 250 214"/>
+      <path id="right-cheek-flow-a" class="gold-line-mid" d="M330 260C301 251 277 238 262 214"/>
+      <path id="left-cheek-flow-b" class="gold-line-thin" d="M180 308C206 294 226 280 244 258"/>
+      <path id="right-cheek-flow-b" class="gold-line-thin" d="M332 308C306 294 286 280 268 258"/>
+      <path id="left-jaw-flow" class="gold-line-thin" d="M208 350C229 338 242 344 256 358"/>
+      <path id="right-jaw-flow" class="gold-line-thin" d="M304 350C283 338 270 344 256 358"/>
+    </g>
+
+    <g id="layer-06-eyes" filter="url(#animBlueGlow)">
+      <path id="left-eye" class="gold-fill" d="M188 232C211 210 238 213 252 232C232 243 209 243 188 232Z"/>
+      <path id="right-eye" class="gold-fill" d="M324 232C301 210 274 213 260 232C280 243 303 243 324 232Z"/>
+      <circle id="left-pupil" class="ink-fill" cx="223" cy="230" r="6"/>
+      <circle id="right-pupil" class="ink-fill" cx="289" cy="230" r="6"/>
+    </g>
+
+    <g id="layer-07-face-lockup">
+      <path id="nose" class="gold-soft" d="M221 320C238 301 274 301 291 320C281 338 231 338 221 320Z"/>
+      <path id="muzzle-outline" class="gold-line-mid" d="M208 350C229 338 242 344 256 358C270 344 283 338 304 350"/>
+      <path id="center-muzzle" class="gold-line-thin" d="M256 358V384"/>
+      <path id="lower-mouth" class="gold-line-thin" d="M230 396Q256 416 282 396"/>
+      <path id="left-whisker-a" class="gold-line-thin" d="M206 356C176 351 151 356 132 370"/>
+      <path id="left-whisker-b" class="gold-line-thin" d="M206 376C177 379 152 389 132 404"/>
+      <path id="right-whisker-a" class="gold-line-thin" d="M306 356C336 351 361 356 380 370"/>
+      <path id="right-whisker-b" class="gold-line-thin" d="M306 376C335 379 360 389 380 404"/>
+    </g>
+  </g>
+
+  <g id="wordmark-group" transform="translate(170 612)">
+    <text class="label wordmark">AMBITEN</text>
+    <text class="label tagline" x="222" y="54" fill="rgba(244,247,255,0.82)">Resolve context once. Execute safely everywhere.</text>
+  </g>
+</svg>

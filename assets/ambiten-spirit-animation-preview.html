@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Ambiten Spirit Animation Preview</title>
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #020817;
+      margin: 0;
+    }
+
+    svg {
+      width: min(72vw, 560px);
+      height: auto;
+    }
+
+    #layer-01-runtime-ring path,
+    #layer-03-left-ear path,
+    #layer-04-right-ear path,
+    #layer-05-execution-paths path,
+    #layer-07-face-lockup path {
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: draw 1.2s ease forwards;
+    }
+
+    #ring-top { animation-delay: .05s; }
+    #ring-left { animation-delay: .18s; }
+    #ring-right { animation-delay: .18s; }
+    #ring-bottom { animation-delay: .32s; }
+
+    #layer-02-context-nodes > * {
+      transform-box: fill-box;
+      transform-origin: center;
+      opacity: 0;
+      transform: scale(.2);
+      animation: pop .45s cubic-bezier(.2, 1.4, .5, 1) forwards;
+    }
+
+    #node-top { animation-delay: .45s; }
+    #node-left { animation-delay: .58s; }
+    #node-right { animation-delay: .7s; }
+    #node-bottom, #node-bottom-stem { animation-delay: .85s; }
+
+    #layer-03-left-ear {
+      opacity: 0;
+      transform: translateX(-28px);
+      animation: slideIn .65s ease forwards;
+      animation-delay: .95s;
+    }
+
+    #layer-04-right-ear {
+      opacity: 0;
+      transform: translateX(28px);
+      animation: slideIn .65s ease forwards;
+      animation-delay: .95s;
+    }
+
+    #layer-08-final-shield {
+      opacity: 0;
+      transform-origin: 256px 256px;
+      transform: scale(.96);
+      animation: fadeScale .7s ease forwards;
+      animation-delay: 1.15s;
+    }
+
+    #layer-05-execution-paths path {
+      animation-delay: 1.25s;
+    }
+
+    #layer-06-eyes {
+      opacity: 0;
+      animation: eyes .8s ease forwards;
+      animation-delay: 2.1s;
+    }
+
+    #layer-07-face-lockup path {
+      animation-delay: 2.25s;
+    }
+
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes pop {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeScale {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes eyes {
+      0% { opacity: 0; filter: brightness(1); }
+      60% { opacity: 1; filter: brightness(1.8); }
+      100% { opacity: 1; filter: brightness(1); }
+    }
+  </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiten Spirit Animation-First Panther</title>
+  <desc id="desc">Layered Ambiten Spirit panther mark designed for motion: runtime ring, nodes, ears, execution paths, eyes, face lockup, and final shield geometry.</desc>
+
+  <defs>
+    <linearGradient id="gold" x1="86" y1="54" x2="426" y2="468" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0B7"/>
+      <stop offset="0.42" stop-color="#D8A846"/>
+      <stop offset="1" stop-color="#8B631B"/>
+    </linearGradient>
+
+    <linearGradient id="goldSoft" x1="126" y1="86" x2="386" y2="438" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F9DA88"/>
+      <stop offset="1" stop-color="#A77922"/>
+    </linearGradient>
+
+    <linearGradient id="runtimeBlue" x1="220" y1="130" x2="292" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38D5FF"/>
+      <stop offset="0.52" stop-color="#246DFF"/>
+      <stop offset="1" stop-color="#143BCA"/>
+    </linearGradient>
+
+    <filter id="goldGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 1
+                0 1 0 0 .68
+                0 0 1 0 .18
+                0 0 0 .45 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="eyeGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 .14
+                0 0 0 0 .75
+                0 0 0 0 1
+                0 0 0 .8 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      .bg {
+        fill: #020817;
+      }
+
+      .ring {
+        fill: none;
+        stroke: url(#gold);
+        stroke-width: 10;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .ring-thin {
+        fill: none;
+        stroke: url(#gold);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: .72;
+      }
+
+      .gold-line {
+        fill: none;
+        stroke: url(#gold);
+        stroke-width: 9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .gold-line-mid {
+        fill: none;
+        stroke: url(#gold);
+        stroke-width: 7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .gold-line-thin {
+        fill: none;
+        stroke: url(#goldSoft);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .gold-fill {
+        fill: url(#gold);
+      }
+
+      .dark-fill {
+        fill: #020817;
+      }
+
+      .dark-panel {
+        fill: #050C18;
+      }
+
+      .blue-fill {
+        fill: url(#runtimeBlue);
+      }
+
+      .cut {
+        fill: none;
+        stroke: #020817;
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .micro {
+        fill: url(#goldSoft);
+        opacity: .9;
+      }
+
+      /*
+        Suggested animation hooks:
+        #layer-01-runtime-ring path      -> stroke-dasharray / stroke-dashoffset draw-in
+        #layer-02-context-nodes *        -> scale + opacity
+        #layer-03-left-ear               -> translateX(-40px) opacity
+        #layer-04-right-ear              -> translateX(40px) opacity
+        #layer-05-execution-paths path   -> stroke-dasharray / dashoffset, move inward
+        #layer-06-eyes                   -> opacity + glow pulse
+        #layer-07-face-lockup            -> opacity + scale
+        #layer-08-final-shield           -> subtle final glow
+      */
+    </style>
+  </defs>
+
+  <rect id="background" class="bg" width="512" height="512" rx="88"/>
+
+  <!-- 01: Runtime boundary draws first -->
+  <g id="layer-01-runtime-ring" filter="url(#goldGlow)">
+    <path id="ring-top" class="ring" d="M151 73 A204 204 0 0 1 361 73"/>
+    <path id="ring-left" class="ring" d="M82 205 A204 204 0 0 0 110 342"/>
+    <path id="ring-right" class="ring" d="M430 205 A204 204 0 0 1 402 342"/>
+    <path id="ring-bottom" class="ring" d="M190 447 A204 204 0 0 0 322 447"/>
+
+    <path id="inner-flow-a" class="ring-thin" d="M130 160 C166 108 207 85 256 82"/>
+    <path id="inner-flow-b" class="ring-thin" d="M382 160 C346 108 305 85 256 82"/>
+    <path id="inner-flow-c" class="ring-thin" d="M126 360 C170 414 213 438 256 440"/>
+    <path id="inner-flow-d" class="ring-thin" d="M386 360 C342 414 299 438 256 440"/>
+  </g>
+
+  <!-- 02: Context nodes arrive from different directions -->
+  <g id="layer-02-context-nodes" filter="url(#goldGlow)">
+    <circle id="node-top" class="gold-fill" cx="256" cy="53" r="8"/>
+    <circle id="node-left" class="gold-fill" cx="81" cy="256" r="7"/>
+    <circle id="node-right" class="gold-fill" cx="431" cy="256" r="7"/>
+    <circle id="node-bottom" class="gold-fill" cx="256" cy="486" r="7"/>
+    <rect id="node-bottom-stem" class="gold-fill" x="251" y="450" width="10" height="27" rx="5"/>
+
+    <path id="direction-arrow-top" class="gold-fill" d="M246 70 L256 84 L266 70 Z"/>
+    <path id="direction-arrow-left" class="gold-fill" d="M98 246 L112 256 L98 266 Z"/>
+    <path id="direction-arrow-right" class="gold-fill" d="M414 246 L400 256 L414 266 Z"/>
+  </g>
+
+  <!-- 03: Left ear / left outer construction -->
+  <g id="layer-03-left-ear">
+    <path class="dark-panel" d="M165 158 L124 88 C120 81 128 74 136 78 L208 123 Z"/>
+    <path class="gold-line" d="M165 158 L124 88 C120 81 128 74 136 78 L208 123"/>
+    <path class="gold-line-thin" d="M151 118 L169 140 L143 144"/>
+  </g>
+
+  <!-- 04: Right ear / right outer construction -->
+  <g id="layer-04-right-ear">
+    <path class="dark-panel" d="M347 158 L388 88 C392 81 384 74 376 78 L304 123 Z"/>
+    <path class="gold-line" d="M347 158 L388 88 C392 81 384 74 376 78 L304 123"/>
+    <path class="gold-line-thin" d="M361 118 L343 140 L369 144"/>
+  </g>
+
+  <!-- 08 behind-face shield finalizes silhouette but can animate late -->
+  <g id="layer-08-final-shield">
+    <path class="dark-panel" d="M256 108
+      C216 112 183 137 163 178
+      C136 235 142 311 180 365
+      C203 399 232 421 256 436
+      C280 421 309 399 332 365
+      C370 311 376 235 349 178
+      C329 137 296 112 256 108Z"/>
+    <path class="gold-line" d="M256 108
+      C216 112 183 137 163 178
+      C136 235 142 311 180 365
+      C203 399 232 421 256 436
+      C280 421 309 399 332 365
+      C370 311 376 235 349 178
+      C329 137 296 112 256 108Z"/>
+  </g>
+
+  <!-- 05: Execution paths race inward and form the Ambiten A -->
+  <g id="layer-05-execution-paths">
+    <path id="ambiten-a-core" class="blue-fill" d="M256 130
+      L226 306
+      C239 296 249 292 256 292
+      C263 292 273 296 286 306
+      Z"/>
+    <path id="a-left-rail" class="gold-line-thin" d="M256 130 L238 292"/>
+    <path id="a-right-rail" class="gold-line-thin" d="M256 130 L274 292"/>
+
+    <path id="left-brow-flow" class="gold-line" d="M175 224 C202 187 235 181 254 208"/>
+    <path id="right-brow-flow" class="gold-line" d="M337 224 C310 187 277 181 258 208"/>
+
+    <path id="left-cheek-flow-a" class="gold-line-mid" d="M181 264 C211 255 235 239 250 214"/>
+    <path id="right-cheek-flow-a" class="gold-line-mid" d="M331 264 C301 255 277 239 262 214"/>
+    <path id="left-cheek-flow-b" class="gold-line-thin" d="M176 312 C204 298 225 283 244 260"/>
+    <path id="right-cheek-flow-b" class="gold-line-thin" d="M336 312 C308 298 287 283 268 260"/>
+
+    <path id="left-jaw-flow" class="gold-line-thin" d="M198 350 C222 337 241 340 256 357"/>
+    <path id="right-jaw-flow" class="gold-line-thin" d="M314 350 C290 337 271 340 256 357"/>
+  </g>
+
+  <!-- 06: Eyes ignite late and become the memorable feature -->
+  <g id="layer-06-eyes" filter="url(#eyeGlow)">
+    <path id="left-eye" class="gold-fill" d="M188 232
+      C211 210 238 213 252 232
+      C232 243 209 243 188 232Z"/>
+    <path id="right-eye" class="gold-fill" d="M324 232
+      C301 210 274 213 260 232
+      C280 243 303 243 324 232Z"/>
+
+    <circle id="left-pupil" class="dark-fill" cx="223" cy="230" r="6"/>
+    <circle id="right-pupil" class="dark-fill" cx="289" cy="230" r="6"/>
+
+    <path id="left-eye-cut" class="cut" d="M196 233 C214 237 233 237 246 231"/>
+    <path id="right-eye-cut" class="cut" d="M316 233 C298 237 279 237 266 231"/>
+  </g>
+
+  <!-- 07: Face lockup resolves the final predator expression -->
+  <g id="layer-07-face-lockup">
+    <path id="nose" class="gold-fill" d="M221 320
+      C238 301 274 301 291 320
+      C281 338 231 338 221 320Z"/>
+    <path id="muzzle-outline" class="gold-line-mid" d="M207 350
+      C229 338 242 344 256 358
+      C270 344 283 338 305 350"/>
+    <path id="center-muzzle" class="gold-line-thin" d="M256 358 L256 383"/>
+    <path id="lower-mouth" class="gold-line-thin" d="M229 395 Q256 417 283 395"/>
+
+    <path id="left-whisker-a" class="gold-line-thin" d="M207 356 C176 352 151 357 131 370"/>
+    <path id="left-whisker-b" class="gold-line-thin" d="M207 376 C177 379 152 389 132 404"/>
+    <path id="right-whisker-a" class="gold-line-thin" d="M305 356 C336 352 361 357 381 370"/>
+    <path id="right-whisker-b" class="gold-line-thin" d="M305 376 C335 379 360 389 380 404"/>
+
+    <ellipse id="left-context-mark-1" class="micro" cx="202" cy="181" rx="6" ry="11" transform="rotate(-22 202 181)"/>
+    <ellipse id="right-context-mark-1" class="micro" cx="310" cy="181" rx="6" ry="11" transform="rotate(22 310 181)"/>
+    <ellipse id="left-context-mark-2" class="micro" cx="186" cy="292" rx="5" ry="10" transform="rotate(-34 186 292)"/>
+    <ellipse id="right-context-mark-2" class="micro" cx="326" cy="292" rx="5" ry="10" transform="rotate(34 326 292)"/>
+  </g>
+</svg>
+
+</body>
+</html>

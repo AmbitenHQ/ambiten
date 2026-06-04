@@ -1,0 +1,66 @@
+# Source
+src/
+test/
+tests/
+__test__/
+__tests__/
+coverage/
+
+# Build metadata
+*.tsbuildinfo
+**/*.tsbuildinfo
+dist/.tsbuildinfo
+dist/**/*.tsbuildinfo
+
+# Tooling
+.vscode/
+.idea/
+
+# CI/CD
+.github/
+.gitlab/
+
+# Local files
+.env
+.env.*
+*.log
+
+# Package manager
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Docs & drafts
+docs/
+examples/
+benchmarks/
+
+# Temporary
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Scripts
+scripts/
+
+# Reports
+*.lcov
+coverage-final.json
+
+# Jest
+jest.config.*
+jest.setup.*
+
+# TypeScript configs (optional)
+tsconfig.test.json
+tsconfig.jest.json
+
+# Release artifacts
+*.tgz

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiten Spirit Core Avatar</title>
+  <desc id="desc">A high-contrast Ambiten spirit avatar mark for GitHub, npm, and profile surfaces.</desc>
+  <defs>
+    <linearGradient id="avatarBg" x1="72" y1="52" x2="442" y2="462" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F1E45"/>
+      <stop offset="0.55" stop-color="#10295F"/>
+      <stop offset="1" stop-color="#173B8A"/>
+    </linearGradient>
+    <linearGradient id="avatarStroke" x1="108" y1="76" x2="384" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F5F8FF"/>
+      <stop offset="0.5" stop-color="#AFC4FF"/>
+      <stop offset="1" stop-color="#62A7FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="116" fill="url(#avatarBg)"/>
+  <g fill="none" stroke="url(#avatarStroke)" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="18" d="M150 84A202 202 0 0 1 362 84"/>
+    <path stroke-width="18" d="M92 192A202 202 0 0 0 116 334"/>
+    <path stroke-width="18" d="M420 192A202 202 0 0 1 396 334"/>
+    <path stroke-width="18" d="M194 438A202 202 0 0 0 318 438"/>
+
+    <circle cx="256" cy="60" r="10" fill="#DCE8FF" stroke="none"/>
+    <circle cx="84" cy="256" r="9" fill="#8EBEFF" stroke="none"/>
+    <circle cx="428" cy="256" r="9" fill="#8EBEFF" stroke="none"/>
+    <circle cx="256" cy="452" r="9" fill="#8EBEFF" stroke="none"/>
+
+    <path stroke-width="16" d="M256 112
+      C218 116 186 141 166 180
+      C140 233 146 309 182 360
+      C204 392 231 414 256 430
+      C281 414 308 392 330 360
+      C366 309 372 233 346 180
+      C326 141 294 116 256 112Z"/>
+
+    <path stroke-width="14" d="M176 158L134 92L206 126"/>
+    <path stroke-width="14" d="M336 158L378 92L306 126"/>
+
+    <path stroke-width="12" d="M256 130L232 300"/>
+    <path stroke-width="12" d="M256 130L280 300"/>
+    <path stroke-width="12" d="M194 222C220 190 241 184 256 202C271 184 292 190 318 222"/>
+
+    <path stroke-width="12" d="M194 238C214 248 236 248 252 236"/>
+    <path stroke-width="12" d="M318 238C298 248 276 248 260 236"/>
+
+    <path stroke-width="10" d="M224 314C238 300 274 300 288 314"/>
+    <path stroke-width="10" d="M214 346C232 338 244 342 256 354C268 342 280 338 298 346"/>
+    <path stroke-width="8" d="M256 354V382"/>
+    <path stroke-width="8" d="M230 392Q256 410 282 392"/>
+
+    <path stroke-width="7" d="M206 352C176 348 150 354 130 366"/>
+    <path stroke-width="7" d="M206 372C176 376 151 386 132 400"/>
+    <path stroke-width="7" d="M306 352C336 348 362 354 382 366"/>
+    <path stroke-width="7" d="M306 372C336 376 361 386 380 400"/>
+  </g>
+</svg>

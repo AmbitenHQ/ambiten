@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiten Spirit Social Avatar</title>
+  <desc id="desc">A compact high-contrast Ambiten spirit avatar for GitHub, npm, and social profile use.</desc>
+  <defs>
+    <linearGradient id="socialAvatarBg" x1="30" y1="24" x2="220" y2="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#11224D"/>
+      <stop offset="0.58" stop-color="#12306E"/>
+      <stop offset="1" stop-color="#1C4AA5"/>
+    </linearGradient>
+    <linearGradient id="socialAvatarStroke" x1="58" y1="42" x2="193" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4F8FF"/>
+      <stop offset="0.48" stop-color="#BED0FF"/>
+      <stop offset="1" stop-color="#70B0FF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="256" height="256" rx="58" fill="url(#socialAvatarBg)"/>
+  <g fill="none" stroke="url(#socialAvatarStroke)" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke-width="10" d="M76 40A96 96 0 0 1 180 40"/>
+    <path stroke-width="10" d="M48 100A96 96 0 0 0 58 170"/>
+    <path stroke-width="10" d="M208 100A96 96 0 0 1 198 170"/>
+    <path stroke-width="10" d="M96 212A96 96 0 0 0 160 212"/>
+    <circle cx="128" cy="28" r="5" fill="#E3ECFF" stroke="none"/>
+    <circle cx="40" cy="128" r="5" fill="#95C3FF" stroke="none"/>
+    <circle cx="216" cy="128" r="5" fill="#95C3FF" stroke="none"/>
+    <circle cx="128" cy="224" r="5" fill="#95C3FF" stroke="none"/>
+    <path stroke-width="11" d="M128 56C100 60 78 78 64 106C46 144 56 186 86 208C100 219 113 227 128 234C143 227 156 219 170 208C200 186 210 144 192 106C178 78 156 60 128 56Z"/>
+    <path stroke-width="10" d="M88 84L66 50L102 68"/>
+    <path stroke-width="10" d="M168 84L190 50L154 68"/>
+    <path stroke-width="8" d="M128 70L115 154"/>
+    <path stroke-width="8" d="M128 70L141 154"/>
+    <path stroke-width="8" d="M98 112C110 96 120 92 128 101C136 92 146 96 158 112"/>
+    <path stroke-width="8" d="M98 120C108 125 118 125 126 120"/>
+    <path stroke-width="8" d="M158 120C148 125 138 125 130 120"/>
+    <path stroke-width="7" d="M112 162C120 155 136 155 144 162"/>
+    <path stroke-width="7" d="M106 180C116 176 122 178 128 184C134 178 140 176 150 180"/>
+  </g>
+</svg>
