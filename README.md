@@ -1,7 +1,11 @@
 # Ambiten
 
 <p align="center">
-  <img src="./ambiten-brand/ambiten-primary-logo-dark.png" alt="Ambiten" />
+  <img
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.svg"
+    width="120"
+    alt="Ambiten"
+  />
 </p>
 
 <p align="center">
