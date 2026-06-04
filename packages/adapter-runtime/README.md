@@ -1,7 +1,11 @@
 # @ambiten/adapter-runtime
 
 <p align="center">
-  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" />
+  <img
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.png"
+    width="120"
+    alt="Ambiten"
+  />
 </p>
 
 <p align="center">

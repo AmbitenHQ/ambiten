@@ -1,6 +1,20 @@
 # @ambiten/adapter-fastify
 
-<p align="center"> <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" alt="Ambiten" width="250" /> </p> <p align="center"> <strong>Fastify integration for the Ambiten runtime.</strong> </p> <p align="center"> Establish request-scoped execution boundaries, context propagation, multi-tenancy, and transaction-aware runtime behavior inside Fastify applications. </p> <p align="center"> <a href="https://www.npmjs.com/package/@ambiten/adapter-fastify"> <img src="https://img.shields.io/npm/v/@ambiten/adapter-fastify?style=flat-square" alt="npm version" /> </a> <a href="https://ambiten.dev"> <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" /> </a> </p>
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.png"
+    width="120"
+    alt="Ambiten"
+  />
+</p>
+
+<p align="center"> <strong>Fastify integration for the Ambiten runtime.</strong>
+</p>
+
+<p align="center"> Establish request-scoped execution boundaries, context propagation, multi-tenancy, and transaction-aware runtime behavior inside Fastify applications. </p>
+
+ <p align="center"> <a href="https://www.npmjs.com/package/@ambiten/adapter-fastify"> <img src="https://img.shields.io/npm/v/@ambiten/adapter-fastify?style=flat-square" alt="npm version" /> </a> 
+ <a href="https://ambiten.dev"> <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" /> </a> </p>
 
 ## Overview
 

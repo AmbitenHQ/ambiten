@@ -1,7 +1,11 @@
 # @ambiten/create
 
 <p align="center">
-  <img src="../../ambiten-brand/ambiten_svg/ambiten-primary-logo-dark.svg" width="250" alt="Ambiten">
+  <img
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.png"
+    width="120"
+    alt="Ambiten"
+  />
 </p>
 
 <p align="center">
