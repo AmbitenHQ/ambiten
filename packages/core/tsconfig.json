@@ -8,7 +8,8 @@
     "resolveJsonModule": true,  
     "types": ["node", "jest"],
     "emitDeclarationOnly": false,   
-    "tsBuildInfoFile": "./dist/.tsbuildinfo"                     
+    "tsBuildInfoFile": ".tsbuildinfo",
+    // "incremental": false                     
   },
   "include": [
     "src/**/*",
@@ -22,7 +23,9 @@
   ],
   "exclude": [
     "node_modules",
-    "examples",
-    "**/__tests__/**"
+    "dist",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/__test__/**/*"
   ],
 }

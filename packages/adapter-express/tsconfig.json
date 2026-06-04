@@ -12,12 +12,17 @@
     "types": ["node", "jest"],
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "tsBuildInfoFile": ".tsbuildinfo",
   },
     "references": [
     {"path": "../adapter-runtime"},
     { "path": "../adapter-types" }, // Reference to other local packages
    ],
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/__test__/*"]
+  "exclude": [
+    "node_modules", 
+    "dist",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+  ]
 }
