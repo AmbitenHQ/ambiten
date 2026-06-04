@@ -47,6 +47,9 @@
   "keywords": [
     "Ambiten",
     "logger",
+    "observability",
+    "transport",
+    "metadata",
     "Advance logging"
   ],
   "author": "Emmanuel Nodolomwanyi",
@@ -59,11 +62,11 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ambiten/ambiten.git",
+    "url": "git+https://github.com/AmbitenHQ/ambiten.git",
     "directory": "packages/logger"
   },
   "bugs": {
-    "url": "https://github.com/ambiten/ambiten/issues"
+    "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
   "homepage": "https://ambiten.dev",
   "devDependencies": {

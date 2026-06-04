@@ -38,7 +38,7 @@
     "README.md",
     "LICENSE",
     "package.json",
-    "brand",
+    "../ambiten-brand",
     "!dist/scripts"
   ],
   "scripts": {
@@ -77,11 +77,11 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ambiten/ambiten.git",
+    "url": "git+https://github.com/AmbitenHQ/ambiten.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/ambiten/ambiten/issues"
+    "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
   "homepage": "https://ambiten.dev",
   "dependencies": {

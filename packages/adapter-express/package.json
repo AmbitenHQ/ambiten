@@ -36,11 +36,11 @@
   "packageManager": "pnpm@10.20.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ambiten/ambiten.git",
+    "url": "git+https://github.com/AmbitenHQ/ambiten.git",
     "directory": "packages/adapter-express"
   },
   "bugs": {
-    "url": "https://github.com/ambiten/ambiten/issues"
+    "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
   "homepage": "https://ambiten.dev",
   "peerDependencies": {

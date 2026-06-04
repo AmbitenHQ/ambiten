@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ambiten/ambiten.git"
+    "url": "git+https://github.com/AmbitenHQ/ambiten.git"
   },
   "keywords": [],
   "author": "",
@@ -37,9 +37,9 @@
     "registry": "https://registry.npmjs.org/"
   },
   "bugs": {
-    "url": "https://github.com/ambiten/ambiten/issues"
+    "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
-  "homepage": "https://github.com/ambiten/ambiten#readme",
+  "homepage": "https://github.com/AmbitenHQ/ambiten#readme",
   "packageManager": "pnpm@10.20.0",
   "engines": {
     "node": ">=20.11.0"

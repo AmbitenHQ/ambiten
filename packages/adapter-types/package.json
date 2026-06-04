@@ -1,7 +1,7 @@
 {
   "name": "@ambiten/adapter-types",
   "version": "1.0.0",
-  "description": "Ambiten multi-tenacy adapter types",
+  "description": "Ambiten multi-tenancy adapter types",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -30,11 +30,11 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ambiten/ambiten.git",
+    "url": "git+https://github.com/AmbitenHQ/ambiten.git",
     "directory": "packages/adapter-types"
   },
   "bugs": {
-    "url": "https://github.com/ambiten/ambiten/issues"
+    "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
   "homepage": "https://ambiten.dev",
   "packageManager": "pnpm@10.20.0",

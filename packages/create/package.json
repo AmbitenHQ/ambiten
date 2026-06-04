@@ -50,11 +50,11 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ambiten/ambiten.git",
+    "url": "git+https://github.com/AmbitenHQ/ambiten.git",
     "directory": "packages/create"
   },
   "bugs": {
-    "url": "https://github.com/ambiten/ambiten/issues"
+    "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
   "homepage": "https://ambiten.dev",
   "devDependencies": {
