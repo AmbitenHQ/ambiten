@@ -2,7 +2,6 @@
 	 This test mocks the Redis layer to simulate an unreachable Redis server and
 	 verifies that initialize() resolves (doesn't hang or throw). */
 import { AmbitenBootstrapFactory } from '../lib-core';
-import { MongoClient } from 'mongodb';
 
 
 jest.setTimeout(20000);

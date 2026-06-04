@@ -5,6 +5,7 @@ import { DbProvider } from '../../types';
 import { AmbitenContext } from '../../context';
 
 
+
 jest.mock('../../tanancy/MultiTenantManager');
 jest.mock('../../context/AmbitenContext');
 jest.mock('../../utils/builders/createModel');
@@ -67,7 +68,7 @@ describe('getTenantModel', () => {
 });
 
 describe('createTenantProvider', () => {
-	let provider: DbProvider = {
+	const provider: DbProvider = {
 		db: async () => ({} as any)
 	};
 	it('should return a provider that resolves the tenant database', async () => {

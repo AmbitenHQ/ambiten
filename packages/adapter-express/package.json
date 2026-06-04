@@ -26,6 +26,7 @@
     "build:script": "tsc -p tsconfig.json",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "pnpm run changeset",
+    "clean": "rimraf dist",
     "release": "pnpm changeset version",
     "prepack": "pnpm build",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"

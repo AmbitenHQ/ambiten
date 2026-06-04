@@ -73,10 +73,7 @@ export interface AmbitenBootstrapFactoryOptions {
  * @example
  * import { AmbitenBootstrapFactory } from '@Ambiten/core';
  *  async function start() {
- *   const Ambiten = await AmbitenBootstrapFactory.create({
- *    config: './Ambiten.config.json' // Optional, will look for Ambiten.config.json in the root directory by default
- *    adapter: customAdapter // Optional, only needed if you want to use multi-tenancy with a specific adapter
- * });
+ *   const Ambiten = await AmbitenBootstrapFactory.create();
  *   const db = Ambiten.getMongoClient();
  *   await db.connect();
  *   const graphql = await Ambiten.getGraphQL();
@@ -88,19 +85,7 @@ export interface AmbitenBootstrapFactoryOptions {
  * start();
  * ```
  *
- * @example
- * // With custom configuration file
- * import { AmbitenBootstrapFactory } from '@Ambiten/core';
- * export async function start() {
- *  const Ambiten = await AmbitenBootstrapFactory.create('path/to/custom-Ambiten.config.json');
- * const db = Ambiten.getMongoClient();
- * await db.connect();
- *  const graphql = await Ambiten.getGraphQL();
- *  // You can now use the GraphQL instance to generate schema or start a server
- * // or perform other GraphQL related operations
- * graphql.generateSchema();
- * Ambiten.getRedisClient();
- * };
+ * 
   * @param {string} [configFilePathOrObject] - Optional path to a custom configuration file or a config object.
  * If not provided, it defaults to 'Ambiten.config.json'.
  * @returns {Promise<void>} - A promise that resolves when the initialization is complete.
@@ -114,11 +99,7 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
   private schema!: AmbitenSchema<T>;
   private graphql?: AmbitenGraphQL;
   private gc?: AmbitenGC;
-
-  // public logCfgProperty!: ReturnType<typeof setupLogger>;
   private logger!: ILogger;
-
-
   private adapter?: AmbitenAdapter;
   private onConnectHooks: OnConnectHook[] = [];
   private connectCallbacks: ConnectCallbacks[] = [];
@@ -128,13 +109,6 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
   constructor(adapter?: AmbitenAdapter) {
     this.adapter = adapter;
   }
-
-  /**
-   * Register a hook to be called after the connection is established.
-   */
-  // public onConnect(hook: OnConnectHook): void {
-  //   this.onConnectHooks.push(hook);
-  // }
 
   public onConnect(callback: () => void): void {
     if (!this.isConnected) {
@@ -488,10 +462,7 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
  * It can be used to create a fully configured Ambiten instance
  * with optional configuration parameters.
  * @example
- * const Ambiten = await AmbitenBootstrapFactory.create({
- * adapter: customAdapter,
- * config: './AmbitenConfig.json' // Do this only if you want to use a custom config file, otherwise it will look for AmbitenConfig.json in the root directory by default
- * });
+ * const Ambiten = await AmbitenBootstrapFactory.create();
  * const db = Ambiten.getMongoClient();
  * await db.connect();
  * const graphql = await Ambiten.getGraphQL();

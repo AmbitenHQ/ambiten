@@ -1,4 +1,3 @@
-// __test__/fastify-adapter.test.ts
 import { createFastifyAdapter } from '../src/fastify-adapter';
 import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 

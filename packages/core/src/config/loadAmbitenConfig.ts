@@ -105,7 +105,6 @@ export async function loadAmbitenConfig(configPath?: string): Promise<AmbitenCon
   let finalPath: string | undefined;
 
   for (const candidate of candidates) {
-    // eslint-disable-next-line no-await-in-loop
     if (await fs.pathExists(candidate)) {
       finalPath = candidate;
       break;

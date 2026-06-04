@@ -5,7 +5,6 @@ import { AmbitenClient } from "../lib-core";
 describe("AmbitenClient.db()", () => {
 	afterEach(async () => {
 		jest.restoreAllMocks();
-		// await bufferedTransporter.stop();
 	});
 
 	it("should throw error if client is not connected", async () => {

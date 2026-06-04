@@ -8,24 +8,24 @@
     "resolveJsonModule": true,  
     "types": ["node", "jest"],
     "emitDeclarationOnly": false,   
-    "tsBuildInfoFile": ".tsbuildinfo",
-    // "incremental": false                     
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/core.tsbuildinfo"            
   },
-  "include": [
-    "src/**/*",
-    "src/**/*.json",
-    // "package.json",
-    "assets"
-  ],
-  "references": [
+    "references": [
     { "path": "../logger" }, // Reference to other local packages
     {"path": "../adapter-types"}
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json",
+    "assets"
   ],
   "exclude": [
     "node_modules",
     "dist",
+    "coverage",
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
-    "src/__test__/**/*"
-  ],
+    "src/**/__test__/**",
+    "src/**/__tests__/**"
+  ]
 }

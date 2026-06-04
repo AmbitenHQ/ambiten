@@ -1,7 +1,9 @@
 const webpack = require('webpack');
-const path = require('path');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+
+
 
 module.exports = {
 	mode: 'production',

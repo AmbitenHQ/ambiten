@@ -1,4 +1,3 @@
-// __test__/lambda-adapter.test.ts
 import { createLambdaAdapter } from '../src/lambda-adapter';
 import { runWithAdapterContext } from '@ambiten/adapter-runtime';
 

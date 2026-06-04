@@ -1,9 +1,10 @@
 const webpack = require('webpack');
-const path = require('path');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
-const { VERSION } = require('ts-node');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const { version: VERSION } = require('./package.json');
+const ESLintPlugin = require('eslint-webpack-plugin');
+
 
 
 module.exports = {
@@ -90,8 +91,7 @@ module.exports = {
 						onlyCompileBundledFiles: true,
 					}
 				},
-				exclude: [/^node_modules/, /^examples\//i],
-				// include: path.resolve(__dirname, 'src'),
+				exclude: [/^node_modules/, /\.test\.ts$/, /\.spec\.ts$/],
 			},
 		]
 	},
@@ -119,13 +119,15 @@ module.exports = {
 			console: require.resolve('console-browserify'),
 			crypto: require.resolve("crypto-browserify"),
 			path: require.resolve('path-browserify'),
-			// util: require.resolve('util/'),
 			"async_hooks": false,
-			// "child_process": false,
 			"fs": false,
 			"http2": false,
 		},
-		plugins: [new TsconfigPathsPlugin()]
+		plugins: [
+			new TsconfigPathsPlugin({
+				configFile: path.resolve(__dirname, 'tsconfig.json'),
+			}),
+		]
 	},
 	plugins: (() => {
 		const p = [

@@ -1,7 +1,7 @@
 {
   "name": "@ambiten/create",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ambiten project scaffold generator.",
   "publishConfig": {
     "access": "public"
   },
@@ -32,6 +32,7 @@
     "lint": "eslint src",
     "changeset": "pnpm run changeset",
     "release": "pnpm changeset version",
+    "clean": "rimraf dist",
     "prepublishOnly": "pnpm run build",
     "prepack": "pnpm build && node ../../scripts/copy-figlet-fonts.js .",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"

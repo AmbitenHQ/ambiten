@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 export default api => {
 	const isTest = api.env('test');
 	 api.cache.using(() => process.env.NODE_ENV || 'development');

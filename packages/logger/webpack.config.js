@@ -1,16 +1,13 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-require-imports */
-const webpack = require('webpack');
-const path = require('path');
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
-const { VERSION } = require('ts-node');
+import webpack from 'webpack';
+import path from 'path';
+import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
+import { VERSION } from 'ts-node';
 
 
 module.exports = {
 	mode: 'production',
 	entry: './src/index.ts',
 	target: 'node',
-	// devtool: 'source-map',
 	output: {
 		filename: 'index.js',
 		path: path.resolve(__dirname, 'dist'),

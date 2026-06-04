@@ -33,15 +33,14 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "ts-node --project tsconfig.json src/index.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -b tsconfig.json --force",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "changeset",
     "release": "pnpm changeset version && pnpm install && pnpm build && changeset publish",
     "typedoc": "typedoc --options typedoc.json",
-    "clean": "rimraf dist",
+    "clean": "tsc -b tsconfig.json --clean && rimraf dist",
     "prepublishOnly": "pnpm run build",
-    "prepack": "pnpm build",
+    "prepack": "pnpm clean && pnpm build",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "keywords": [

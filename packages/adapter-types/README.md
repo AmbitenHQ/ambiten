@@ -1,8 +1,8 @@
 # @ambiten/adapter-types
 
-<<p align="center">
+<p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.png"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.svg"
     width="120"
     alt="Ambiten"
   />

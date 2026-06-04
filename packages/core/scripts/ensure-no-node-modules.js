@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-const { execSync } = require('child_process');
-const path = require('path');
+// const { execSync } = require('child_process');
+// const path = require('path');
+import { execSync as execSyncEsm } from 'child_process';
+import path from 'path';
 
 function run() {
   console.log('Checking package pack contents for node_modules...');

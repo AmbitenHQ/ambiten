@@ -1,6 +1,6 @@
 {
-  "extends": "../../tsconfig.base.json", // Inherit common settings
-  "compilerOptions": {                                                                                   
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {                                                                                                                                                                    
     "rootDir": "src",
     "outDir": "dist",                                                                                                                                                                     
     "composite": true,
@@ -8,17 +8,20 @@
     "resolveJsonModule": true,  
     "types": ["node", "jest"],
     "emitDeclarationOnly": false,  
-    "tsBuildInfoFile": ".tsbuildinfo",                       
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/logger.tsbuildinfo"                                       
   },
   "include": [
     "src",
     "src/**/*",
-    // "package.json"
+    "package.json"
   ],
   "exclude": [
     "node_modules",
     "dist",
+    "coverage",
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
-  ],
+    "src/**/__test__/**",
+    "src/**/__tests__/**"
+  ]
 }

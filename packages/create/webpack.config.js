@@ -1,5 +1,3 @@
-// webpack.cli.js
-
 const path = require('path');
 
 module.exports = {
