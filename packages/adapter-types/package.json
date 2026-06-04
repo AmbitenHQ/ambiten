@@ -23,6 +23,7 @@
     "build": "tsc -p tsconfig.json",
     "changeset": "pnpm run changeset",
     "release": "pnpm changeset version",
+    "clean": "rimraf dist",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "keywords": [],

@@ -1,6 +1,6 @@
 import type { AdapterContextOptions } from '@ambiten/adapter-types';
 
-export interface LambdaAdapterOptions extends AdapterContextOptions { }
+export type LambdaAdapterOptions = AdapterContextOptions;
 
 export interface LambdaHandlerLike<TEvent = unknown, TResult = unknown> {
   (event: TEvent, context?: unknown): Promise<TResult> | TResult;

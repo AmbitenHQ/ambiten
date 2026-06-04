@@ -27,6 +27,7 @@
     "build:nestjs": "tsc -p tsconfig.json",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "pnpm run changeset",
+    "clean": "rimraf dist",
     "release": "pnpm changeset version",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },

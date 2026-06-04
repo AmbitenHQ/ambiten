@@ -1,19 +1,21 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",                                                                                                                                                                    
-    // "declarationDir": "./dist/types",
-    "composite": true,
-    "declaration": true,  
-    "resolveJsonModule": true,        
-    "tsBuildInfoFile": ".tsbuildinfo"
+  "extends": "../../tsconfig.base.json", // Inherit common settings
+  "compilerOptions": {                                                                                   
+    "rootDir": "src",
+    "outDir": "dist",                                                                                                                                                                    
+    "types": ["node", "jest"],
+    "composite": true, 
+    "noEmit": false,
+    "declaration": true,
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,  
+    "sourceMap": true,    
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/adapter-types.tsbuildinfo"       
   },
-  "include": ["src/**/*", "package.json"],
-  "exclude": [
-    "node_modules", 
-    "dist",
-    "src/**/*.test.ts",
-    "src/**/*.spec.ts",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json",
+    "assets"
   ]
-} 
+}

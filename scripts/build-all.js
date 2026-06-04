@@ -26,24 +26,6 @@ function runPnpm(args, { capture = false } = {}) {
   return { out, ms: Date.now() - t0 };
 }
 
-// function runPnpm(args, options = {}) {
-//   const command = process.platform === 'win32'
-//     ? 'pnpm.cmd'
-//     : 'pnpm';
-
-//   return execFileSync(command, args, {
-//     cwd: options.cwd ?? process.cwd(),
-//     env: {
-//       ...process.env,
-//       ...(options.env ?? {}),
-//     },
-//     encoding: 'utf8',
-//     stdio: options.stdio ?? 'pipe',
-//     shell: process.platform === 'win32',
-//   });
-// }
-
-
 function toFilterArgs(filters) {
   const out = [];
   for (const f of filters) out.push("--filter", f);

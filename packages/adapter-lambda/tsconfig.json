@@ -1,26 +1,33 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
+  "extends": "../../tsconfig.base.json", // Inherit common settings
+  "compilerOptions": {                                                                                   
+    "rootDir": "src",
+    "outDir": "dist",                                                                                                                                                                     
+    "types": ["node", "jest"],
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false,
-    "target": "ES2020",
-    "composite": true,
-    "types": ["node", "jest"],
-    "skipLibCheck": true,
-    "tsBuildInfoFile": ".tsbuildinfo"
+    "esModuleInterop": true,
+    "emitDeclarationOnly": false,  
+    "resolveJsonModule": true, 
+    "sourceMap": true,
+    "noEmit": false,              
   },
   "references": [
-    {"path": "../adapter-runtime"},
-    { "path": "../adapter-types" }, // Reference to other local packages
-   ],
-  "include": ["src/**/*"],
+    { "path": "../adapter-runtime" }, // Reference to other local packages
+    {"path": "../adapter-types"}
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json",
+    "assets"
+  ],
   "exclude": [
-    "node_modules", 
-    "dist", 
+    "node_modules",
+    "dist",
+    "coverage",
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
-  ],
+    "src/**/__test__/**",
+    "src/**/__tests__/**"
+  ]
 }

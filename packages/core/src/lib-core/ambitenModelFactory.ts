@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import 'dotenv/config';
 import {
   Collection,

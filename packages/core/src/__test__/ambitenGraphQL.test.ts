@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AmbitenGraphQL } from '../graphql';
 import { invalidateTenantCache } from '../middleware';
 import { connectRedis } from '../redis-manager';

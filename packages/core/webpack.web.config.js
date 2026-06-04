@@ -92,7 +92,11 @@ module.exports = {
 	recordsPath: path.join(__dirname, 'records.json'),
 	resolve: {
 		extensions: ['.ts', '.js'],
-		plugins: [new TsconfigPathsPlugin()],
+		plugins: [
+			new TsconfigPathsPlugin({
+				configFile: path.resolve(__dirname, 'tsconfig.json'),
+			}),
+		],
 		alias: {
 			'@gcCron': path.resolve(__dirname, 'src/gc/gcCron.browser.ts'),
 			'@measureQuery': path.resolve(__dirname, 'src/instrumentation/measureQuery.browser.ts')

@@ -46,14 +46,13 @@
     "build:cli": "webpack --config webpack.cli.config.js",
     "build:web": "webpack --config webpack.web.config.js",
     "build:types": "tsc -p tsconfig.json --excludeDirectories **/node_modules",
-    "clean": "rimraf dist",
     "build": "pnpm run build:types && pnpm run build:node && pnpm run build:cli && pnpm run build:web",
     "lint": "eslint src",
-    "clean:all": "rimraf dist && rimraf docs",
+    "clean": "rimraf dist",
     "typedoc": "typedoc --options typedoc.json",
     "release": "pnpm changeset version",
     "test": "jest --detectOpenHandles --coverage",
-    "prepack": "pnpm build",
+    "prepack": "pnpm clean && pnpm build",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "release": {

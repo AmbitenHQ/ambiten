@@ -1,44 +1,105 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-require-imports */
-// eslint.config.mjs
-// import js from '@eslint/js'
-const js = require('@eslint/js')
-// import tseslint from 'typescript-eslint'
-const tseslint = require('typescript-eslint')
+const { defineConfig, globalIgnores } = require("eslint/config");
+const globals = require("globals");
+const js = require("@eslint/js");
+const tseslint = require("typescript-eslint");
 
-module.exports = [
-  // Monorepo-wide ignores
-  {
-    ignores: ['**/dist/**', '**/build/**', '**/.next/**', '**/coverage/**'],
-  },
+module.exports = defineConfig([
+  globalIgnores([
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/*.tgz",
+    "**/*.tsbuildinfo"
+  ]),
 
-  // JS recommended
   js.configs.recommended,
 
-  // TypeScript recommended (flat config)
   ...tseslint.configs.recommended,
 
-  // Common settings/rules
   {
-    files: ['**/*.{ts,tsx,js,jsx}'],
+    files: ["**/*.{js,cjs,mjs,ts}"],
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      // For type-aware rules, switch to:
-      // ...tseslint.configs.recommendedTypeChecked
-      // and set parserOptions.project to your tsconfig paths
-      // parserOptions: { project: ['./tsconfig.json', './packages/*/tsconfig.json'] },
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+        ...globals.es2023
+      }
     },
-  },
-    // 👇 keep this LAST so it overrides everything above
-  {
-    files: ['**/*.ts', '**/*.tsx'],
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-require-imports': 'off',
-      '@typescript-eslint/no-dynamic-require': 'off',
-    },
+      "no-unused-vars": "off",
+      "no-undef": "off",
+      "no-extra-semi": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off"
+    }
   },
-]
+
+  // Type-aware linting only for production source files
+  {
+    files: ["packages/*/src/**/*.ts"],
+    ignores: [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      "**/__test__/**",
+      "**/__tests__/**"
+    ],
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: ["./packages/*/tsconfig.json"],
+        tsconfigRootDir: __dirname,
+        sourceType: "module"
+      }
+    }
+  },
+
+  // Jest tests: no project binding, just Jest globals
+  {
+    files: [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      "**/__test__/**/*.ts",
+      "**/__tests__/**/*.ts"
+    ],
+    languageOptions: {
+      parser: tseslint.parser,
+      globals: {
+        ...globals.node,
+        ...globals.jest
+      }
+    },
+    rules: {
+      "no-undef": "off"
+    }
+  },
+
+  // setupTest.ts files
+  {
+    files: ["**/setupTest.ts"],
+    languageOptions: {
+      parser: tseslint.parser,
+      globals: {
+        ...globals.node,
+        ...globals.jest
+      }
+    }
+  },
+
+  // scripts/config files
+  {
+    files: [
+      "**/scripts/**/*.ts",
+      "**/*.config.js",
+      "**/*.config.cjs",
+      "**/*.config.mjs"
+    ],
+    languageOptions: {
+      parser: tseslint.parser,
+      sourceType: "script",
+      globals: {
+        ...globals.node
+      }
+    }
+  }
+]);
