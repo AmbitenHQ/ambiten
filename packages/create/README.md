@@ -2,7 +2,7 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.svg"
+    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-wordmark-logo.png"
     width="120"
     alt="Ambiten"
   />
@@ -20,11 +20,11 @@
   <a href="https://www.npmjs.com/package/@ambiten/create">
     <img src="https://img.shields.io/npm/v/@ambiten/create.svg?style=flat-square" alt="npm version">
   </a>
-  <a href="https://github.com/ambiten/ambiten">
-    <img src="https://img.shields.io/github/stars/ambiten/ambiten?style=flat-square" alt="GitHub stars">
-  </a>
   <a href="https://ambiten.dev">
     <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation">
+  </a>
+  <a href="https://github.com/AmbitenHQ/ambiten/stargazers">
+    <img src="https://img.shields.io/github/stars/AmbitenHQ/ambiten?style=flat-square&color=1E88E5" alt="GitHub stars" />
   </a>
 </p>
 
