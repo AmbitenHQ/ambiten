@@ -1,7 +1,7 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-wordmark-logo.png"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-wordmark1.png"
     width="500"
     alt="Ambiten" 
     style="border-radius: 50%"
