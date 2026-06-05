@@ -2,8 +2,8 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-logo-mark-dark-plain.svg"
-    width="250"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-wordmark-logo.png"
+    width="120"
     alt="Ambiten"
   />
 </p>
