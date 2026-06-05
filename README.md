@@ -1,12 +1,12 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-wordmark1.png"
+    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-wordmark1.png"
     width="500"
     alt="Ambiten" 
     style="border-radius: 50%"
   />
-</p>
+</p> 
 
 <h1 align="center">Ambiten</h1>
 
