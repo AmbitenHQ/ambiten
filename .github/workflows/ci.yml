@@ -47,7 +47,7 @@ jobs:
         run: pnpm lint
 
       - name: Test
-        run: pnpm test -- --runInBand --detectOpenHandles
+        run: pnpm -r test
 
       - name: Build
         run: pnpm build:ordered
