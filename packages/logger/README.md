@@ -2,7 +2,7 @@
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-wordmark-logo.png"
+    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-wordmark-logo.png"
     width="120"
     alt="Ambiten"
   />
@@ -18,14 +18,14 @@
 
 <p align="center">
 <a href="https://www.npmjs.com/package/@ambiten/logger">
-<img src="https://img.shields.io/npm/v/@ambiten/logger?color=0ea5e9&label=npm&style=flat-square" alt="npm version" />
+  <img src="https://img.shields.io/npm/v/@ambiten/logger?color=0ea5e9&label=npm&style=flat-square" alt="npm version" />
 </a>
 <a href="https://ambiten.dev">
-<img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
+  <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
 </a>
-<a href="https://github.com/ambiten/ambiten">
-<img src="https://img.shields.io/github/stars/ambiten/ambiten?style=flat-square" alt="github stars" />
-</a>
+  <a href="https://github.com/AmbitenHQ/ambiten/stargazers">
+    <img src="https://img.shields.io/github/stars/AmbitenHQ/ambiten?style=flat-square&color=1E88E5" alt="GitHub stars" />
+  </a>
 <img src="https://img.shields.io/badge/structured-logging-6366f1?style=flat-square" alt="structured logging" />
 <img src="https://img.shields.io/badge/context-aware-14b8a6?style=flat-square" alt="context aware" />
 </p>

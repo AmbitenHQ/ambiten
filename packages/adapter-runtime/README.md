@@ -23,6 +23,9 @@
   <a href="https://ambiten.dev">
     <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a>
+    <a href="https://github.com/AmbitenHQ/ambiten/stargazers">
+    <img src="https://img.shields.io/github/stars/AmbitenHQ/ambiten?style=flat-square&color=1E88E5" alt="GitHub stars" />
+  </a>
 </p>
 
 ---
