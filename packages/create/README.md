@@ -2,7 +2,7 @@
 
 <p align="center">
   <img
-    src="/assets/ambiten-wordmark-logo.png"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-wordmark-logo.png"
     width="500"
     alt="Ambiten" 
     style="border-radius: 50%"
