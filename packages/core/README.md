@@ -1,12 +1,12 @@
-# @ambiten/core
-
-<p align="center">
+<div style="display: flex; align-items: center;">
+<p >
   <img
-    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-mark-300x300.png"
-    width="350"
+    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-mark-192x192.png"
+    width="56"
     alt="Ambiten"
   />  
-</p> 
+</p> <h2> @ambiten/core</h2>
+</div>
 
 <p align="center">
   <strong>A runtime and context-aware data platform for MongoDB applications.</strong>

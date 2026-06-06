@@ -1,8 +1,8 @@
 
 <p align="center">
   <img
-    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-mark-300x300.png"
-    width="350"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-mark-300x300.png"
+    width="500"
     alt="Ambiten"
   />  
 </p>
@@ -18,14 +18,14 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@ambiten/core">
+  <a href="https://www.npmjs.com/package/@ambiten">
     <img src="https://img.shields.io/npm/v/@ambiten/core?style=flat-square" alt="npm version" />
   </a>
   <!-- <a href="https://ambiten.dev">
     <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
   </a> -->
   <a href="https://github.com/AmbitenHQ/ambiten/stargazers">
-    <img src="https://img.shields.io/github/stars/AmbitenHQ/ambiten?style=flat-square" alt="GitHub stars" />
+    <img src="https://img.shields.io/github/stars/AmbitenHQ/ambiten?style=flat-squaree&cacheSeconds=60" alt="GitHub stars" />
   </a>
 </p>
 
