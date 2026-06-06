@@ -228,7 +228,7 @@ The official documentation covers runtime architecture, context propagation, tra
 
 Documentation:
 
-https://Ambiten.dev
+https://ambiten.dev
 
 ## Ecosystem
 
