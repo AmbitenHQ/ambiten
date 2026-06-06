@@ -1,6 +1,6 @@
 import { createAmbitenError, ErrorType } from "../utils";
 import { AmbitenClient } from "../lib-core";
-import { Collection, Db, MongoClient } from "mongodb";
+import { Collection, MongoClient } from "mongodb";
 
 
 jest.mock('@ambiten/logger', () => {

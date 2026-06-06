@@ -9,7 +9,6 @@ describe('measureQuery', () => {
 
 	afterEach(async () => {
 		jest.clearAllMocks();
-		// await bufferedTransporter.stop();
 	});
 
 	it('should throw when no active runtime context exists', async () => {

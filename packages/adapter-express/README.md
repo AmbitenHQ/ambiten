@@ -2,12 +2,11 @@
 
 <p align="center">
   <img
-    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-wordmark1.png"
-    width="500"
-    alt="Ambiten" 
-    style="border-radius: 50%"
-  />
-</p> 
+    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-mark-300x300.png"
+    width="350"
+    alt="Ambiten"
+  />  
+</p>  
 
 <p align="center">
   <strong>Express integration for the Ambiten runtime.</strong>

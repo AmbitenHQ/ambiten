@@ -38,7 +38,6 @@
     "README.md",
     "LICENSE",
     "package.json",
-    "../ambiten-brand",
     "!dist/scripts"
   ],
   "scripts": {
@@ -94,9 +93,8 @@
     "prompts": "^2.4.2"
   },
   "peerDependencies": {
-    "@apollo/server": "5.1.0",
     "@graphql-tools/schema": "10.0.23",
-    "ajv": "8.17.1",
+    "ajv": ">=8.18.0",
     "ajv-formats": "3.0.1",
     "express": "^5.1.0",
     "express-serve-static-core": "^0.1.1",

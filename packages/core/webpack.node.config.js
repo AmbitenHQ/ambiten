@@ -17,7 +17,6 @@ module.exports = {
 		library: {
 			name: 'ambiten-core',
 			type: 'umd',
-			// umdNamedDefine: true, // Use named UMD definition
 		},
 		globalObject: 'this',
 		clean: false
@@ -30,12 +29,6 @@ module.exports = {
 				commonjs2: 'mongodb',
 				amd: 'mongodb',
 				root: 'mongodb',
-			},
-			'@apollo/server': {
-				commonjs: '@apollo/server',
-				commonjs2: '@apollo/server',
-				amd: '@apollo/server',
-				root: '@apollo/server',
 			},
 			graphql: {
 				commonjs2: 'graphql',

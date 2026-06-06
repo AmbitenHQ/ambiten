@@ -7,7 +7,7 @@ import { AmbitenContext } from '../../context';
 
 
 jest.mock('../../tanancy/MultiTenantManager');
-jest.mock('../../context/AmbitenContext');
+jest.mock('../../context/ambitenContext');
 jest.mock('../../utils/builders/createModel');
 jest.mock('../../utils/ensureModelNameSafe', () => ({
 	ensureModelNameSafe: jest.fn((name: string) => name + '_safe')

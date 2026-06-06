@@ -10,7 +10,6 @@ describe('MultiTenantManager', () => {
   afterEach(async () => {
     MultiTenantManager.clearTenants();
     jest.clearAllMocks();
-    // await bufferedTransporter.stop();
   });
 
   it('should register a lazy tenant with dbName', () => {
@@ -30,19 +29,19 @@ describe('MultiTenantManager', () => {
   });
 
   it('should register and retrieve tenant config', async () => {
-   const client = await MultiTenantManager.registerTenant(
+    const client = await MultiTenantManager.registerTenant(
       'tenantA',
       'mongodb://localhost:27017/tenantA_db'
     );
 
-    const tenant = MultiTenantManager.getTenant('tenantA');
+    const tenant =  MultiTenantManager.getTenant('tenantA');
 
     expect(tenant?.tenantId).toBe('tenantA');
     expect(tenant?.uri).toBe('mongodb://localhost:27017/tenantA_db');
     expect(tenant?.dbName).toBe('tenantA_db');
     expect(tenant?.lazy).toBe(false);
-		expect(tenant?.client).toBeDefined();
-		await client.close();
+    expect(tenant?.client).toBeDefined();
+    await client.close();
   });
 
   it('should return tenant dbName', () => {
@@ -67,5 +66,5 @@ describe('MultiTenantManager', () => {
     expect(() => MultiTenantManager.getTenant('')).toThrow('Tenant ID is required.');
   });
 
-  
+
 });

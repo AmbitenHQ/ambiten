@@ -26,10 +26,10 @@ describe('buildInteractiveConfig', () => {
         withRedis: true,
         withGarbageCollector: true,
         install: true,
-      })
+      }as never)
       .mockResolvedValueOnce({
         proceed: true,
-      });
+      }as never);
 
     mockedConfirm.mockResolvedValue(true);
 
@@ -55,10 +55,10 @@ describe('buildInteractiveConfig', () => {
         withRedis: false,
         withGarbageCollector: false,
         install: false,
-      })
+      }as never)
       .mockResolvedValueOnce({
         proceed: true,
-      });
+      }as never);
 
     mockedConfirm.mockResolvedValue(true);
 
@@ -72,17 +72,17 @@ describe('buildInteractiveConfig', () => {
     mockedPrompts
       .mockResolvedValueOnce({
         projectName: 'ignored-name',
-        uri: 'mongodb://localhost:27017/from-prompt',
+        uri: 'mongodb://localhost:27017/ignored-db',
         withGraphql: false,
         multiTenant: false,
         logger: false,
         withRedis: false,
         withGarbageCollector: false,
         install: false,
-      })
+      }as never)
       .mockResolvedValueOnce({
         proceed: true,
-      });
+      } as never);
 
     mockedConfirm.mockResolvedValue(true);
 
@@ -116,7 +116,7 @@ describe('buildInteractiveConfig', () => {
       withRedis: false,
       withGarbageCollector: false,
       install: false,
-    });
+    } as never);
 
     mockedConfirm.mockResolvedValue(false);
 
@@ -136,10 +136,10 @@ describe('buildInteractiveConfig', () => {
         withRedis: false,
         withGarbageCollector: false,
         install: false,
-      })
+      } as never)
       .mockResolvedValueOnce({
         proceed: true,
-      });
+      } as never);
 
     mockedConfirm.mockResolvedValue(true);
 

@@ -54,7 +54,7 @@ jest.mock('../config/loadAmbitenConfig', () => ({
 	}),
 }));
 
-jest.mock('../lib-core/AmbitenClient', () => ({
+jest.mock('../lib-core/ambitenClient', () => ({
 	AmbitenClient: class {
 		private uri: string | undefined;
 		constructor(uri?: string, _opts?: any) {
