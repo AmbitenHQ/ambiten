@@ -9,7 +9,7 @@ describe("AmbitenClient.db()", () => {
 
 	it("should throw error if client is not connected", async () => {
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "testdb" },
 		});
 
@@ -25,7 +25,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 		});
 
@@ -52,7 +52,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 		});
 
@@ -84,7 +84,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 		});
 
@@ -115,7 +115,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 			tenantResolver,
 		});
@@ -129,7 +129,7 @@ describe("AmbitenClient.db()", () => {
 
 	it("should throw if tenantId is provided but tenantResolver is missing", async () => {
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 		});
 
@@ -144,7 +144,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 			tenantResolver,
 		});
@@ -161,7 +161,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 		});
 
@@ -201,7 +201,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 			tenantResolver,
 		});
@@ -230,7 +230,7 @@ describe("AmbitenClient.db()", () => {
 		};
 
 		const client = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "defaultdb" },
 		});
 
@@ -251,7 +251,7 @@ describe("AmbitenClient.db()", () => {
 
 	afterAll(async () => {
 		let driver = new AmbitenClient({
-			uri: "mongodb://localhost:27017",
+			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
 			options: { dbName: "testdb" },
 		});
 		await driver.connect();

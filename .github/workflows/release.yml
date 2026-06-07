@@ -19,6 +19,19 @@ jobs:
     name: Version and Publish
     runs-on: ubuntu-latest
 
+    services:
+      mongodb:
+       image: mongo:7
+       ports:
+         - 27017:27017
+       options: >-
+         --health-cmd "mongosh --eval 'db.adminCommand({ ping: 1 })'"
+         --health-interval 10s
+         --health-timeout 5s
+         --health-retries 5
+    env:
+      MONGODB_URI: mongodb://127.0.0.1:27017/ambiten_test
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,6 +59,14 @@ jobs:
 
       - name: Lint
         run: pnpm lint
+      
+      - name: Wait for MongoDB
+        run: |
+         for i in {1..30}; do
+         node -e "const { MongoClient } = require('mongodb'); MongoClient.connect('mongodb://127.0.0.1:27017', { serverSelectionTimeoutMS: 1000 }).then(c => c.close()).then(() => process.exit(0)).catch(() => process.exit(1))" && exit 0
+         sleep 2
+         done
+         exit 1
 
       - name: Test
         run: pnpm -r test

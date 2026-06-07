@@ -1,7 +1,7 @@
 <div style="display: flex; align-items: center;">
 <p >
   <img
-    src="https://cdn.jsdelivr.net/gh/AmbitenHQ/ambiten@main/assets/ambiten-mark-192x192.png"
+    src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-mark-192x192.png"
     width="56"
     alt="Ambiten"
   />  
@@ -228,7 +228,7 @@ The official documentation covers runtime architecture, context propagation, tra
 
 Documentation:
 
-https://Ambiten.dev
+https://ambiten.dev
 
 ## Ecosystem
 

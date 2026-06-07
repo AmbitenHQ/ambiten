@@ -15,13 +15,13 @@ describe('MultiTenantManager', () => {
   it('should register a lazy tenant with dbName', () => {
     const tenant = MultiTenantManager.registerLazyTenant(
       'tenantA',
-      'mongodb://localhost:27017/tenantA_db'
+      process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test'
     );
 
     expect(tenant).toEqual({
       tenantId: 'tenantA',
-      uri: 'mongodb://localhost:27017/tenantA_db',
-      dbName: 'tenantA_db',
+      uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
+      dbName: 'ambiten_test',
       client: undefined,
       lazy: true,
       metadata: undefined
@@ -31,14 +31,14 @@ describe('MultiTenantManager', () => {
   it('should register and retrieve tenant config', async () => {
     const client = await MultiTenantManager.registerTenant(
       'tenantA',
-      'mongodb://localhost:27017/tenantA_db'
+      process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test'
     );
 
     const tenant =  MultiTenantManager.getTenant('tenantA');
 
     expect(tenant?.tenantId).toBe('tenantA');
-    expect(tenant?.uri).toBe('mongodb://localhost:27017/tenantA_db');
-    expect(tenant?.dbName).toBe('tenantA_db');
+    expect(tenant?.uri).toBe('mongodb://127.0.0.1:27017/ambiten_test');
+    expect(tenant?.dbName).toBe('ambiten_test');
     expect(tenant?.lazy).toBe(false);
     expect(tenant?.client).toBeDefined();
     await client.close();
@@ -47,16 +47,16 @@ describe('MultiTenantManager', () => {
   it('should return tenant dbName', () => {
     MultiTenantManager.registerLazyTenant(
       'tenantA',
-      'mongodb://localhost:27017/tenantA_db'
+      process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test'
     );
 
-    expect(MultiTenantManager.getTenantDbName('tenantA')).toBe('tenantA_db');
+    expect(MultiTenantManager.getTenantDbName('tenantA')).toBe('ambiten_test');
   });
 
   it('should return true when tenant is registered', () => {
     MultiTenantManager.registerLazyTenant(
       'tenantA',
-      'mongodb://localhost:27017/tenantA_db'
+      process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test'
     );
 
     expect(MultiTenantManager.hasTenant('tenantA')).toBe(true);

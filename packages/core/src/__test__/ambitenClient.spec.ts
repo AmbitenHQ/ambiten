@@ -37,7 +37,7 @@ describe('AmbitenClient', () => {
 	let driver: AmbitenClient;
 
 	// Arrange
-	const uri = 'mongodb://127.0.0.1:27017';
+	const uri = process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test';
 	const dbName = 'test';
 
 	beforeEach(async () => {
