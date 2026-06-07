@@ -201,6 +201,15 @@ function runPnpmInDir(pkgDir, args, { capture = false } = {}) {
   }
 }
 
+function tsBuildInfoName(pkgName) {
+  return pkgName.replace(/^@/, "").replace(/\//g, "-") + ".tsbuildinfo";
+}
+
+function cleanTsBuildInfoForPackage(pkgName) {
+  const cacheDir = path.join(ROOT, ".cache", "tsbuildinfo");
+  rimraf(path.join(cacheDir, tsBuildInfoName(pkgName)));
+}
+
 function buildGroup(filters, label, { clean, verify, concurrency }) {
   assertValidFilters(filters);
   const pkgs = listMatchedPackages(filters, label); // must return [{name, dir}]
@@ -215,7 +224,9 @@ function buildGroup(filters, label, { clean, verify, concurrency }) {
     console.log(`🧹 Cleaning dist/ for ${pkgs.length} package(s)...`);
     for (const p of pkgs) {
       if (!p?.dir) throw new Error(`${label}: missing dir for ${p?.name}`);
+
       rimraf(path.join(p.dir, "dist"));
+      cleanTsBuildInfoForPackage(p.name);
     }
   }
 
@@ -293,6 +304,11 @@ function main() {
 
   console.log(`\n🔧 Mode: ${IS_CI ? "CI" : "Local"} | Concurrency: ${opts.concurrency}`);
   console.log(`Flags: clean=${opts.clean} verify=${opts.verify}`);
+
+  if (opts.clean) {
+    console.log("🧹 Cleaning shared tsbuildinfo cache...");
+    rimraf(path.join(ROOT, ".cache", "tsbuildinfo"));
+  }
 
   const summary = [];
 

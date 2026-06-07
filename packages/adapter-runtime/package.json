@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "pnpm -r run build:rtime",
-    "build:rtime": "tsc -p tsconfig.json",
+    "build:rtime": "tsc -b tsconfig.json --force",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "pnpm run changeset",
     "clean": "rimraf dist",

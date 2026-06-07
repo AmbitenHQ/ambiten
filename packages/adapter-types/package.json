@@ -20,7 +20,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -b tsconfig.json --force",
     "changeset": "pnpm run changeset",
     "release": "pnpm changeset version",
     "clean": "rimraf dist",
