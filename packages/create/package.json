@@ -57,7 +57,7 @@
   "bugs": {
     "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
-  "homepage": "https://ambiten.dev",
+  "homepage": "https://docs.ambiten.dev",
   "devDependencies": {
     "@types/figlet": "^1.7.0",
     "@types/fs-extra": "^11.0.4",

@@ -42,7 +42,7 @@
   "bugs": {
     "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
-  "homepage": "https://ambiten.dev",
+  "homepage": "https://docs.ambiten.dev",
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

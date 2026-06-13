@@ -42,7 +42,7 @@
   "bugs": {
     "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
-  "homepage": "https://ambiten.dev",
+  "homepage": "https://docs.ambiten.dev",
   "packageManager": "pnpm@10.20.0",
   "peerDependencies": {
     "@nestjs/common": "^10.0.0 || ^11.0.0",
