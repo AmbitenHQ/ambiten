@@ -184,7 +184,7 @@ Context, transactions, middleware, observability, and infrastructure concerns sh
 
 Comprehensive documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 Documentation covers:
 

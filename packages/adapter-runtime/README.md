@@ -142,7 +142,7 @@ Direct usage of `@ambiten/adapter-runtime` is generally reserved for adapter aut
 
 Complete documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Related Packages
 

@@ -121,7 +121,7 @@ Direct usage of `@ambiten/adapter-types` is generally intended for adapter autho
 
 Complete documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Related Packages
 

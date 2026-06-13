@@ -138,7 +138,7 @@ Together they create a consistent platform for building context-aware applicatio
 
 Complete guides for project scaffolding, templates, runtime configuration, adapters, and deployment workflows are available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Philosophy
 

@@ -153,7 +153,7 @@ This helps preserve operational visibility across distributed systems where requ
 
 Complete documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Related Packages
 

@@ -119,7 +119,7 @@ This allows models and services to operate against the correct tenant boundary w
 
 Complete documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Related Packages
 

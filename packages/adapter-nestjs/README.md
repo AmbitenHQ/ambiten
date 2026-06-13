@@ -150,7 +150,7 @@ This provides a consistent operational view across controllers, services, reposi
 
 Complete documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Related Packages
 

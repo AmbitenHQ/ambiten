@@ -143,7 +143,7 @@ Subscription events can participate in the same execution model used by queries 
 
 Complete documentation is available at:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Related Packages
 

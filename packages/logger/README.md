@@ -248,7 +248,7 @@ The official Ambiten documentation includes guides for structured logging, conte
 
 Documentation:
 
-https://ambiten.dev
+https://docs.ambiten.dev
 
 ## Philosophy
 
