@@ -1,12 +1,33 @@
 {
-  "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["./src/index.ts"],
-  "out": "docs/api",
-  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
-  "theme": "vitepress",
-  "hideBreadcrumbs": false,
-  "hidePageTitle": false,
-  "entryDocument": "index.md",
-  "flattenOutputFiles": true,
-  "identifiersForUniqueSymbols": true
+  "entryPoints": [
+    "packages/core/src/index.ts",
+    "packages/logger/src/index.ts",
+    "packages/adapter-types/src/index.ts",
+    "packages/adapter-runtime/src/index.ts",
+    "packages/adapter-express/src/index.ts",
+    "packages/adapter-fastify/src/index.ts",
+    "packages/adapter-graphql/src/index.ts",
+    "packages/adapter-nestjs/src/index.ts",
+    "packages/adapter-lambda/src/index.ts",
+   
+  ],
+  "out": "docs-api",
+  "plugin": ["typedoc-plugin-markdown"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "readme": "none"
 }
+
+// {
+//   "$schema": "https://typedoc.org/schema.json",
+//   "entryPoints": ["./src/index.ts"],
+//   "out": "docs/api",
+//   "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+//   "theme": "vitepress",
+//   "hideBreadcrumbs": false,
+//   "hidePageTitle": false,
+//   "entryDocument": "index.md",
+//   "flattenOutputFiles": true,
+//   "identifiersForUniqueSymbols": true
+// }

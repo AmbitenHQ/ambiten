@@ -20,9 +20,7 @@
     "version-packages": "changeset version",
     "release": "changeset publish",
     "changelog:generate": "changeset version",
-    "docs:sanitize": "node ./scripts/sanitize-typedoc-md.js",
-    "api:docs": "pnpm docs:api && pnpm run docs:sanitize",
-    "docs:api": "typedoc --out api-docs packages/core/src packages/logger/src",
+    "docs:api": "typedoc",
     "typecheck": "pnpm -w -r exec tsc --build",
     "publish": "pnpm -r publish --access public --tag latest --no-git-checks"
   },

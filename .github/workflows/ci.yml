@@ -64,8 +64,8 @@ jobs:
       - name: Build
         run: pnpm build:ordered
 
-      - name: Build Docs
-        run:  pnpm docs:api
+      # - name: Build Docs
+      #   run:  pnpm docs:api
 
       - name: Pack packages
         run: pnpm -r pack
