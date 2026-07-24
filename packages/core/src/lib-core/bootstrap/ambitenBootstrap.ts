@@ -456,10 +456,11 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
 
 
 /**
- * Factory class to create an instance of AmbitenBootstrap.
+ * Factory which returns the instance of the main AmbitenBootstrap and 
+ * Attached a method AmbitenBootstrap.create() which initializes the AmbitenBootstrap.
  * This class encapsulates the logic for initializing the Ambiten application stack,
  * including MongoDB, Multi-Tenancy, Redis, GraphQL logger etc. setup.
- * It can be used to create a fully configured Ambiten instance
+ * It can be used to create a fully configured Ambiten application.
  * with optional configuration parameters.
  * @example
  * const Ambiten = await AmbitenBootstrapFactory.create();

@@ -28,23 +28,31 @@ window.Buffer = Buffer;
 
 
 
-export * from './lib-core';
-export { AmbitenBootstrapFactory } from './lib-core/bootstrap';
-export * from './config';
-export * from './graphql';
-export * from './tanancy';
-export * from './context';
-export * from './plugins';
-export * from './debug';
+export * from './lib-core/index';
+export * from './lib-core/bootstrap/index';
+export * from './config/index';
+export * from './redis-manager/index';
+export * from './tanancy/index';
+export * from './context/index';
+export * from './plugins/index';
+export * from './instrumentation/index';
+export * from './debug/index';
+export * from './ambiten-cache/index';
+
+export * from './init-cli/generate.project';
+export * from './middleware/index';
+export * from './graphql/index';
+export * from './utils/index';
+export * from './utils/builders/index';
+export * from './gc/index';
+export * from './types/index';
+
+export { AmbitenClient, createAmbitenClientModule } from './lib-core/ambitenClient';
+export { AmbitenModel } from './lib-core/ambitenModelFactory';
+export { AmbitenSchema } from './lib-core/ambitenSchema';
+export { AmbitenBootstrapFactory } from './lib-core/bootstrap/ambitenBootstrap';
 export { measureQueryForBrowser } from './instrumentation';
-export * from './ambiten-cache';
 
-
-export * from './utils/builders';
-export * from './utils';
-export * from './gc';
-export * from './redis-manager';
-export * from './types';
 export type { AmbitenRuntime } from './types/ambiten-runtime-type';
 export type { SchemaType } from './types/schema.type';
 export type { Document } from './types/document';
