@@ -21,7 +21,7 @@
     "release": "changeset publish",
     "changelog:generate": "changeset version",
     "docs:api": "typedoc",
-    "typecheck": "pnpm -w -r exec tsc --build",
+    "typecheck": "pnpm run build:ordered",
     "publish": "pnpm -r publish --access public --tag latest --no-git-checks"
   },
   "repository": {
