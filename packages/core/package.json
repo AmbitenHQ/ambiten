@@ -47,7 +47,7 @@
     "build:cli": "webpack --config webpack.cli.config.js",
     "build:web": "webpack --config webpack.web.config.js",
     "build:types": "tsc -p tsconfig.json --excludeDirectories **/node_modules",
-    "build": "pnpm build:types && pnpm build:esm && pnpm build:cjs && pnpm build:cli && pnpm build:web",
+    "build": "pnpm run build:types && pnpm run build:esm && pnpm run build:cjs && pnpm run build:cli && pnpm run build:web",
     "verify:exports": "node scripts/verify-package-exports.mjs",
     "lint": "eslint src",
     "clean": "rimraf dist",
