@@ -12,13 +12,13 @@ module.exports = {
 	entry: './src/index.ts',
 	target: 'node',
 	output: {
-		filename: 'index.js',
+		filename: 'index.cjs',
 		path: path.resolve(__dirname, 'dist'),
 		library: {
-			name: 'ambiten-core',
-			type: 'umd',
+			type: 'commonjs2',
+			// umdNamedDefine: true
 		},
-		globalObject: 'this',
+		// globalObject: 'this',
 		clean: false
 	},
 	externals: [
@@ -74,16 +74,17 @@ module.exports = {
 			},
 			{
 				test: /\.ts$/,
-				use: {
-					loader: 'ts-loader',
-					options: {
-						compilerOptions: {
-							rootDir: path.resolve(__dirname, '..')
-						},
-						transpileOnly: true,
-						onlyCompileBundledFiles: true,
-					}
-				},
+				use: 'ts-loader',
+				// use: {
+				// 	loader: 'ts-loader',
+				// 	options: {
+				// 		compilerOptions: {
+				// 			rootDir: path.resolve(__dirname, '..')
+				// 		},
+				// 		transpileOnly: true,
+				// 		onlyCompileBundledFiles: true,
+				// 	}
+				// },
 				exclude: [/^node_modules/, /\.test\.ts$/, /\.spec\.ts$/],
 			},
 		]

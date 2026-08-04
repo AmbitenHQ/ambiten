@@ -3,7 +3,6 @@ import {
 	AmbitenClient,
 	AmbitenModel,
 	AmbitenSchema,
-	type RegisterMultiTenancyOptions
 } from "../lib-core";
 import { AmbitenGraphQL } from "../graphql";
 import { AmbitenGC } from "../gc";

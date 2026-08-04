@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json", // Inherit common settings
   "compilerOptions": {                                                                                   
     "rootDir": "src",
-    "outDir": "dist",                                                                                                                                                                     
+    "outDir": "dist/cjs",                                                                                                                                                                     
     "composite": true,
     "declaration": true,  
     "resolveJsonModule": true,  

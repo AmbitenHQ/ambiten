@@ -18,7 +18,7 @@
 
 <p align="center">
 <a href="https://www.npmjs.com/package/@ambiten/core">
-  <img src="https://img.shields.io/npm/v/@Ambiten/core?color=0ea5e9&label=npm&style=flat-square" alt="npm version" />
+  <img src="https://img.shields.io/npm/v/@ambiten/core?color=0ea5e9&label=npm&style=flat-square" alt="npm version" />
 </a>
 <!-- <a href="https://ambiten.dev">
   <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
