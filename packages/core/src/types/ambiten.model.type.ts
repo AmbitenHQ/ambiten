@@ -31,6 +31,13 @@ export interface AmbitenModelOptions<T extends Document = any> {
   }
 };
 
+export type BootstrapModelOptions<
+  T extends Document = Document
+> = Omit<
+  AmbitenModelOptions<T>,
+  "schema" | "provider"
+>;
+
 
 /**
  * Represents a relationship between collections in MongoDB.

@@ -1,7 +1,7 @@
 import type {
   Collection,
   OptionalUnlessRequiredId,
-  Document as MongoDocument,
+  // Document as MongoDocument,
 } from 'mongodb';
 
 import type {
@@ -16,8 +16,9 @@ import type {
   AmbitenMiddlewareContext,
   AmbitenMiddlewareHandler,
 } from '../types';
+import { AmbitenError, createAmbitenError, ErrorType } from '../utils';
 
-type MiddlewareStore<T extends MongoDocument> = {
+type MiddlewareStore<T extends Document> = {
   pre: Partial<Record<AmbitenMiddlewareOperation, AmbitenMiddlewareHandler<T>[]>>;
   post: Partial<Record<AmbitenMiddlewareOperation, AmbitenMiddlewareHandler<T>[]>>;
 };
@@ -68,7 +69,122 @@ export class AmbitenSchema<T extends Document> {
    */
   registerSchema(schemaDefinition: SchemaDefinition<T>): void {
     this.schemaDefinition = schemaDefinition;
-    console.info('Schema registered:', this.schemaDefinition);
+  }
+
+  private validateUnknownFields(
+    doc: OptionalUnlessRequiredId<T>
+  ): void {
+    const definition = this.schemaDefinition as Record<
+      string,
+      { required?: boolean; type?: any }
+    >;
+
+    for (const key of Object.keys(doc)) {
+      // MongoDB-generated fields may need an allow-list.
+      if (key === "_id") continue;
+
+      if (!(key in definition)) {
+        throw createAmbitenError(
+          ErrorType.AmbitenSchemaError,
+          `Unknown schema property "${key}".`,
+          {
+            details: {
+              operation: 'validateKnownFields',
+              schemaDefinition: this.schemaDefinition,
+              document,
+            }
+          }
+        );
+      }
+    }
+  }
+
+  private validateRequiredFields(
+    doc: Record<string, unknown>
+  ): void {
+    for (const [field, options] of Object.entries(
+      this.schemaDefinition
+    )) {
+      if (
+         options.required === true &&
+          (doc)[field] === undefined
+      ) {
+        throw createAmbitenError(
+          ErrorType.AmbitenSchemaError,
+          `Required property "${field}" is missing.`,
+          {
+            details: {
+              operation: 'validateRequiredFields',
+              schemaDefinition: this.schemaDefinition,
+              doc,
+            }
+          }
+        );
+      }
+    }
+  }
+
+  private validateFieldTypes(
+    doc: OptionalUnlessRequiredId<T>
+  ): void {
+    for (const [field, options] of Object.entries(
+      this.schemaDefinition
+    )) {
+      const value = (doc as Document)[field];
+      if (value !== undefined && options.type) {
+        const expectedType = options.type;
+        const actualType = typeof value;
+
+        if (expectedType === String && actualType !== 'string') {
+          throw createAmbitenError(
+            ErrorType.AmbitenSchemaError,
+            `Field "${field}" should be of type String, but got ${actualType}.`,
+            {
+              details: {
+                operation: 'validateFieldType',
+                schemaDefinition: this.schemaDefinition,
+                doc,
+                field,
+                expectedType: 'String',
+                actualType,
+              }
+            }
+          );
+        }
+        if (expectedType === Number && actualType !== 'number') {
+          throw createAmbitenError(
+            ErrorType.AmbitenSchemaError,
+            `Field "${field}" should be of type Number, but got ${actualType}.`,
+            {
+              details: {
+                operation: 'validateFieldType',
+                schemaDefinition: this.schemaDefinition,
+                doc,
+                field,
+                expectedType: 'Number',
+                actualType,
+              }
+            }
+          );
+        }
+        if (expectedType === Boolean && actualType !== 'boolean') {
+          throw createAmbitenError(
+            ErrorType.AmbitenSchemaError,
+            `Field "${field}" should be of type Boolean, but got ${actualType}.`,
+            {
+              details: {
+                operation: 'validateFieldType',
+                schemaDefinition: this.schemaDefinition,
+                doc,
+                field,
+                expectedType: 'Boolean',
+                actualType,
+              }
+            }
+          );
+        }
+      }
+    }
   }
 
   /**
@@ -76,9 +192,18 @@ export class AmbitenSchema<T extends Document> {
    */
   validator(
     field: string,
-    fn: (value: any, doc?: OptionalUnlessRequiredId<T>) => boolean | Promise<boolean>
+    fn: (
+      value: any,
+      doc?: OptionalUnlessRequiredId<T>
+    ) => boolean | Promise<boolean>
   ): void {
     this.validators[field] = fn;
+  }
+
+  private validateStructure(doc: OptionalUnlessRequiredId<T>): void {
+    this.validateUnknownFields(doc);
+    this.validateRequiredFields(doc);
+    this.validateFieldTypes(doc);
   }
 
   /**
@@ -86,8 +211,13 @@ export class AmbitenSchema<T extends Document> {
    * Throws if an async validator is encountered.
    */
   validate(doc: OptionalUnlessRequiredId<T>): void {
+    this.validateStructure(doc);
+
     for (const [field, validate] of Object.entries(this.validators)) {
-      const result = validate((doc as any)[field], doc);
+      const result = validate(
+        (doc as Document)[field],
+        doc
+      );
 
       if (result instanceof Promise) {
         throw new Error(
@@ -96,8 +226,18 @@ export class AmbitenSchema<T extends Document> {
       }
 
       if (!result) {
-        console.log(`[error]: Validation failed for field: ${field}`);
-        throw new Error(`Validation failed for field: ${field}`);
+        throw createAmbitenError(
+          ErrorType.AmbitenSchemaError,
+          `Validation failed for field: ${field}`,
+          {
+            details: {
+              operation: 'validate',
+              schemaDefinition: this.schemaDefinition,
+              doc,
+              field,
+            }
+          }
+        );
       }
     }
   }
@@ -106,12 +246,27 @@ export class AmbitenSchema<T extends Document> {
    * Validates a document asynchronously.
    */
   async validateAsync(doc: OptionalUnlessRequiredId<T>): Promise<void> {
+    this.validateStructure(doc);
+
     for (const [field, validate] of Object.entries(this.validators)) {
-      const isValid = await validate((doc as any)[field], doc);
+      const isValid = await validate(
+        (doc)[field],
+        doc
+      );
 
       if (!isValid) {
-        console.log(`[error]: Validation failed for field: ${field}`);
-        throw new Error(`Validation failed for field: ${field}`);
+        throw createAmbitenError(
+          ErrorType.AmbitenSchemaError,
+          `Validation failed for field: ${field}`,
+          {
+            details: {
+              operation: 'validateAsync',
+              schemaDefinition: this.schemaDefinition,
+              doc,
+              field,
+            }
+          }
+        );
       }
     }
   }
@@ -298,7 +453,7 @@ export class AmbitenSchema<T extends Document> {
   }
 }
 
-export class Schema<T extends Document = Document> extends AmbitenSchema<T> {
+export class Schema<T extends Document> extends AmbitenSchema<T> {
   constructor(schemaDefinition: SchemaDefinition<T>) {
     super(schemaDefinition);
     this.registerSchema(schemaDefinition);
@@ -330,7 +485,7 @@ export class Schema<T extends Document = Document> extends AmbitenSchema<T> {
     return result;
   }
 
-  static create<T extends Document = Document>(
+  static create<T extends Document>(
     schemaDefinition: SchemaDefinition<T>
   ): Schema<T> {
     return new Schema<T>(schemaDefinition);

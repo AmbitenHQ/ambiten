@@ -11,9 +11,8 @@
     "tsBuildInfoFile": "../../.cache/tsbuildinfo/logger.tsbuildinfo"                                       
   },
   "include": [
-    "src",
-    "src/**/*",
-    "package.json"
+    "src/**/*.ts",
+    // "package.json"
   ],
   "exclude": [
     "node_modules",

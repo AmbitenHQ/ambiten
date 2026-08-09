@@ -23,9 +23,6 @@ import { invalidateTenantCache } from '../../utils/invalidateTenantCache';
 import { AmbitenRuntime } from '../../types/ambiten-runtime-type';
 
 
-type OnConnectHook = () => Promise<void> | void;
-type ConnectCallbacks = () => Promise<void> | void;
-
 
 export interface RegisterMultiTenancyOptions {
   adapter?: AmbitenAdapter;
@@ -34,8 +31,8 @@ export interface RegisterMultiTenancyOptions {
   initOptions?: InitMultiTenancyOptions;
 }
 
-export interface AmbitenBootstrapFactoryOptions {
-  config?: string | AmbitenConfig;
+export interface AmbitenBootstrapFactoryOptions<T extends Document = Document> {
+  config?: string | AmbitenConfig<T>;
   adapter?: AmbitenAdapter;
 }
 
@@ -93,7 +90,7 @@ export interface AmbitenBootstrapFactoryOptions {
  * // Now you can use Ambiten.getMongoClient(), Ambiten.getRedisClient(), etc.
  */
 class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<T> {
-  private config!: AmbitenConfig;
+  private config!: AmbitenConfig<T>;
   private provider!: BootstrapClient;
   private model!: AmbitenModel<T>;
   private schema!: AmbitenSchema<T>;
@@ -101,22 +98,27 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
   private gc?: AmbitenGC;
   private logger!: ILogger;
   private adapter?: AmbitenAdapter;
-  private onConnectHooks: OnConnectHook[] = [];
-  private connectCallbacks: ConnectCallbacks[] = [];
 
-  private isConnected?: true
+  private readonly onConnectHooks: Array<
+    () => void | Promise<void>
+  > = [];
+
+  private isConnected = false
 
   constructor(adapter?: AmbitenAdapter) {
     this.adapter = adapter;
   }
 
-  public onConnect(callback: () => void): void {
-    if (!this.isConnected) {
-      callback();
+  public onConnect(
+    callback: () => void | Promise<void>
+  ): void {
+
+    if (this.isConnected) {
+      void callback();
       return;
     }
 
-    this.connectCallbacks.push(callback);
+    this.onConnectHooks.push(callback);
   }
 
   /**
@@ -135,7 +137,6 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
     await this.initializeModel();
     await this.initializeMultiTenancy();
     await this.initializeGraphQL();
-    await this.runOnConnectHooks();
     await this.initializeGarbageCollector();
   }
 
@@ -202,17 +203,21 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
 
     configureAmbitenContext(this.provider);
 
+    this.isConnected = true;
+
     if (this.logger) {
       this.getLogger().info('MongoDB connected via AmbitenClientModule', {
         source: 'AmbitenBootstrap'
       });
+
+      await this.runOnConnectHooks();
     } else {
       console.log(colorize('MongoDB connected via AmbitenClientModule', 'blue'));
     }
   }
 
   private initializeSchema(): void {
-    this.schema = new Schema<T>(
+    this.schema = Schema.create<T>(
       typeof this.config.schema === 'object'
         ? this.config.schema as SchemaDefinition<T>
         : {} as SchemaDefinition<T>
@@ -229,6 +234,7 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
 
   private async initializeModel(): Promise<void> {
     const collectionName = this.config.model?.collectionName || 'default';
+    const schema = this.schema;
 
     this.model = Model<T>({
       collectionName,
@@ -243,7 +249,7 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
       await this.model.registerModel({
         ...this.config.model,
         collectionName,
-        schema: this.schema,
+        schema: schema,
         provider: this.provider,
       });
 
@@ -304,7 +310,9 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
   }
 
   private async runOnConnectHooks(): Promise<void> {
-    for (const hook of this.onConnectHooks) {
+    const hooks = this.onConnectHooks.splice(0);
+
+    for (const hook of hooks) {
       await hook();
     }
   }

@@ -13,7 +13,10 @@ import { AmbitenCacheOptions } from "../ambiten-cache";
 export interface AmbitenRuntime<T extends Document = Document> {
 	getMongoClient(): AmbitenClient | BootstrapClient
 
-	onConnect(hook): void
+	onConnect(
+		callback: () => void | Promise<void>
+	): void;
+	
 	getModel(): AmbitenModel<T>;
 
 	getSchema(): AmbitenSchema<T>;

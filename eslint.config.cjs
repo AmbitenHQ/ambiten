@@ -35,7 +35,6 @@ module.exports = defineConfig([
     }
   },
 
-  // Type-aware linting only for production source files
   {
     files: ["packages/*/src/**/*.ts"],
     ignores: [
@@ -54,7 +53,6 @@ module.exports = defineConfig([
     }
   },
 
-  // Jest tests: no project binding, just Jest globals
   {
     files: [
       "**/*.test.ts",
@@ -74,7 +72,6 @@ module.exports = defineConfig([
     }
   },
 
-  // setupTest.ts files
   {
     files: ["**/setupTest.ts"],
     languageOptions: {
@@ -86,7 +83,6 @@ module.exports = defineConfig([
     }
   },
 
-  // scripts/config files
   {
     files: [
       "**/scripts/**/*.ts",
@@ -100,6 +96,49 @@ module.exports = defineConfig([
       globals: {
         ...globals.node
       }
+    }
+  },
+
+  // Logger is authored as CommonJS JavaScript.
+  {
+    files: [
+      "packages/logger/src/**/*.js",
+      "packages/logger/src/**/*.cjs"
+    ],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        ...globals.es2023
+      }
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-this-alias": "off"
+    }
+  },
+
+  // Logger JavaScript tests use CommonJS and Jest.
+  {
+    files: [
+      "packages/logger/src/**/__test__/**/*.js",
+      "packages/logger/src/**/__tests__/**/*.js",
+      "packages/logger/src/**/*.test.js",
+      "packages/logger/src/**/*.spec.js"
+    ],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.node,
+        ...globals.jest
+      }
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-this-alias": "off",
+      "no-undef": "off"
     }
   }
 ]);
