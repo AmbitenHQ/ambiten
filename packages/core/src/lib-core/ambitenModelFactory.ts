@@ -736,6 +736,8 @@ export class AmbitenModel<T extends Document> {
 
           this.validate(nextDoc);
 
+          await this.schema.validateAsync(nextDoc);
+
           await this.schema.executePre(
             'create',
             this.buildHookPayload('create', ctx, {
