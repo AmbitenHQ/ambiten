@@ -79,21 +79,19 @@ export class AmbitenSchema<T extends Document> {
       { required?: boolean; type?: any }
     >;
 
+    // No structural schema was supplied.
+    // Allow custom-validator-only schemas to continue working.
+    if (!definition || Object.keys(definition).length === 0) {
+      return;
+    }
+
     for (const key of Object.keys(doc)) {
       // MongoDB-generated fields may need an allow-list.
       if (key === "_id") continue;
 
       if (!(key in definition)) {
-        throw createAmbitenError(
-          ErrorType.AmbitenSchemaError,
-          `Unknown schema property "${key}".`,
-          {
-            details: {
-              operation: 'validateKnownFields',
-              schemaDefinition: this.schemaDefinition,
-              document,
-            }
-          }
+        throw new Error(
+          `Unknown schema property "${key}".`
         );
       }
     }
@@ -106,19 +104,11 @@ export class AmbitenSchema<T extends Document> {
       this.schemaDefinition
     )) {
       if (
-         options.required === true &&
-          (doc)[field] === undefined
+        options.required === true &&
+        (doc)[field] === undefined
       ) {
-        throw createAmbitenError(
-          ErrorType.AmbitenSchemaError,
-          `Required property "${field}" is missing.`,
-          {
-            details: {
-              operation: 'validateRequiredFields',
-              schemaDefinition: this.schemaDefinition,
-              doc,
-            }
-          }
+        throw new Error(
+          `Required property "${field}" is missing.`
         );
       }
     }
@@ -136,51 +126,18 @@ export class AmbitenSchema<T extends Document> {
         const actualType = typeof value;
 
         if (expectedType === String && actualType !== 'string') {
-          throw createAmbitenError(
-            ErrorType.AmbitenSchemaError,
-            `Field "${field}" should be of type String, but got ${actualType}.`,
-            {
-              details: {
-                operation: 'validateFieldType',
-                schemaDefinition: this.schemaDefinition,
-                doc,
-                field,
-                expectedType: 'String',
-                actualType,
-              }
-            }
+          throw new Error(
+            `Field "${field}" should be of type String, but got ${actualType}.`
           );
         }
         if (expectedType === Number && actualType !== 'number') {
-          throw createAmbitenError(
-            ErrorType.AmbitenSchemaError,
-            `Field "${field}" should be of type Number, but got ${actualType}.`,
-            {
-              details: {
-                operation: 'validateFieldType',
-                schemaDefinition: this.schemaDefinition,
-                doc,
-                field,
-                expectedType: 'Number',
-                actualType,
-              }
-            }
+          throw new Error(
+            `Field "${field}" should be of type Number, but got ${actualType}.`
           );
         }
         if (expectedType === Boolean && actualType !== 'boolean') {
-          throw createAmbitenError(
-            ErrorType.AmbitenSchemaError,
-            `Field "${field}" should be of type Boolean, but got ${actualType}.`,
-            {
-              details: {
-                operation: 'validateFieldType',
-                schemaDefinition: this.schemaDefinition,
-                doc,
-                field,
-                expectedType: 'Boolean',
-                actualType,
-              }
-            }
+          throw new Error(
+            `Field "${field}" should be of type Boolean, but got ${actualType}.`
           );
         }
       }
@@ -201,6 +158,12 @@ export class AmbitenSchema<T extends Document> {
   }
 
   private validateStructure(doc: OptionalUnlessRequiredId<T>): void {
+    const definition = this.schemaDefinition
+
+    if (!definition || Object.keys(definition).length === 0) {
+      return;
+    }
+    
     this.validateUnknownFields(doc);
     this.validateRequiredFields(doc);
     this.validateFieldTypes(doc);
@@ -226,17 +189,8 @@ export class AmbitenSchema<T extends Document> {
       }
 
       if (!result) {
-        throw createAmbitenError(
-          ErrorType.AmbitenSchemaError,
+        throw new Error(
           `Validation failed for field: ${field}`,
-          {
-            details: {
-              operation: 'validate',
-              schemaDefinition: this.schemaDefinition,
-              doc,
-              field,
-            }
-          }
         );
       }
     }
@@ -255,17 +209,8 @@ export class AmbitenSchema<T extends Document> {
       );
 
       if (!isValid) {
-        throw createAmbitenError(
-          ErrorType.AmbitenSchemaError,
+        throw new Error(
           `Validation failed for field: ${field}`,
-          {
-            details: {
-              operation: 'validateAsync',
-              schemaDefinition: this.schemaDefinition,
-              doc,
-              field,
-            }
-          }
         );
       }
     }

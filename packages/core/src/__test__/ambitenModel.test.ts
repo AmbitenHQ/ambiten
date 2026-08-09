@@ -229,6 +229,11 @@ describe('AmbitenModel', () => {
         name: 'Test Document',
         _id: 'mockId',
       });
+      await expect(
+        model.create({
+          name: "John"
+        })
+      ).resolves.toBeDefined();
     });
 
     it('should throw validation error when invalid data is provided', async () => {
