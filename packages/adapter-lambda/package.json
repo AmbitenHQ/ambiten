@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/adapter-lambda",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -45,8 +45,8 @@
   "homepage": "https://docs.ambiten.dev",
   "packageManager": "pnpm@10.20.0",
   "dependencies": {
-    "@ambiten/adapter-runtime": "workspace:*",
-    "@ambiten/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:^",
+    "@ambiten/adapter-types": "workspace:^"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

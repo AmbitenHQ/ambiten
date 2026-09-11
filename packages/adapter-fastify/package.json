@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/adapter-fastify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -55,8 +55,8 @@
     "fastify": "^5.6.2"
   },
   "dependencies": {
-    "@ambiten/adapter-runtime": "workspace:*",
-    "@ambiten/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:^",
+    "@ambiten/adapter-types": "workspace:^"
   },
   "engines": {
     "node": ">=20.11.0"

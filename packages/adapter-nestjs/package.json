@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/adapter-nestjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ambiten Nestjs adapter",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -57,8 +57,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@ambiten/adapter-runtime": "workspace:*",
-    "@ambiten/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:^",
+    "@ambiten/adapter-types": "workspace:^"
   },
   "engines": {
     "node": ">=20.11.0"

@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/adapter-runtime",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Runtime utilities for Ambiten multi-tenancy adapters",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -44,17 +44,20 @@
     "url": "https://github.com/AmbitenHQ/ambiten/issues"
   },
   "homepage": "https://docs.ambiten.dev",
+  "dependencies": {
+    "@ambiten/adapter-types": "workspace:^"
+  },
+  "peerDependencies": {
+    "@ambiten/core": "workspace:^"
+  },
   "devDependencies": {
+    "@ambiten/core": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^25.5.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.4.9",
     "typescript": "^6.0.2"
-  },
-  "dependencies": {
-    "@ambiten/adapter-types": "workspace:*",
-    "@ambiten/core": "workspace:*"
   },
   "engines": {
     "node": ">=20.11.0"

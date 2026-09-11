@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/adapter-express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ambiten multi-tenancy adapter for Express.js",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -58,8 +58,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@ambiten/adapter-runtime": "workspace:*",
-    "@ambiten/adapter-types": "workspace:*"
+    "@ambiten/adapter-runtime": "workspace:^",
+    "@ambiten/adapter-types": "workspace:^"
   },
   "engines": {
     "node": ">=20.11.0"
