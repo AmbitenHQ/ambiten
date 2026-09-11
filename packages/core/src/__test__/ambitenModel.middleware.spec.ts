@@ -369,7 +369,7 @@ describe('AmbitenModel middleware', () => {
       databaseName: 'main_db'
     } as any;
 
-    jest.spyOn(MultiTenantManager, 'getTenant').mockReturnValue({
+    jest.spyOn(MultiTenantManager, 'resolveTenant').mockReturnValue({
       tenantId: 'tenantA',
       uri: 'mongodb://localhost:27017/main_db',
       dbName: 'main_db',

@@ -150,7 +150,7 @@ describe("AmbitenClient.db()", () => {
 		});
 
 		await expect(client.db({ tenantId: "tenant_unknown" })).rejects.toThrow(
-			'Tenant "tenant_unknown" is not registered.'
+			'Tenant "tenant_unknown" could not be resolved.'
 		);
 	});
 

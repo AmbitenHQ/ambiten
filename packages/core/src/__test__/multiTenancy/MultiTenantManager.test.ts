@@ -44,13 +44,13 @@ describe('MultiTenantManager', () => {
     await client.close();
   });
 
-  it('should return tenant dbName', () => {
+  it('should return tenant dbName', async () => {
     MultiTenantManager.registerLazyTenant(
       'tenantA',
       process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test'
     );
 
-    expect(MultiTenantManager.getTenantDbName('tenantA')).toBe('ambiten_test');
+    expect(await MultiTenantManager.getTenantDbName('tenantA')).toBe('ambiten_test');
   });
 
   it('should return true when tenant is registered', () => {

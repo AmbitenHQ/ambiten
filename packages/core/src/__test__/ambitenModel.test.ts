@@ -269,7 +269,7 @@ describe('AmbitenModel', () => {
       expect(mockCollection.insertOne).not.toHaveBeenCalled();
     });
 
-    it('should initialize with provider database and collection', async () => {
+    it('should initialize without resolving the database collection', async () => {
       const mockCollection = {
         collectionName,
       };
@@ -278,14 +278,13 @@ describe('AmbitenModel', () => {
 
       const model = new AmbitenModel<TestDocument>({
         collectionName,
-        schema: new AmbitenSchema<TestDocument>({} as Record<string, any>),
-        provider,
+        schema,
+        provider
       });
 
       await model.init();
 
-      expect(db.collection).toHaveBeenCalledWith(collectionName);
-      expect(model.schema).toBeInstanceOf(AmbitenSchema);
+      expect(db.collection).not.toHaveBeenCalled();
     });
   });
 
