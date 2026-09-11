@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/create",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ambiten project scaffold generator.",
   "publishConfig": {
     "access": "public"
@@ -74,7 +74,7 @@
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
-    "@ambiten/logger": "workspace:*",
+    "@ambiten/logger": "workspace:^",
     "commander": "^14.0.2",
     "figlet": "^1.9.4",
     "fs-extra": "^11.3.3",

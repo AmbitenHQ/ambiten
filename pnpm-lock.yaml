@@ -100,10 +100,10 @@ importers:
   packages/adapter-express:
     dependencies:
       '@ambiten/adapter-runtime':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-runtime
       '@ambiten/adapter-types':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-types
     devDependencies:
       '@testing-library/jest-dom':
@@ -134,10 +134,10 @@ importers:
   packages/adapter-fastify:
     dependencies:
       '@ambiten/adapter-runtime':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-runtime
       '@ambiten/adapter-types':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-types
       fastify:
         specifier: ^5.6.2
@@ -162,10 +162,10 @@ importers:
   packages/adapter-graphql:
     dependencies:
       '@ambiten/adapter-runtime':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-runtime
       '@ambiten/adapter-types':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-types
       graphql:
         specifier: 16.11.0
@@ -190,10 +190,10 @@ importers:
   packages/adapter-lambda:
     dependencies:
       '@ambiten/adapter-runtime':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-runtime
       '@ambiten/adapter-types':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-types
     devDependencies:
       '@testing-library/jest-dom':
@@ -221,10 +221,10 @@ importers:
   packages/adapter-nestjs:
     dependencies:
       '@ambiten/adapter-runtime':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-runtime
       '@ambiten/adapter-types':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-types
       '@nestjs/common':
         specifier: ^10.0.0 || ^11.0.0
@@ -255,12 +255,12 @@ importers:
   packages/adapter-runtime:
     dependencies:
       '@ambiten/adapter-types':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../adapter-types
+    devDependencies:
       '@ambiten/core':
         specifier: workspace:*
         version: link:../core
-    devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.9.1
         version: 6.9.1
@@ -301,7 +301,7 @@ importers:
   packages/core:
     dependencies:
       '@ambiten/logger':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../logger
       '@babel/runtime':
         specifier: 7.28.4
@@ -533,7 +533,7 @@ importers:
   packages/create:
     dependencies:
       '@ambiten/logger':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../logger
       commander:
         specifier: ^14.0.2
@@ -3699,6 +3699,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
