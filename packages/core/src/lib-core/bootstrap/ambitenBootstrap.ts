@@ -1,5 +1,13 @@
-import { loadAmbitenConfig } from '../../config';
-import { ILogger, setupLogger, type LoggerTransportConfig } from '@ambiten/logger';
+import {
+  assertValidAmbitenConfig,
+  loadAmbitenConfig,
+  normalizeAmbitenConfig
+} from '../../config';
+import {
+  ILogger,
+  setupLogger,
+  type LoggerTransportConfig
+} from '@ambiten/logger';
 import {
   AmbitenClient,
   createAmbitenClientModule,
@@ -15,10 +23,19 @@ import {
   Model,
   colorize,
 } from '../../utils';
-import { initMultiTenancy, InitMultiTenancyOptions } from '../../tanancy';
+import {
+  initMultiTenancy,
+  InitMultiTenancyOptions,
+  MultiTenantManager
+} from '../../tanancy';
 import { AmbitenGC } from '../../gc';
 import type { AmbitenAdapter } from '@ambiten/adapter-types';
-import type { AmbitenConfig, BootstrapClient, Document, SchemaDefinition } from '../../types';
+import type {
+  AmbitenConfig,
+  BootstrapClient,
+  Document,
+  SchemaDefinition
+} from '../../types';
 import { invalidateTenantCache } from '../../utils/invalidateTenantCache';
 import { AmbitenRuntime } from '../../types/ambiten-runtime-type';
 
@@ -124,11 +141,22 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
   /**
    * Initializes the Ambiten application stack.
    */
-  async initialize(configFilePathOrObject?: string | AmbitenConfig): Promise<void> {
-    this.config =
-      configFilePathOrObject && typeof configFilePathOrObject === 'object'
-        ? (configFilePathOrObject as AmbitenConfig)
-        : await loadAmbitenConfig(configFilePathOrObject as string | undefined);
+  async initialize(
+    configFilePathOrObject?: string | AmbitenConfig
+  ): Promise<void> {
+    if (
+      configFilePathOrObject &&
+      typeof configFilePathOrObject === 'object'
+    ) {
+      this.config =
+        normalizeAmbitenConfig(configFilePathOrObject);
+
+      assertValidAmbitenConfig(this.config);
+    } else {
+      this.config = await loadAmbitenConfig(
+        configFilePathOrObject as string | undefined
+      );
+    }
 
     this.initializeLogger();
     await this.initializeRedis();
@@ -264,18 +292,45 @@ class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<
   }
 
   private async initializeMultiTenancy(): Promise<void> {
-    if (!this.config.multiTenant?.enabled) return;
+    if (!this.config.multiTenant?.enabled) {
+      return;
+    }
 
-    const tenants = this.config.multiTenant.tenants || {};
-    const initOptions = this.config.multiTenant.initOptions || {};
+    const {
+      tenants = {},
+      tenantConfigResolver,
+      initOptions = {}
+    } = this.config.multiTenant;
 
-    await initMultiTenancy(tenants, initOptions);
+    await initMultiTenancy(
+      tenants,
+      {
+        ...initOptions,
+        tenantConfigResolver
+      }
+    );
 
-    this.getLogger().info('Multi-tenancy initialized', {
-      source: 'AmbitenBootstrap',
-      tenantCount: Object.keys(tenants).length,
-      lazy: initOptions.lazy ?? false,
-    });
+    this.getLogger().info(
+      'Multi-tenancy initialized',
+      {
+        source: 'AmbitenBootstrap',
+
+        staticTenantCount:
+          Object.keys(tenants).length,
+
+        registeredTenantCount:
+          MultiTenantManager.getAllTenants().length,
+        
+        connectedTenantCount:
+          MultiTenantManager.getAllConnectedTenants().length,
+
+        dynamicResolver:
+          Boolean(tenantConfigResolver),
+
+        lazy:
+          initOptions.lazy ?? false,
+      }
+    );
   }
 
   private async initializeGraphQL(): Promise<void> {

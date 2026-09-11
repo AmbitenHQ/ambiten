@@ -18,7 +18,7 @@ function buildCacheKey(role: string | string[] | { tenantId: string } | any, key
 	return `${role}:${key}`;
 }
 
-declare module "express-serve-static-core" {
+declare module "express" {
 	interface Request {
 		user: { _id: string; role: string, tenantId: string };
 		isAdmin: boolean;

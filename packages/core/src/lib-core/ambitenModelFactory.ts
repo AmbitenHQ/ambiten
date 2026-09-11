@@ -38,7 +38,8 @@ import { AmbitenClient } from './ambitenClient';
 import { AmbitenSchema } from './ambitenSchema';
 import EventEmitter from 'events';
 import { PubSub } from 'graphql-subscriptions';
-import { MultiTenantManager, TenantConfig } from '../tanancy';
+import { MultiTenantManager } from '../tanancy';
+import type { TenantConfig } from '../tanancy/MultiTenantManager';
 import { redis } from '../redis-manager';
 import {
   DB_CHANGE_EVENT,
@@ -170,25 +171,56 @@ export class AmbitenModel<T extends Document> {
    * @param ctx - Optional operation context.
    * @returns A merged context or `undefined` when no context values are present.
    */
-  private mergeCtx(ctx?: ModelContext): ModelContext | undefined {
-    const runtimeCtx = AmbitenContext.get();
+  private mergeCtx(
+    ctx?: ModelContext
+  ): ModelContext | undefined {
+    const runtimeCtx =
+      AmbitenContext.get();
 
     const merged: ModelContext = {
-      tenantId: ctx?.tenantId ?? this._defaultCtx?.tenantId ?? runtimeCtx.tenantId,
-      dbName: ctx?.dbName ?? this._defaultCtx?.dbName ?? runtimeCtx.dbName,
-      db: ctx?.db ?? this._defaultCtx?.db,
+      tenantId:
+        ctx?.tenantId ??
+        runtimeCtx.tenantId ??
+        this._defaultCtx?.tenantId,
+
+      dbName:
+        ctx?.dbName ??
+        runtimeCtx.dbName ??
+        this._defaultCtx?.dbName,
+
+      db:
+        ctx?.db ??
+        this._defaultCtx?.db,
+
       collectionName:
         ctx?.collectionName ??
-        this._defaultCtx?.collectionName ??
-        runtimeCtx.collectionName,
-      config: ctx?.config ?? this._defaultCtx?.config,
-      session: ctx?.session ?? this._defaultCtx?.session ?? runtimeCtx.session,
-      withDeleted: ctx?.withDeleted,
-      onlyDeleted: ctx?.onlyDeleted,
-      hardDelete: ctx?.hardDelete,
+        runtimeCtx.collectionName ??
+        this._defaultCtx?.collectionName,
+
+      config:
+        ctx?.config ??
+        this._defaultCtx?.config,
+
+      session:
+        ctx?.session ??
+        runtimeCtx.session ??
+        this._defaultCtx?.session,
+
+      withDeleted:
+        ctx?.withDeleted,
+
+      onlyDeleted:
+        ctx?.onlyDeleted,
+
+      hardDelete:
+        ctx?.hardDelete,
     };
 
-    return Object.values(merged).some((value) => value !== undefined)
+    return Object.values(merged)
+      .some(
+        (value) =>
+          value !== undefined
+      )
       ? merged
       : undefined;
   }
@@ -263,11 +295,18 @@ export class AmbitenModel<T extends Document> {
    * @param tenantId - The tenant identifier.
    * @returns The tenant configuration.
    */
-  private getResolvedTenant(tenantId: string): TenantConfig {
-    const tenant = MultiTenantManager.getTenant(tenantId);
+  private async getResolvedTenant(
+    tenantId: string
+  ): Promise<TenantConfig> {
+    const tenant =
+      await MultiTenantManager.resolveTenant(tenantId);
+
     if (!tenant) {
-      throw new Error(`Tenant "${tenantId}" is not registered.`);
+      throw new Error(
+        `Tenant "${tenantId}" could not be resolved.`
+      );
     }
+
     return { ...tenant };
   }
 
@@ -285,19 +324,29 @@ export class AmbitenModel<T extends Document> {
     }
 
     if (resolvedCtx?.tenantId) {
-      const tenant = this.getResolvedTenant(resolvedCtx.tenantId);
+      const tenant = await this.getResolvedTenant(
+        resolvedCtx.tenantId
+      );
+
+      if (!tenant) {
+        throw new Error(
+          `Tenant "${resolvedCtx.tenantId}" could not be resolved.`
+        );
+      }
+
       const client = await MultiTenantManager.getClient(resolvedCtx.tenantId);
 
       if (!client) {
         throw new Error(
-          `MongoClient for tenant "${resolvedCtx.tenantId}" is not available.`
+          `MongoDB client could not be resolved for tenant "${resolvedCtx.tenantId}".`
         );
       }
 
-      const dbName = resolvedCtx.dbName ?? tenant.dbName;
+      const dbName = resolvedCtx.dbName ?? tenant?.dbName;
+
       if (!dbName) {
         throw new Error(
-          `No database name configured for tenant "${resolvedCtx.tenantId}".`
+          `Database name could not be resolved for tenant "${resolvedCtx.tenantId}".`
         );
       }
 
@@ -423,30 +472,31 @@ export class AmbitenModel<T extends Document> {
    * and creating the GC TTL index when enabled.
    */
   async init(): Promise<void> {
-    if (this._initialized) return;
+    if (this._initialized) {
+      return;
+    }
 
     try {
       this.ensureConfigured();
 
       if (!this._schema) {
-        this._schema = new AmbitenSchema<T>({} as Record<keyof T, any>);
-      }
-
-      await this.getCollection();
-
-      if (this.isGCEnabled() && this._modelGCConfig) {
-        await this.ensureGCIndex(this._modelGCConfig);
+        this._schema =
+          new AmbitenSchema<T>(
+            {} as Record<keyof T, any>
+          );
       }
 
       this._initialized = true;
     } catch (error: any) {
       throw createAmbitenError(
         ErrorType.INITIALIZATION_ERROR,
-        `Failed to initialize AmbitenModel: ${error?.message ?? String(error)}`,
+        `Failed to initialize AmbitenModel: ${error?.message ?? String(error)
+        }`,
         {
           details: {
-            operation: 'init',
-            TypeError: ErrorType.INITIALIZATION_ERROR,
+            operation: "init",
+            TypeError:
+              ErrorType.INITIALIZATION_ERROR
           }
         }
       );

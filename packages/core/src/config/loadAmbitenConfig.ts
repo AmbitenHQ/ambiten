@@ -15,7 +15,9 @@ let validate: ValidateFunction | null = null;
 
 const DEFAULT_CONFIG_FILENAME = 'ambiten.config.json';
 
-function normalizeAmbitenConfig(rawConfig: any): AmbitenConfig {
+export function normalizeAmbitenConfig(
+  rawConfig: any
+): AmbitenConfig {
   const cfg = { ...rawConfig };
 
   if (typeof cfg.logger === 'boolean') {
@@ -77,7 +79,9 @@ function normalizeAmbitenConfig(rawConfig: any): AmbitenConfig {
   return cfg as AmbitenConfig;
 }
 
-function assertValidAmbitenConfig(config: AmbitenConfig): void {
+export function assertValidAmbitenConfig(
+  config: AmbitenConfig
+): void {
   if (!config.connection?.uri) {
     throw new Error('Invalid config: "connection.uri" is required.');
   }

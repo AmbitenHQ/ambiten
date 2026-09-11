@@ -4,6 +4,7 @@ import { AmbitenOperationMeta } from "./ambiten.model.type";
 
 export type ModelContext = {
   tenantId?: string;
+  requestId?: string;
   dbName?: string;
   db?: Db;
   collectionName?: string;

@@ -14,13 +14,14 @@ import type {
 	BootstrapClient,
 	ModelContext,
 	AmbitenResolvedClientScope,
-	AmbitenContextState
+	AmbitenContextState,
 } from '../types';
 import {
 	ErrorType,
 	createAmbitenError
 } from '../utils';
-import { MultiTenantManager, TenantConfig } from '../tanancy';
+import { MultiTenantManager } from '../tanancy';
+import type { TenantConfig } from '../tanancy/MultiTenantManager';
 import { AmbitenContext } from '../context';
 import type { Transporter } from '@ambiten/logger';
 
@@ -111,32 +112,43 @@ export class AmbitenClient implements BootstrapClient {
 		}
 
 		if (ctx?.tenantId) {
-			const resolver = this._opts.tenantResolver;
+			const resolver =
+				this._opts.tenantResolver;
+
 			if (!resolver) {
 				throw new Error(
 					'Multi-tenancy not enabled. Provide tenantResolver to AmbitenClient or avoid passing tenantId.'
 				);
 			}
 
-			const tenantClient = await resolver.getClient(ctx.tenantId);
+			const tenantClient =
+				await resolver.getClient(
+					ctx.tenantId
+				);
+
 			if (!tenantClient) {
-				throw new Error(`Tenant "${ctx.tenantId}" is not registered.`);
+				throw new Error(
+					`Tenant "${ctx.tenantId}" could not be resolved.`
+				);
 			}
 
 			const resolvedTenantDbName =
 				ctx.dbName ??
-				MultiTenantManager.getTenantDbName(ctx.tenantId) ??
+				await MultiTenantManager.resolveTenantDbName(
+					ctx.tenantId
+				) ??
 				this._defaultDbName;
 
-			return tenantClient.db(resolvedTenantDbName);
+			return tenantClient.db(
+				resolvedTenantDbName
+			);
 		}
 
+		// base runtime database
 		if (!this._client || !this._connected) {
-			const message = 'AmbitenClient not connected. call connect() first.';
-
 			throw createAmbitenError(
 				ErrorType.CONNECTION_ERROR,
-				message,
+				'AmbitenClient not connected. call connect() first.',
 				{
 					details: {
 						operation: 'db'
@@ -150,10 +162,14 @@ export class AmbitenClient implements BootstrapClient {
 		}
 
 		if (this._overrideDbName) {
-			return this._client.db(this._overrideDbName);
+			return this._client.db(
+				this._overrideDbName
+			);
 		}
 
-		return this._client.db(this._defaultDbName);
+		return this._client.db(
+			this._defaultDbName
+		);
 	}
 
 	static async db(ctx?: ModelContext): Promise<Db> {
@@ -320,7 +336,7 @@ export class AmbitenClient implements BootstrapClient {
 			throw new Error("Tenant not resolved in context.");
 		}
 
-		const tenant = MultiTenantManager.getTenant(ctx.tenantId);
+		const tenant = await MultiTenantManager.resolveTenant(ctx.tenantId);
 
 		if (!tenant) {
 			throw new Error(`Tenant not found: ${ctx.tenantId}`);

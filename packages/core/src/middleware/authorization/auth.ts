@@ -1,12 +1,12 @@
-import { Request, Response, NextFunction } from "express-serve-static-core";
+import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../../utils/AuthUtils";
 
 
-declare module "express-serve-static-core" {
+declare module "express" {
 	interface Request {
 		user: { _id: string; role: string, tenantId: string };
 	}
-}
+} 
 
 /**
  *  Middleware to authorize access to routes based on user roles.

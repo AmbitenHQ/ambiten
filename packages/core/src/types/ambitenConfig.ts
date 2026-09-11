@@ -1,9 +1,10 @@
 import { LoggerConfig } from '@ambiten/logger';
-import { InitMultiTenancyOptions } from '../tanancy';
-import { AmbitenModelOptions, BootstrapModelOptions } from './ambiten.model.type';
-import { SchemaDefinition } from './schema.type';
-import { Document } from './document';
-import { BootstrapClient } from './bootstrapClient.type';
+import type { InitMultiTenancyOptions } from '../tanancy';
+import type { BootstrapModelOptions } from './ambiten.model.type';
+import type { SchemaDefinition } from './schema.type';
+import type { Document } from './document';
+import type { BootstrapClient } from './bootstrapClient.type';
+import type { TenantConfigResolver } from './tenant-config-resolver';
 
 
 export interface AmbitenLoggerSettings extends LoggerConfig {
@@ -45,8 +46,29 @@ export interface AmbitenConfig<
 
   multiTenant?: {
     enabled?: boolean;
+
+    /**
+     * Header used by supported runtime integrations
+     * to identify the active tenant.
+     *
+     * @default "x-tenant-id"
+     */
     headerKey?: string;
+
+    /**
+     * Static tenant ID → MongoDB URI mappings.
+     *
+     * Useful for local development, tests,
+     * and applications with a known tenant set.
+     */
     tenants?: Record<string, string>;
+
+    /**
+     * Dynamically resolves configuration for tenants
+     * that are not already registered.
+     */
+    tenantConfigResolver?: TenantConfigResolver;
+
     initOptions?: InitMultiTenancyOptions;
   };
 

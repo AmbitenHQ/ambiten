@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { createClient, RedisClientType } from 'redis';
+import { createClient } from 'redis';
 
 
 type AmbitenRedisClient = {
