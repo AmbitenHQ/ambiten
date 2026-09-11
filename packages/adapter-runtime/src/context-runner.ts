@@ -85,6 +85,6 @@ export async function runWithAdapterContext<T>(
       AmbitenContext.withTransaction(async () => await handler())
     );
   }
-
+  
   return AmbitenContext.run(ctx, async () => await handler());
 }

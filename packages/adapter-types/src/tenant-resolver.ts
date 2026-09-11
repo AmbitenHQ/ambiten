@@ -72,3 +72,20 @@ export async function resolveTenant(
 
   return fallback;
 };
+
+export async function validateResolvedTenant(
+  tenantId: string | undefined,
+  validate?: TenancyOptions["validate"]
+): Promise<string | undefined> {
+  if (!tenantId) {
+    return undefined;
+  }
+
+  if (!validate) {
+    return tenantId;
+  }
+
+  return await validate(tenantId)
+    ? tenantId
+    : undefined;
+}
