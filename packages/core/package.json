@@ -1,11 +1,11 @@
 {
   "name": "@ambiten/core",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "publishConfig": {
     "access": "public"
   },
   "description": "Core library for Ambiten, providing essential functionalities and utilities for building applications with Ambiten.",
-  "main": "./dist/cjs/index.cjs",
+  "main": "./dist/index.cjs",
   "module": "./dist/esm/index.js",
   "browser": "./dist/index-browser.js",
   "types": "./dist/esm/index.d.ts",
@@ -16,7 +16,7 @@
     ".": {
       "types": "./dist/esm/index.d.ts",
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs",
+      "require": "./dist/index.cjs",
       "default": "./dist/esm/index.js"
     },
     "./browser": {
@@ -54,7 +54,7 @@
     "typedoc": "typedoc --options typedoc.json",
     "release": "pnpm changeset version",
     "test": "jest --detectOpenHandles --coverage",
-    "prepack": "pnpm clean && pnpm build",
+    "prepack": "pnpm clean && pnpm build && pnpm run verify:exports",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "release": {
