@@ -27,7 +27,7 @@ jobs:
        options: >-
          --health-cmd "mongosh --eval 'db.adminCommand({ ping: 1 })'"
          --health-interval 10s
-         --health-timeout 5s
+         --health-timeout 5s 
          --health-retries 5
     env:
       MONGODB_URI: mongodb://127.0.0.1:27017/ambiten_test
