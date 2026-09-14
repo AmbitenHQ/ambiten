@@ -6,7 +6,7 @@
 
 # Interface: DbProvider
 
-Defined in: [packages/core/src/types/db.provider.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L18)
+Defined in: [packages/core/src/types/db.provider.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L19)
 
 ## Extended by
 
@@ -18,7 +18,7 @@ Defined in: [packages/core/src/types/db.provider.ts:18](https://github.com/Ambit
 
 > `optional` **client**(`ctx?`): `Promise`\<`MongoClient`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:20](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L20)
+Defined in: [packages/core/src/types/db.provider.ts:21](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L21)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/core/src/types/db.provider.ts:20](https://github.com/Ambit
 
 > **db**(`ctx?`): `Promise`\<`Db`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L19)
+Defined in: [packages/core/src/types/db.provider.ts:20](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L20)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [packages/core/src/types/db.provider.ts:19](https://github.com/Ambit
 
 > `optional` **startSession**(`ctx?`): `Promise`\<`ClientSession`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:21](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L21)
+Defined in: [packages/core/src/types/db.provider.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L22)
 
 #### Parameters
 

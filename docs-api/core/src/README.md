@@ -27,7 +27,6 @@
 
 ## Interfaces
 
-- [AmbitenBootstrapFactoryOptions](interfaces/AmbitenBootstrapFactoryOptions.md)
 - [AmbitenCacheClient](interfaces/AmbitenCacheClient.md)
 - [AmbitenCacheOptions](interfaces/AmbitenCacheOptions.md)
 - [AmbitenCacheStats](interfaces/AmbitenCacheStats.md)
@@ -67,9 +66,10 @@
 - [QueryCacheOptions](interfaces/QueryCacheOptions.md)
 - [QueryInstrumentationMeta](interfaces/QueryInstrumentationMeta.md)
 - [QueryOptions](interfaces/QueryOptions.md)
-- [RegisterMultiTenancyOptions](interfaces/RegisterMultiTenancyOptions.md)
+- [RegisteredTenantStatistics](interfaces/RegisteredTenantStatistics.md)
 - [RegisterTenantOptions](interfaces/RegisterTenantOptions.md)
 - [Relationship](interfaces/Relationship.md)
+- [ResolvedTenantConfig](interfaces/ResolvedTenantConfig.md)
 - [RuntimeResolutionInput](interfaces/RuntimeResolutionInput.md)
 - [RuntimeResolutionOutput](interfaces/RuntimeResolutionOutput.md)
 - [ScaffoldLog](interfaces/ScaffoldLog.md)
@@ -82,8 +82,10 @@
 
 - [AmbitenMiddlewareHandler](type-aliases/AmbitenMiddlewareHandler.md)
 - [AmbitenMiddlewareOperation](type-aliases/AmbitenMiddlewareOperation.md)
+- [BootstrapModelOptions](type-aliases/BootstrapModelOptions.md)
 - [Document](type-aliases/Document.md)
 - [EventType](type-aliases/EventType.md)
+- [eventTypes](type-aliases/eventTypes.md)
 - [GCConfig](type-aliases/GCConfig.md)
 - [GetTenantModelParams](type-aliases/GetTenantModelParams.md)
 - [HookFunction](type-aliases/HookFunction.md)
@@ -97,6 +99,7 @@
 - [Role](type-aliases/Role.md)
 - [SchemaDefinition](type-aliases/SchemaDefinition.md)
 - [SchemaType](type-aliases/SchemaType.md)
+- [TenantConfigResolver](type-aliases/TenantConfigResolver.md)
 - [User](type-aliases/User.md)
 
 ## Variables
@@ -108,7 +111,6 @@
 - [DOCUMENT\_DELETED\_EVENT](variables/DOCUMENT_DELETED_EVENT.md)
 - [DOCUMENT\_INSERTED\_EVENT](variables/DOCUMENT_INSERTED_EVENT.md)
 - [DOCUMENT\_UPDATED\_EVENT](variables/DOCUMENT_UPDATED_EVENT.md)
-- [eventTypes](variables/eventTypes.md)
 - [now](variables/now.md)
 - [objectIdSymbol](variables/objectIdSymbol.md)
 - [redis](variables/redis.md)
@@ -118,6 +120,7 @@
 ## Functions
 
 - [applySoftDelete](functions/applySoftDelete.md)
+- [assertValidAmbitenConfig](functions/assertValidAmbitenConfig.md)
 - [authorize](functions/authorize.md)
 - [cacheWithRedis](functions/cacheWithRedis.md)
 - [castId](functions/castId.md)
@@ -165,6 +168,7 @@
 - [measureQuery](functions/measureQuery.md)
 - [measureQueryForBrowser](functions/measureQueryForBrowser.md)
 - [Model](functions/Model.md)
+- [normalizeAmbitenConfig](functions/normalizeAmbitenConfig.md)
 - [parseDuration](functions/parseDuration.md)
 - [resolveAmbitenOption](functions/resolveAmbitenOption.md)
 - [resolveRuntimeConfig](functions/resolveRuntimeConfig.md)

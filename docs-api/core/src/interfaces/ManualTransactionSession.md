@@ -6,7 +6,7 @@
 
 # Interface: ManualTransactionSession
 
-Defined in: [packages/core/src/context/helpers/transactionSession.ts:3](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/helpers/transactionSession.ts#L3)
+Defined in: [packages/core/src/context/helpers/transactionSession.ts:3](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/helpers/transactionSession.ts#L3)
 
 ## Extends
 
@@ -224,7 +224,7 @@ Defined in: node\_modules/.pnpm/mongodb@6.21.0/node\_modules/mongodb/mongodb.d.t
 
 > `optional` **\[captureRejectionSymbol\]**\<`K`\>(`error`, `event`, ...`args`): `void`
 
-Defined in: node\_modules/.pnpm/@types+node@22.19.19/node\_modules/@types/node/events.d.ts:103
+Defined in: node\_modules/.pnpm/@types+node@22.20.2/node\_modules/@types/node/events.d.ts:103
 
 #### Type Parameters
 
@@ -260,7 +260,7 @@ Defined in: node\_modules/.pnpm/@types+node@22.19.19/node\_modules/@types/node/e
 
 > **abortTransaction**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/context/helpers/transactionSession.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/helpers/transactionSession.ts#L6)
+Defined in: [packages/core/src/context/helpers/transactionSession.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/helpers/transactionSession.ts#L6)
 
 Aborts the currently active transaction in this session.
 
@@ -430,7 +430,7 @@ the `BSON.Timestamp` of the operation type it is desired to advance to
 
 > **commitTransaction**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/context/helpers/transactionSession.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/helpers/transactionSession.ts#L5)
+Defined in: [packages/core/src/context/helpers/transactionSession.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/helpers/transactionSession.ts#L5)
 
 Commits the currently active transaction in this session.
 
@@ -522,7 +522,7 @@ v0.1.26
 
 > **endSession**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/context/helpers/transactionSession.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/helpers/transactionSession.ts#L7)
+Defined in: [packages/core/src/context/helpers/transactionSession.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/helpers/transactionSession.ts#L7)
 
 Frees any client-side resources held by the current session.  If a session is in a transaction,
 the transaction is aborted.
@@ -1938,7 +1938,7 @@ v0.3.5
 
 > **startTransaction**(): `void`
 
-Defined in: [packages/core/src/context/helpers/transactionSession.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/helpers/transactionSession.ts#L4)
+Defined in: [packages/core/src/context/helpers/transactionSession.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/helpers/transactionSession.ts#L4)
 
 Starts a new transaction with the given options.
 

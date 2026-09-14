@@ -8,7 +8,7 @@
 
 > **runGarbageCollector**(`model`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/gc/gcManager.ts:92](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/gcManager.ts#L92)
+Defined in: [packages/core/src/gc/gcManager.ts:92](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/gcManager.ts#L92)
 
 Runs garbage collection on a single Ambiten model instance.
 

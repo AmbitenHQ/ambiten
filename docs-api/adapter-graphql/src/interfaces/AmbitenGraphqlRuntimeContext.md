@@ -6,7 +6,7 @@
 
 # Interface: AmbitenGraphqlRuntimeContext
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L9)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:9](https://github.c
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L13)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L13)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:13](https://github.
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L12)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L12)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:12](https://github.
 
 > `optional` **debug?**: `boolean`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L14)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:14](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L14)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:14](https://github.
 
 > `optional` **loggerMeta?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L15)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L15)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:15](https://github.
 
 > `optional` **meta?**: `AmbitenOperationMeta`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:16](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L16)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:16](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L16)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:16](https://github.
 
 > `optional` **rawInput?**: `unknown`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L19)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L19)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:19](https://github.
 
 > `optional` **rawRequest?**: `unknown`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L18)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:18](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L18)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:18](https://github.
 
 > **request**: [`AmbitenRequestLike`](../../../adapter-types/src/interfaces/AmbitenRequestLike.md)
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:17](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L17)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:17](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L17)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:17](https://github.
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L11)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L11)
 
 ***
 
@@ -86,4 +86,4 @@ Defined in: [packages/adapter-graphql/src/graphql-context.ts:11](https://github.
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/adapter-graphql/src/graphql-context.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/graphql-context.ts#L10)
+Defined in: [packages/adapter-graphql/src/graphql-context.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/graphql-context.ts#L10)

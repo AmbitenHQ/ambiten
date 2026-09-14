@@ -6,7 +6,7 @@
 
 # Class: MetricsTracker
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L4)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L4)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:4](https://github.com/A
 
 > **new MetricsTracker**(`options?`): `MetricsTracker`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L19)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L19)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:19](https://github.com/
 
 > **getSnapshot**(): `MetricsSnapshot`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:82](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L82)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:82](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L82)
 
 #### Returns
 
@@ -44,7 +44,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:82](https://github.com/
 
 > **isTrackingMetrics**(): `boolean`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:78](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L78)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:78](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L78)
 
 #### Returns
 
@@ -56,7 +56,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:78](https://github.com/
 
 > **start**(`interval?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:49](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L49)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:49](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L49)
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:49](https://github.com/
 
 > **stop**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:69](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L69)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:69](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L69)
 
 #### Returns
 
@@ -86,7 +86,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:69](https://github.com/
 
 > **trackDroppedLog**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:45](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L45)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:45](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L45)
 
 #### Parameters
 
@@ -104,7 +104,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:45](https://github.com/
 
 > **trackFlush**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L25)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L25)
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:25](https://github.com/
 
 > **trackLog**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:21](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L21)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:21](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L21)
 
 #### Parameters
 
@@ -140,7 +140,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:21](https://github.com/
 
 > **trackRotation**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L29)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L29)
 
 #### Parameters
 
@@ -158,7 +158,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:29](https://github.com/
 
 > **trackSuccessfulTransportWrite**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:37](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L37)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:37](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L37)
 
 #### Parameters
 
@@ -176,7 +176,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:37](https://github.com/
 
 > **trackTransportDispatch**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:33](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L33)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:33](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L33)
 
 #### Parameters
 
@@ -194,7 +194,7 @@ Defined in: [packages/logger/src/utils/MetricsTracker.ts:33](https://github.com/
 
 > **trackTransportError**(`count?`): `void`
 
-Defined in: [packages/logger/src/utils/MetricsTracker.ts:41](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/utils/MetricsTracker.ts#L41)
+Defined in: [packages/logger/src/utils/MetricsTracker.ts:41](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/utils/MetricsTracker.ts#L41)
 
 #### Parameters
 

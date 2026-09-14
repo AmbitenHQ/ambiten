@@ -8,7 +8,7 @@
 
 > **createResilientTransporter**(`baseTransporter`, `options?`): [`RemoteTransporter`](../type-aliases/RemoteTransporter.md)
 
-Defined in: [packages/logger/src/transports/remote-transports/createResilientTransport.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/remote-transports/createResilientTransport.ts#L5)
+Defined in: [packages/logger/src/transports/remote-transports/createResilientTransport.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/remote-transports/createResilientTransport.ts#L5)
 
 ## Parameters
 

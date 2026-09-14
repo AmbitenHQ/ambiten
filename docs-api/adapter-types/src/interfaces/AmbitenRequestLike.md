@@ -6,7 +6,7 @@
 
 # Interface: AmbitenRequestLike
 
-Defined in: [packages/adapter-types/src/types.ts:1](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L1)
+Defined in: [packages/adapter-types/src/types.ts:1](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L1)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-types/src/types.ts:1](https://github.com/AmbitenHQ
 
 > `optional` **body?**: `unknown`
 
-Defined in: [packages/adapter-types/src/types.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L8)
+Defined in: [packages/adapter-types/src/types.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L8)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-types/src/types.ts:8](https://github.com/AmbitenHQ
 
 > `optional` **cookies?**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/adapter-types/src/types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L6)
+Defined in: [packages/adapter-types/src/types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L6)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-types/src/types.ts:6](https://github.com/AmbitenHQ
 
 > **headers**: `Record`\<`string`, `string` \| `string`[] \| `undefined`\>
 
-Defined in: [packages/adapter-types/src/types.ts:2](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L2)
+Defined in: [packages/adapter-types/src/types.ts:2](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L2)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-types/src/types.ts:2](https://github.com/AmbitenHQ
 
 > `optional` **method?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L4)
+Defined in: [packages/adapter-types/src/types.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L4)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-types/src/types.ts:4](https://github.com/AmbitenHQ
 
 > `optional` **params?**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/adapter-types/src/types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L5)
+Defined in: [packages/adapter-types/src/types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L5)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/adapter-types/src/types.ts:5](https://github.com/AmbitenHQ
 
 > `optional` **query?**: `Record`\<`string`, `string` \| `string`[] \| `undefined`\>
 
-Defined in: [packages/adapter-types/src/types.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L7)
+Defined in: [packages/adapter-types/src/types.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L7)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/adapter-types/src/types.ts:7](https://github.com/AmbitenHQ
 
 > `optional` **url?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L3)
+Defined in: [packages/adapter-types/src/types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L3)
 
 ## Methods
 
@@ -70,7 +70,7 @@ Defined in: [packages/adapter-types/src/types.ts:3](https://github.com/AmbitenHQ
 
 > `optional` **get**(`name`): `string` \| `undefined`
 
-Defined in: [packages/adapter-types/src/types.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L9)
+Defined in: [packages/adapter-types/src/types.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L9)
 
 #### Parameters
 

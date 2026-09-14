@@ -8,7 +8,7 @@
 
 > **getTenantDB**(`tenantId`): `Promise`\<`Db`\>
 
-Defined in: [packages/core/src/utils/builders/getTenantDb.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/builders/getTenantDb.ts#L15)
+Defined in: [packages/core/src/utils/builders/getTenantDb.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/builders/getTenantDb.ts#L15)
 
 Retrieves the database instance for a specific tenant.
 If the database is already cached, it returns the cached instance. 

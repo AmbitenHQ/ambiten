@@ -6,7 +6,7 @@
 
 # Class: AmbitenGraphQL
 
-Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:17](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/graphql/ambitenGraphQL.ts#L17)
+Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:17](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/graphql/ambitenGraphQL.ts#L17)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:17](https://github.com/
 
 > **new AmbitenGraphQL**(`options`): `AmbitenGraphQL`
 
-Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/graphql/ambitenGraphQL.ts#L25)
+Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/graphql/ambitenGraphQL.ts#L25)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:25](https://github.com/
 
 > **customResolvers**(`resolver`): `this`
 
-Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:41](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/graphql/ambitenGraphQL.ts#L41)
+Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:41](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/graphql/ambitenGraphQL.ts#L41)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:41](https://github.com/
 
 > **customTypeDefs**(`schema`): `this`
 
-Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/graphql/ambitenGraphQL.ts#L32)
+Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/graphql/ambitenGraphQL.ts#L32)
 
 #### Parameters
 
@@ -68,7 +68,7 @@ Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:32](https://github.com/
 
 > **generateSchema**(): `Promise`\<`GraphQLSchema`\>
 
-Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:273](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/graphql/ambitenGraphQL.ts#L273)
+Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:273](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/graphql/ambitenGraphQL.ts#L273)
 
 #### Returns
 
@@ -80,7 +80,7 @@ Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:273](https://github.com
 
 > **subscriptions**(): `boolean`
 
-Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:269](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/graphql/ambitenGraphQL.ts#L269)
+Defined in: [packages/core/src/graphql/ambitenGraphQL.ts:269](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/graphql/ambitenGraphQL.ts#L269)
 
 #### Returns
 

@@ -6,7 +6,7 @@
 
 # Class: AmbitenClient
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:38](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L38)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:39](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L39)
 
 AmbitenClient is a MongoDB client wrapper that provides a simplified interface
 for connecting to and interacting with MongoDB databases.
@@ -21,7 +21,7 @@ for connecting to and interacting with MongoDB databases.
 
 > **new AmbitenClient**(`_opts`): `AmbitenClient`
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:51](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L51)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:52](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L52)
 
 #### Parameters
 
@@ -39,7 +39,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:51](https://github.com/
 
 > **client**(`ctx?`): `Promise`\<`MongoClient`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:210](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L210)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:238](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L238)
 
 #### Parameters
 
@@ -61,7 +61,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:210](https://github.com
 
 > **close**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:639](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L639)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:667](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L667)
 
 #### Returns
 
@@ -77,7 +77,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:639](https://github.com
 
 > **collection**\<`T`\>(`collectionName`, `ctx?`): `Promise`\<`Collection`\<`T`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:258](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L258)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:286](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L286)
 
 #### Type Parameters
 
@@ -109,7 +109,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:258](https://github.com
 
 > **connect**(): `Promise`\<`AmbitenClient`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:195](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L195)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:223](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L223)
 
 #### Returns
 
@@ -125,7 +125,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:195](https://github.com
 
 > **db**(`ctx?`): `Promise`\<`Db`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:108](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L108)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:121](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L121)
 
 Resolution order:
 1. explicit ctx.db
@@ -154,7 +154,7 @@ Resolution order:
 
 > **disconnect**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:651](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L651)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:679](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L679)
 
 #### Returns
 
@@ -166,7 +166,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:651](https://github.com
 
 > **dropCollection**(`collectionName?`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:580](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L580)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:608](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L608)
 
 #### Parameters
 
@@ -188,7 +188,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:580](https://github.com
 
 > **dropDatabase**(`ctx?`): `Promise`\<`boolean`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:618](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L618)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:646](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L646)
 
 #### Parameters
 
@@ -206,7 +206,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:618](https://github.com
 
 > **getClusterInfo**(): `Promise`\<`ClusterInfo`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:279](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L279)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:307](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L307)
 
 #### Returns
 
@@ -218,7 +218,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:279](https://github.com
 
 > **getCollection**\<`T`\>(`collectionName`, `ctx?`): `Promise`\<`Collection`\<`T`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:266](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L266)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:294](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L294)
 
 #### Type Parameters
 
@@ -246,7 +246,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:266](https://github.com
 
 > **isConnected**(): `boolean`
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:655](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L655)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:683](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L683)
 
 #### Returns
 
@@ -258,7 +258,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:655](https://github.com
 
 > **resetDatabase**(): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:571](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L571)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:599](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L599)
 
 #### Returns
 
@@ -270,7 +270,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:571](https://github.com
 
 > **startSession**(`ctx?`): `Promise`\<`ClientSession`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:575](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L575)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:603](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L603)
 
 #### Parameters
 
@@ -292,7 +292,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:575](https://github.com
 
 > **useCollection**(`collectionName`): `Promise`\<`Collection`\<`any`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:236](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L236)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:264](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L264)
 
 #### Parameters
 
@@ -310,7 +310,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:236](https://github.com
 
 > **useDatabase**(`dbName`): `Promise`\<\{ `client`: `MongoClient`; `db`: `Db`; \}\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:340](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L340)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:368](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L368)
 
 Mutable legacy helper. Prefer withDatabase() or withScope() in request-safe flows.
 
@@ -330,7 +330,7 @@ Mutable legacy helper. Prefer withDatabase() or withScope() in request-safe flow
 
 > **validateUri**(`uri`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:163](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L163)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:191](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L191)
 
 #### Parameters
 
@@ -348,7 +348,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:163](https://github.com
 
 > **withContext**\<`R`\>(`context`, `callback`): `Promise`\<`R`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:460](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L460)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:488](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L488)
 
 #### Type Parameters
 
@@ -394,7 +394,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:460](https://github.com
 
 > **withDatabase**(`dbName`): [`BootstrapClient`](../interfaces/BootstrapClient.md)
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:354](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L354)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:382](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L382)
 
 #### Parameters
 
@@ -412,7 +412,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:354](https://github.com
 
 > **withScope**(`scope`): [`BootstrapClient`](../interfaces/BootstrapClient.md)
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:527](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L527)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:555](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L555)
 
 #### Parameters
 
@@ -436,7 +436,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:527](https://github.com
 
 > **withTenant**(`tenantId`): [`BootstrapClient`](../interfaces/BootstrapClient.md)
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:499](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L499)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:527](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L527)
 
 #### Parameters
 
@@ -454,7 +454,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:499](https://github.com
 
 > `static` **db**(`ctx?`): `Promise`\<`Db`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:159](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L159)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:187](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L187)
 
 #### Parameters
 
@@ -472,7 +472,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:159](https://github.com
 
 > `static` **handleLogBatch**(`batch`, `transporter?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:669](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L669)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:697](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L697)
 
 #### Parameters
 
@@ -494,7 +494,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:669](https://github.com
 
 > `static` **handleTopologyEvent**(`event`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:659](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L659)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:687](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L687)
 
 #### Parameters
 
@@ -512,7 +512,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:659](https://github.com
 
 > `static` **init**(`opts?`): `AmbitenClient`
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:69](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L69)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:70](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L70)
 
 #### Parameters
 
@@ -530,7 +530,7 @@ Defined in: [packages/core/src/lib-core/ambitenClient.ts:69](https://github.com/
 
 > `static` **resolveRuntime**(): `Promise`\<\{ `db`: `Db`; `session`: `ClientSession` \| `undefined`; \}\>
 
-Defined in: [packages/core/src/lib-core/ambitenClient.ts:316](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenClient.ts#L316)
+Defined in: [packages/core/src/lib-core/ambitenClient.ts:344](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenClient.ts#L344)
 
 Resolves database + session + runtime binding
 

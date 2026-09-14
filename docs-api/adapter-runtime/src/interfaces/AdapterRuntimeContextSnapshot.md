@@ -6,7 +6,7 @@
 
 # Interface: AdapterRuntimeContextSnapshot
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L4)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:4](https://github.
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L8)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L8)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:8](https://github.
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L7)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L7)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:7](https://github.
 
 > `optional` **debug?**: `boolean`
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L9)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L9)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:9](https://github.
 
 > `optional` **loggerMeta?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L10)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L10)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:10](https://github
 
 > `optional` **meta?**: `AmbitenOperationMeta`
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L11)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L11)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:11](https://github
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L6)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L6)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [packages/adapter-runtime/src/context-accessor.ts:6](https://github.
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/adapter-runtime/src/context-accessor.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-runtime/src/context-accessor.ts#L5)
+Defined in: [packages/adapter-runtime/src/context-accessor.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-runtime/src/context-accessor.ts#L5)

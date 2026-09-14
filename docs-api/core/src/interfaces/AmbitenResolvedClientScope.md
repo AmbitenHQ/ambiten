@@ -6,7 +6,7 @@
 
 # Interface: AmbitenResolvedClientScope
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L29)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L29)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/ambiten.client.type.ts:29](https://github.c
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:33](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L33)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:33](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L33)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/types/ambiten.client.type.ts:33](https://github.c
 
 > **dbName**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L32)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L32)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/types/ambiten.client.type.ts:32](https://github.c
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:31](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L31)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:31](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L31)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/types/ambiten.client.type.ts:31](https://github.c
 
 > `optional` **session?**: `ClientSession`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:34](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L34)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:34](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L34)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [packages/core/src/types/ambiten.client.type.ts:34](https://github.c
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:30](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L30)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:30](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L30)

@@ -9,7 +9,6 @@
     "packages/adapter-graphql/src/index.ts",
     "packages/adapter-nestjs/src/index.ts",
     "packages/adapter-lambda/src/index.ts",
-   
   ],
   "out": "docs-api",
   "plugin": ["typedoc-plugin-markdown"],

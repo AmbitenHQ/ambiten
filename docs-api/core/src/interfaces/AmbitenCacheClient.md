@@ -6,7 +6,7 @@
 
 # Interface: AmbitenCacheClient
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L11)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L11)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:11](https://github.
 
 > **del**(`key`): `Promise`\<`unknown`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L18)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:18](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L18)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:18](https://github.
 
 > **get**(`key`): `Promise`\<`string` \| `null`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L12)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L12)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:12](https://github.
 
 > `optional` **scan**(`cursor`, `options?`): `Promise`\<\[`string`, `string`[]\] \| \{ `cursor`: `number`; `keys`: `string`[]; \}\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L19)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L19)
 
 #### Parameters
 
@@ -78,7 +78,7 @@ Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:19](https://github.
 
 > **set**(`key`, `value`, `options?`): `Promise`\<`unknown`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L13)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L13)
 
 #### Parameters
 

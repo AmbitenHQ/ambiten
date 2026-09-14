@@ -6,7 +6,7 @@
 
 # Interface: AmbitenGraphQLContext
 
-Defined in: [packages/core/src/types/graphql.type.ts:17](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L17)
+Defined in: [packages/core/src/types/graphql.type.ts:17](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:17](https://github.com/Ambi
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/core/src/types/graphql.type.ts:21](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L21)
+Defined in: [packages/core/src/types/graphql.type.ts:21](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L21)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:21](https://github.com/Ambi
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/types/graphql.type.ts:20](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L20)
+Defined in: [packages/core/src/types/graphql.type.ts:20](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L20)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:20](https://github.com/Ambi
 
 > **provider**: [`BootstrapClient`](BootstrapClient.md)
 
-Defined in: [packages/core/src/types/graphql.type.ts:24](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L24)
+Defined in: [packages/core/src/types/graphql.type.ts:24](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L24)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:24](https://github.com/Ambi
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/core/src/types/graphql.type.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L19)
+Defined in: [packages/core/src/types/graphql.type.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L19)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:19](https://github.com/Ambi
 
 > `optional` **session?**: `ClientSession`
 
-Defined in: [packages/core/src/types/graphql.type.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L22)
+Defined in: [packages/core/src/types/graphql.type.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L22)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:22](https://github.com/Ambi
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/types/graphql.type.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L18)
+Defined in: [packages/core/src/types/graphql.type.ts:18](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L18)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [packages/core/src/types/graphql.type.ts:18](https://github.com/Ambi
 
 > `optional` **user?**: [`AmbitenGraphQLUser`](AmbitenGraphQLUser.md)
 
-Defined in: [packages/core/src/types/graphql.type.ts:23](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L23)
+Defined in: [packages/core/src/types/graphql.type.ts:23](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L23)

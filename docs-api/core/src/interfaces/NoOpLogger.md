@@ -6,7 +6,7 @@
 
 # Interface: NoOpLogger
 
-Defined in: [packages/core/src/types/logger.types.ts:2](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/logger.types.ts#L2)
+Defined in: [packages/core/src/types/logger.types.ts:2](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/logger.types.ts#L2)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/logger.types.ts:2](https://github.com/Ambit
 
 > **debug**: (`message`) => `void`
 
-Defined in: [packages/core/src/types/logger.types.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/logger.types.ts#L7)
+Defined in: [packages/core/src/types/logger.types.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/logger.types.ts#L7)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/types/logger.types.ts:7](https://github.com/Ambit
 
 > **error**: (`message`) => `void`
 
-Defined in: [packages/core/src/types/logger.types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/logger.types.ts#L5)
+Defined in: [packages/core/src/types/logger.types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/logger.types.ts#L5)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [packages/core/src/types/logger.types.ts:5](https://github.com/Ambit
 
 > **fatal**: (`message`) => `void`
 
-Defined in: [packages/core/src/types/logger.types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/logger.types.ts#L6)
+Defined in: [packages/core/src/types/logger.types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/logger.types.ts#L6)
 
 #### Parameters
 
@@ -68,7 +68,7 @@ Defined in: [packages/core/src/types/logger.types.ts:6](https://github.com/Ambit
 
 > **info**: (`message`) => `void`
 
-Defined in: [packages/core/src/types/logger.types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/logger.types.ts#L3)
+Defined in: [packages/core/src/types/logger.types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/logger.types.ts#L3)
 
 #### Parameters
 
@@ -86,7 +86,7 @@ Defined in: [packages/core/src/types/logger.types.ts:3](https://github.com/Ambit
 
 > **warn**: (`message`) => `void`
 
-Defined in: [packages/core/src/types/logger.types.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/logger.types.ts#L4)
+Defined in: [packages/core/src/types/logger.types.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/logger.types.ts#L4)
 
 #### Parameters
 

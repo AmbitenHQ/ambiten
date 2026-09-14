@@ -6,7 +6,7 @@
 
 # Interface: AmbitenRuntime\<T\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L14)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L13)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:14](https://github.
 
 > **cache**\<`T`\>(`key`, `fetcher`, `options?`): `Promise`\<`T`\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L32)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:34](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L34)
 
 #### Type Parameters
 
@@ -52,7 +52,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:32](https://github.
 
 > **getGCRunner**(): [`AmbitenGC`](../classes/AmbitenGC.md) \| `undefined`
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:24](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L24)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:26](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L26)
 
 #### Returns
 
@@ -64,7 +64,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:24](https://github.
 
 > **getGraphQL**(): [`AmbitenGraphQL`](../classes/AmbitenGraphQL.md) \| `undefined`
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L22)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:24](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L24)
 
 #### Returns
 
@@ -76,7 +76,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:22](https://github.
 
 > **getLogger**(): `ILogger`
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L25)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:27](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L27)
 
 #### Returns
 
@@ -88,7 +88,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:25](https://github.
 
 > **getModel**(): [`AmbitenModel`](../classes/AmbitenModel.md)\<`T`\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L18)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:20](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L20)
 
 #### Returns
 
@@ -100,7 +100,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:18](https://github.
 
 > **getMongoClient**(): [`AmbitenClient`](../classes/AmbitenClient.md) \| [`BootstrapClient`](BootstrapClient.md)
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L15)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:14](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L14)
 
 #### Returns
 
@@ -112,7 +112,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:15](https://github.
 
 > **getSchema**(): [`AmbitenSchema`](../classes/AmbitenSchema.md)\<`T`\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:20](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L20)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L22)
 
 #### Returns
 
@@ -124,7 +124,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:20](https://github.
 
 > **invalidateCache**(`tenantId`, `namespace?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:38](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L38)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:40](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L40)
 
 #### Parameters
 
@@ -144,15 +144,15 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:38](https://github.
 
 ### onConnect()
 
-> **onConnect**(`hook`): `void`
+> **onConnect**(`callback`): `void`
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:17](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L17)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:16](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L16)
 
 #### Parameters
 
-##### hook
+##### callback
 
-`any`
+() => `void` \| `Promise`\<`void`\>
 
 #### Returns
 
@@ -164,7 +164,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:17](https://github.
 
 > **registerMultiTenancy**(`options`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:27](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L27)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L29)
 
 #### Parameters
 
@@ -188,7 +188,7 @@ Defined in: [packages/core/src/types/ambiten-runtime-type.ts:27](https://github.
 
 > **shutdown**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/types/ambiten-runtime-type.ts:43](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten-runtime-type.ts#L43)
+Defined in: [packages/core/src/types/ambiten-runtime-type.ts:45](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten-runtime-type.ts#L45)
 
 #### Returns
 

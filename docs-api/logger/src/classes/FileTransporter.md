@@ -6,7 +6,7 @@
 
 # Class: FileTransporter
 
-Defined in: [packages/logger/src/transports/fileTransport.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/fileTransport.ts#L5)
+Defined in: [packages/logger/src/transports/fileTransport.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/fileTransport.ts#L5)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/logger/src/transports/fileTransport.ts:5](https://github.c
 
 > **new FileTransporter**(`stream`): `FileTransporter`
 
-Defined in: [packages/logger/src/transports/fileTransport.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/fileTransport.ts#L6)
+Defined in: [packages/logger/src/transports/fileTransport.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/fileTransport.ts#L6)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/logger/src/transports/fileTransport.ts:6](https://github.c
 
 > **close**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/fileTransport.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/fileTransport.ts#L25)
+Defined in: [packages/logger/src/transports/fileTransport.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/fileTransport.ts#L25)
 
 #### Returns
 
@@ -52,7 +52,7 @@ Defined in: [packages/logger/src/transports/fileTransport.ts:25](https://github.
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/fileTransport.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/fileTransport.ts#L19)
+Defined in: [packages/logger/src/transports/fileTransport.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/fileTransport.ts#L19)
 
 #### Returns
 
@@ -68,7 +68,7 @@ Defined in: [packages/logger/src/transports/fileTransport.ts:19](https://github.
 
 > **write**(`_entry`, `formatted`): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/fileTransport.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/fileTransport.ts#L8)
+Defined in: [packages/logger/src/transports/fileTransport.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/fileTransport.ts#L8)
 
 #### Parameters
 

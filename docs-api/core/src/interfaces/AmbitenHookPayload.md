@@ -6,7 +6,7 @@
 
 # Interface: AmbitenHookPayload\<T\>
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:68](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L68)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:75](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L75)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:68](https://github.co
 
 > `optional` **bulkOperations?**: `AnyBulkWriteOperation`\<`T`\>[]
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:80](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L80)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:87](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L87)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:80](https://github.co
 
 > `optional` **bulkUpdates?**: `object`[]
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:79](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L79)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:86](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L86)
 
 #### filter
 
@@ -44,7 +44,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:79](https://github.co
 
 > **collectionName**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:70](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L70)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:77](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L77)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:70](https://github.co
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:72](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L72)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:79](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L79)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:72](https://github.co
 
 > `optional` **doc?**: `Partial`\<`T`\>
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:76](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L76)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:83](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L83)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:76](https://github.co
 
 > `optional` **docs?**: `Partial`\<`T`\>[]
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:77](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L77)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:84](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L84)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:77](https://github.co
 
 > `optional` **filter?**: `Filter`\<`T`\>
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:74](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L74)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:81](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L81)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:74](https://github.co
 
 > `optional` **meta?**: [`AmbitenOperationMeta`](AmbitenOperationMeta.md)
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:82](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L82)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:89](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L89)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:82](https://github.co
 
 > **operation**: [`AmbitenMiddlewareOperation`](../type-aliases/AmbitenMiddlewareOperation.md)
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:69](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L69)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:76](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L76)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:69](https://github.co
 
 > `optional` **pipeline?**: `object`[]
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:78](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L78)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:85](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L85)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:78](https://github.co
 
 > `optional` **result?**: `unknown`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:81](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L81)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:88](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L88)
 
 ***
 
@@ -116,7 +116,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:81](https://github.co
 
 > `optional` **session?**: `ClientSession`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:73](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L73)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:80](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L80)
 
 ***
 
@@ -124,7 +124,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:73](https://github.co
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:71](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L71)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:78](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L78)
 
 ***
 
@@ -132,4 +132,4 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:71](https://github.co
 
 > `optional` **update?**: `UpdateFilter`\<`T`\>
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:75](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L75)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:82](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L82)

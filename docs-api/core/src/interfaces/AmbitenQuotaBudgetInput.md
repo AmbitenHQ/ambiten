@@ -6,7 +6,7 @@
 
 # Interface: AmbitenQuotaBudgetInput
 
-Defined in: [packages/core/src/types/db.provider.ts:50](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L50)
+Defined in: [packages/core/src/types/db.provider.ts:51](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L51)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/db.provider.ts:50](https://github.com/Ambit
 
 > `optional` **maxQueries?**: `number`
 
-Defined in: [packages/core/src/types/db.provider.ts:51](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L51)
+Defined in: [packages/core/src/types/db.provider.ts:52](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L52)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/types/db.provider.ts:51](https://github.com/Ambit
 
 > `optional` **queriesExecuted?**: `number`
 
-Defined in: [packages/core/src/types/db.provider.ts:52](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L52)
+Defined in: [packages/core/src/types/db.provider.ts:53](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L53)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [packages/core/src/types/db.provider.ts:52](https://github.com/Ambit
 
 > `optional` **totalTimeMs?**: `number`
 
-Defined in: [packages/core/src/types/db.provider.ts:53](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L53)
+Defined in: [packages/core/src/types/db.provider.ts:54](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L54)

@@ -4,9 +4,15 @@
 
 [ambiten](../../../README.md) / [core/src](../README.md) / AmbitenConfig
 
-# Interface: AmbitenConfig
+# Interface: AmbitenConfig\<T\>
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L29)
+Defined in: [packages/core/src/types/ambitenConfig.ts:30](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L30)
+
+## Type Parameters
+
+### T
+
+`T` *extends* [`Document`](../type-aliases/Document.md) = `any`
 
 ## Properties
 
@@ -14,9 +20,7 @@ Defined in: [packages/core/src/types/ambitenConfig.ts:29](https://github.com/Amb
 
 > `optional` **advanced?**: `object`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:96](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L96)
-
-Advanced runtime configuration.
+Defined in: [packages/core/src/types/ambitenConfig.ts:93](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L93)
 
 #### autoInstall?
 
@@ -60,10 +64,7 @@ Advanced runtime configuration.
 
 > `optional` **configVersion?**: `string`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:114](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L114)
-
-Optional config metadata/versioning.
-Useful for generated config files and forward compatibility.
+Defined in: [packages/core/src/types/ambitenConfig.ts:110](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L110)
 
 ***
 
@@ -71,9 +72,7 @@ Useful for generated config files and forward compatibility.
 
 > `optional` **connection?**: `object`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:42](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L42)
-
-Connection settings used when no provider/mongoClient is supplied.
+Defined in: [packages/core/src/types/ambitenConfig.ts:38](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L38)
 
 #### options?
 
@@ -89,10 +88,7 @@ Connection settings used when no provider/mongoClient is supplied.
 
 > `optional` **features?**: `object`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:84](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L84)
-
-Optional feature paths and integrations.
-These are especially useful for generated project structures and bootstrap discovery.
+Defined in: [packages/core/src/types/ambitenConfig.ts:84](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L84)
 
 #### models?
 
@@ -124,10 +120,7 @@ These are especially useful for generated project structures and bootstrap disco
 
 > `optional` **graphql?**: `object`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:73](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L73)
-
-Optional GraphQL auto-generation/bootstrap feature.
-Primarily useful for playgrounds, prototyping, and generated GraphQL flows.
+Defined in: [packages/core/src/types/ambitenConfig.ts:77](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L77)
 
 #### enabled?
 
@@ -151,20 +144,15 @@ Primarily useful for playgrounds, prototyping, and generated GraphQL flows.
 
 > `optional` **logger?**: [`AmbitenLoggerSettings`](AmbitenLoggerSettings.md)
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:67](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L67)
-
-Logger configuration.
+Defined in: [packages/core/src/types/ambitenConfig.ts:75](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L75)
 
 ***
 
 ### model?
 
-> `optional` **model?**: [`AmbitenModelOptions`](AmbitenModelOptions.md)\<`any`\>
+> `optional` **model?**: [`BootstrapModelOptions`](../type-aliases/BootstrapModelOptions.md)\<`T`\>
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:51](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L51)
-
-Optional default model/schema bootstrap config.
-These are runtime-facing defaults, not request resolver functions.
+Defined in: [packages/core/src/types/ambitenConfig.ts:43](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L43)
 
 ***
 
@@ -172,7 +160,7 @@ These are runtime-facing defaults, not request resolver functions.
 
 > `optional` **mongoClient?**: [`BootstrapClient`](BootstrapClient.md)
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:37](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L37)
+Defined in: [packages/core/src/types/ambitenConfig.ts:36](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L36)
 
 ***
 
@@ -180,9 +168,7 @@ Defined in: [packages/core/src/types/ambitenConfig.ts:37](https://github.com/Amb
 
 > `optional` **multiTenant?**: `object`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:57](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L57)
-
-Multi-tenant runtime configuration.
+Defined in: [packages/core/src/types/ambitenConfig.ts:47](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L47)
 
 #### enabled?
 
@@ -192,13 +178,34 @@ Multi-tenant runtime configuration.
 
 > `optional` **headerKey?**: `string`
 
+Header used by supported runtime integrations
+to identify the active tenant.
+
+##### Default
+
+```ts
+"x-tenant-id"
+```
+
 #### initOptions?
 
 > `optional` **initOptions?**: [`InitMultiTenancyOptions`](InitMultiTenancyOptions.md)
 
+#### tenantConfigResolver?
+
+> `optional` **tenantConfigResolver?**: [`TenantConfigResolver`](../type-aliases/TenantConfigResolver.md)
+
+Dynamically resolves configuration for tenants
+that are not already registered.
+
 #### tenants?
 
 > `optional` **tenants?**: `Record`\<`string`, `string`\>
+
+Static tenant ID → MongoDB URI mappings.
+
+Useful for local development, tests,
+and applications with a known tenant set.
 
 ***
 
@@ -206,7 +213,7 @@ Multi-tenant runtime configuration.
 
 > `optional` **projectName?**: `string`
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:30](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L30)
+Defined in: [packages/core/src/types/ambitenConfig.ts:33](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L33)
 
 ***
 
@@ -214,15 +221,12 @@ Defined in: [packages/core/src/types/ambitenConfig.ts:30](https://github.com/Amb
 
 > `optional` **provider?**: [`BootstrapClient`](BootstrapClient.md)
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:36](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L36)
-
-Optional externally provided bootstrap client/provider.
-If provided, bootstrap uses this instead of creating one from connection config.
+Defined in: [packages/core/src/types/ambitenConfig.ts:35](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L35)
 
 ***
 
 ### schema?
 
-> `optional` **schema?**: [`SchemaDefinition`](../type-aliases/SchemaDefinition.md)\<[`Document`](../type-aliases/Document.md)\>
+> `optional` **schema?**: [`SchemaDefinition`](../type-aliases/SchemaDefinition.md)\<`T`\>
 
-Defined in: [packages/core/src/types/ambitenConfig.ts:52](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambitenConfig.ts#L52)
+Defined in: [packages/core/src/types/ambitenConfig.ts:45](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambitenConfig.ts#L45)

@@ -8,7 +8,7 @@
 
 > **SchemaType** = `object`
 
-Defined in: [packages/core/src/types/schema.type.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/schema.type.ts#L15)
+Defined in: [packages/core/src/types/schema.type.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/schema.type.ts#L15)
 
 MongoDB schema types.
 
@@ -18,7 +18,7 @@ MongoDB schema types.
 
 > `readonly` **Types**: `object`
 
-Defined in: [packages/core/src/types/schema.type.ts:16](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/schema.type.ts#L16)
+Defined in: [packages/core/src/types/schema.type.ts:16](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/schema.type.ts#L16)
 
 #### ObjectId
 

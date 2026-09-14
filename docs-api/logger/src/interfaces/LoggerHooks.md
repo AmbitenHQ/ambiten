@@ -6,7 +6,7 @@
 
 # Interface: LoggerHooks
 
-Defined in: [packages/logger/src/types/logger.types.ts:71](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L71)
+Defined in: [packages/logger/src/types/logger.types.ts:71](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L71)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:71](https://github.com/Am
 
 > `optional` **onError?**: (`error`, `entry?`) => `void`
 
-Defined in: [packages/logger/src/types/logger.types.ts:74](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L74)
+Defined in: [packages/logger/src/types/logger.types.ts:74](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L74)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:74](https://github.com/Am
 
 > `optional` **onFlush?**: (`entries`) => `void`
 
-Defined in: [packages/logger/src/types/logger.types.ts:73](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L73)
+Defined in: [packages/logger/src/types/logger.types.ts:73](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L73)
 
 #### Parameters
 
@@ -54,7 +54,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:73](https://github.com/Am
 
 > `optional` **onLog?**: (`entry`) => `void`
 
-Defined in: [packages/logger/src/types/logger.types.ts:72](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L72)
+Defined in: [packages/logger/src/types/logger.types.ts:72](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L72)
 
 #### Parameters
 

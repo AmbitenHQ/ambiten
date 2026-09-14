@@ -6,7 +6,7 @@
 
 # Interface: BootstrapClient
 
-Defined in: [packages/core/src/types/bootstrapClient.type.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/bootstrapClient.type.ts#L10)
+Defined in: [packages/core/src/types/bootstrapClient.type.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/bootstrapClient.type.ts#L10)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [packages/core/src/types/bootstrapClient.type.ts:10](https://github.
 
 > **client**(`ctx?`): `Promise`\<`MongoClient`\>
 
-Defined in: [packages/core/src/types/bootstrapClient.type.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/bootstrapClient.type.ts#L13)
+Defined in: [packages/core/src/types/bootstrapClient.type.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/bootstrapClient.type.ts#L13)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [packages/core/src/types/bootstrapClient.type.ts:13](https://github.
 
 > **close**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/types/bootstrapClient.type.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/bootstrapClient.type.ts#L12)
+Defined in: [packages/core/src/types/bootstrapClient.type.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/bootstrapClient.type.ts#L12)
 
 #### Returns
 
@@ -52,7 +52,7 @@ Defined in: [packages/core/src/types/bootstrapClient.type.ts:12](https://github.
 
 > **collection**\<`T`\>(`collectionName`, `ctx?`): `Promise`\<`Collection`\<`T`\>\>
 
-Defined in: [packages/core/src/types/bootstrapClient.type.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/bootstrapClient.type.ts#L15)
+Defined in: [packages/core/src/types/bootstrapClient.type.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/bootstrapClient.type.ts#L15)
 
 #### Type Parameters
 
@@ -80,7 +80,7 @@ Defined in: [packages/core/src/types/bootstrapClient.type.ts:15](https://github.
 
 > **connect**(): `Promise`\<`BootstrapClient`\>
 
-Defined in: [packages/core/src/types/bootstrapClient.type.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/bootstrapClient.type.ts#L11)
+Defined in: [packages/core/src/types/bootstrapClient.type.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/bootstrapClient.type.ts#L11)
 
 #### Returns
 
@@ -92,7 +92,7 @@ Defined in: [packages/core/src/types/bootstrapClient.type.ts:11](https://github.
 
 > **db**(`ctx?`): `Promise`\<`Db`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L19)
+Defined in: [packages/core/src/types/db.provider.ts:20](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L20)
 
 #### Parameters
 
@@ -114,7 +114,7 @@ Defined in: [packages/core/src/types/db.provider.ts:19](https://github.com/Ambit
 
 > **startSession**(`ctx?`): `Promise`\<`ClientSession`\>
 
-Defined in: [packages/core/src/types/bootstrapClient.type.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/bootstrapClient.type.ts#L14)
+Defined in: [packages/core/src/types/bootstrapClient.type.ts:14](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/bootstrapClient.type.ts#L14)
 
 #### Parameters
 

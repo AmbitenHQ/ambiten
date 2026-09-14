@@ -6,7 +6,7 @@
 
 # Interface: GarbageCollectorScheduleOptions
 
-Defined in: [packages/core/src/gc/gcCron.node.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/gcCron.node.ts#L7)
+Defined in: [packages/core/src/gc/gcCron.node.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/gcCron.node.ts#L7)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/gc/gcCron.node.ts:7](https://github.com/AmbitenHQ
 
 > `optional` **continueOnError?**: `boolean`
 
-Defined in: [packages/core/src/gc/gcCron.node.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/gcCron.node.ts#L10)
+Defined in: [packages/core/src/gc/gcCron.node.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/gcCron.node.ts#L10)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/gc/gcCron.node.ts:10](https://github.com/AmbitenH
 
 > `optional` **cronExpr?**: `string`
 
-Defined in: [packages/core/src/gc/gcCron.node.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/gcCron.node.ts#L8)
+Defined in: [packages/core/src/gc/gcCron.node.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/gcCron.node.ts#L8)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [packages/core/src/gc/gcCron.node.ts:8](https://github.com/AmbitenHQ
 
 > `optional` **ctx?**: [`ModelContext`](../type-aliases/ModelContext.md)
 
-Defined in: [packages/core/src/gc/gcCron.node.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/gcCron.node.ts#L9)
+Defined in: [packages/core/src/gc/gcCron.node.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/gcCron.node.ts#L9)

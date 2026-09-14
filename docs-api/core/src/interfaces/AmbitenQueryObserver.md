@@ -6,7 +6,7 @@
 
 # Interface: AmbitenQueryObserver
 
-Defined in: [packages/core/src/types/db.provider.ts:45](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L45)
+Defined in: [packages/core/src/types/db.provider.ts:46](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L46)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/db.provider.ts:45](https://github.com/Ambit
 
 > `optional` **onQuery?**: (`payload`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:46](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L46)
+Defined in: [packages/core/src/types/db.provider.ts:47](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L47)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/types/db.provider.ts:46](https://github.com/Ambit
 
 > `optional` **onQueryError?**: (`payload`) => `void` \| `Promise`\<`void`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:47](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L47)
+Defined in: [packages/core/src/types/db.provider.ts:48](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L48)
 
 #### Parameters
 

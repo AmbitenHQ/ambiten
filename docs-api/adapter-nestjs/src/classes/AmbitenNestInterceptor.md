@@ -6,7 +6,7 @@
 
 # Class: AmbitenNestInterceptor
 
-Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:91](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts#L91)
+Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:112](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts#L112)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:91](https
 
 > **new AmbitenNestInterceptor**(`options?`): `AmbitenNestInterceptor`
 
-Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:92](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts#L92)
+Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:114](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts#L114)
 
 #### Parameters
 
@@ -34,9 +34,9 @@ Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:92](https
 
 ### intercept()
 
-> **intercept**(`context`, `next`): `Promise`\<`Observable`\<`unknown`\>\>
+> **intercept**(`context`, `next`): `Observable`\<`unknown`\>
 
-Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:97](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts#L97)
+Defined in: [packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts:120](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-nestjs/src/nestjs-adapter.interceptor.ts#L120)
 
 Method to implement a custom interceptor.
 
@@ -58,7 +58,7 @@ a reference to the `CallHandler`, which provides access to an
 
 #### Returns
 
-`Promise`\<`Observable`\<`unknown`\>\>
+`Observable`\<`unknown`\>
 
 #### Implementation of
 

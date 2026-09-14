@@ -6,7 +6,7 @@
 
 # Interface: TenancyOptions
 
-Defined in: [packages/adapter-types/src/types.ts:21](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L21)
+Defined in: [packages/adapter-types/src/types.ts:21](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L21)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-types/src/types.ts:21](https://github.com/AmbitenH
 
 > `optional` **cookie?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:23](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L23)
+Defined in: [packages/adapter-types/src/types.ts:23](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L23)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-types/src/types.ts:23](https://github.com/AmbitenH
 
 > `optional` **fallback?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:27](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L27)
+Defined in: [packages/adapter-types/src/types.ts:27](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L27)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-types/src/types.ts:27](https://github.com/AmbitenH
 
 > `optional` **header?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L22)
+Defined in: [packages/adapter-types/src/types.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L22)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-types/src/types.ts:22](https://github.com/AmbitenH
 
 > `optional` **jwtClaim?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:26](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L26)
+Defined in: [packages/adapter-types/src/types.ts:26](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L26)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-types/src/types.ts:26](https://github.com/AmbitenH
 
 > `optional` **param?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:24](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L24)
+Defined in: [packages/adapter-types/src/types.ts:24](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L24)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/adapter-types/src/types.ts:24](https://github.com/AmbitenH
 
 > `optional` **resolver?**: [`TenantResolver`](../type-aliases/TenantResolver.md)
 
-Defined in: [packages/adapter-types/src/types.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L29)
+Defined in: [packages/adapter-types/src/types.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L29)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/adapter-types/src/types.ts:29](https://github.com/AmbitenH
 
 > `optional` **subdomain?**: `boolean`
 
-Defined in: [packages/adapter-types/src/types.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L25)
+Defined in: [packages/adapter-types/src/types.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L25)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [packages/adapter-types/src/types.ts:25](https://github.com/AmbitenH
 
 > `optional` **validate?**: (`id`) => `boolean` \| `Promise`\<`boolean`\>
 
-Defined in: [packages/adapter-types/src/types.ts:28](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L28)
+Defined in: [packages/adapter-types/src/types.ts:28](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L28)
 
 #### Parameters
 

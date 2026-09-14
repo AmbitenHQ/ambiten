@@ -6,7 +6,7 @@
 
 # Interface: SoftDeleteOptions
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:1](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L1)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L3)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/plugins/softDelete/types.ts:1](https://github.com
 
 > `optional` **deletedAtField?**: `string`
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L3)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L5)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/plugins/softDelete/types.ts:3](https://github.com
 
 > `optional` **deletedByField?**: `string`
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L4)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L6)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/plugins/softDelete/types.ts:4](https://github.com
 
 > `optional` **enabled?**: `boolean`
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L6)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L8)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/plugins/softDelete/types.ts:6](https://github.com
 
 > `optional` **excludeDeletedByDefault?**: `boolean`
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L7)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L9)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/core/src/plugins/softDelete/types.ts:7](https://github.com
 
 > `optional` **field?**: `string`
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:2](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L2)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L4)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [packages/core/src/plugins/softDelete/types.ts:2](https://github.com
 
 > `optional` **isDeletedField?**: `string`
 
-Defined in: [packages/core/src/plugins/softDelete/types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/plugins/softDelete/types.ts#L5)
+Defined in: [packages/core/src/plugins/softDelete/types.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/plugins/softDelete/types.ts#L7)

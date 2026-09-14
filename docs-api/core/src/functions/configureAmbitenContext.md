@@ -8,7 +8,7 @@
 
 > **configureAmbitenContext**(`provider`): `void`
 
-Defined in: [packages/core/src/utils/configureAmbitenContext.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/configureAmbitenContext.ts#L15)
+Defined in: [packages/core/src/utils/configureAmbitenContext.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/configureAmbitenContext.ts#L15)
 
 Configures the Ambiten runtime context with a transaction client resolver.
 

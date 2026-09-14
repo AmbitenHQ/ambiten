@@ -6,7 +6,7 @@
 
 # Interface: AsyncBatchTransporterOptions
 
-Defined in: [packages/logger/src/types/logger.types.ts:77](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L77)
+Defined in: [packages/logger/src/types/logger.types.ts:77](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L77)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:77](https://github.com/Am
 
 > `optional` **batchSize?**: `number`
 
-Defined in: [packages/logger/src/types/logger.types.ts:78](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L78)
+Defined in: [packages/logger/src/types/logger.types.ts:78](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L78)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:78](https://github.com/Am
 
 > `optional` **flushInterval?**: `number`
 
-Defined in: [packages/logger/src/types/logger.types.ts:79](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L79)
+Defined in: [packages/logger/src/types/logger.types.ts:79](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L79)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:79](https://github.com/Am
 
 > **sendBatch**: (`entries`) => `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/types/logger.types.ts:80](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L80)
+Defined in: [packages/logger/src/types/logger.types.ts:80](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L80)
 
 #### Parameters
 

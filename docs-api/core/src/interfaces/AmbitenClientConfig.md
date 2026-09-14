@@ -6,7 +6,7 @@
 
 # Interface: AmbitenClientConfig
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L8)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L8)
 
 Configuration options for the AmbitenClient.
 
@@ -16,7 +16,7 @@ Configuration options for the AmbitenClient.
 
 > `optional` **options?**: [`AmbitenClientOptions`](AmbitenClientOptions.md)
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:17](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L17)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:17](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L17)
 
 Optional configuration options for the client.
 
@@ -26,7 +26,7 @@ Optional configuration options for the client.
 
 > `optional` **tenantResolver?**: [`TenantClientResolver`](TenantClientResolver.md)
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L22)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L22)
 
 An optional MongoClient instance.
 
@@ -36,6 +36,6 @@ An optional MongoClient instance.
 
 > **uri**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L12)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L12)
 
 The MongoDB connection URI.

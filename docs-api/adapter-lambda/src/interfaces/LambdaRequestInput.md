@@ -6,7 +6,7 @@
 
 # Interface: LambdaRequestInput
 
-Defined in: [packages/adapter-lambda/src/types.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L9)
+Defined in: [packages/adapter-lambda/src/types.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:9](https://github.com/AmbitenH
 
 > `optional` **body?**: `string` \| `null`
 
-Defined in: [packages/adapter-lambda/src/types.ts:31](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L31)
+Defined in: [packages/adapter-lambda/src/types.ts:31](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L31)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:31](https://github.com/Ambiten
 
 > `optional` **cookies?**: `string`[]
 
-Defined in: [packages/adapter-lambda/src/types.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L29)
+Defined in: [packages/adapter-lambda/src/types.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L29)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:29](https://github.com/Ambiten
 
 > `optional` **headers?**: `Record`\<`string`, `string` \| `undefined`\> \| `null`
 
-Defined in: [packages/adapter-lambda/src/types.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L10)
+Defined in: [packages/adapter-lambda/src/types.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L10)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:10](https://github.com/Ambiten
 
 > `optional` **httpMethod?**: `string`
 
-Defined in: [packages/adapter-lambda/src/types.ts:27](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L27)
+Defined in: [packages/adapter-lambda/src/types.ts:27](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L27)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:27](https://github.com/Ambiten
 
 > `optional` **isBase64Encoded?**: `boolean`
 
-Defined in: [packages/adapter-lambda/src/types.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L32)
+Defined in: [packages/adapter-lambda/src/types.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L32)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:32](https://github.com/Ambiten
 
 > `optional` **multiValueHeaders?**: `Record`\<`string`, `string`[] \| `undefined`\> \| `null`
 
-Defined in: [packages/adapter-lambda/src/types.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L11)
+Defined in: [packages/adapter-lambda/src/types.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L11)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:11](https://github.com/Ambiten
 
 > `optional` **multiValueQueryStringParameters?**: `Record`\<`string`, `string`[] \| `undefined`\> \| `null`
 
-Defined in: [packages/adapter-lambda/src/types.ts:16](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L16)
+Defined in: [packages/adapter-lambda/src/types.ts:16](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L16)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:16](https://github.com/Ambiten
 
 > `optional` **path?**: `string`
 
-Defined in: [packages/adapter-lambda/src/types.ts:26](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L26)
+Defined in: [packages/adapter-lambda/src/types.ts:26](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L26)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:26](https://github.com/Ambiten
 
 > `optional` **pathParameters?**: `Record`\<`string`, `string` \| `undefined`\> \| `null`
 
-Defined in: [packages/adapter-lambda/src/types.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L13)
+Defined in: [packages/adapter-lambda/src/types.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L13)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:13](https://github.com/Ambiten
 
 > `optional` **queryStringParameters?**: `Record`\<`string`, `string` \| `undefined`\> \| `null`
 
-Defined in: [packages/adapter-lambda/src/types.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L15)
+Defined in: [packages/adapter-lambda/src/types.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L15)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:15](https://github.com/Ambiten
 
 > `optional` **rawPath?**: `string`
 
-Defined in: [packages/adapter-lambda/src/types.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L25)
+Defined in: [packages/adapter-lambda/src/types.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L25)
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: [packages/adapter-lambda/src/types.ts:25](https://github.com/Ambiten
 
 > `optional` **requestContext?**: `object`
 
-Defined in: [packages/adapter-lambda/src/types.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/types.ts#L18)
+Defined in: [packages/adapter-lambda/src/types.ts:18](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/types.ts#L18)
 
 #### http?
 

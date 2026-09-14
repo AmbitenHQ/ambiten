@@ -6,7 +6,7 @@
 
 # Interface: GeneratedProjectResult
 
-Defined in: [packages/core/src/init-cli/generate.project.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/init-cli/generate.project.ts#L7)
+Defined in: [packages/core/src/init-cli/generate.project.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/init-cli/generate.project.ts#L7)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/init-cli/generate.project.ts:7](https://github.co
 
 > **configPath**: `string`
 
-Defined in: [packages/core/src/init-cli/generate.project.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/init-cli/generate.project.ts#L9)
+Defined in: [packages/core/src/init-cli/generate.project.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/init-cli/generate.project.ts#L9)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/init-cli/generate.project.ts:9](https://github.co
 
 > **entryFilePath**: `string`
 
-Defined in: [packages/core/src/init-cli/generate.project.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/init-cli/generate.project.ts#L10)
+Defined in: [packages/core/src/init-cli/generate.project.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/init-cli/generate.project.ts#L10)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [packages/core/src/init-cli/generate.project.ts:10](https://github.c
 
 > **projectRoot**: `string`
 
-Defined in: [packages/core/src/init-cli/generate.project.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/init-cli/generate.project.ts#L8)
+Defined in: [packages/core/src/init-cli/generate.project.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/init-cli/generate.project.ts#L8)

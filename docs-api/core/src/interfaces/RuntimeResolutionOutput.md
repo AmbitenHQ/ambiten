@@ -6,7 +6,7 @@
 
 # Interface: RuntimeResolutionOutput
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:19](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L19)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L19)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:19](https://github.
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L22)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L22)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:22](https://github.
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:21](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L21)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:21](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L21)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:21](https://github.
 
 > `optional` **loggerMeta?**: `Record`\<`string`, `any`\>
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L25)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L25)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:25](https://github.
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:24](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L24)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:24](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L24)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:24](https://github.
 
 > `optional` **session?**: `ClientSession`
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:23](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L23)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:23](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L23)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:23](https://github.
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:20](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/resolveRuntimeConfig.ts#L20)
+Defined in: [packages/core/src/utils/resolveRuntimeConfig.ts:20](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/resolveRuntimeConfig.ts#L20)

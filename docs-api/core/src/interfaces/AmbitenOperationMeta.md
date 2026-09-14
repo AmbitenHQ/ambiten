@@ -6,7 +6,7 @@
 
 # Interface: AmbitenOperationMeta
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:86](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L86)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:93](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L93)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/ambiten.model.type.ts:86](https://github.co
 
 > `optional` **bulkWrite?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:115](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L115)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:122](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L122)
 
 Indicates the operation is a bulk write or bulk-style mutation.
 
@@ -24,7 +24,7 @@ Indicates the operation is a bulk write or bulk-style mutation.
 
 > `optional` **cacheHit?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:125](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L125)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:132](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L132)
 
 Indicates the operation result came from cache.
 
@@ -34,7 +34,7 @@ Indicates the operation result came from cache.
 
 > `optional` **extra?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:158](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L158)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:165](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L165)
 
 Free-form extension point for future enterprise features.
 
@@ -44,7 +44,7 @@ Free-form extension point for future enterprise features.
 
 > `optional` **gc?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:110](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L110)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:117](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L117)
 
 Indicates the operation is part of garbage collection.
 
@@ -54,7 +54,7 @@ Indicates the operation is part of garbage collection.
 
 > `optional` **policy?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:141](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L141)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:148](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L148)
 
 Optional tenant policy or compliance classification.
 Reserved for future Sovereign Shield integration.
@@ -65,7 +65,7 @@ Reserved for future Sovereign Shield integration.
 
 > `optional` **region?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:147](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L147)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:154](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L154)
 
 Optional region or sovereignty zone identifier.
 Reserved for future geofencing and data-governance features.
@@ -76,7 +76,7 @@ Reserved for future geofencing and data-governance features.
 
 > `optional` **restore?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:100](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L100)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:107](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L107)
 
 Indicates the operation is part of a restore flow.
 
@@ -86,7 +86,7 @@ Indicates the operation is part of a restore flow.
 
 > `optional` **secure?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:95](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L95)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:102](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L102)
 
 Indicates the operation is security-sensitive or explicitly access-controlled.
 
@@ -96,7 +96,7 @@ Indicates the operation is security-sensitive or explicitly access-controlled.
 
 > `optional` **softDelete?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:105](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L105)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:112](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L112)
 
 Indicates the operation is performing a soft delete rather than a hard delete.
 
@@ -106,7 +106,7 @@ Indicates the operation is performing a soft delete rather than a hard delete.
 
 > `optional` **streaming?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:120](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L120)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:127](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L127)
 
 Indicates the operation is creating or handling a stream.
 
@@ -116,7 +116,7 @@ Indicates the operation is creating or handling a stream.
 
 > `optional` **trace?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:153](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L153)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:160](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L160)
 
 Optional evidence or trace classification tag.
 Reserved for future evidence collection and audit systems.
@@ -127,7 +127,7 @@ Reserved for future evidence collection and audit systems.
 
 > `optional` **transactional?**: `boolean`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:90](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L90)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:97](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L97)
 
 Indicates the operation is executing inside a transaction boundary.
 
@@ -137,7 +137,7 @@ Indicates the operation is executing inside a transaction boundary.
 
 > `optional` **userId?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:130](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L130)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:137](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L137)
 
 User identifier associated with the operation, when available.
 
@@ -147,6 +147,6 @@ User identifier associated with the operation, when available.
 
 > `optional` **userRole?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:135](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L135)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:142](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L142)
 
 User role associated with the operation, when available.

@@ -6,7 +6,7 @@
 
 # Class: BufferedTransporter
 
-Defined in: [packages/logger/src/transports/buffered-transporter.ts:18](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/buffered-transporter.ts#L18)
+Defined in: [packages/logger/src/transports/buffered-transporter.ts:18](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/buffered-transporter.ts#L18)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/logger/src/transports/buffered-transporter.ts:18](https://
 
 > **new BufferedTransporter**(`transporter`, `options?`): `BufferedTransporter`
 
-Defined in: [packages/logger/src/transports/buffered-transporter.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/buffered-transporter.ts#L32)
+Defined in: [packages/logger/src/transports/buffered-transporter.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/buffered-transporter.ts#L32)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [packages/logger/src/transports/buffered-transporter.ts:32](https://
 
 > **close**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/buffered-transporter.ts:105](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/buffered-transporter.ts#L105)
+Defined in: [packages/logger/src/transports/buffered-transporter.ts:105](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/buffered-transporter.ts#L105)
 
 #### Returns
 
@@ -56,7 +56,7 @@ Defined in: [packages/logger/src/transports/buffered-transporter.ts:105](https:/
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/buffered-transporter.ts:66](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/buffered-transporter.ts#L66)
+Defined in: [packages/logger/src/transports/buffered-transporter.ts:66](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/buffered-transporter.ts#L66)
 
 #### Returns
 
@@ -72,7 +72,7 @@ Defined in: [packages/logger/src/transports/buffered-transporter.ts:66](https://
 
 > **stop**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/buffered-transporter.ts:120](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/buffered-transporter.ts#L120)
+Defined in: [packages/logger/src/transports/buffered-transporter.ts:120](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/buffered-transporter.ts#L120)
 
 #### Returns
 
@@ -84,7 +84,7 @@ Defined in: [packages/logger/src/transports/buffered-transporter.ts:120](https:/
 
 > **write**(`entry`, `formatted`): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/buffered-transporter.ts:44](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/buffered-transporter.ts#L44)
+Defined in: [packages/logger/src/transports/buffered-transporter.ts:44](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/buffered-transporter.ts#L44)
 
 #### Parameters
 

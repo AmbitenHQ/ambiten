@@ -6,7 +6,7 @@
 
 # Class: AmbitenModel\<T\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:82](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L82)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:83](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L83)
 
 A MongoDB-backed model with schema validation, middleware, multi-tenancy,
 transactions, caching, soft-delete support, and query instrumentation.
@@ -25,7 +25,7 @@ The MongoDB document shape handled by this model.
 
 > **new AmbitenModel**\<`T`\>(`options`): `AmbitenModel`\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:115](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L115)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:116](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L116)
 
 Creates a new model instance.
 
@@ -50,7 +50,7 @@ default context, and optional GC configuration.
 
 > **get** **schema**(): [`AmbitenSchema`](AmbitenSchema.md)\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:528](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L528)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:578](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L578)
 
 Returns the schema attached to this model.
 
@@ -64,7 +64,7 @@ Returns the schema attached to this model.
 
 > **after**(`operation`, `handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5404](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5404)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5456](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5456)
 
 #### Parameters
 
@@ -86,7 +86,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5404](https://git
 
 > **afterAggregate**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5482](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5482)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5534](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5534)
 
 #### Parameters
 
@@ -104,7 +104,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5482](https://git
 
 > **afterBulkInsert**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5466](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5466)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5518](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5518)
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5466](https://git
 
 > **afterBulkUpdate**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5474](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5474)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5526](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5526)
 
 #### Parameters
 
@@ -140,7 +140,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5474](https://git
 
 > **afterDeleteMany**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5458](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5458)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5510](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5510)
 
 #### Parameters
 
@@ -158,7 +158,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5458](https://git
 
 > **afterDeleteOne**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5450](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5450)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5502](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5502)
 
 #### Parameters
 
@@ -176,7 +176,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5450](https://git
 
 > **afterFind**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5418](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5418)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5470](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5470)
 
 #### Parameters
 
@@ -194,7 +194,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5418](https://git
 
 > **afterFindOne**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5426](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5426)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5478](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5478)
 
 #### Parameters
 
@@ -212,7 +212,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5426](https://git
 
 > **afterFindOneAndDelete**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5498](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5498)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5550](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5550)
 
 #### Parameters
 
@@ -230,7 +230,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5498](https://git
 
 > **afterFindOneAndReplace**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5506](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5506)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5558](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5558)
 
 #### Parameters
 
@@ -248,7 +248,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5506](https://git
 
 > **afterFindOneAndUpdate**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5490](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5490)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5542](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5542)
 
 #### Parameters
 
@@ -266,7 +266,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5490](https://git
 
 > **afterFindOneAndUpsert**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5514](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5514)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5566](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5566)
 
 #### Parameters
 
@@ -284,7 +284,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5514](https://git
 
 > **afterSave**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5434](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5434)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5486](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5486)
 
 #### Parameters
 
@@ -302,7 +302,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5434](https://git
 
 > **afterUpdateOne**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5442](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5442)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5494](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5494)
 
 #### Parameters
 
@@ -320,7 +320,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5442](https://git
 
 > **aggregate**\<`U`\>(`pipeline`, `options?`, `externalSession?`, `ctx?`, `queryOptions?`): `Promise`\<`U`[]\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3455](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3455)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3507](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3507)
 
 Executes an aggregation pipeline against the model collection.
 
@@ -390,7 +390,7 @@ When the pipeline is missing or invalid.
 
 > **aggregateWithCache**(`pipeline`, `cacheKey`, `cacheDuration?`): `Promise`\<`T`[]\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3932](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3932)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3984](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3984)
 
 Aggregates documents in the collection using a pipeline with caching.
 
@@ -430,7 +430,7 @@ If the pipeline is not valid or the cache key is not a string.
 
 > **aggregateWithTransaction**\<`U`\>(`pipeline`, `options?`, `ctx?`): `Promise`\<`U`[]\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3597](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3597)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3649](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3649)
 
 Executes an aggregation pipeline inside a transaction-aware runtime context.
 
@@ -484,7 +484,7 @@ When the pipeline is missing or invalid.
 
 > **before**(`operation`, `handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5394](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5394)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5446](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5446)
 
 #### Parameters
 
@@ -506,7 +506,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5394](https://git
 
 > **beforeAggregate**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5478](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5478)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5530](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5530)
 
 #### Parameters
 
@@ -524,7 +524,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5478](https://git
 
 > **beforeBulkInsert**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5462](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5462)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5514](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5514)
 
 #### Parameters
 
@@ -542,7 +542,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5462](https://git
 
 > **beforeBulkUpdate**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5470](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5470)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5522](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5522)
 
 #### Parameters
 
@@ -560,7 +560,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5470](https://git
 
 > **beforeDeleteMany**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5454](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5454)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5506](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5506)
 
 #### Parameters
 
@@ -578,7 +578,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5454](https://git
 
 > **beforeDeleteOne**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5446](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5446)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5498](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5498)
 
 #### Parameters
 
@@ -596,7 +596,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5446](https://git
 
 > **beforeFind**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5414](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5414)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5466](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5466)
 
 #### Parameters
 
@@ -614,7 +614,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5414](https://git
 
 > **beforeFindOne**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5422](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5422)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5474](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5474)
 
 #### Parameters
 
@@ -632,7 +632,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5422](https://git
 
 > **beforeFindOneAndDelete**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5494](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5494)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5546](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5546)
 
 #### Parameters
 
@@ -650,7 +650,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5494](https://git
 
 > **beforeFindOneAndReplace**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5502](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5502)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5554](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5554)
 
 #### Parameters
 
@@ -668,7 +668,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5502](https://git
 
 > **beforeFindOneAndUpdate**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5486](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5486)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5538](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5538)
 
 #### Parameters
 
@@ -686,7 +686,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5486](https://git
 
 > **beforeFindOneAndUpsert**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5510](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5510)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5562](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5562)
 
 #### Parameters
 
@@ -704,7 +704,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5510](https://git
 
 > **beforeSave**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5430](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5430)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5482](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5482)
 
 #### Parameters
 
@@ -722,7 +722,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5430](https://git
 
 > **beforeUpdateOne**(`handler`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5438](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5438)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5490](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5490)
 
 #### Parameters
 
@@ -740,7 +740,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5438](https://git
 
 > **bind**(`ctx`): `AmbitenModel`\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:462](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L462)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:512](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L512)
 
 Returns a model instance bound to a default context.
 
@@ -764,7 +764,7 @@ A cloned model instance with merged default context.
 
 > **bulkInsert**(`docs`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1221](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1221)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1273](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1273)
 
 Inserts multiple documents into the model collection.
 
@@ -801,7 +801,7 @@ A promise that resolves when the operation completes.
 
 > **bulkUpdate**(`updates`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1343](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1343)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1395](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1395)
 
 Updates multiple documents using MongoDB bulk write semantics.
 
@@ -844,7 +844,7 @@ When the updates payload is invalid.
 
 > **bulkWriteWithTransaction**(`operations`, `options?`, `ctx?`): `Promise`\<`BulkWriteResult`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2073](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2073)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2125](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2125)
 
 Executes multiple MongoDB bulk write operations inside a transaction-aware
 runtime context.
@@ -891,7 +891,7 @@ When the operations payload is missing or invalid.
 
 > **create**(`doc`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:703](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L703)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:753](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L753)
 
 Creates a new document in the model collection.
 
@@ -932,7 +932,7 @@ When the provided document is missing or invalid.
 
 > **createIndex**(`fields`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4052](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4052)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4104](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4104)
 
 Creates an index on the model collection.
 
@@ -968,7 +968,7 @@ When the field specification is missing or invalid.
 
 > **createWithTransaction**(`doc`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1952](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1952)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2004](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2004)
 
 Creates a new document inside a transaction-aware runtime context.
 
@@ -1009,7 +1009,7 @@ When the provided document is missing or invalid.
 
 > **deleteMany**(`filter`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1674](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1674)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1726](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1726)
 
 Deletes multiple documents matching the provided filter.
 
@@ -1057,7 +1057,7 @@ When soft delete is enabled but no softDeleteUpdate payload is provided.
 
 > **deleteOne**(`filter`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1501](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1501)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1553](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1553)
 
 Deletes a single document matching the provided filter.
 
@@ -1105,7 +1105,7 @@ When soft delete is enabled but no softDeleteUpdate payload is provided.
 
 > **deleteSecure**(`filter`, `user`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3335](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3335)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3387](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3387)
 
 Deletes a single document matching the provided filter using an admin-only
 secure operation.
@@ -1161,7 +1161,7 @@ When the user payload is missing.
 
 > **deleteWithTransaction**(`filter`, `ctx?`): `Promise`\<`boolean`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2202](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2202)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2254](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2254)
 
 Deletes a single document inside a transaction-aware runtime context.
 
@@ -1201,7 +1201,7 @@ When the filter is missing or invalid.
 
 > **dropIndex**(`indexName`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4085](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4085)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4137](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4137)
 
 Drops an index from the collection by its name.
 
@@ -1225,7 +1225,7 @@ Resolves when the index is dropped.
 
 > **find**(`filter?`, `ctx?`, `options?`): `Promise`\<[`ModelResultArray`](../type-aliases/ModelResultArray.md)\<`T`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:813](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L813)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:865](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L865)
 
 Finds documents matching the provided filter.
 
@@ -1271,7 +1271,7 @@ When the filter is invalid.
 
 > **findOne**(`filter`, `ctx?`, `options?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:958](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L958)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1010](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1010)
 
 Finds a single document matching the provided filter.
 
@@ -1317,7 +1317,7 @@ When the filter is missing or invalid.
 
 > **findOneAndDelete**(`filter`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2621](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2621)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2673](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2673)
 
 Finds a single document matching the provided filter and deletes it.
 
@@ -1365,7 +1365,7 @@ When the filter is missing or invalid.
 
 > **findOneAndReplace**(`filter`, `replacement`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2828](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2828)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2880](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2880)
 
 Finds a single document matching the provided filter and replaces it with the
 supplied replacement document.
@@ -1417,7 +1417,7 @@ When the replacement document fails validation.
 
 > **findOneAndUpdate**(`filter`, `update`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2486](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2486)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2538](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2538)
 
 Finds a single document matching the provided filter and updates it.
 
@@ -1471,7 +1471,7 @@ When the update document is missing or invalid.
 
 > **findOneAndUpsert**(`filter`, `update`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2950](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2950)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3002](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3002)
 
 Finds a single document matching the provided filter and updates it. If no
 matching document exists, a new one is inserted using MongoDB upsert
@@ -1524,7 +1524,7 @@ When the update document is missing or invalid.
 
 > **findOneAndUpsertWithTransaction**(`filter`, `update`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3072](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3072)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3124](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3124)
 
 Finds a single document matching the provided filter and updates it inside a
 transaction. If no document matches, a new one is inserted using MongoDB
@@ -1577,7 +1577,7 @@ When the update document is missing or invalid.
 
 > **findOneAndUpsertWithTransactionSecure**(`filter`, `update`, `user`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3201](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3201)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3253](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3253)
 
 Finds a single document matching the provided filter and updates it inside a
 secure transaction. If no document matches, a new one is inserted using
@@ -1641,7 +1641,7 @@ When the update document is missing or invalid.
 
 > **getContext**(): `object`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4191](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4191)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4243](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4243)
 
 #### Returns
 
@@ -1657,7 +1657,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4191](https://git
 
 > **getSchema**(): [`AmbitenSchema`](AmbitenSchema.md)\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:535](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L535)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:585](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L585)
 
 Returns the schema attached to this model.
 
@@ -1671,7 +1671,7 @@ Returns the schema attached to this model.
 
 > **init**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:425](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L425)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:474](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L474)
 
 Initializes the model by validating configuration, resolving the collection,
 and creating the GC TTL index when enabled.
@@ -1686,7 +1686,7 @@ and creating the GC TTL index when enabled.
 
 > **invalidateDocumentCache**(`doc`, `ctx?`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4240](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4240)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4292](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4292)
 
 Invalidates cache entries related to a specific document within the current
 model scope.
@@ -1724,7 +1724,7 @@ When the document is missing a valid `_id`.
 
 > **invalidateModelPattern**(`pattern`, `ctx?`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4206](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4206)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4258](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4258)
 
 Invalidates cache entries for the current model scope using a pattern.
 
@@ -1761,7 +1761,7 @@ When the pattern is invalid.
 
 > **off**(`event`, `listener`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:392](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L392)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:441](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L441)
 
 Removes a subscribed event listener.
 
@@ -1789,7 +1789,7 @@ Event listener callback.
 
 > **on**(`event`, `listener`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:372](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L372)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:421](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L421)
 
 Subscribes to a model event.
 
@@ -1817,7 +1817,7 @@ Event listener callback.
 
 > **once**(`event`, `listener`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:382](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L382)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:431](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L431)
 
 Subscribes to a model event once.
 
@@ -1845,7 +1845,7 @@ Event listener callback.
 
 > **paginatedFind**(`filter`, `pageSize`, `lastId?`): `Promise`\<`T`[]\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3979](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3979)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4031](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4031)
 
 Cursor-based pagination using _id comparison instead of skip.
 
@@ -1882,7 +1882,7 @@ This method uses the _id field for pagination, which is more efficient than usin
 
 > **populateMany**\<`K`\>(`doc`, `field`, `relatedModel`): `Promise`\<`T` & `Record`\<`string`, `unknown`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1910](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1910)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1962](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1962)
 
 Populates an array reference field on a document by resolving the related
 documents from another model.
@@ -1932,7 +1932,7 @@ document results, or `null` when the input document is invalid.
 
 > **populateOne**\<`K`\>(`doc`, `field`, `relatedModel`): `Promise`\<`T` & `Record`\<`string`, `unknown`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1868](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1868)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1920](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1920)
 
 Populates a single reference field on a document by resolving the related
 document from another model.
@@ -1982,7 +1982,7 @@ document result, or `null` when the input document is invalid.
 
 > **registerModel**(`options`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:473](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L473)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:523](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L523)
 
 Registers or reconfigures the model.
 
@@ -2004,7 +2004,7 @@ Model registration options.
 
 > **removeListener**(`event`, `listener`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:402](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L402)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:451](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L451)
 
 Removes a specific event listener.
 
@@ -2032,7 +2032,7 @@ Event listener callback.
 
 > **restoreMany**(`filter`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5161](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5161)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5213](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5213)
 
 Restores multiple soft-deleted documents matching the provided filter.
 
@@ -2075,7 +2075,7 @@ When the filter is missing or invalid.
 
 > **restoreOne**(`filter`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5011](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5011)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5063](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5063)
 
 Restores a single soft-deleted document matching the provided filter.
 
@@ -2118,7 +2118,7 @@ When the filter is missing or invalid.
 
 > **runCommand**(`command`, ...`args`): `Promise`\<`any`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4359](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4359)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4411](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4411)
 
 Runs a custom command on the collection.
 
@@ -2148,7 +2148,7 @@ The result of the command.
 
 > **runGC**(`ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4382](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4382)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4434](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4434)
 
 Runs garbage collection for expired documents in the model collection.
 
@@ -2182,7 +2182,7 @@ A promise that resolves when garbage collection completes.
 
 > **runInTransaction**\<`R`\>(`operation`, `ctx?`): `Promise`\<`R`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3773](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3773)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3825](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3825)
 
 Executes the provided operation inside a transaction-aware Ambiten runtime context.
 
@@ -2229,7 +2229,7 @@ The resolved result of the transactional operation.
 
 > **setSoftDeleteConfig**(`config`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5344](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L5344)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5396](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L5396)
 
 #### Parameters
 
@@ -2253,7 +2253,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:5344](https://git
 
 > **startAutoGC**(`intervalMs?`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4617](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4617)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4669](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4669)
 
 Starts the automatic garbage collection process.
 
@@ -2275,7 +2275,7 @@ The interval in milliseconds for the garbage collection to run.
 
 > **streamAggregation**\<`U`\>(`pipeline`, `options?`, `ctx?`): `Promise`\<`Readable` & `AsyncIterable`\<`U`, `any`, `any`\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3819](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L3819)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:3871](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L3871)
 
 Creates a readable stream for an aggregation pipeline.
 
@@ -2333,7 +2333,7 @@ When the pipeline is missing or invalid.
 
 > **updateOne**(`filter`, `update`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1106](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L1106)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:1158](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L1158)
 
 Updates a single document matching the provided filter.
 
@@ -2383,7 +2383,7 @@ When the update document is missing or invalid.
 
 > **updateWithTransaction**(`filter`, `update`, `ctx?`): `Promise`\<[`ModelResult`](../type-aliases/ModelResult.md)\<`T`\> \| `null`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2334](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L2334)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:2386](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L2386)
 
 Updates a single document inside a transaction-aware runtime context.
 
@@ -2435,7 +2435,7 @@ When the update document is missing or invalid.
 
 > **validateAsync**(`doc`): `Promise`\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:556](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L556)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:606](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L606)
 
 Validates a document asynchronously against the model schema.
 Useful for schemas that perform async validation, such as checking uniqueness
@@ -2460,7 +2460,7 @@ The validated document.
 
 > **warmCache**(`queries?`, `defaultTtl?`, `ctx?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4894](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4894)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4946](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4946)
 
 Warms cache entries for selected model queries.
 
@@ -2509,7 +2509,7 @@ When cache warming fails.
 
 > **watchChanges**(`callback`, `ctx?`): `Promise`\<`ChangeStream`\<`T`, `ChangeStreamDocument`\<`T`\>\>\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4014](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4014)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4066](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4066)
 
 Opens a MongoDB change stream on the model collection and registers a change
 callback.
@@ -2554,7 +2554,7 @@ When the callback is not a valid function.
 
 > `static` **cacheResult**\<`R`\>(`key`, `data`, `ttl?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4837](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4837)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4889](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4889)
 
 #### Type Parameters
 
@@ -2586,7 +2586,7 @@ Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4837](https://git
 
 > `static` **clearCache**(`key`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4863](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4863)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4915](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4915)
 
 Clears a cached result by its key.
 
@@ -2610,7 +2610,7 @@ Resolves when the cache is cleared.
 
 > `static` **getCacheStats**(`tenantId?`): `Promise`\<[`AmbitenCacheStats`](../interfaces/AmbitenCacheStats.md)\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4273](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4273)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4325](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4325)
 
 Returns cache statistics for the active Redis cache backend.
 
@@ -2642,7 +2642,7 @@ When cache statistics cannot be retrieved.
 
 > `static` **invalidatePattern**(`pattern`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4135](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenModelFactory.ts#L4135)
+Defined in: [packages/core/src/lib-core/ambitenModelFactory.ts:4187](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenModelFactory.ts#L4187)
 
 Invalidates all cache entries matching the provided Redis key pattern.
 

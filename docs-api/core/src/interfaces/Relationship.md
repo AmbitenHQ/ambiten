@@ -6,7 +6,7 @@
 
 # Interface: Relationship\<T\>
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:39](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L39)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:46](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L46)
 
 Represents a relationship between collections in MongoDB.
 
@@ -24,7 +24,7 @@ The type of the document in the collection.
 
 > **localField**: keyof `T`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:48](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L48)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:55](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L55)
 
 The field in the current document that holds the reference.
 
@@ -34,6 +34,6 @@ The field in the current document that holds the reference.
 
 > **ref**: `string`
 
-Defined in: [packages/core/src/types/ambiten.model.type.ts:43](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.model.type.ts#L43)
+Defined in: [packages/core/src/types/ambiten.model.type.ts:50](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.model.type.ts#L50)
 
 The name of the referenced collection.

@@ -8,7 +8,7 @@
 
 > **invalidateTenantCache**(`tenantId`, `role`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/middleware/rbac/rbacMiddleware.ts:174](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/middleware/rbac/rbacMiddleware.ts#L174)
+Defined in: [packages/core/src/middleware/rbac/rbacMiddleware.ts:174](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/middleware/rbac/rbacMiddleware.ts#L174)
 
 Invalidate the cache for a specific tenant and role
 

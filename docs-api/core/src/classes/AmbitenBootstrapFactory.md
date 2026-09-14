@@ -6,12 +6,13 @@
 
 # Class: AmbitenBootstrapFactory
 
-Defined in: [packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts:478](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts#L478)
+Defined in: [packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts:546](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts#L546)
 
-Factory class to create an instance of AmbitenBootstrap.
+Factory which returns the instance of the main AmbitenBootstrap and 
+Attached a method AmbitenBootstrap.create() which initializes the AmbitenBootstrap.
 This class encapsulates the logic for initializing the Ambiten application stack,
 including MongoDB, Multi-Tenancy, Redis, GraphQL logger etc. setup.
-It can be used to create a fully configured Ambiten instance
+It can be used to create a fully configured Ambiten application.
 with optional configuration parameters.
 
 ## Example
@@ -51,13 +52,13 @@ Optional configuration object for Ambiten.
 
 > `static` **create**(`options?`): `Promise`\<[`AmbitenRuntime`](../interfaces/AmbitenRuntime.md)\<[`Document`](../type-aliases/Document.md)\>\>
 
-Defined in: [packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts:479](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts#L479)
+Defined in: [packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts:547](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/bootstrap/ambitenBootstrap.ts#L547)
 
 #### Parameters
 
 ##### options?
 
-[`AmbitenBootstrapFactoryOptions`](../interfaces/AmbitenBootstrapFactoryOptions.md) = `{}`
+`AmbitenBootstrapFactoryOptions` = `{}`
 
 #### Returns
 

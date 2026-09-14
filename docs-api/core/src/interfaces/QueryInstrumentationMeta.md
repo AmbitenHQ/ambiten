@@ -6,7 +6,7 @@
 
 # Interface: QueryInstrumentationMeta
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:4](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L4)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:4](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:4](http
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L6)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L6)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:6](http
 
 > `optional` **documentCount?**: `number`
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L10)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L10)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:10](htt
 
 > `optional` **extra?**: `Record`\<`string`, `any`\>
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L11)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L11)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:11](htt
 
 > `optional` **filter?**: `unknown`
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L7)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L7)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:7](http
 
 > **operation**: `string`
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L5)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L5)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:5](http
 
 > `optional` **pipeline?**: `unknown`
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L9)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L9)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:9](http
 
 > `optional` **update?**: `unknown`
 
-Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/instrumentation/measureQueryWithErrors.ts#L8)
+Defined in: [packages/core/src/instrumentation/measureQueryWithErrors.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/instrumentation/measureQueryWithErrors.ts#L8)

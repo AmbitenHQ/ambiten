@@ -6,7 +6,7 @@
 
 # Class: AmbitenGC
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:24](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L24)
+Defined in: [packages/core/src/gc/ambitenGC.ts:24](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L24)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:24](https://github.com/AmbitenHQ/
 
 > **new AmbitenGC**(`options?`): `AmbitenGC`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:30](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L30)
+Defined in: [packages/core/src/gc/ambitenGC.ts:30](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L30)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:30](https://github.com/AmbitenHQ/
 
 > **runOnce**(`ctx?`): `Promise`\<[`GarbageCollectorRunResult`](../interfaces/GarbageCollectorRunResult.md)\>
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:108](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L108)
+Defined in: [packages/core/src/gc/ambitenGC.ts:108](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L108)
 
 Runs garbage collection once across registered models.
 
@@ -56,7 +56,7 @@ Summary of the GC run.
 
 > **start**(): `void`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:66](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L66)
+Defined in: [packages/core/src/gc/ambitenGC.ts:66](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L66)
 
 Starts interval-based garbage collection.
 
@@ -70,7 +70,7 @@ Starts interval-based garbage collection.
 
 > **stop**(): `void`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:88](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L88)
+Defined in: [packages/core/src/gc/ambitenGC.ts:88](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L88)
 
 Stops interval or cron-based garbage collection.
 

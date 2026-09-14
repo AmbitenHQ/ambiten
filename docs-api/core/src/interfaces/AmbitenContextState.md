@@ -6,7 +6,7 @@
 
 # Interface: AmbitenContextState
 
-Defined in: [packages/core/src/types/db.provider.ts:31](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L31)
+Defined in: [packages/core/src/types/db.provider.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L32)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/db.provider.ts:31](https://github.com/Ambit
 
 > `optional` **budget?**: [`AmbitenQuotaBudgetInput`](AmbitenQuotaBudgetInput.md)
 
-Defined in: [packages/core/src/types/db.provider.ts:42](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L42)
+Defined in: [packages/core/src/types/db.provider.ts:43](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L43)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/types/db.provider.ts:42](https://github.com/Ambit
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/core/src/types/db.provider.ts:35](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L35)
+Defined in: [packages/core/src/types/db.provider.ts:36](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L36)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/types/db.provider.ts:35](https://github.com/Ambit
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/types/db.provider.ts:34](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L34)
+Defined in: [packages/core/src/types/db.provider.ts:35](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L35)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/types/db.provider.ts:34](https://github.com/Ambit
 
 > `optional` **debug?**: `boolean`
 
-Defined in: [packages/core/src/types/db.provider.ts:39](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L39)
+Defined in: [packages/core/src/types/db.provider.ts:40](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L40)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/core/src/types/db.provider.ts:39](https://github.com/Ambit
 
 > `optional` **logger?**: [`AmbitenLoggerLike`](AmbitenLoggerLike.md)
 
-Defined in: [packages/core/src/types/db.provider.ts:38](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L38)
+Defined in: [packages/core/src/types/db.provider.ts:39](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L39)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/core/src/types/db.provider.ts:38](https://github.com/Ambit
 
 > `optional` **loggerMeta?**: `Record`\<`string`, `any`\>
 
-Defined in: [packages/core/src/types/db.provider.ts:37](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L37)
+Defined in: [packages/core/src/types/db.provider.ts:38](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L38)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/core/src/types/db.provider.ts:37](https://github.com/Ambit
 
 > `optional` **meta?**: [`AmbitenOperationMeta`](AmbitenOperationMeta.md)
 
-Defined in: [packages/core/src/types/db.provider.ts:40](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L40)
+Defined in: [packages/core/src/types/db.provider.ts:41](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L41)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [packages/core/src/types/db.provider.ts:40](https://github.com/Ambit
 
 > `optional` **observer?**: [`AmbitenQueryObserver`](AmbitenQueryObserver.md)
 
-Defined in: [packages/core/src/types/db.provider.ts:41](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L41)
+Defined in: [packages/core/src/types/db.provider.ts:42](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L42)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [packages/core/src/types/db.provider.ts:41](https://github.com/Ambit
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/core/src/types/db.provider.ts:33](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L33)
+Defined in: [packages/core/src/types/db.provider.ts:34](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L34)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [packages/core/src/types/db.provider.ts:33](https://github.com/Ambit
 
 > `optional` **session?**: `ClientSession`
 
-Defined in: [packages/core/src/types/db.provider.ts:36](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L36)
+Defined in: [packages/core/src/types/db.provider.ts:37](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L37)
 
 ***
 
@@ -94,4 +94,4 @@ Defined in: [packages/core/src/types/db.provider.ts:36](https://github.com/Ambit
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/types/db.provider.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/db.provider.ts#L32)
+Defined in: [packages/core/src/types/db.provider.ts:33](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/db.provider.ts#L33)

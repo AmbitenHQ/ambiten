@@ -23,3 +23,4 @@
 ## Functions
 
 - [resolveTenant](functions/resolveTenant.md)
+- [validateResolvedTenant](functions/validateResolvedTenant.md)

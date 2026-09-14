@@ -8,7 +8,7 @@
 
 > **GetTenantModelParams**\<`T`\> = `object`
 
-Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/TenantModelResolver.ts#L10)
+Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/TenantModelResolver.ts#L9)
 
 ## Type Parameters
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:10](https://github
 
 > **collectionName**: `string`
 
-Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/TenantModelResolver.ts#L11)
+Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/TenantModelResolver.ts#L10)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:11](https://github
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/TenantModelResolver.ts#L14)
+Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/TenantModelResolver.ts#L13)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:14](https://github
 
 > **schema**: [`AmbitenSchema`](../classes/AmbitenSchema.md)\<`T`\>
 
-Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/TenantModelResolver.ts#L12)
+Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/TenantModelResolver.ts#L11)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:12](https://github
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/TenantModelResolver.ts#L13)
+Defined in: [packages/core/src/tanancy/TenantModelResolver.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/TenantModelResolver.ts#L12)

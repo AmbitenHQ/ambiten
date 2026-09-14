@@ -8,7 +8,7 @@
 
 > **ModelResult**\<`T`\> = `EnhancedOmit`\<`WithId`\<`T`\>, `"_id"`\> & `object`
 
-Defined in: [packages/core/src/types/result.utils.types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/result.utils.types.ts#L5)
+Defined in: [packages/core/src/types/result.utils.types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/result.utils.types.ts#L5)
 
 ## Type Declaration
 

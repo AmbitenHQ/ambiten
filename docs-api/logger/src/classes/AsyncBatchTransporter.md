@@ -6,7 +6,7 @@
 
 # Class: AsyncBatchTransporter
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L22)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L22)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/logger/src/transports/async-batch.transporter.ts:22](https
 
 > **new AsyncBatchTransporter**(`options`): `AsyncBatchTransporter`
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:40](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L40)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:40](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L40)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/logger/src/transports/async-batch.transporter.ts:40](https
 
 > **close**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:151](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L151)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:151](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L151)
 
 #### Returns
 
@@ -52,7 +52,7 @@ Defined in: [packages/logger/src/transports/async-batch.transporter.ts:151](http
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:94](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L94)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:94](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L94)
 
 #### Returns
 
@@ -68,7 +68,7 @@ Defined in: [packages/logger/src/transports/async-batch.transporter.ts:94](https
 
 > **start**(): `void`
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:133](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L133)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:133](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L133)
 
 #### Returns
 
@@ -80,7 +80,7 @@ Defined in: [packages/logger/src/transports/async-batch.transporter.ts:133](http
 
 > **stop**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:174](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L174)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:174](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L174)
 
 #### Returns
 
@@ -92,7 +92,7 @@ Defined in: [packages/logger/src/transports/async-batch.transporter.ts:174](http
 
 > **write**(`entry`, `_formatted`): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/async-batch.transporter.ts:58](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/async-batch.transporter.ts#L58)
+Defined in: [packages/logger/src/transports/async-batch.transporter.ts:58](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/async-batch.transporter.ts#L58)
 
 #### Parameters
 

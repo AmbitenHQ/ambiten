@@ -6,7 +6,7 @@
 
 # Interface: LoggerContextSnapshot
 
-Defined in: [packages/logger/src/types/logger.types.ts:27](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L27)
+Defined in: [packages/logger/src/types/logger.types.ts:27](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L27)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:27](https://github.com/Am
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/logger/src/types/logger.types.ts:31](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L31)
+Defined in: [packages/logger/src/types/logger.types.ts:31](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L31)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:31](https://github.com/Am
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/logger/src/types/logger.types.ts:30](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L30)
+Defined in: [packages/logger/src/types/logger.types.ts:30](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L30)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:30](https://github.com/Am
 
 > `optional` **debug?**: `boolean`
 
-Defined in: [packages/logger/src/types/logger.types.ts:34](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L34)
+Defined in: [packages/logger/src/types/logger.types.ts:34](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L34)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:34](https://github.com/Am
 
 > `optional` **meta?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/logger/src/types/logger.types.ts:35](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L35)
+Defined in: [packages/logger/src/types/logger.types.ts:35](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L35)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:35](https://github.com/Am
 
 > `optional` **operation?**: `string`
 
-Defined in: [packages/logger/src/types/logger.types.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L32)
+Defined in: [packages/logger/src/types/logger.types.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L32)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:32](https://github.com/Am
 
 > `optional` **requestId?**: `string`
 
-Defined in: [packages/logger/src/types/logger.types.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L29)
+Defined in: [packages/logger/src/types/logger.types.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L29)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:29](https://github.com/Am
 
 > `optional` **source?**: `string`
 
-Defined in: [packages/logger/src/types/logger.types.ts:33](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L33)
+Defined in: [packages/logger/src/types/logger.types.ts:33](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L33)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [packages/logger/src/types/logger.types.ts:33](https://github.com/Am
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/logger/src/types/logger.types.ts:28](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L28)
+Defined in: [packages/logger/src/types/logger.types.ts:28](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L28)

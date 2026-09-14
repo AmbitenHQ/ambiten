@@ -6,7 +6,7 @@
 
 # Class: AmbitenCache
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:28](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L28)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:28](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L28)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:28](https://github.
 
 > **new AmbitenCache**(`client?`): `AmbitenCache`
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L29)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L29)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:29](https://github.
 
 > **get**\<`T`\>(`key`, `options?`): `Promise`\<`T` \| `null`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:59](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L59)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:59](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L59)
 
 Reads and deserializes a cached value.
 
@@ -62,7 +62,7 @@ Reads and deserializes a cached value.
 
 > **invalidate**(`key`, `options?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:120](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L120)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:120](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L120)
 
 Invalidates one cache key.
 
@@ -86,7 +86,7 @@ Invalidates one cache key.
 
 > **invalidatePattern**(`pattern`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:129](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L129)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:129](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L129)
 
 Invalidates cache keys by pattern using SCAN.
 
@@ -106,7 +106,7 @@ Invalidates cache keys by pattern using SCAN.
 
 > **set**\<`T`\>(`key`, `value`, `options?`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:81](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L81)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:81](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L81)
 
 Serializes and writes a cached value.
 
@@ -140,7 +140,7 @@ Serializes and writes a cached value.
 
 > **wrap**\<`T`\>(`key`, `fetcher`, `options?`): `Promise`\<`T`\>
 
-Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:100](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/ambiten-cache/ambitenCache.ts#L100)
+Defined in: [packages/core/src/ambiten-cache/ambitenCache.ts:100](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/ambiten-cache/ambitenCache.ts#L100)
 
 Returns cached value if available, otherwise computes, stores, and returns it.
 

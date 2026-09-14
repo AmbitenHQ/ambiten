@@ -8,7 +8,7 @@
 
 > **LoggerContextProvider** = () => [`LoggerContextSnapshot`](../interfaces/LoggerContextSnapshot.md) \| `undefined` \| `null`
 
-Defined in: [packages/logger/src/types/logger.types.ts:38](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L38)
+Defined in: [packages/logger/src/types/logger.types.ts:38](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L38)
 
 ## Returns
 

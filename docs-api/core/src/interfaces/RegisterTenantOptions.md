@@ -6,7 +6,7 @@
 
 # Interface: RegisterTenantOptions
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L12)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:16](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L16)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:12](https://github.
 
 > `optional` **client?**: `MongoClient`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L14)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:18](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L18)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:14](https://github.
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L13)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:17](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L17)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:13](https://github.
 
 > `optional` **lazy?**: `boolean`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L15)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:19](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L19)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:15](https://github.
 
 > `optional` **metadata?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:16](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L16)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:20](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L20)

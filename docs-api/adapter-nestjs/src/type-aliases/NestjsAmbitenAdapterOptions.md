@@ -8,4 +8,4 @@
 
 > **NestjsAmbitenAdapterOptions** = `AdapterContextOptions`
 
-Defined in: [packages/adapter-nestjs/src/nestjs-adapter.types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-nestjs/src/nestjs-adapter.types.ts#L3)
+Defined in: [packages/adapter-nestjs/src/nestjs-adapter.types.ts:3](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-nestjs/src/nestjs-adapter.types.ts#L3)

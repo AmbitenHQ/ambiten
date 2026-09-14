@@ -6,7 +6,7 @@
 
 # Interface: InitMultiTenancyOptions
 
-Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/init/initMultiTenancy.ts#L5)
+Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/init/initMultiTenancy.ts#L5)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:5](https://githu
 
 > `optional` **config?**: [`AmbitenLoggerSettings`](AmbitenLoggerSettings.md)
 
-Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:7](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/init/initMultiTenancy.ts#L7)
+Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:7](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/init/initMultiTenancy.ts#L7)
 
 ***
 
@@ -22,4 +22,12 @@ Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:7](https://githu
 
 > `optional` **lazy?**: `boolean`
 
-Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/init/initMultiTenancy.ts#L6)
+Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/init/initMultiTenancy.ts#L6)
+
+***
+
+### tenantConfigResolver?
+
+> `optional` **tenantConfigResolver?**: [`TenantConfigResolver`](../type-aliases/TenantConfigResolver.md)
+
+Defined in: [packages/core/src/tanancy/init/initMultiTenancy.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/init/initMultiTenancy.ts#L8)

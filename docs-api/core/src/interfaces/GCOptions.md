@@ -6,7 +6,7 @@
 
 # Interface: GCOptions
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:9](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L9)
+Defined in: [packages/core/src/gc/ambitenGC.ts:9](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:9](https://github.com/AmbitenHQ/a
 
 > `optional` **continueOnError?**: `boolean`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:16](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L16)
+Defined in: [packages/core/src/gc/ambitenGC.ts:16](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L16)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:16](https://github.com/AmbitenHQ/
 
 > `optional` **cron?**: `string`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L14)
+Defined in: [packages/core/src/gc/ambitenGC.ts:14](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L14)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:14](https://github.com/AmbitenHQ/
 
 > `optional` **ctx?**: [`ModelContext`](../type-aliases/ModelContext.md)
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:15](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L15)
+Defined in: [packages/core/src/gc/ambitenGC.ts:15](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L15)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:15](https://github.com/AmbitenHQ/
 
 > `optional` **enabled?**: `boolean`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:10](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L10)
+Defined in: [packages/core/src/gc/ambitenGC.ts:10](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L10)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:10](https://github.com/AmbitenHQ/
 
 > `optional` **interval?**: `string`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:11](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L11)
+Defined in: [packages/core/src/gc/ambitenGC.ts:11](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L11)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:11](https://github.com/AmbitenHQ/
 
 > `optional` **logger?**: `object`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:17](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L17)
+Defined in: [packages/core/src/gc/ambitenGC.ts:17](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L17)
 
 #### error?
 
@@ -116,7 +116,7 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:17](https://github.com/AmbitenHQ/
 
 > `optional` **logResults?**: `boolean`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L13)
+Defined in: [packages/core/src/gc/ambitenGC.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L13)
 
 ***
 
@@ -124,4 +124,4 @@ Defined in: [packages/core/src/gc/ambitenGC.ts:13](https://github.com/AmbitenHQ/
 
 > `optional` **retentionPeriod?**: `number`
 
-Defined in: [packages/core/src/gc/ambitenGC.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/gc/ambitenGC.ts#L12)
+Defined in: [packages/core/src/gc/ambitenGC.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/gc/ambitenGC.ts#L12)

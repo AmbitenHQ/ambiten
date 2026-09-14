@@ -6,7 +6,7 @@
 
 # Interface: AdapterContextResolvers
 
-Defined in: [packages/adapter-types/src/types.ts:36](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L36)
+Defined in: [packages/adapter-types/src/types.ts:36](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L36)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-types/src/types.ts:36](https://github.com/AmbitenH
 
 > `optional` **collectionName?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`string`\>
 
-Defined in: [packages/adapter-types/src/types.ts:40](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L40)
+Defined in: [packages/adapter-types/src/types.ts:40](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L40)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-types/src/types.ts:40](https://github.com/AmbitenH
 
 > `optional` **dbName?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`string`\>
 
-Defined in: [packages/adapter-types/src/types.ts:39](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L39)
+Defined in: [packages/adapter-types/src/types.ts:39](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L39)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-types/src/types.ts:39](https://github.com/AmbitenH
 
 > `optional` **debug?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`boolean`\>
 
-Defined in: [packages/adapter-types/src/types.ts:41](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L41)
+Defined in: [packages/adapter-types/src/types.ts:41](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L41)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-types/src/types.ts:41](https://github.com/AmbitenH
 
 > `optional` **loggerMeta?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [packages/adapter-types/src/types.ts:43](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L43)
+Defined in: [packages/adapter-types/src/types.ts:43](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L43)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-types/src/types.ts:43](https://github.com/AmbitenH
 
 > `optional` **meta?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [packages/adapter-types/src/types.ts:42](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L42)
+Defined in: [packages/adapter-types/src/types.ts:42](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L42)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [packages/adapter-types/src/types.ts:42](https://github.com/AmbitenH
 
 > `optional` **requestId?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`string`\>
 
-Defined in: [packages/adapter-types/src/types.ts:38](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L38)
+Defined in: [packages/adapter-types/src/types.ts:38](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L38)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [packages/adapter-types/src/types.ts:38](https://github.com/AmbitenH
 
 > `optional` **tenantId?**: [`ContextValueResolver`](../type-aliases/ContextValueResolver.md)\<`string`\>
 
-Defined in: [packages/adapter-types/src/types.ts:37](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L37)
+Defined in: [packages/adapter-types/src/types.ts:37](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L37)

@@ -6,9 +6,9 @@
 
 # Function: loadAmbitenConfig()
 
-> **loadAmbitenConfig**(`configPath?`): `Promise`\<[`AmbitenConfig`](../interfaces/AmbitenConfig.md)\>
+> **loadAmbitenConfig**(`configPath?`): `Promise`\<[`AmbitenConfig`](../interfaces/AmbitenConfig.md)\<`any`\>\>
 
-Defined in: [packages/core/src/config/loadAmbitenConfig.ts:94](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/config/loadAmbitenConfig.ts#L94)
+Defined in: [packages/core/src/config/loadAmbitenConfig.ts:98](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/config/loadAmbitenConfig.ts#L98)
 
 ## Parameters
 
@@ -18,4 +18,4 @@ Defined in: [packages/core/src/config/loadAmbitenConfig.ts:94](https://github.co
 
 ## Returns
 
-`Promise`\<[`AmbitenConfig`](../interfaces/AmbitenConfig.md)\>
+`Promise`\<[`AmbitenConfig`](../interfaces/AmbitenConfig.md)\<`any`\>\>

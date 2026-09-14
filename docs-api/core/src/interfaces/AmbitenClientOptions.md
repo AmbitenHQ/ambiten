@@ -6,7 +6,7 @@
 
 # Interface: AmbitenClientOptions
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:44](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L44)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:44](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L44)
 
 Options for configuring the AmbitenClient.
 
@@ -16,7 +16,7 @@ Options for configuring the AmbitenClient.
 
 > `optional` **client?**: `MongoClient`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:58](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L58)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:58](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L58)
 
 An optional MongoClient instance.
 
@@ -26,7 +26,7 @@ An optional MongoClient instance.
 
 > `optional` **collectionName?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:53](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L53)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:53](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L53)
 
 The name of the collection to use.
 
@@ -34,9 +34,9 @@ The name of the collection to use.
 
 ### config?
 
-> `optional` **config?**: [`AmbitenConfig`](AmbitenConfig.md)
+> `optional` **config?**: [`AmbitenConfig`](AmbitenConfig.md)\<`any`\>
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:63](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L63)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:63](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L63)
 
 Optional configuration for Ambiten.
 
@@ -46,6 +46,6 @@ Optional configuration for Ambiten.
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/types/ambiten.client.type.ts:48](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/ambiten.client.type.ts#L48)
+Defined in: [packages/core/src/types/ambiten.client.type.ts:48](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/ambiten.client.type.ts#L48)
 
 The name of the database to connect to.

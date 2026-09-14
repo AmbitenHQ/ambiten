@@ -6,7 +6,7 @@
 
 # Interface: AmbitenGraphQLUser
 
-Defined in: [packages/core/src/types/graphql.type.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L12)
+Defined in: [packages/core/src/types/graphql.type.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L12)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types/graphql.type.ts:12](https://github.com/Ambi
 
 > `optional` **id?**: `string`
 
-Defined in: [packages/core/src/types/graphql.type.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L13)
+Defined in: [packages/core/src/types/graphql.type.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L13)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [packages/core/src/types/graphql.type.ts:13](https://github.com/Ambi
 
 > `optional` **role?**: `string`
 
-Defined in: [packages/core/src/types/graphql.type.ts:14](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/graphql.type.ts#L14)
+Defined in: [packages/core/src/types/graphql.type.ts:14](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/graphql.type.ts#L14)

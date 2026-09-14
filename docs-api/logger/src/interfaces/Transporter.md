@@ -6,7 +6,7 @@
 
 # Interface: Transporter
 
-Defined in: [packages/logger/src/types/logger.types.ts:52](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L52)
+Defined in: [packages/logger/src/types/logger.types.ts:52](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L52)
 
 ## Methods
 
@@ -14,7 +14,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:52](https://github.com/Am
 
 > `optional` **close**(): `void` \| `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/types/logger.types.ts:55](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L55)
+Defined in: [packages/logger/src/types/logger.types.ts:55](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L55)
 
 #### Returns
 
@@ -26,7 +26,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:55](https://github.com/Am
 
 > `optional` **flush**(): `void` \| `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/types/logger.types.ts:54](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L54)
+Defined in: [packages/logger/src/types/logger.types.ts:54](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L54)
 
 #### Returns
 
@@ -38,7 +38,7 @@ Defined in: [packages/logger/src/types/logger.types.ts:54](https://github.com/Am
 
 > **write**(`entry`, `formatted`): `void` \| `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/types/logger.types.ts:53](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/logger.types.ts#L53)
+Defined in: [packages/logger/src/types/logger.types.ts:53](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/logger.types.ts#L53)
 
 #### Parameters
 

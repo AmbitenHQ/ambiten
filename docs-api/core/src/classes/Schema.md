@@ -6,7 +6,7 @@
 
 # Class: Schema\<T\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:301](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L301)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:400](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L400)
 
 The AmbitenSchema class allows you to define a schema for MongoDB documents.
 It supports:
@@ -26,7 +26,7 @@ It supports:
 
 ### T
 
-`T` *extends* [`Document`](../type-aliases/Document.md) = [`Document`](../type-aliases/Document.md)
+`T` *extends* [`Document`](../type-aliases/Document.md)
 
 ## Constructors
 
@@ -34,7 +34,7 @@ It supports:
 
 > **new Schema**\<`T`\>(`schemaDefinition`): `Schema`\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:302](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L302)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:401](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L401)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [packages/core/src/lib-core/ambitenSchema.ts:302](https://github.com
 
 > **addRelationship**(`ref`, `localField`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:138](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L138)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:237](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L237)
 
 Adds a relationship to the schema.
 
@@ -84,7 +84,7 @@ keyof `T`
 
 > **applyIndexes**(`collection`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:129](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L129)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:228](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L228)
 
 Applies all defined indexes to a MongoDB collection.
 
@@ -108,7 +108,7 @@ Applies all defined indexes to a MongoDB collection.
 
 > **applyVirtuals**(`doc`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:159](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L159)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:258](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L258)
 
 Applies all virtual fields to a document.
 
@@ -132,7 +132,7 @@ Applies all virtual fields to a document.
 
 > **create**(`data`): `Promise`\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:307](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L307)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:406](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L406)
 
 #### Parameters
 
@@ -150,7 +150,7 @@ Defined in: [packages/core/src/lib-core/ambitenSchema.ts:307](https://github.com
 
 > **executeMiddleware**(`phase`, `operation`, `ctx`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:256](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L256)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:355](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L355)
 
 Executes middleware for a given phase and operation.
 
@@ -182,7 +182,7 @@ Executes middleware for a given phase and operation.
 
 > **executePost**(`operation`, `ctx`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:243](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L243)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:342](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L342)
 
 Executes post-middleware for an operation.
 
@@ -210,7 +210,7 @@ Executes post-middleware for an operation.
 
 > **executePre**(`operation`, `ctx`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:230](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L230)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:329](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L329)
 
 Executes pre-middleware for an operation.
 
@@ -238,7 +238,7 @@ Executes pre-middleware for an operation.
 
 > **getGCConfig**(): [`GCConfig`](../type-aliases/GCConfig.md) \| `undefined`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:296](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L296)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:395](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L395)
 
 Gets garbage collection configuration.
 
@@ -256,7 +256,7 @@ Gets garbage collection configuration.
 
 > **getHooks**(`operation`, `phase?`): [`AmbitenMiddlewareHandler`](../type-aliases/AmbitenMiddlewareHandler.md)\<`T`\>[]
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:218](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L218)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:317](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L317)
 
 Backward-compatible hook reader.
 Defaults to pre hooks to avoid breaking older callers that expect getHooks(action).
@@ -285,7 +285,7 @@ Defaults to pre hooks to avoid breaking older callers that expect getHooks(actio
 
 > **getPostHooks**(`operation`): [`AmbitenMiddlewareHandler`](../type-aliases/AmbitenMiddlewareHandler.md)\<`T`\>[]
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:208](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L208)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:307](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L307)
 
 Returns all post-middleware for an operation.
 
@@ -309,7 +309,7 @@ Returns all post-middleware for an operation.
 
 > **getPreHooks**(`operation`): [`AmbitenMiddlewareHandler`](../type-aliases/AmbitenMiddlewareHandler.md)\<`T`\>[]
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:199](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L199)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:298](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L298)
 
 Returns all pre-middleware for an operation.
 
@@ -333,7 +333,7 @@ Returns all pre-middleware for an operation.
 
 > **getRelationships**(): [`Relationship`](../interfaces/Relationship.md)\<`any`\>[]
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:145](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L145)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:244](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L244)
 
 Retrieves all relationships defined in the schema.
 
@@ -351,7 +351,7 @@ Retrieves all relationships defined in the schema.
 
 > **getSchema**(): [`SchemaDefinition`](../type-aliases/SchemaDefinition.md)\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:62](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L62)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:62](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L62)
 
 Retrieves the schema definition.
 
@@ -369,7 +369,7 @@ Retrieves the schema definition.
 
 > **index**(`fields`, `options?`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:122](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L122)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:221](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L221)
 
 Adds an index to the schema.
 
@@ -397,7 +397,7 @@ Adds an index to the schema.
 
 > **post**(`operation`, `fn`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:185](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L185)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:284](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L284)
 
 Adds a post-middleware handler for a specific operation.
 
@@ -425,7 +425,7 @@ Adds a post-middleware handler for a specific operation.
 
 > **pre**(`operation`, `fn`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:171](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L171)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:270](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L270)
 
 Adds a pre-middleware handler for a specific operation.
 
@@ -453,7 +453,7 @@ Adds a pre-middleware handler for a specific operation.
 
 > **registerSchema**(`schemaDefinition`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:69](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L69)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:69](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L69)
 
 Re-registers the schema definition.
 
@@ -477,7 +477,7 @@ Re-registers the schema definition.
 
 > **setGCConfig**(`config`): `this`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:288](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L288)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:387](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L387)
 
 Sets garbage collection configuration.
 
@@ -501,7 +501,7 @@ Sets garbage collection configuration.
 
 > **triggerMiddleware**(`phase`, `operation`, `ctx`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:277](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L277)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:376](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L376)
 
 Backward-compatible alias.
 If older callers use triggerMiddleware(action, data), they should be upgraded
@@ -535,7 +535,7 @@ to pass explicit phase + operation + context.
 
 > **validate**(`doc`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:88](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L88)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:175](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L175)
 
 Validates a document synchronously.
 Throws if an async validator is encountered.
@@ -560,7 +560,7 @@ Throws if an async validator is encountered.
 
 > **validateAsync**(`doc`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:108](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L108)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:201](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L201)
 
 Validates a document asynchronously.
 
@@ -584,7 +584,7 @@ Validates a document asynchronously.
 
 > **validator**(`field`, `fn`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:77](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L77)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:149](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L149)
 
 Adds a custom validator for a specific field.
 
@@ -612,7 +612,7 @@ Adds a custom validator for a specific field.
 
 > **virtual**(`name`, `getter`): `void`
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:152](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L152)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:251](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L251)
 
 Adds a virtual field to the schema.
 
@@ -640,13 +640,13 @@ Adds a virtual field to the schema.
 
 > `static` **create**\<`T`\>(`schemaDefinition`): `Schema`\<`T`\>
 
-Defined in: [packages/core/src/lib-core/ambitenSchema.ts:333](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/lib-core/ambitenSchema.ts#L333)
+Defined in: [packages/core/src/lib-core/ambitenSchema.ts:432](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/lib-core/ambitenSchema.ts#L432)
 
 #### Type Parameters
 
 ##### T
 
-`T` *extends* [`Document`](../type-aliases/Document.md) = [`Document`](../type-aliases/Document.md)
+`T` *extends* [`Document`](../type-aliases/Document.md)
 
 #### Parameters
 

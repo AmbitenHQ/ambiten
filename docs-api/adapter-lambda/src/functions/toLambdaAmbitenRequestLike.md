@@ -8,7 +8,7 @@
 
 > **toLambdaAmbitenRequestLike**(`event`): [`AmbitenRequestLike`](../../../adapter-types/src/interfaces/AmbitenRequestLike.md)
 
-Defined in: [packages/adapter-lambda/src/lambda-request.ts:90](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-lambda/src/lambda-request.ts#L90)
+Defined in: [packages/adapter-lambda/src/lambda-request.ts:90](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-lambda/src/lambda-request.ts#L90)
 
 ## Parameters
 

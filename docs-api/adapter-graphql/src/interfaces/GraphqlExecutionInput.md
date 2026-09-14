@@ -6,7 +6,7 @@
 
 # Interface: GraphqlExecutionInput
 
-Defined in: [packages/adapter-graphql/src/types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/types.ts#L5)
+Defined in: [packages/adapter-graphql/src/types.ts:5](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/types.ts#L5)
 
 ## Properties
 
@@ -14,4 +14,4 @@ Defined in: [packages/adapter-graphql/src/types.ts:5](https://github.com/Ambiten
 
 > **request**: [`AmbitenRequestLike`](../../../adapter-types/src/interfaces/AmbitenRequestLike.md)
 
-Defined in: [packages/adapter-graphql/src/types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/types.ts#L6)
+Defined in: [packages/adapter-graphql/src/types.ts:6](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/types.ts#L6)

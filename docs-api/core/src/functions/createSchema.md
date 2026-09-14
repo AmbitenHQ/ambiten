@@ -8,7 +8,7 @@
 
 > **createSchema**\<`T`\>(`schema`): [`AmbitenSchema`](../classes/AmbitenSchema.md)\<`T`\>
 
-Defined in: [packages/core/src/utils/builders/schema.ts:23](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/utils/builders/schema.ts#L23)
+Defined in: [packages/core/src/utils/builders/schema.ts:23](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/utils/builders/schema.ts#L23)
 
 Creates a new AmbitenSchema instance with the provided schema definition.
 

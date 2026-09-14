@@ -6,7 +6,7 @@
 
 # Interface: AmbitenMiddlewareContext\<T\>
 
-Defined in: [packages/core/src/types/middleware/types.ts:30](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L30)
+Defined in: [packages/core/src/types/middleware/types.ts:30](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L30)
 
 ## Type Parameters
 
@@ -20,7 +20,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:30](https://github.com/
 
 > `optional` **bulkOperations?**: `AnyBulkWriteOperation`\<`T`\>[]
 
-Defined in: [packages/core/src/types/middleware/types.ts:43](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L43)
+Defined in: [packages/core/src/types/middleware/types.ts:43](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L43)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:43](https://github.com/
 
 > `optional` **bulkUpdates?**: `object`[]
 
-Defined in: [packages/core/src/types/middleware/types.ts:42](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L42)
+Defined in: [packages/core/src/types/middleware/types.ts:42](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L42)
 
 #### filter
 
@@ -44,7 +44,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:42](https://github.com/
 
 > **collectionName**: `string`
 
-Defined in: [packages/core/src/types/middleware/types.ts:33](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L33)
+Defined in: [packages/core/src/types/middleware/types.ts:33](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L33)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:33](https://github.com/
 
 > `optional` **dbName?**: `string`
 
-Defined in: [packages/core/src/types/middleware/types.ts:35](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L35)
+Defined in: [packages/core/src/types/middleware/types.ts:35](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L35)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:35](https://github.com/
 
 > `optional` **doc?**: `Partial`\<`T`\>
 
-Defined in: [packages/core/src/types/middleware/types.ts:39](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L39)
+Defined in: [packages/core/src/types/middleware/types.ts:39](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L39)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:39](https://github.com/
 
 > `optional` **docs?**: `Partial`\<`T`\>[]
 
-Defined in: [packages/core/src/types/middleware/types.ts:40](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L40)
+Defined in: [packages/core/src/types/middleware/types.ts:40](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L40)
 
 ***
 
@@ -76,7 +76,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:40](https://github.com/
 
 > `optional` **filter?**: `Filter`\<`T`\>
 
-Defined in: [packages/core/src/types/middleware/types.ts:37](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L37)
+Defined in: [packages/core/src/types/middleware/types.ts:37](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L37)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:37](https://github.com/
 
 > `optional` **hardDelete?**: `boolean`
 
-Defined in: [packages/core/src/types/middleware/types.ts:46](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L46)
+Defined in: [packages/core/src/types/middleware/types.ts:46](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L46)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:46](https://github.com/
 
 > `optional` **meta?**: [`AmbitenOperationMeta`](AmbitenOperationMeta.md)
 
-Defined in: [packages/core/src/types/middleware/types.ts:48](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L48)
+Defined in: [packages/core/src/types/middleware/types.ts:48](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L48)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:48](https://github.com/
 
 > `optional` **modelName?**: `string`
 
-Defined in: [packages/core/src/types/middleware/types.ts:32](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L32)
+Defined in: [packages/core/src/types/middleware/types.ts:32](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L32)
 
 ***
 
@@ -108,7 +108,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:32](https://github.com/
 
 > `optional` **onlyDeleted?**: `boolean`
 
-Defined in: [packages/core/src/types/middleware/types.ts:45](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L45)
+Defined in: [packages/core/src/types/middleware/types.ts:45](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L45)
 
 ***
 
@@ -116,7 +116,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:45](https://github.com/
 
 > **operation**: [`AmbitenMiddlewareOperation`](../type-aliases/AmbitenMiddlewareOperation.md)
 
-Defined in: [packages/core/src/types/middleware/types.ts:31](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L31)
+Defined in: [packages/core/src/types/middleware/types.ts:31](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L31)
 
 ***
 
@@ -124,7 +124,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:31](https://github.com/
 
 > `optional` **pipeline?**: `object`[]
 
-Defined in: [packages/core/src/types/middleware/types.ts:41](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L41)
+Defined in: [packages/core/src/types/middleware/types.ts:41](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L41)
 
 ***
 
@@ -132,7 +132,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:41](https://github.com/
 
 > `optional` **result?**: `unknown`
 
-Defined in: [packages/core/src/types/middleware/types.ts:47](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L47)
+Defined in: [packages/core/src/types/middleware/types.ts:47](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L47)
 
 ***
 
@@ -140,7 +140,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:47](https://github.com/
 
 > `optional` **session?**: `ClientSession`
 
-Defined in: [packages/core/src/types/middleware/types.ts:36](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L36)
+Defined in: [packages/core/src/types/middleware/types.ts:36](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L36)
 
 ***
 
@@ -148,7 +148,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:36](https://github.com/
 
 > `optional` **tenantId?**: `string`
 
-Defined in: [packages/core/src/types/middleware/types.ts:34](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L34)
+Defined in: [packages/core/src/types/middleware/types.ts:34](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L34)
 
 ***
 
@@ -156,7 +156,7 @@ Defined in: [packages/core/src/types/middleware/types.ts:34](https://github.com/
 
 > `optional` **update?**: `UpdateFilter`\<`T`\>
 
-Defined in: [packages/core/src/types/middleware/types.ts:38](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L38)
+Defined in: [packages/core/src/types/middleware/types.ts:38](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L38)
 
 ***
 
@@ -164,4 +164,4 @@ Defined in: [packages/core/src/types/middleware/types.ts:38](https://github.com/
 
 > `optional` **withDeleted?**: `boolean`
 
-Defined in: [packages/core/src/types/middleware/types.ts:44](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L44)
+Defined in: [packages/core/src/types/middleware/types.ts:44](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L44)

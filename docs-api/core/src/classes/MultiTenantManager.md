@@ -6,7 +6,7 @@
 
 # Class: MultiTenantManager
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:23](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L23)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:35](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L35)
 
 MultiTenantManager is responsible for managing tenant configurations and MongoDB client connections in a multi-tenant application.
 It supports both lazy and immediate tenant registration, allowing for flexible connection management based on application needs.
@@ -17,7 +17,7 @@ It supports both lazy and immediate tenant registration, allowing for flexible c
 
 > **new MultiTenantManager**(): `MultiTenantManager`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:26](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L26)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:42](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L42)
 
 #### Returns
 
@@ -25,11 +25,23 @@ Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:26](https://github.
 
 ## Methods
 
+### clearTenantConfigResolver()
+
+> `static` **clearTenantConfigResolver**(): `void`
+
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:174](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L174)
+
+#### Returns
+
+`void`
+
+***
+
 ### clearTenants()
 
 > `static` **clearTenants**(): `void`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:209](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L209)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:410](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L410)
 
 Clears all tenants from the registry.
 
@@ -43,9 +55,13 @@ Clears all tenants from the registry.
 
 > `static` **getAllConnectedTenants**(): `string`[]
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:178](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L178)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:336](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L336)
 
-Returns all currently connected tenant IDs.
+Returns all tenant IDs with active MongoDB clients
+in the current Ambiten runtime.
+
+Includes both statically registered and dynamically
+discovered tenants that are currently connected.
 
 #### Returns
 
@@ -57,9 +73,18 @@ Returns all currently connected tenant IDs.
 
 > `static` **getAllTenants**(): [`TenantConfig`](../interfaces/TenantConfig.md)[]
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:187](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L187)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:354](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L354)
 
-Returns all registered tenant configs.
+Returns all tenants currently registered with this
+Ambiten runtime.
+
+This includes:
+- statically configured tenants
+- manually registered tenants
+- externally discovered tenants after they have been resolved
+
+It does not represent every tenant that may exist in an
+external registry but has never been encountered by this runtime.
 
 #### Returns
 
@@ -71,7 +96,7 @@ Returns all registered tenant configs.
 
 > `static` **getClient**(`tenantId`): `Promise`\<`MongoClient` \| `null`\>
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:117](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L117)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:133](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L133)
 
 Retrieves the MongoClient instance for a specific tenant.
 If the tenant was registered lazily, connection is established on first access.
@@ -96,10 +121,12 @@ The MongoClient or null if not registered.
 
 > `static` **getConnectedTenant**(): `string`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:170](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L170)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:321](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L321)
 
-Returns the first connected tenant ID.
-Useful for backward compatibility, though not ideal in multi-tenant flows.
+Returns the first tenant with an active MongoDB client
+in the current Ambiten runtime.
+
+This reflects runtime connection state only.
 
 #### Returns
 
@@ -107,13 +134,32 @@ Useful for backward compatibility, though not ideal in multi-tenant flows.
 
 ***
 
+### getStats()
+
+> `static` **getStats**(): [`RegisteredTenantStatistics`](../interfaces/RegisteredTenantStatistics.md)
+
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:384](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L384)
+
+#### Returns
+
+[`RegisteredTenantStatistics`](../interfaces/RegisteredTenantStatistics.md)
+
+***
+
 ### getTenant()
 
 > `static` **getTenant**(`tenantId`): [`TenantConfig`](../interfaces/TenantConfig.md) \| `undefined`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:151](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L151)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:275](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L275)
 
-Retrieves the full tenant configuration.
+Retrieves a tenant that is already registered in the current runtime.
+
+This method performs a synchronous local registry lookup only.
+Dynamically discovered tenants are included once they have been
+resolved and registered by MultiTenantManager.
+
+Use resolveTenant() when the tenant may need to be discovered
+through the configured TenantConfigResolver.
 
 #### Parameters
 
@@ -127,17 +173,19 @@ The tenant ID.
 
 [`TenantConfig`](../interfaces/TenantConfig.md) \| `undefined`
 
-The tenant configuration if found.
+The registered tenant configuration, if available.
 
 ***
 
 ### getTenantDbName()
 
-> `static` **getTenantDbName**(`tenantId`): `string` \| `undefined`
+> `static` **getTenantDbName**(`tenantId`): `Promise`\<`string` \| `undefined`\>
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:162](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L162)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:293](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L293)
 
-Retrieves the configured database name for a tenant.
+Retrieves the database name for an already registered tenant.
+
+This is a synchronous local-registry lookup.
 
 #### Parameters
 
@@ -149,9 +197,9 @@ The tenant ID.
 
 #### Returns
 
-`string` \| `undefined`
+`Promise`\<`string` \| `undefined`\>
 
-The database name if found.
+The configured database name, if available.
 
 ***
 
@@ -159,7 +207,7 @@ The database name if found.
 
 > `static` **hasTenant**(`tenantId`): `boolean`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:33](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L33)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:49](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L49)
 
 Checks if a tenant is already registered.
 
@@ -183,7 +231,7 @@ The ID of the tenant to check.
 
 > `static` **isEnabled**(): `boolean`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:194](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L194)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:362](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L362)
 
 Returns true if at least one tenant is registered.
 
@@ -197,7 +245,7 @@ Returns true if at least one tenant is registered.
 
 > `static` **registerLazyTenant**(`tenantId`, `uri`, `options?`): [`TenantConfig`](../interfaces/TenantConfig.md)
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:45](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L45)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:61](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L61)
 
 Registers a tenant for lazy connection.
 Connection is established only when the tenant is accessed for the first time.
@@ -232,7 +280,7 @@ Optional tenant registration settings.
 
 > `static` **registerTenant**(`tenantId`, `uri`, `options?`): `Promise`\<`MongoClient`\>
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:77](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L77)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:93](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L93)
 
 Registers a tenant and establishes a connection immediately.
 
@@ -268,9 +316,13 @@ The connected MongoClient instance.
 
 > `static` **removeTenant**(`tenantId`): `boolean`
 
-Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:201](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/tanancy/MultiTenantManager.ts#L201)
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:376](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L376)
 
-Removes a tenant from the registry.
+Removes a tenant from the current runtime registry.
+
+This does not remove the tenant from an external tenant source.
+If a TenantConfigResolver can still resolve the tenant, it may
+be discovered and registered again on a future request.
 
 #### Parameters
 
@@ -278,6 +330,81 @@ Removes a tenant from the registry.
 
 `string`
 
+The tenant ID.
+
 #### Returns
 
 `boolean`
+
+true when a registered tenant was removed.
+
+***
+
+### resolveTenant()
+
+> `static` **resolveTenant**(`tenantId`): `Promise`\<[`TenantConfig`](../interfaces/TenantConfig.md) \| `undefined`\>
+
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:188](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L188)
+
+Resolves a tenant from the current runtime registry or, when
+necessary, from the configured external TenantConfigResolver.
+
+Dynamically resolved tenants are registered locally before
+being returned, making subsequent lookups local.
+
+#### Parameters
+
+##### tenantId
+
+`string`
+
+The tenant ID.
+
+#### Returns
+
+`Promise`\<[`TenantConfig`](../interfaces/TenantConfig.md) \| `undefined`\>
+
+The resolved tenant configuration, if available.
+
+***
+
+### resolveTenantDbName()
+
+> `static` **resolveTenantDbName**(`tenantId`): `Promise`\<`string` \| `undefined`\>
+
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:306](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L306)
+
+Resolves the tenant locally or externally and returns its
+configured database name.
+
+#### Parameters
+
+##### tenantId
+
+`string`
+
+The tenant ID.
+
+#### Returns
+
+`Promise`\<`string` \| `undefined`\>
+
+The resolved database name, if available.
+
+***
+
+### setTenantConfigResolver()
+
+> `static` **setTenantConfigResolver**(`resolver`): `void`
+
+Defined in: [packages/core/src/tanancy/MultiTenantManager.ts:168](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/tanancy/MultiTenantManager.ts#L168)
+
+#### Parameters
+
+##### resolver
+
+[`TenantConfigResolver`](../type-aliases/TenantConfigResolver.md)
+
+#### Returns
+
+`void`

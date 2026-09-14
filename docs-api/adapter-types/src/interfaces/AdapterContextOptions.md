@@ -6,7 +6,7 @@
 
 # Interface: AdapterContextOptions
 
-Defined in: [packages/adapter-types/src/types.ts:46](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L46)
+Defined in: [packages/adapter-types/src/types.ts:46](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L46)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/adapter-types/src/types.ts:46](https://github.com/AmbitenH
 
 > `optional` **collectionNameHeader?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:51](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L51)
+Defined in: [packages/adapter-types/src/types.ts:51](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L51)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/adapter-types/src/types.ts:51](https://github.com/AmbitenH
 
 > `optional` **dbNameHeader?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:50](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L50)
+Defined in: [packages/adapter-types/src/types.ts:50](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L50)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [packages/adapter-types/src/types.ts:50](https://github.com/AmbitenH
 
 > `optional` **enableTransactions?**: `boolean`
 
-Defined in: [packages/adapter-types/src/types.ts:48](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L48)
+Defined in: [packages/adapter-types/src/types.ts:48](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L48)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [packages/adapter-types/src/types.ts:48](https://github.com/AmbitenH
 
 > `optional` **requestIdHeader?**: `string`
 
-Defined in: [packages/adapter-types/src/types.ts:49](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L49)
+Defined in: [packages/adapter-types/src/types.ts:49](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L49)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [packages/adapter-types/src/types.ts:49](https://github.com/AmbitenH
 
 > `optional` **resolvers?**: [`AdapterContextResolvers`](AdapterContextResolvers.md)
 
-Defined in: [packages/adapter-types/src/types.ts:52](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L52)
+Defined in: [packages/adapter-types/src/types.ts:52](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L52)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [packages/adapter-types/src/types.ts:52](https://github.com/AmbitenH
 
 > `optional` **tenancy?**: [`TenancyOptions`](TenancyOptions.md)
 
-Defined in: [packages/adapter-types/src/types.ts:47](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-types/src/types.ts#L47)
+Defined in: [packages/adapter-types/src/types.ts:47](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-types/src/types.ts#L47)

@@ -8,7 +8,7 @@
 
 > **AmbitenMiddlewareHandler**\<`T`\> = (`ctx`) => `Promise`\<`void`\> \| `void`
 
-Defined in: [packages/core/src/types/middleware/types.ts:51](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/types/middleware/types.ts#L51)
+Defined in: [packages/core/src/types/middleware/types.ts:51](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/types/middleware/types.ts#L51)
 
 ## Type Parameters
 

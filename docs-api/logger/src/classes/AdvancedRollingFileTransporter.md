@@ -6,7 +6,7 @@
 
 # Class: AdvancedRollingFileTransporter
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L29)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L29)
 
 ## Implements
 
@@ -18,7 +18,7 @@ Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:29
 
 > **new AdvancedRollingFileTransporter**(`options`): `AdvancedRollingFileTransporter`
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:40](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L40)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:40](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L40)
 
 #### Parameters
 
@@ -36,7 +36,7 @@ Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:40
 
 > **close**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:287](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L287)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:287](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L287)
 
 #### Returns
 
@@ -52,7 +52,7 @@ Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:28
 
 > **ensureDirectoryExists**(): `void`
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:275](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L275)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:275](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L275)
 
 #### Returns
 
@@ -64,7 +64,7 @@ Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:27
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:232](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L232)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:232](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L232)
 
 #### Returns
 
@@ -80,7 +80,7 @@ Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:23
 
 > **getLogDirectory**(): `string`
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:283](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L283)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:283](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L283)
 
 #### Returns
 
@@ -92,7 +92,7 @@ Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:28
 
 > **write**(`entry`, `formatted`): `Promise`\<`void`\>
 
-Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:215](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L215)
+Defined in: [packages/logger/src/transports/AdvancedRollingFileTransporter.ts:215](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/transports/AdvancedRollingFileTransporter.ts#L215)
 
 #### Parameters
 

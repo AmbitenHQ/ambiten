@@ -6,7 +6,7 @@
 
 # Interface: LoggerConfig
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:22](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L22)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:22](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L22)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:22](https://github.com/A
 
 > `optional` **circuitBreaker?**: `object`
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:49](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L49)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:49](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L49)
 
 #### enabled?
 
@@ -34,7 +34,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:49](https://github.com/A
 
 > `optional` **colorize?**: `boolean`
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:25](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L25)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:25](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L25)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:25](https://github.com/A
 
 > `optional` **compress?**: `object`
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:57](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L57)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:57](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L57)
 
 #### enabled?
 
@@ -54,7 +54,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:57](https://github.com/A
 
 > `optional` **contextProvider?**: [`LoggerContextProvider`](../type-aliases/LoggerContextProvider.md)
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:37](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L37)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:37](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L37)
 
 Allows @ambiten/core to inject AmbitenContext.get()
 without @ambiten/logger importing @ambiten/core.
@@ -65,7 +65,7 @@ without @ambiten/logger importing @ambiten/core.
 
 > `optional` **enableMetrics?**: `LoggerMetricsOptions`
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:55](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L55)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:55](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L55)
 
 ***
 
@@ -73,7 +73,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:55](https://github.com/A
 
 > `optional` **enrichMetadata?**: (`entry`) => [`LogEntry`](LogEntry.md)
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:42](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L42)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:42](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L42)
 
 Allows users to enrich structured metadata.
 
@@ -93,7 +93,7 @@ Allows users to enrich structured metadata.
 
 > `optional` **excludedSources?**: `string`[]
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:29](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L29)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:29](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L29)
 
 ***
 
@@ -101,7 +101,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:29](https://github.com/A
 
 > `optional` **formatOptions?**: [`LoggerFormatOptions`](LoggerFormatOptions.md)
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:30](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L30)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:30](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L30)
 
 ***
 
@@ -109,7 +109,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:30](https://github.com/A
 
 > `optional` **hooks?**: [`LoggerHooks`](LoggerHooks.md)
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:31](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L31)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:31](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L31)
 
 ***
 
@@ -117,7 +117,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:31](https://github.com/A
 
 > `optional` **json?**: `boolean`
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:26](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L26)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:26](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L26)
 
 ***
 
@@ -125,7 +125,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:26](https://github.com/A
 
 > `optional` **level?**: [`LogLevel`](../type-aliases/LogLevel.md)
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:24](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L24)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:24](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L24)
 
 ***
 
@@ -133,7 +133,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:24](https://github.com/A
 
 > `optional` **logger?**: [`ILogger`](ILogger.md)
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:23](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L23)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:23](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L23)
 
 ***
 
@@ -141,7 +141,7 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:23](https://github.com/A
 
 > `optional` **shouldLog?**: (`level`, `entry`) => `boolean`
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:47](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L47)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:47](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L47)
 
 Allows advanced filtering by level, entry, tenant, source, etc.
 
@@ -165,7 +165,7 @@ Allows advanced filtering by level, entry, tenant, source, etc.
 
 > `optional` **transportConfigs?**: [`LoggerTransportConfig`](../type-aliases/LoggerTransportConfig.md)[]
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:27](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L27)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:27](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L27)
 
 ***
 
@@ -173,4 +173,4 @@ Defined in: [packages/logger/src/types/ambitenConfig.ts:27](https://github.com/A
 
 > `optional` **transports?**: ([`Transporter`](Transporter.md) \| [`RemoteTransporter`](../type-aliases/RemoteTransporter.md))[]
 
-Defined in: [packages/logger/src/types/ambitenConfig.ts:28](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/logger/src/types/ambitenConfig.ts#L28)
+Defined in: [packages/logger/src/types/ambitenConfig.ts:28](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/logger/src/types/ambitenConfig.ts#L28)

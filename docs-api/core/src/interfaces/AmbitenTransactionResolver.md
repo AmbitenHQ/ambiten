@@ -6,7 +6,7 @@
 
 # Interface: AmbitenTransactionResolver
 
-Defined in: [packages/core/src/context/ambitenContext.ts:12](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/ambitenContext.ts#L12)
+Defined in: [packages/core/src/context/ambitenContext.ts:12](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/ambitenContext.ts#L12)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/context/ambitenContext.ts:12](https://github.com/
 
 > **resolveClient**: (`tenantId?`, `dbName?`) => `MongoClient` \| `Promise`\<`MongoClient` \| `undefined`\> \| `undefined`
 
-Defined in: [packages/core/src/context/ambitenContext.ts:13](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/core/src/context/ambitenContext.ts#L13)
+Defined in: [packages/core/src/context/ambitenContext.ts:13](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/core/src/context/ambitenContext.ts#L13)
 
 #### Parameters
 

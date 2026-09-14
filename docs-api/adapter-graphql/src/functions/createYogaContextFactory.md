@@ -8,7 +8,7 @@
 
 > **createYogaContextFactory**\<`TContext`\>(`options?`, `extend?`): (`input`) => `Promise`\<[`AmbitenGraphqlRuntimeContext`](../interfaces/AmbitenGraphqlRuntimeContext.md) & `TContext`\>
 
-Defined in: [packages/adapter-graphql/src/yoga.ts:8](https://github.com/AmbitenHQ/ambiten/blob/cc0e7b03036ce0e549488b37d6b1276a65498bee/packages/adapter-graphql/src/yoga.ts#L8)
+Defined in: [packages/adapter-graphql/src/yoga.ts:8](https://github.com/AmbitenHQ/ambiten/blob/e30d8aa39363c5a87d56414ab76b4b08bc2a477d/packages/adapter-graphql/src/yoga.ts#L8)
 
 ## Type Parameters
 
