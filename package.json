@@ -1,14 +1,15 @@
 {
   "name": "ambiten",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build": "pnpm run build:ordered",
+    "build": "pnpm run build:ordered & pnpm test:integration:packages",
     "build:ordered": "node scripts/build-all.js --build --clean --verify",
+    "test:integration:packages": "node scripts/test-package-boundary.mjs",
     "test": "pnpm --recursive test",
     "lint": "pnpm -w exec eslint \"packages/**/src/**/*.{ts,tsx,js,jsx}\"",
     "lint:fix": "pnpm -w exec eslint \"packages/**/src/**/*.{ts,tsx,js,jsx}\" --fix",
