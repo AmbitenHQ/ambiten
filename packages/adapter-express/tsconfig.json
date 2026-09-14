@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json", // Inherit common settings
   "compilerOptions": {                                                                                   
     "rootDir": "src",
-    "outDir": "dist/cjs",    
-    "module": "commonjs",
-    "moduleResolution":"bundler",                                                                                                                                                                   
+    "outDir": "dist/cjs",                                                                                                                                                                     
     "types": ["node", "jest"],
 		"composite": false,
     "esModuleInterop": true,
@@ -15,6 +13,7 @@
     "resolvePackageJsonExports":false,
     "sourceMap": true,
     "noEmit": false, 
+    "allowJs": false,
     "tsBuildInfoFile": "../../.cache/tsbuildinfo/adapter-express/cjs.tsbuildinfo"              
   },
   "include": [

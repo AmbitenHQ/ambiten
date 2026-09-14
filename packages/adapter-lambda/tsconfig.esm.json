@@ -11,6 +11,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "sourceMap": true,
+    "allowJs": false,
     "tsBuildInfoFile": "../../.cache/tsbuildinfo/adapter-lambda/esm.tsbuildinfo"  
   },
   "include": ["src/**/*.ts"],
