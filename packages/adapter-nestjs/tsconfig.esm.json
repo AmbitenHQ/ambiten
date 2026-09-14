@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESnext",
+    "moduleResolution": "bundler",
+    "rootDir": "src",
+    "outDir": "dist/esm",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/adapter-nestjs/esm.tsbuildinfo"  
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ]
+}

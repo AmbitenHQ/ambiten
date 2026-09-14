@@ -1,15 +1,35 @@
 import {
-  CallHandler,
-  ExecutionContext,
   Inject,
   Injectable,
+  Optional
+} from '@nestjs/common';
+
+import type {
+  CallHandler,
+  ExecutionContext,
   NestInterceptor
 } from '@nestjs/common';
-import type { Observable } from 'rxjs';
-import { runWithAdapterContext } from '@ambiten/adapter-runtime';
-import type { AmbitenRequestLike } from '@ambiten/adapter-types';
-import type { NestjsAmbitenAdapterOptions } from './nestjs-adapter.types';
-import { AMBITEN_ADAPTER_OPTIONS } from './nestjs-adapter.constants';
+
+import {
+  Observable,
+  type Subscription
+} from 'rxjs';
+
+import {
+  runWithAdapterContext
+} from '@ambiten/adapter-runtime';
+
+import type {
+  AmbitenRequestLike
+} from '@ambiten/adapter-types';
+
+import type {
+  NestjsAmbitenAdapterOptions
+} from './nestjs-adapter.types';
+
+import {
+  AMBITEN_ADAPTER_OPTIONS
+} from './nestjs-adapter.constants';
 
 function normalizeParams(params: unknown): Record<string, string> {
   if (!params || typeof params !== 'object') {
@@ -87,26 +107,67 @@ function toAmbitenRequestLike(req: any): AmbitenRequestLike {
   };
 }
 
+
 @Injectable()
-export class AmbitenNestInterceptor implements NestInterceptor {
+export class AmbitenNestInterceptor
+  implements NestInterceptor {
   constructor(
+    @Optional()
     @Inject(AMBITEN_ADAPTER_OPTIONS)
     private readonly options: NestjsAmbitenAdapterOptions = {}
   ) { }
 
-  async intercept(
+  intercept(
     context: ExecutionContext,
     next: CallHandler
-  ): Promise<Observable<unknown>> {
-    const http = context.switchToHttp();
-    const req = http.getRequest();
+  ): Observable<unknown> {
+    const req = context
+      .switchToHttp()
+      .getRequest();
 
-    const adaptedRequest = toAmbitenRequestLike(req);
+    const adaptedRequest =
+      toAmbitenRequestLike(req);
 
-    return runWithAdapterContext(
-      adaptedRequest,
-      async () => next.handle(),
-      this.options
-    );
+    return new Observable<unknown>((subscriber) => {
+      let innerSubscription:
+        | Subscription
+        | undefined;
+
+      let cancelled = false;
+
+      void runWithAdapterContext(
+        adaptedRequest,
+
+        () => {
+          if (cancelled) {
+            return;
+          }
+
+          innerSubscription =
+            next.handle().subscribe({
+              next(value) {
+                subscriber.next(value);
+              },
+
+              error(error) {
+                subscriber.error(error);
+              },
+
+              complete() {
+                subscriber.complete();
+              }
+            });
+        },
+
+        this.options
+      ).catch((error) => {
+        subscriber.error(error);
+      });
+
+      return () => {
+        cancelled = true;
+        innerSubscription?.unsubscribe();
+      };
+    });
   }
-};
+}

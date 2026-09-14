@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESnext",
+    "moduleResolution": "bundler",
+    "rootDir": "src",
+    "outDir": "dist/esm",
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/adapter-graphql/esm.tsbuildinfo"  
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ]
+}

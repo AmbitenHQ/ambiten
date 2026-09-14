@@ -1,10 +1,10 @@
 {
   "name": "@ambiten/adapter-nestjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ambiten Nestjs adapter",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -17,18 +17,26 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
     }
   },
   "scripts": {
-    "build": "pnpm -r run build:nestjs",
-    "build:nestjs": "tsc -p tsconfig.json",
+    "build:esm": "tsc -b tsconfig.esm.json -force",
+    "build:cjs": "tsc -b tsconfig.json -force",
+    "build": "pnpm run clean && pnpm run build:esm && pnpm run build:cjs",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "pnpm run changeset",
     "clean": "rimraf dist",
     "release": "pnpm changeset version",
+    "prepack": "pnpm clean && pnpm build",
+    "postbuild:esm": "node scripts/add-esm-type.js",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "keywords": [],
