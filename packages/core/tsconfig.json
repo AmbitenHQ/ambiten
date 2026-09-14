@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.base.json", // Inherit common settings
   "compilerOptions": {                                                                                   
     "rootDir": "src",
-    "outDir": "dist/cjs",  
-    "module": "commonjs",
-    "moduleResolution":"bundler",                                                                                                                                                                   
+    "outDir": "dist/cjs",                                                                                                                                                                   
     "declaration": true,  
     "types": ["node", "jest"],
     "esModuleInterop": true,
