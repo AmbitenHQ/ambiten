@@ -39,6 +39,5 @@
    "node_modules", 
    "**/node_modules/*", 
    "dist",
-   "packages/core/examples", 
    "packages/*/src/__test__/**"]
 }
