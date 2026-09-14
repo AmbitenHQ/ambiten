@@ -7,7 +7,8 @@
     "declaration": true,  
     "resolveJsonModule": true,  
     "types": ["node", "jest"],
-    "emitDeclarationOnly": false,  
+    "emitDeclarationOnly": false,
+    "allowJs": false,  
     "tsBuildInfoFile": "../../.cache/tsbuildinfo/logger.tsbuildinfo"                                       
   },
   "include": [
