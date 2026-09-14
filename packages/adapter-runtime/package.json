@@ -35,7 +35,7 @@
     "changeset": "pnpm run changeset",
     "clean": "rimraf dist && rimraf ../../.cache/tsbuildinfo/adapter-runtime",
     "release": "pnpm changeset version",
-    "prepack": "pnpm clean && pnpm build",
+    "prepack": "pnpm build",
     "postbuild:esm": "node scripts/add-esm-type.js",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
