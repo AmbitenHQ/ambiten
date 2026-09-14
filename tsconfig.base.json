@@ -17,7 +17,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "isolatedModules": true, 
-    "allowJs": true,
+    "allowJs": false,
     "experimentalDecorators": true,
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
