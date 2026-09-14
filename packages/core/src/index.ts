@@ -1,7 +1,7 @@
 /**
  * @author Emmanuel Nodolomwanyi - Ambiten Team
  * @package - @Ambiten/core
- * @version 1.0.0
+ * @version 1.2.4
  */
 
 import { RedisService } from './redis-manager';
@@ -11,12 +11,16 @@ import { RedisService } from './redis-manager';
  * This library provides core functionalities for Ambiten, ORM/ODM solution
  * for MongoDB in Node.js and Browser environments.
  * @module Ambiten Core Library
- * @version 1.0.0
+ * @version 1.2.4
  */
 
+const isCjs =
+  typeof module !== 'undefined' &&
+  typeof module.exports !== 'undefined';
 
-console.log('Ambiten Core Library Loaded. \n (Node.js environment detected.)');
-
+console.log(
+  `Ambiten Core Library Loaded [${isCjs ? 'CJS' : 'ESM'}].`
+);
 
 export const initializeRedis = async (
 	{ useRedis = false }: { useRedis?: boolean } = {}
@@ -43,7 +47,7 @@ export * from './instrumentation/index';
 export * from './debug/index';
 export * from './ambiten-cache/index';
 
-export * from './init-cli/generate.project';
+export * from './init-cli/index';
 export * from './middleware/index';
 export * from './graphql/index';
 export * from './utils/index';
@@ -51,13 +55,77 @@ export * from './utils/builders/index';
 export * from './gc/index';
 export * from './types/index';
 
-export { AmbitenClient, createAmbitenClientModule } from './lib-core/ambitenClient';
-export { AmbitenModel } from './lib-core/ambitenModelFactory';
-export { AmbitenSchema } from './lib-core/ambitenSchema';
-export { AmbitenBootstrapFactory } from './lib-core/bootstrap/ambitenBootstrap';
-export { measureQueryForBrowser } from './instrumentation';
+export {
+	createAmbitenClientModule,
+	AmbitenClient,
+	AmbitenModel,
+	AmbitenSchema,
+	AmbitenBootstrapFactory
+} from './lib-core';
+export { AmbitenContext } from './context/ambitenContext'
+export {
+	runManualTransaction,
+	hasManualTransactionMethods
+} from './context/index';
 
-export type { AmbitenRuntime } from './types/ambiten-runtime-type';
-export type { SchemaType } from './types/schema.type';
-export type { Document } from './types/document';
+export { MultiTenantManager, initMultiTenancy } from './tanancy';
+export { AmbitenGraphQL } from './graphql'
+
+export { loadAmbitenConfig } from './config'
+export { generateProject, generateProjectWithConfig } from './init-cli';
+export { measureQueryForBrowser } from './instrumentation';
+export { applySoftDelete } from './plugins';
+export {
+	AmbitenGC,
+	startGarbageCollector,
+	scheduleGarbageCollector,
+	runGarbageCollector,
+	runGarbageCollectorOnAllModels
+} from './gc';
+export { debugLog } from './debug'
+
+export type {
+	TenantConfig,
+	RegisterTenantOptions,
+	RegisteredTenantStatistics
+} from './tanancy/MultiTenantManager';
+
+export {
+	Model,
+	createSchema,
+	createAmbitenError,
+	AuthService,
+	configureAmbitenContext,
+	AmbitenModelRegistry,
+	clearModelRegistryForTests,
+} from './utils'
+
+export type { GeneratedProjectResult } from './init-cli/generate.project';
+export type { InitMultiTenancyOptions } from './tanancy/init/initMultiTenancy';
+export type { SoftDeletableDocument, SoftDeleteOptions } from './plugins/softDelete/types'
 export type { ErrorType } from './utils/error/errorTypes';
+export type { GCOptions } from './gc/ambitenGC';
+export type { GarbageCollectorScheduleOptions } from './gc/gcCron.node';
+
+export type {
+	AmbitenRuntime,
+	BootstrapClient,
+	AmbitenClientConfig,
+	AmbitenResolvedClientScope,
+	ModelContext,
+	AmbitenModelOptions,
+	ResolverObject,
+	TenantConfigResolver,
+	ResolvedTenantConfig,
+	AmbitenGraphQLOptions,
+	AmbitenGraphQLContext,
+	QueryOptions,
+	AmbitenContextState,
+	SchemaType,
+	Document,
+	AmbitenMiddlewareHandler,
+	AmbitenCacheStats,
+	GCConfig,
+	eventTypes,
+	EventType
+} from './types';

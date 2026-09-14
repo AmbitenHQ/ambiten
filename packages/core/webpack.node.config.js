@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const { version: VERSION } = require('./package.json');
@@ -13,12 +12,11 @@ module.exports = {
 	target: 'node',
 	output: {
 		filename: 'index.cjs',
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'dist', 'cjs'),
 		library: {
 			type: 'commonjs2',
-			// umdNamedDefine: true
 		},
-		// globalObject: 'this',
+		globalObject: 'this',
 		clean: false
 	},
 	externals: [
@@ -74,19 +72,18 @@ module.exports = {
 			},
 			{
 				test: /\.ts$/,
-				use: 'ts-loader',
-				// use: {
-				// 	loader: 'ts-loader',
-				// 	options: {
-				// 		compilerOptions: {
-				// 			rootDir: path.resolve(__dirname, '..')
-				// 		},
-				// 		transpileOnly: true,
-				// 		onlyCompileBundledFiles: true,
-				// 	}
-				// },
+				use: {
+					loader: 'ts-loader',
+					options: {
+						configFile: path.resolve(
+							__dirname,
+							'tsconfig.json'
+						),
+						onlyCompileBundledFiles: true
+					},
+				},
 				exclude: [/^node_modules/, /\.test\.ts$/, /\.spec\.ts$/],
-			},
+			}
 		]
 	},
 	resolve: {
@@ -102,26 +99,12 @@ module.exports = {
 		},
 		byDependency: {
 			esm: {
-				mainFields: ['browser', 'module', 'main'],
+				mainFields: ['module', 'main', 'browser'],
 			},
 			commonjs2: {
-				aliasFields: ['browser', 'module'],
+				aliasFields: ['commonjs', 'main', 'browser'],
 			},
 		},
-		fallback: {
-			buffer: require.resolve('buffer'),
-			console: require.resolve('console-browserify'),
-			crypto: require.resolve("crypto-browserify"),
-			path: require.resolve('path-browserify'),
-			"async_hooks": false,
-			"fs": false,
-			"http2": false,
-		},
-		plugins: [
-			new TsconfigPathsPlugin({
-				configFile: path.resolve(__dirname, 'tsconfig.json'),
-			}),
-		]
 	},
 	plugins: (() => {
 		const p = [

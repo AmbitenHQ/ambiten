@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 
@@ -9,8 +8,8 @@ module.exports = {
 	entry: './src/browser.ts',
 	target: 'web',
 	output: {
-		filename: 'index-browser.js',
-		path: path.resolve(__dirname, 'dist'),
+		filename: 'index-browser.cjs',
+		path: path.resolve(__dirname, 'dist', 'cjs'),
 		library: {
 			name: 'ambitencore-browser', // global name if script loaded in <script> tag
 			type: 'umd', // Universal Module Definition for compatibility with CommonJS, AMD, and browser globals
@@ -21,18 +20,17 @@ module.exports = {
 		rules: [
 			{
 				test: /\.ts$/,
-				use: 'ts-loader',
-				exclude: /node_modules/,
-			},
-			{
-				test: /\.js$/,
-				include: /node_modules\/node-cron/,
 				use: {
-					loader: 'babel-loader',
+					loader: 'ts-loader',
 					options: {
-						presets: [['@babel/preset-env', { targets: { node: '16' } }]],
-					}
-				}
+						configFile: path.resolve(
+							__dirname,
+							'tsconfig.json'
+						),
+						onlyCompileBundledFiles: true
+					},
+				},
+				exclude: [/^node_modules/, /\.test\.ts$/, /\.spec\.ts$/],
 			},
 		],
 	},
@@ -91,11 +89,6 @@ module.exports = {
 	recordsPath: path.join(__dirname, 'records.json'),
 	resolve: {
 		extensions: ['.ts', '.js'],
-		plugins: [
-			new TsconfigPathsPlugin({
-				configFile: path.resolve(__dirname, 'tsconfig.json'),
-			}),
-		],
 		alias: {
 			'@gcCron': path.resolve(__dirname, 'src/gc/gcCron.browser.ts'),
 			'@measureQuery': path.resolve(__dirname, 'src/instrumentation/measureQuery.browser.ts')

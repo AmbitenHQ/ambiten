@@ -2,15 +2,22 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "rootDir": "src",
-    "outDir": "dist/esm",
+    "outDir": "dist/esm", 
+    "composite": true,
+    "esModuleInterop": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/core/esm.tsbuildinfo" 
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+  "src/**/*.ts",
+  "src/**/*.json",
+  "src/config/ambiten.config.schema.json"
+  ],
   "exclude": [
     "node_modules",
     "dist",

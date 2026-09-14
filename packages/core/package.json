@@ -1,32 +1,37 @@
 {
   "name": "@ambiten/core",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "publishConfig": {
     "access": "public"
   },
   "description": "Core library for Ambiten, providing essential functionalities and utilities for building applications with Ambiten.",
-  "main": "./dist/index.cjs",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
-  "browser": "./dist/index-browser.js",
+  "browser": "./dist/cjs/index-browser.cjs",
   "types": "./dist/esm/index.d.ts",
   "bin": {
     "ambiten": "./bin/bootstrap.js"
   },
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/esm/index.js"
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
     },
     "./browser": {
       "types": "./dist/browser.d.ts",
-      "import": "./dist/index-browser.js",
-      "default": "./dist/index-browser.js"
+      "import": "./dist/esm/index-browser.js",
+      "require": "./dist/cjs/index.cjs",
+      "default": "./dist/cjs/index-browser.cjs"
     },
     "./bin": {
       "import": "./dist/index-cli.js",
-      "require": "./dist/index-cli.js",
+      "default": "./dist/index-cli.js",
       "types": "./dist/cli.d.ts"
     },
     "./bundle": "./dist/ambiten-logger.js",
@@ -42,12 +47,12 @@
     "!dist/scripts"
   ],
   "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "build:cjs": "webpack --config webpack.node.config.js",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:esm": "tsc -b tsconfig.esm.json -force && node scripts/fix-esm-extensions.mjs",
     "build:cli": "webpack --config webpack.cli.config.js",
     "build:web": "webpack --config webpack.web.config.js",
-    "build:types": "tsc -p tsconfig.json --excludeDirectories **/node_modules",
-    "build": "pnpm run build:types && pnpm run build:esm && pnpm run build:cjs && pnpm run build:cli && pnpm run build:web",
+    "build": "pnpm clean && pnpm run typecheck && pnpm run build:esm && pnpm run build:cjs && pnpm run build:cli && pnpm run build:web",
     "verify:exports": "node scripts/verify-package-exports.mjs",
     "lint": "eslint src",
     "clean": "rimraf dist",
@@ -55,6 +60,7 @@
     "release": "pnpm changeset version",
     "test": "jest --detectOpenHandles --coverage",
     "prepack": "pnpm clean && pnpm build && pnpm run verify:exports",
+    "postbuild:esm": "node scripts/add-esm-type.js",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "release": {
@@ -86,9 +92,9 @@
   },
   "homepage": "https://docs.ambiten.dev",
   "dependencies": {
+    "@ambiten/logger": "workspace:^",
     "@babel/runtime": "7.28.4",
     "@inquirer/prompts": "^8.3.2",
-    "@ambiten/logger": "workspace:^",
     "buffer": "6.0.3",
     "commander": "14.0.2",
     "fs-extra": "11.3.3",
@@ -101,6 +107,7 @@
     "ajv-formats": "3.0.1",
     "express": "^5.1.0",
     "express-serve-static-core": "^0.1.1",
+    "dotenv": "16.4.7",
     "graphql": "16.11.0",
     "graphql-http": "1.22.4",
     "graphql-redis-subscriptions": "2.7.0",
@@ -124,6 +131,7 @@
     "graphql": "16.11.0"
   },
   "devDependencies": {
+    "@ambiten/adapter-types": "workspace:*",
     "@babel/core": "^7.28.5",
     "@babel/eslint-parser": "^7.28.5",
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
@@ -137,7 +145,6 @@
     "@semantic-release/github": "^11.0.6",
     "@semantic-release/npm": "^12.0.2",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "@ambiten/adapter-types": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/express": "^5.0.6",
     "@types/express-serve-static-core": "^5.1.1",

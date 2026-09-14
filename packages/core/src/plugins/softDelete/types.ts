@@ -1,3 +1,5 @@
+import { Document } from "../../types";
+
 export interface SoftDeleteOptions {
   field?: string;
   deletedAtField?: string;

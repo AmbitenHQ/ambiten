@@ -13,7 +13,17 @@ if (!existsSync(esmEntryPath)) {
   );
 }
 
-const esm = await import(esmEntryUrl.href);
+// Replace the old "const esm = await import(...)" line with this:
+let esm;
+try {
+  esm = await import(esmEntryUrl.href);
+} catch (error) {
+  console.error("\n❌ CRITICAL: The ESM file failed to load inside Node.js!");
+  console.error("This usually happens because a file is missing a '.js' extension in its import statements.\n");
+  console.error(error); // This prints the raw Node.js error trace
+  process.exit(1);
+}
+
 
 const requiredExports = [
   "AmbitenBootstrapFactory",

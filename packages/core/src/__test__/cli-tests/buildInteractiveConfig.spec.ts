@@ -16,8 +16,7 @@ describe('buildInteractiveConfig', () => {
   });
 
   it('should build config from prompt answers when no flags are provided', async () => {
-    mockedPrompts
-      .mockResolvedValueOnce({
+    mockedPrompts.mockResolvedValueOnce({
         projectName: 'my-app',
         uri: 'mongodb://localhost:27017/my-app',
         withGraphql: true,
@@ -46,8 +45,7 @@ describe('buildInteractiveConfig', () => {
   });
 
   it('should use provided projectName argument instead of prompting for it', async () => {
-    mockedPrompts
-      .mockResolvedValueOnce({
+    mockedPrompts.mockResolvedValueOnce({
         uri: 'mongodb://localhost:27017/custom-app',
         withGraphql: false,
         multiTenant: false,
@@ -69,8 +67,7 @@ describe('buildInteractiveConfig', () => {
   });
 
   it('should allow flags to override prompt values', async () => {
-    mockedPrompts
-      .mockResolvedValueOnce({
+    mockedPrompts.mockResolvedValueOnce({
         projectName: 'ignored-name',
         uri: 'mongodb://localhost:27017/ignored-db',
         withGraphql: false,
@@ -126,8 +123,7 @@ describe('buildInteractiveConfig', () => {
   });
 
   it('should normalize project name', async () => {
-    mockedPrompts
-      .mockResolvedValueOnce({
+    mockedPrompts.mockResolvedValueOnce({
         projectName: 'My App',
         uri: 'mongodb://localhost:27017/my-app',
         withGraphql: false,

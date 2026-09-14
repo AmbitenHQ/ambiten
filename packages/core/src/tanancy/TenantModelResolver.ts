@@ -4,7 +4,6 @@ import { MultiTenantManager } from "./MultiTenantManager";
 import type { AmbitenSchema } from "../lib-core";
 import type { DbProvider, ModelContext } from "../types";
 import { AmbitenContext } from "../context";
-// import { ensureModelNameSafe } from "../utils";
 
 
 export type GetTenantModelParams<T extends Document> = {
@@ -73,81 +72,3 @@ export const getTenantModel = async <T extends Document>(
 
   return model;
 };
-
-
-// import { AmbitenSchema } from '../lib-core';
-// import { MultiTenantManager } from './MultiTenantManager';
-// import { TenantContext } from './TenantContext';
-// import { Model } from '../utils/builders/createModel';
-// import { ensureModelNameSafe } from '../utils/ensureModelNameSafe'; // <- wherever you put it
-// import { Document } from '../types';
-// import { Db } from 'mongodb';
-
-// type DbProvider = { db(ctx?: { dbName?: string }): Promise<Db> };
-
-// /**
-//  * Parameters required to resolve a tenant-specific model.
-//  * @template T - The type of the document in the model.
-//  */
-// export type GetTanantModelParams<T extends Document> = {
-//   collectionName: string;
-//   tenantId: string;
-//   schema?: AmbitenSchema<T>;
-// };
-
-// const tenantModelsCache: Map<string, Map<string, ReturnType<typeof Model>>> = new Map();
-
-// /**
-//  * Resolves a tenant-specific model by creating or retrieving it from the cache.
-//  * Ensures that each tenant has its own isolated model instance.
-//  *
-//  * @template T - The type of the document in the model.
-//  * @param {GetTanantModelParams<T>} param - The parameters required to resolve the model.
-//  * @param {string} param.modelName - The name of the model to resolve.
-//  * @param {AmbitenSchema<T>} [param.schema] - The schema definition for the model (optional).
-//  * @param {string} param.tenantId - The ID of the tenant for which the model is being resolved.
-//  * @returns {Promise<any>} A promise that resolves to the tenant-specific model instance.
-//  * @throws {Error} If no tenant context is found or the tenant is not registered.
-//  * @example
-//  * const userModel = await getTenantModel({
-//  *  modelName: 'User',
-//  *  schema: UserSchema,
-//  *  tenantId: 'tenant123'
-//  * });
-//  * // userModel is now a tenant-specific model for the 'User' collection in 'tenant123'
-//  * @example
-//  * const productModel = await getTenantModel({
-//  *  modelName: 'Product',
-//  *  schema: ProductSchema,
-//  *  tenantId: 'tenant456'
-//  * });
-//  */
-// export const getTenantModel = async <T extends Document>
-//   (param: GetTanantModelParams<T>): Promise<any> => {
-//   const safeCollectionName = ensureModelNameSafe(param.collectionName);
-//   const schema = param.schema;
-//   // const client = await MultiTenantManager.getClient(param.tenantId);
-//   const tenantId = param.tenantId ?? TenantContext.getTenantId();
-
-//   if (!tenantId) throw new Error('No tenant context found');
-
-//   if (!tenantModelsCache.has(tenantId)) {
-//     tenantModelsCache.set(tenantId, new Map());
-//   }
-
-//   const clientCache = tenantModelsCache.get(tenantId)!;
-//   if (clientCache.has(safeCollectionName)) {
-//     return clientCache.get(safeCollectionName);
-//   }
-
-//   const provider = tenantDbProvider(tenantId);
-
-//   const model = Model({
-//     collectionName: safeCollectionName,
-//     schema,
-//     provider: provider
-//   });
-//   clientCache.set(safeCollectionName, model as unknown as ReturnType<typeof Model>);
-
-//   return model;
-// };

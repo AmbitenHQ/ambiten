@@ -64,7 +64,7 @@ export class AmbitenClient implements BootstrapClient {
 		});
 
 		this._db = this._client.db(this._opts.options?.dbName);
-		this.ensureMongoDependency();
+		this.loadMongoClient().catch(error => console.log(error));
 	}
 
 	static init(opts?: Partial<AmbitenClientConfig>): AmbitenClient {
@@ -84,17 +84,29 @@ export class AmbitenClient implements BootstrapClient {
 		return client;
 	}
 
-	private ensureMongoDependency(): void {
+	private async loadMongoClient() {
 		try {
-			const { MongoClient } = require('mongodb');
-			void MongoClient;
-		} catch {
-			console.error(
-				'\n❌ Missing peer dependency: "mongodb".\n' +
-				'Please install it in your project before continuing:\n\n' +
-				'   npm i mongodb\n'
-			);
-			process.exit(1);
+			const { MongoClient } = await import('mongodb');
+			return MongoClient;
+		} catch (error) {
+			const code =
+				error &&
+					typeof error === 'object' &&
+					'code' in error
+					? (error as { code?: string }).code
+					: undefined;
+
+			if (
+				code === 'ERR_MODULE_NOT_FOUND' ||
+				code === 'MODULE_NOT_FOUND'
+			) {
+				throw new Error(
+					'Ambiten requires the "mongodb" package. ' +
+					'Install it with: npm i mongodb'
+				);
+			}
+
+			throw error;
 		}
 	}
 

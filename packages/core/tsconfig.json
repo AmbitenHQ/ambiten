@@ -2,17 +2,24 @@
   "extends": "../../tsconfig.base.json", // Inherit common settings
   "compilerOptions": {                                                                                   
     "rootDir": "src",
-    "outDir": "dist/cjs",                                                                                                                                                                     
-    "composite": true,
+    "outDir": "dist/cjs",  
+    "module": "commonjs",
+    "moduleResolution":"node",                                                                                                                                                                   
     "declaration": true,  
-    "resolveJsonModule": true,  
     "types": ["node", "jest"],
-    "emitDeclarationOnly": false,   
-    "tsBuildInfoFile": "../../.cache/tsbuildinfo/core.tsbuildinfo"            
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "resolvePackageJsonExports":false,
+    "allowJs": false,
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/core/cjs.tsbuildinfo"            
   },
-    "references": [
+   "files": [],
+  "references": [
     { "path": "../logger" }, // Reference to other local packages
-    {"path": "../adapter-types"}
+    { "path": "../adapter-types" },
+    { "path": "../adapter-types/tsconfig.esm.json" }
   ],
   "include": [
     "src/**/*.ts",

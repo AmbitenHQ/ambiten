@@ -6,14 +6,19 @@ module.exports = {
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: "<rootDir>/tsconfig.json"
+      }
+    ]
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     // Map workspace packages to local source folders so tests can require package imports
     '^@ambiten/(.*)$': '<rootDir>/../$1/src',
   },
-  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/esm/', '/dist/cjs/'],
   // modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testTimeout: 30000,
 };

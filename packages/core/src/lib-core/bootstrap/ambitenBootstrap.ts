@@ -86,25 +86,29 @@ export interface AmbitenBootstrapFactoryOptions<T extends Document = Document> {
  * ```ts
  * @example
  * import { AmbitenBootstrapFactory } from '@Ambiten/core';
- *  async function start() {
- *   const Ambiten = await AmbitenBootstrapFactory.create();
- *   const db = Ambiten.getMongoClient();
- *   await db.connect();
- *   const graphql = await Ambiten.getGraphQL();
- *   // You can now use the GraphQL instance to generate schema or start a server
- *   // or perform other GraphQL related operations
+ *  async function run() {
+ *   return AmbitenBootstrapFactory.create({ config: {} });
+ *   
+ * }
+ * 
+ *  const runtime = await run()
+ *  const client = runtime.getMongoClient();
+ *  console.log('Client is ready' Boolean(client))
+ * 
+ *  const graphql = runtime.getGraphQL();
+ *  // You can now use the GraphQL instance to generate schema or start a server
+ *  // or perform other GraphQL related operations
  *  graphql.generateSchema();
- *  Ambiten.getRedisClient();
- *  }
- * start();
+ *  runtime.getRedisClient();
+ *  };
  * ```
  *
  * 
   * @param {string} [configFilePathOrObject] - Optional path to a custom configuration file or a config object.
- * If not provided, it defaults to 'Ambiten.config.json'.
+ * If not provided, it defaults to 'ambiten.config.json'.
  * @returns {Promise<void>} - A promise that resolves when the initialization is complete.
  * 
- * // Now you can use Ambiten.getMongoClient(), Ambiten.getRedisClient(), etc.
+ * // Now you can use runtime.getMongoClient(), runtime.getRedisClient(), etc.
  */
 class AmbitenBootstrap<T extends Document = Document> implements AmbitenRuntime<T> {
   private config!: AmbitenConfig<T>;

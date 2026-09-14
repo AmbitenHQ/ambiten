@@ -1,7 +1,7 @@
 /**
  * @author Emmanuel Nodolomwanyi - Ambiten Team
- * @package - @Ambiten/core
- * @version 1.0.0
+ * @package - @ambiten/core
+ * @version 1.2.4
  */
 
 import { AmbitenClient } from './lib-core';
@@ -11,10 +11,16 @@ import { AmbitenClient } from './lib-core';
  * This module provides core functionalities for Ambiten in a browser environment.
  * It includes database operations, configuration, and more.
  * @module Ambiten Core Browser Module
- * @version 1.0.0
+ * @version 1.2.4
  */
 
-console.log('Ambiten Core Library Loaded for (Browser)');
+const isCjs =
+  typeof module !== 'undefined' &&
+  typeof module.exports !== 'undefined';
+
+console.log(
+  `Ambiten Core Library Loaded (Browser) [${isCjs ? 'CJS' : 'ESM'}].`
+);
 
 declare global {
 	interface Window {
@@ -47,13 +53,79 @@ export * from './utils/builders/index';
 export * from './gc/index';
 export * from './types/index';
 
-export { AmbitenClient, createAmbitenClientModule } from './lib-core/ambitenClient';
-export { AmbitenModel } from './lib-core/ambitenModelFactory';
-export { AmbitenSchema } from './lib-core/ambitenSchema';
-export { AmbitenBootstrapFactory } from './lib-core/bootstrap/ambitenBootstrap';
-export { measureQueryForBrowser } from './instrumentation';
+export {
+	createAmbitenClientModule,
+	AmbitenClient,
+	AmbitenModel,
+	AmbitenSchema,
+	AmbitenBootstrapFactory
+} from './lib-core';
 
-export type { AmbitenRuntime } from './types/ambiten-runtime-type';
-export type { SchemaType } from './types/schema.type';
-export type { Document } from './types/document';
+export {
+	AmbitenContext,
+	runManualTransaction,
+	hasManualTransactionMethods
+} from './context';
+
+export { MultiTenantManager, initMultiTenancy } from './tanancy';
+export { AmbitenGraphQL } from './graphql'
+
+export { loadAmbitenConfig } from './config'
+export { generateProject, generateProjectWithConfig } from './init-cli/generate.project';
+export { measureQueryForBrowser } from './instrumentation';
+export { applySoftDelete } from './plugins/softDelete/applySoftDelete';
+export {
+	AmbitenGC,
+	startGarbageCollector,
+	scheduleGarbageCollector,
+	runGarbageCollector,
+	runGarbageCollectorOnAllModels
+} from './gc';
+export { debugLog } from './debug'
+
+export type {
+	TenantConfig,
+	RegisterTenantOptions,
+	RegisteredTenantStatistics
+} from './tanancy/MultiTenantManager';
+
+export {
+	Model,
+	createSchema,
+	createAmbitenError,
+	AuthService,
+	configureAmbitenContext,
+	AmbitenModelRegistry,
+	clearModelRegistryForTests,
+	
+} from './utils'
+
+export type { GeneratedProjectResult } from './init-cli/generate.project';
+export type { InitMultiTenancyOptions } from './tanancy/init/initMultiTenancy';
+export type { SoftDeletableDocument, SoftDeleteOptions } from './plugins/softDelete/types'
 export type { ErrorType } from './utils/error/errorTypes';
+export type { GCOptions } from './gc/ambitenGC';
+export type { GarbageCollectorScheduleOptions } from './gc/gcCron.node';
+
+export type {
+	AmbitenRuntime,
+	BootstrapClient,
+	AmbitenClientConfig,
+	AmbitenResolvedClientScope,
+	ModelContext,
+	AmbitenModelOptions,
+	ResolverObject,
+	TenantConfigResolver,
+	ResolvedTenantConfig,
+	AmbitenGraphQLOptions,
+	AmbitenGraphQLContext,
+	QueryOptions,
+	AmbitenContextState,
+	SchemaType,
+	Document,
+	AmbitenMiddlewareHandler,
+	AmbitenCacheStats,
+	GCConfig,
+	eventTypes,
+	EventType
+} from './types';
