@@ -1,10 +1,10 @@
 {
   "name": "@ambiten/adapter-types",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ambiten multi-tenancy adapter types",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "sideEffects": false,
   "files": [
     "dist",
@@ -14,16 +14,24 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.js",
+        "default": "./dist/cjs/index.js"
+      }
     }
   },
   "scripts": {
-    "build": "tsc -b tsconfig.json --force",
+    "build:esm": "tsc -b tsconfig.esm.json --force",
+    "build:cjs": "tsc -b tsconfig.json --force",
+    "build": "pnpm run clean && pnpm run build:esm && pnpm run build:cjs ", 
     "changeset": "pnpm run changeset",
     "release": "pnpm changeset version",
     "clean": "rimraf dist",
+    "postbuild:esm": "node scripts/add-esm-type.js",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
   "keywords": [],

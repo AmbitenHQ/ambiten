@@ -1,21 +1,24 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { createDefaultPreset } = require('ts-jest');
-
-const tsJestTransformCfg = createDefaultPreset().transform;
-
-/** @type {import("jest").Config} **/
+/**
+ * Generated companion CJS Jest config to avoid ts-node compile issues when running Jest in dev environments.
+ */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   transform: {
-    ...tsJestTransformCfg,
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: "<rootDir>/tsconfig.cjs.json"
+      }
+    ]
   },
-  testMatch: ['**/__test__/**/*.test.ts'],
-  moduleFileExtensions: ['ts', 'js', 'json'],
   moduleNameMapper: {
-    '^@ambiten/core$': '<rootDir>/../core/src/index.ts',
-    '^@ambiten/logger$': '<rootDir>/../logger/src/index.ts',
-    '^@ambiten/adapter-types$': '<rootDir>/../adapter-types/src/index.ts'
-  }
+    '^@/(.*)$': '<rootDir>/src/$1',
+    // Map workspace packages to local source folders so tests can require package imports
+    '^@ambiten/(.*)$': '<rootDir>/../$1/src',
+  },
+  testPathIgnorePatterns: ['/node_modules/', '/dist/esm/', '/dist/cjs/'],
+  // modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  testTimeout: 30000,
 };
