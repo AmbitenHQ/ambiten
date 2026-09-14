@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build:esm": "tsc -b tsconfig.esm.json -force",
-    "build:cjs": "tsc -b tsconfig.json -force",
+    "build:cjs": "tsc -b tsconfig.json -force && node scripts/fix-esm-extensions.mjs",
     "build": "pnpm run clean && pnpm run build:esm && pnpm run build:cjs",
     "test": "jest --detectOpenHandles --coverage",
     "changeset": "pnpm run changeset",
