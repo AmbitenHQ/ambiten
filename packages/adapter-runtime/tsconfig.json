@@ -1,9 +1,34 @@
-{    
- "files": [],
- "references": [
-    { "path": "../core" }, // Reference to other local packages
-    { "path": "../core/tsconfig.esm.json" },
-    { "path": "../adapter-types" },
-    { "path": "../adapter-types/tsconfig.esm.json" },
+{
+  "extends": "../../tsconfig.base.json", // Inherit common settings
+  "compilerOptions": {
+    "target": "ES2022",                                                                                   
+    "rootDir": "src",
+    "outDir": "dist/cjs", 
+    "module": "commonjs",
+    "moduleResolution":"node",                                                                                                                                                                     
+    "composite": false,
+    "types": ["node", "jest"],
+    "declaration": false,
+    "declarationMap": false,
+    "esModuleInterop": true,
+    "resolvePackageJsonExports":false,
+    "emitDeclarationOnly": false, 
+    "sourceMap": true,        
+    "allowJs": false,               
+    "tsBuildInfoFile": "../../.cache/tsbuildinfo/adapter-runtime/cjs.tsbuildinfo"         
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json",
+    "assets"
   ],
+    "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/__test__/**",
+    "src/**/__tests__/**"
+  ]
 }
