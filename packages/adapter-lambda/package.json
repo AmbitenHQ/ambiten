@@ -35,7 +35,7 @@
     "changeset": "pnpm run changeset",
     "clean": "rimraf dist",
     "release": "pnpm changeset version",
-    "prepack": "pnpm cl ean&& pnpm build",
+    "prepack": "pnpm clean && pnpm build",
     "postbuild:esm": "node scripts/add-esm-type.js",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
   },
