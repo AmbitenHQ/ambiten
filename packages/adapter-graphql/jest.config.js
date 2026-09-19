@@ -15,6 +15,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+     '^(\\.{1,2}/.*)\\.js$': '$1',
     // Map workspace packages to local source folders so tests can require package imports
     '^@ambiten/(.*)$': '<rootDir>/../$1/src',
   },

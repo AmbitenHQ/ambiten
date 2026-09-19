@@ -1,0 +1,3536 @@
+[1mdiff --git a/.changeset/CHANGELOG.md b/.changeset/CHANGELOG.md[m
+[1mindex 90cb708..9efb55b 100644[m
+[1m--- a/.changeset/CHANGELOG.md[m
+[1m+++ b/.changeset/CHANGELOG.md[m
+[36m@@ -1,9 +1,19 @@[m
+ ---[m
+[31m-"@ambiten/adapter-fastify": patch[m
+[32m+[m[32m"@ambiten/adapter-graphql": minor[m
+ ---[m
+ [m
+[31m-Fix Fastify execution-context propagation by running route handlers inside the Ambiten adapter runtime boundary.[m
+[32m+[m[32mAdd execution-scoped Apollo Server and GraphQL Yoga adapters.[m
+ [m
+[31m-Previously, the adapter entered and exited `runWithAdapterContext()` during an empty `preHandler` hook before application handlers executed. This could cause tenant, request, transaction, and other execution-scoped state to be unavailable to downstream application code.[m
+[32m+[m[32mGraphQL operations now execute inside the Ambiten adapter runtime boundary instead of creating a short-lived runtime only while the GraphQL context object is constructed.[m
+ [m
+[31m-Fastify route handlers now execute inside the Ambiten runtime boundary, preserving context throughout asynchronous service and model execution.[m
+\ No newline at end of file[m
+[32m+[m[32mThe new `createApolloAdapter()` wraps Apollo-compatible HTTP GraphQL execution so tenant identity, request metadata, instrumentation state, and other Ambiten execution context remain active throughout asynchronous resolver and model execution.[m
+[32m+[m
+[32m+[m[32mThe new `createYogaAdapter()` integrates with Yoga-compatible execution and subscription hooks so queries, mutations, subscriptions, and streaming execution retain the correct Ambiten runtime boundary.[m
+[32m+[m
+[32m+[m[32mThe adapter now uses framework-neutral structural contracts instead of importing Apollo Server, GraphQL Yoga, or GraphQL framework types directly. This reduces framework coupling and avoids forcing application framework versions into the Ambiten dependency graph.[m
+[32m+[m
+[32m+[m[32mStreaming and subscription continuations restore the already-resolved runtime snapshot without repeating ingress tenant resolution.[m
+[32m+[m
+[32m+[m[32mAutomatic GraphQL-wide transactions are rejected because GraphQL can report resolver failures through execution results without rejecting the execution promise. Use explicit transaction boundaries inside mutation workflows or application services instead.[m
+[32m+[m
+[32m+[m[32m`createApolloContextFactory()` and `createYogaContextFactory()` remain available for compatibility but are deprecated because GraphQL context construction alone does not preserve the Ambiten runtime throughout resolver execution.[m
+\ No newline at end of file[m
+[1mdiff --git a/.changeset/sixty-memes-bake.md b/.changeset/sixty-memes-bake.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9014875[m
+[1m--- /dev/null[m
+[1m+++ b/.changeset/sixty-memes-bake.md[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32m---[m
+[32m+[m[32m"@ambiten/adapter-graphql": major[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32mPreserve Ambiten execution context throughout Apollo Server and GraphQL Yoga execution.[m
+[1mdiff --git a/packages/adapter-graphql/__test__/apollo-adapter.spec.ts b/packages/adapter-graphql/__test__/apollo-adapter.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5c81d32[m
+[1m--- /dev/null[m
+[1m+++ b/packages/adapter-graphql/__test__/apollo-adapter.spec.ts[m
+[36m@@ -0,0 +1,468 @@[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  getAdapterRuntimeContext[m
+[32m+[m[32m} from '@ambiten/adapter-runtime';[m
+[32m+[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  createApolloAdapter[m
+[32m+[m[32m} from '../src/apollo';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+[32m+[m[32m  ApolloExecuteInputLike,[m
+[32m+[m[32m  ApolloServerLike[m
+[32m+[m[32m} from '../src/types';[m
+[32m+[m
+[32m+[m[32mfunction delay([m
+[32m+[m[32m  milliseconds:[m
+[32m+[m[32m    number[m
+[32m+[m[32m): Promise<void> {[m
+[32m+[m[32m  return new Promise([m
+[32m+[m[32m    resolve =>[m
+[32m+[m[32m      setTimeout([m
+[32m+[m[32m        resolve,[m
+[32m+[m[32m        milliseconds[m
+[32m+[m[32m      )[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction createInput([m
+[32m+[m[32m  tenantId:[m
+[32m+[m[32m    string,[m
+[32m+[m
+[32m+[m[32m  requestId:[m
+[32m+[m[32m    string[m
+[32m+[m[32m): ApolloExecuteInputLike {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    httpGraphQLRequest: {[m
+[32m+[m[32m      method:[m
+[32m+[m[32m        'POST',[m
+[32m+[m
+[32m+[m[32m      headers:[m
+[32m+[m[32m        new Map([[m
+[32m+[m[32m          [[m
+[32m+[m[32m            'x-tenant-id',[m
+[32m+[m[32m            tenantId[m
+[32m+[m[32m          ],[m
+[32m+[m
+[32m+[m[32m          [[m
+[32m+[m[32m            'x-request-id',[m
+[32m+[m[32m            requestId[m
+[32m+[m[32m          ][m
+[32m+[m[32m        ]),[m
+[32m+[m
+[32m+[m[32m      search:[m
+[32m+[m[32m        '',[m
+[32m+[m
+[32m+[m[32m      body: {[m
+[32m+[m[32m        query:[m
+[32m+[m[32m          '{ runtime }'[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    context:[m
+[32m+[m[32m      async () => ({[m
+[32m+[m[32m        applicationValue:[m
+[32m+[m[32m          'preserved'[m
+[32m+[m[32m      })[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdescribe([m
+[32m+[m[32m  'createApolloAdapter',[m
+[32m+[m[32m  () => {[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'keeps Ambiten context active throughout Apollo execution',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        const execute =[m
+[32m+[m[32m          jest.fn([m
+[32m+[m[32m            async ([m
+[32m+[m[32m              input:[m
+[32m+[m[32m                ApolloExecuteInputLike[m
+[32m+[m[32m            ) => {[m
+[32m+[m[32m              const context =[m
+[32m+[m[32m                await input[m
+[32m+[m[32m                  .context();[m
+[32m+[m
+[32m+[m[32m              const before =[m
+[32m+[m[32m                getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m              await Promise.resolve();[m
+[32m+[m[32m              await delay(5);[m
+[32m+[m
+[32m+[m[32m              const after =[m
+[32m+[m[32m                getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m              return {[m
+[32m+[m[32m                body: {[m
+[32m+[m[32m                  kind:[m
+[32m+[m[32m                    'complete',[m
+[32m+[m
+[32m+[m[32m                  result: {[m
+[32m+[m[32m                    before:[m
+[32m+[m[32m                      before.tenantId,[m
+[32m+[m
+[32m+[m[32m                    after:[m
+[32m+[m[32m                      after.tenantId,[m
+[32m+[m
+[32m+[m[32m                    requestId:[m
+[32m+[m[32m                      after.requestId,[m
+[32m+[m
+[32m+[m[32m                    context[m
+[32m+[m[32m                  }[m
+[32m+[m[32m                }[m
+[32m+[m[32m              };[m
+[32m+[m[32m            }[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const server =[m
+[32m+[m[32m          {[m
+[32m+[m[32m            executeHTTPGraphQLRequest:[m
+[32m+[m[32m              execute[m
+[32m+[m[32m          } as unknown as[m
+[32m+[m[32m            ApolloServerLike;[m
+[32m+[m
+[32m+[m[32m        const adapter =[m
+[32m+[m[32m          createApolloAdapter();[m
+[32m+[m
+[32m+[m[32m        adapter.install([m
+[32m+[m[32m          server,[m
+[32m+[m[32m          {[m
+[32m+[m[32m            tenancy: {[m
+[32m+[m[32m              header:[m
+[32m+[m[32m                'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m              validate:[m
+[32m+[m[32m                async ([m
+[32m+[m[32m                  tenantId[m
+[32m+[m[32m                ) =>[m
+[32m+[m[32m                  tenantId ===[m
+[32m+[m[32m                  'tenant-a'[m
+[32m+[m[32m            }[m
+[32m+[m[32m          }[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        const result =[m
+[32m+[m[32m          await ([m
+[32m+[m[32m            server as unknown as {[m
+[32m+[m[32m              executeHTTPGraphQLRequest:[m
+[32m+[m[32m                ([m
+[32m+[m[32m                  input:[m
+[32m+[m[32m                    ApolloExecuteInputLike[m
+[32m+[m[32m                ) =>[m
+[32m+[m[32m                  Promise<any>;[m
+[32m+[m[32m            }[m
+[32m+[m[32m          )[m
+[32m+[m[32m            .executeHTTPGraphQLRequest([m
+[32m+[m[32m              createInput([m
+[32m+[m[32m                'tenant-a',[m
+[32m+[m[32m                'req-a'[m
+[32m+[m[32m              )[m
+[32m+[m[32m            );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.body.result.before[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.body.result.after[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.body.result.requestId[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'req-a'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.body.result[m
+[32m+[m[32m            .context[m
+[32m+[m[32m            .applicationValue[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'preserved'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.body.result[m
+[32m+[m[32m            .context[m
+[32m+[m[32m            .tenantId[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a'[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'isolates concurrent Apollo executions',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        const execute =[m
+[32m+[m[32m          async ([m
+[32m+[m[32m            _input:[m
+[32m+[m[32m              ApolloExecuteInputLike[m
+[32m+[m[32m          ) => {[m
+[32m+[m[32m            const before =[m
+[32m+[m[32m              getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m            await delay([m
+[32m+[m[32m              before.tenantId ===[m
+[32m+[m[32m              'tenant-a'[m
+[32m+[m[32m                ? 20[m
+[32m+[m[32m                : 5[m
+[32m+[m[32m            );[m
+[32m+[m
+[32m+[m[32m            const after =[m
+[32m+[m[32m              getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m            return {[m
+[32m+[m[32m              tenantId:[m
+[32m+[m[32m                after.tenantId,[m
+[32m+[m
+[32m+[m[32m              requestId:[m
+[32m+[m[32m                after.requestId[m
+[32m+[m[32m            };[m
+[32m+[m[32m          };[m
+[32m+[m
+[32m+[m[32m        const server =[m
+[32m+[m[32m          {[m
+[32m+[m[32m            executeHTTPGraphQLRequest:[m
+[32m+[m[32m              execute[m
+[32m+[m[32m          } as unknown as[m
+[32m+[m[32m            ApolloServerLike;[m
+[32m+[m
+[32m+[m[32m        createApolloAdapter()[m
+[32m+[m[32m          .install([m
+[32m+[m[32m            server,[m
+[32m+[m[32m            {[m
+[32m+[m[32m              tenancy: {[m
+[32m+[m[32m                header:[m
+[32m+[m[32m                  'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m                validate:[m
+[32m+[m[32m                  async () =>[m
+[32m+[m[32m                    true[m
+[32m+[m[32m              }[m
+[32m+[m[32m            }[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const invoke =[m
+[32m+[m[32m          ([m
+[32m+[m[32m            server as unknown as {[m
+[32m+[m[32m              executeHTTPGraphQLRequest:[m
+[32m+[m[32m                ([m
+[32m+[m[32m                  input:[m
+[32m+[m[32m                    ApolloExecuteInputLike[m
+[32m+[m[32m                ) =>[m
+[32m+[m[32m                  Promise<{[m
+[32m+[m[32m                    tenantId?: string;[m
+[32m+[m[32m                    requestId?: string;[m
+[32m+[m[32m                  }>;[m
+[32m+[m[32m            }[m
+[32m+[m[32m          )[m
+[32m+[m[32m            .executeHTTPGraphQLRequest[m
+[32m+[m[32m            .bind(server);[m
+[32m+[m
+[32m+[m[32m        const [[m
+[32m+[m[32m          tenantA,[m
+[32m+[m[32m          tenantB[m
+[32m+[m[32m        ] =[m
+[32m+[m[32m          await Promise.all([[m
+[32m+[m[32m            invoke([m
+[32m+[m[32m              createInput([m
+[32m+[m[32m                'tenant-a',[m
+[32m+[m[32m                'req-a'[m
+[32m+[m[32m              )[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            invoke([m
+[32m+[m[32m              createInput([m
+[32m+[m[32m                'tenant-b',[m
+[32m+[m[32m                'req-b'[m
+[32m+[m[32m              )[m
+[32m+[m[32m            )[m
+[32m+[m[32m          ]);[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          tenantA[m
+[32m+[m[32m        ).toEqual({[m
+[32m+[m[32m          tenantId:[m
+[32m+[m[32m            'tenant-a',[m
+[32m+[m
+[32m+[m[32m          requestId:[m
+[32m+[m[32m            'req-a'[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          tenantB[m
+[32m+[m[32m        ).toEqual({[m
+[32m+[m[32m          tenantId:[m
+[32m+[m[32m            'tenant-b',[m
+[32m+[m
+[32m+[m[32m          requestId:[m
+[32m+[m[32m            'req-b'[m
+[32m+[m[32m        });[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'rejects invalid tenants before Apollo execution begins',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        const execute =[m
+[32m+[m[32m          jest.fn([m
+[32m+[m[32m            async () => ({[m
+[32m+[m[32m              ok:[m
+[32m+[m[32m                true[m
+[32m+[m[32m            })[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const server =[m
+[32m+[m[32m          {[m
+[32m+[m[32m            executeHTTPGraphQLRequest:[m
+[32m+[m[32m              execute[m
+[32m+[m[32m          } as unknown as[m
+[32m+[m[32m            ApolloServerLike;[m
+[32m+[m
+[32m+[m[32m        createApolloAdapter()[m
+[32m+[m[32m          .install([m
+[32m+[m[32m            server,[m
+[32m+[m[32m            {[m
+[32m+[m[32m              tenancy: {[m
+[32m+[m[32m                header:[m
+[32m+[m[32m                  'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m                validate:[m
+[32m+[m[32m                  async ([m
+[32m+[m[32m                    tenantId[m
+[32m+[m[32m                  ) =>[m
+[32m+[m[32m                    tenantId ===[m
+[32m+[m[32m                    'tenant-a'[m
+[32m+[m[32m              }[m
+[32m+[m[32m            }[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const invoke =[m
+[32m+[m[32m          ([m
+[32m+[m[32m            server as unknown as {[m
+[32m+[m[32m              executeHTTPGraphQLRequest:[m
+[32m+[m[32m                ([m
+[32m+[m[32m                  input:[m
+[32m+[m[32m                    ApolloExecuteInputLike[m
+[32m+[m[32m                ) =>[m
+[32m+[m[32m                  Promise<unknown>;[m
+[32m+[m[32m            }[m
+[32m+[m[32m          )[m
+[32m+[m[32m            .executeHTTPGraphQLRequest;[m
+[32m+[m
+[32m+[m[32m        await expect([m
+[32m+[m[32m          invoke([m
+[32m+[m[32m            createInput([m
+[32m+[m[32m              'unknown',[m
+[32m+[m[32m              'req-x'[m
+[32m+[m[32m            )[m
+[32m+[m[32m          )[m
+[32m+[m[32m        ).rejects.toThrow();[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          execute[m
+[32m+[m[32m        ).not.toHaveBeenCalled();[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'prevents duplicate installation',[m
+[32m+[m[32m      () => {[m
+[32m+[m[32m        const server =[m
+[32m+[m[32m          {[m
+[32m+[m[32m            executeHTTPGraphQLRequest:[m
+[32m+[m[32m              async () =>[m
+[32m+[m[32m                ({})[m
+[32m+[m[32m          } as unknown as[m
+[32m+[m[32m            ApolloServerLike;[m
+[32m+[m
+[32m+[m[32m        const adapter =[m
+[32m+[m[32m          createApolloAdapter();[m
+[32m+[m
+[32m+[m[32m        adapter.install([m
+[32m+[m[32m          server[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          () =>[m
+[32m+[m[32m            adapter.install([m
+[32m+[m[32m              server[m
+[32m+[m[32m            )[m
+[32m+[m[32m        ).toThrow([m
+[32m+[m[32m          /already installed/[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'restores the original Apollo execution method',[m
+[32m+[m[32m      () => {[m
+[32m+[m[32m        const original =[m
+[32m+[m[32m          async () => ({[m
+[32m+[m[32m            original:[m
+[32m+[m[32m              true[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        const server =[m
+[32m+[m[32m          {[m
+[32m+[m[32m            executeHTTPGraphQLRequest:[m
+[32m+[m[32m              original[m
+[32m+[m[32m          } as unknown as[m
+[32m+[m[32m            ApolloServerLike;[m
+[32m+[m
+[32m+[m[32m        const dispose =[m
+[32m+[m[32m          createApolloAdapter()[m
+[32m+[m[32m            .install([m
+[32m+[m[32m              server[m
+[32m+[m[32m            );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          server[m
+[32m+[m[32m            .executeHTTPGraphQLRequest[m
+[32m+[m[32m        ).not.toBe([m
+[32m+[m[32m          original[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        dispose();[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          server[m
+[32m+[m[32m            .executeHTTPGraphQLRequest[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          original[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'rejects automatic GraphQL-wide transactions',[m
+[32m+[m[32m      () => {[m
+[32m+[m[32m        const server =[m
+[32m+[m[32m          {[m
+[32m+[m[32m            executeHTTPGraphQLRequest:[m
+[32m+[m[32m              async () =>[m
+[32m+[m[32m                ({})[m
+[32m+[m[32m          } as unknown as[m
+[32m+[m[32m            ApolloServerLike;[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          () =>[m
+[32m+[m[32m            createApolloAdapter()[m
+[32m+[m[32m              .install([m
+[32m+[m[32m                server,[m
+[32m+[m[32m                {[m
+[32m+[m[32m                  enableTransactions:[m
+[32m+[m[32m                    true[m
+[32m+[m[32m                }[m
+[32m+[m[32m              )[m
+[32m+[m[32m        ).toThrow([m
+[32m+[m[32m          /automatic GraphQL-wide transactions/[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m);[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/__test__/graphql-adapters.test.ts b/packages/adapter-graphql/__test__/graphql-adapters.test.ts[m
+[1mindex 7f252c6..912b32f 100644[m
+[1m--- a/packages/adapter-graphql/__test__/graphql-adapters.test.ts[m
+[1m+++ b/packages/adapter-graphql/__test__/graphql-adapters.test.ts[m
+[36m@@ -1,145 +1,294 @@[m
+[31m-import { createApolloContextFactory } from '../src/apollo';[m
+[31m-import { createYogaContextFactory } from '../src/yoga';[m
+[31m-import { runWithAdapterContext } from '@ambiten/adapter-runtime';[m
+[31m-[m
+[31m-jest.mock('@ambiten/adapter-runtime', () => ({[m
+[31m-  runWithAdapterContext: jest.fn(),[m
+[31m-  getAdapterRuntimeContext: jest.fn(() => ({[m
+[31m-    tenantId: 'tenant-a',[m
+[31m-    requestId: 'req-1',[m
+[31m-    dbName: 'tenant-db',[m
+[31m-    collectionName: 'users',[m
+[31m-    debug: true,[m
+[31m-    loggerMeta: { source: 'test' },[m
+[31m-    meta: { secure: true }[m
+[31m-  }))[m
+[31m-}));[m
+[31m-[m
+[31m-describe('GraphQL adapter context factories', () => {[m
+[31m-  beforeEach(() => {[m
+[31m-    jest.clearAllMocks();[m
+[31m-[m
+[31m-    (runWithAdapterContext as jest.Mock).mockImplementation([m
+[31m-      async (_req, handler) => handler()[m
+[31m-    );[m
+[31m-  });[m
+[31m-[m
+[31m-  it('createApolloContextFactory should create Ambiten GraphQL runtime context', async () => {[m
+[31m-    const factory = createApolloContextFactory([m
+[31m-      {[m
+[31m-        tenancy: { header: 'x-tenant-id' },[m
+[31m-        requestIdHeader: 'x-request-id'[m
+[31m-      },[m
+[31m-      async (_input, runtime) => ({[m
+[31m-        user: { id: 'user-1' },[m
+[31m-        runtimeTenant: runtime.tenantId[m
+[31m-      })[m
+[31m-    );[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  getAdapterRuntimeContext[m
+[32m+[m[32m} from '@ambiten/adapter-runtime';[m
+[32m+[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  bindGraphqlAsyncIterable,[m
+[32m+[m[32m  runWithGraphqlContext[m
+[32m+[m[32m} from '../src/graphql-context';[m
+[32m+[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  toGraphqlAmbitenRequestLike[m
+[32m+[m[32m} from '../src/graphql-request';[m
+[32m+[m
+[32m+[m[32mdescribe([m
+[32m+[m[32m  'GraphQL streaming runtime',[m
+[32m+[m[32m  () => {[m
+[32m+[m[32m    it([m
+[32m+[m[32m      're-enters the same resolved context for iterator advancement',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        let requestIdCalls =[m
+[32m+[m[32m          0;[m
+[32m+[m
+[32m+[m[32m        const request =[m
+[32m+[m[32m          toGraphqlAmbitenRequestLike({[m
+[32m+[m[32m            headers: {[m
+[32m+[m[32m              'x-tenant-id':[m
+[32m+[m[32m                'tenant-a'[m
+[32m+[m[32m            }[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        const options = {[m
+[32m+[m[32m          tenancy: {[m
+[32m+[m[32m            header:[m
+[32m+[m[32m              'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m            validate:[m
+[32m+[m[32m              async () =>[m
+[32m+[m[32m                true[m
+[32m+[m[32m          },[m
+[32m+[m
+[32m+[m[32m          resolvers: {[m
+[32m+[m[32m            requestId:[m
+[32m+[m[32m              () => {[m
+[32m+[m[32m                requestIdCalls +=[m
+[32m+[m[32m                  1;[m
+[32m+[m
+[32m+[m[32m                return `req-${requestIdCalls}`;[m
+[32m+[m[32m              }[m
+[32m+[m[32m          }[m
+[32m+[m[32m        };[m
+[32m+[m
+[32m+[m[32m        let count =[m
+[32m+[m[32m          0;[m
+[32m+[m
+[32m+[m[32m        const source:[m
+[32m+[m[32m          AsyncIterableIterator<[m
+[32m+[m[32m            string[m
+[32m+[m[32m          > = {[m
+[32m+[m[32m          async next() {[m
+[32m+[m[32m            count += 1;[m
+[32m+[m
+[32m+[m[32m            if ([m
+[32m+[m[32m              count > 2[m
+[32m+[m[32m            ) {[m
+[32m+[m[32m              return {[m
+[32m+[m[32m                done: true,[m
+[32m+[m[32m                value:[m
+[32m+[m[32m                  undefined as never[m
+[32m+[m[32m              };[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m            const context =[m
+[32m+[m[32m              getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m            return {[m
+[32m+[m[32m              done: false,[m
+[32m+[m
+[32m+[m[32m              value:[m
+[32m+[m[32m                [[m
+[32m+[m[32m                  context.tenantId,[m
+[32m+[m[32m                  context.requestId[m
+[32m+[m[32m                ].join('|')[m
+[32m+[m[32m            };[m
+[32m+[m[32m          },[m
+[32m+[m
+[32m+[m[32m          [Symbol.asyncIterator]() {[m
+[32m+[m[32m            return this;[m
+[32m+[m[32m          }[m
+[32m+[m[32m        };[m
+[32m+[m
+[32m+[m[32m        let bound:[m
+[32m+[m[32m          AsyncIterableIterator<[m
+[32m+[m[32m            string[m
+[32m+[m[32m          > | undefined;[m
+[32m+[m
+[32m+[m[32m        await runWithGraphqlContext([m
+[32m+[m[32m          request,[m
+[32m+[m
+[32m+[m[32m          async () => {[m
+[32m+[m[32m            const snapshot =[m
+[32m+[m[32m              getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m            bound =[m
+[32m+[m[32m              bindGraphqlAsyncIterable([m
+[32m+[m[32m                source,[m
+[32m+[m[32m                request,[m
+[32m+[m[32m                options,[m
+[32m+[m[32m                snapshot[m
+[32m+[m[32m              );[m
+[32m+[m[32m          },[m
+ [m
+[31m-    const context = await factory({[m
+[31m-      req: {[m
+[31m-        headers: {[m
+[31m-          'x-tenant-id': 'tenant-a',[m
+[31m-          'x-request-id': 'req-1'[m
+[31m-        },[m
+[31m-        url: '/graphql',[m
+[31m-        method: 'POST',[m
+[31m-        cookies: { session: 'abc' },[m
+[31m-        query: { operationName: 'FindUsers' },[m
+[31m-        body: { query: '{ users { id } }' }[m
+[32m+[m[32m          options[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          requestIdCalls[m
+[32m+[m[32m        ).toBe(1);[m
+[32m+[m
+[32m+[m[32m        const first =[m
+[32m+[m[32m          await bound!.next();[m
+[32m+[m
+[32m+[m[32m        const second =[m
+[32m+[m[32m          await bound!.next();[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          first.value[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a|req-1'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          second.value[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a|req-1'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        /*[m
+[32m+[m[32m         * Streaming does not re-run the original[m
+[32m+[m[32m         * request ID resolver.[m
+[32m+[m[32m         */[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          requestIdCalls[m
+[32m+[m[32m        ).toBe(1);[m
+       }[m
+[31m-    });[m
+[31m-[m
+[31m-    expect(runWithAdapterContext).toHaveBeenCalledWith([m
+[31m-      expect.objectContaining({[m
+[31m-        headers: expect.objectContaining({[m
+[31m-          'x-tenant-id': 'tenant-a'[m
+[31m-        }),[m
+[31m-        url: '/graphql',[m
+[31m-        method: 'POST',[m
+[31m-        cookies: { session: 'abc' },[m
+[31m-        query: { operationName: 'FindUsers' },[m
+[31m-        body: { query: '{ users { id } }' },[m
+[31m-        get: expect.any(Function)[m
+[31m-      }),[m
+[31m-      expect.any(Function),[m
+[31m-      expect.objectContaining({[m
+[31m-        tenancy: { header: 'x-tenant-id' },[m
+[31m-        requestIdHeader: 'x-request-id'[m
+[31m-      })[m
+     );[m
+[32m+[m[32m  }[m
+[32m+[m[32m);[m
+ [m
+[31m-    expect(context).toEqual([m
+[31m-      expect.objectContaining({[m
+[31m-        tenantId: 'tenant-a',[m
+[31m-        requestId: 'req-1',[m
+[31m-        dbName: 'tenant-db',[m
+[31m-        collectionName: 'users',[m
+[31m-        debug: true,[m
+[31m-        loggerMeta: { source: 'test' },[m
+[31m-        meta: { secure: true },[m
+[31m-        user: { id: 'user-1' },[m
+[31m-        runtimeTenant: 'tenant-a',[m
+[31m-        request: expect.any(Object),[m
+[31m-        rawRequest: expect.any(Object),[m
+[31m-        rawInput: expect.any(Object)[m
+[31m-      })[m
+[31m-    );[m
+[31m-  });[m
+[31m-[m
+[31m-  it('createYogaContextFactory should create Ambiten GraphQL runtime context', async () => {[m
+[31m-    const request = new Request('https://example.com/graphql', {[m
+[31m-      method: 'POST',[m
+[31m-      headers: {[m
+[31m-        'x-tenant-id': 'tenant-a',[m
+[31m-        'x-request-id': 'req-1'[m
+[31m-      },[m
+[31m-      body: JSON.stringify({ query: '{ users { id } }' })[m
+[31m-    });[m
+[31m-[m
+[31m-    const factory = createYogaContextFactory([m
+[31m-      {[m
+[31m-        tenancy: { header: 'x-tenant-id' },[m
+[31m-        requestIdHeader: 'x-request-id'[m
+[31m-      },[m
+[31m-      async (_input, runtime) => ({[m
+[31m-        user: { id: 'user-2' },[m
+[31m-        runtimeRequestId: runtime.requestId[m
+[31m-      })[m
+[31m-    );[m
+ [m
+[31m-    const context = await factory({ request });[m
+[31m-[m
+[31m-    expect(runWithAdapterContext).toHaveBeenCalledWith([m
+[31m-      expect.objectContaining({[m
+[31m-        headers: expect.objectContaining({[m
+[31m-          'x-tenant-id': 'tenant-a',[m
+[31m-          'x-request-id': 'req-1'[m
+[31m-        }),[m
+[31m-        url: 'https://example.com/graphql',[m
+[31m-        method: 'POST',[m
+[31m-        get: expect.any(Function)[m
+[31m-      }),[m
+[31m-      expect.any(Function),[m
+[31m-      expect.objectContaining({[m
+[31m-        tenancy: { header: 'x-tenant-id' },[m
+[31m-        requestIdHeader: 'x-request-id'[m
+[31m-      })[m
+[31m-    );[m
+[32m+[m[32m// import { createApolloContextFactory } from '../src/apollo';[m
+[32m+[m[32m// import { createYogaContextFactory } from '../src/yoga';[m
+[32m+[m[32m// import { runWithAdapterContext } from '@ambiten/adapter-runtime';[m
+ [m
+[31m-    expect(context).toEqual([m
+[31m-      expect.objectContaining({[m
+[31m-        tenantId: 'tenant-a',[m
+[31m-        requestId: 'req-1',[m
+[31m-        dbName: 'tenant-db',[m
+[31m-        collectionName: 'users',[m
+[31m-        debug: true,[m
+[31m-        user: { id: 'user-2' },[m
+[31m-        runtimeRequestId: 'req-1',[m
+[31m-        request: expect.any(Object),[m
+[31m-        rawRequest: request,[m
+[31m-        rawInput: { request }[m
+[31m-      })[m
+[31m-    );[m
+[31m-  });[m
+[31m-});[m
+\ No newline at end of file[m
+[32m+[m[32m// jest.mock('@ambiten/adapter-runtime', () => ({[m
+[32m+[m[32m//   runWithAdapterContext: jest.fn(),[m
+[32m+[m[32m//   getAdapterRuntimeContext: jest.fn(() => ({[m
+[32m+[m[32m//     tenantId: 'tenant-a',[m
+[32m+[m[32m//     requestId: 'req-1',[m
+[32m+[m[32m//     dbName: 'tenant-db',[m
+[32m+[m[32m//     collectionName: 'users',[m
+[32m+[m[32m//     debug: true,[m
+[32m+[m[32m//     loggerMeta: { source: 'test' },[m
+[32m+[m[32m//     meta: { secure: true }[m
+[32m+[m[32m//   }))[m
+[32m+[m[32m// }));[m
+[32m+[m
+[32m+[m[32m// describe('GraphQL adapter context factories', () => {[m
+[32m+[m[32m//   beforeEach(() => {[m
+[32m+[m[32m//     jest.clearAllMocks();[m
+[32m+[m
+[32m+[m[32m//     (runWithAdapterContext as jest.Mock).mockImplementation([m
+[32m+[m[32m//       async (_req, handler) => handler()[m
+[32m+[m[32m//     );[m
+[32m+[m[32m//   });[m
+[32m+[m
+[32m+[m[32m//   it('createApolloContextFactory should create Ambiten GraphQL runtime context', async () => {[m
+[32m+[m[32m//     const factory = createApolloContextFactory([m
+[32m+[m[32m//       {[m
+[32m+[m[32m//         tenancy: { header: 'x-tenant-id' },[m
+[32m+[m[32m//         requestIdHeader: 'x-request-id'[m
+[32m+[m[32m//       },[m
+[32m+[m[32m//       async (_input, runtime) => ({[m
+[32m+[m[32m//         user: { id: 'user-1' },[m
+[32m+[m[32m//         runtimeTenant: runtime.tenantId[m
+[32m+[m[32m//       })[m
+[32m+[m[32m//     );[m
+[32m+[m
+[32m+[m[32m//     const context = await factory({[m
+[32m+[m[32m//       req: {[m
+[32m+[m[32m//         headers: {[m
+[32m+[m[32m//           'x-tenant-id': 'tenant-a',[m
+[32m+[m[32m//           'x-request-id': 'req-1'[m
+[32m+[m[32m//         },[m
+[32m+[m[32m//         url: '/graphql',[m
+[32m+[m[32m//         method: 'POST',[m
+[32m+[m[32m//         cookies: { session: 'abc' },[m
+[32m+[m[32m//         query: { operationName: 'FindUsers' },[m
+[32m+[m[32m//         body: { query: '{ users { id } }' }[m
+[32m+[m[32m//       }[m
+[32m+[m[32m//     });[m
+[32m+[m
+[32m+[m[32m//     expect(runWithAdapterContext).toHaveBeenCalledWith([m
+[32m+[m[32m//       expect.objectContaining({[m
+[32m+[m[32m//         headers: expect.objectContaining({[m
+[32m+[m[32m//           'x-tenant-id': 'tenant-a'[m
+[32m+[m[32m//         }),[m
+[32m+[m[32m//         url: '/graphql',[m
+[32m+[m[32m//         method: 'POST',[m
+[32m+[m[32m//         cookies: { session: 'abc' },[m
+[32m+[m[32m//         query: { operationName: 'FindUsers' },[m
+[32m+[m[32m//         body: { query: '{ users { id } }' },[m
+[32m+[m[32m//         get: expect.any(Function)[m
+[32m+[m[32m//       }),[m
+[32m+[m[32m//       expect.any(Function),[m
+[32m+[m[32m//       expect.objectContaining({[m
+[32m+[m[32m//         tenancy: { header: 'x-tenant-id' },[m
+[32m+[m[32m//         requestIdHeader: 'x-request-id'[m
+[32m+[m[32m//       })[m
+[32m+[m[32m//     );[m
+[32m+[m
+[32m+[m[32m//     expect(context).toEqual([m
+[32m+[m[32m//       expect.objectContaining({[m
+[32m+[m[32m//         tenantId: 'tenant-a',[m
+[32m+[m[32m//         requestId: 'req-1',[m
+[32m+[m[32m//         dbName: 'tenant-db',[m
+[32m+[m[32m//         collectionName: 'users',[m
+[32m+[m[32m//         debug: true,[m
+[32m+[m[32m//         loggerMeta: { source: 'test' },[m
+[32m+[m[32m//         meta: { secure: true },[m
+[32m+[m[32m//         user: { id: 'user-1' },[m
+[32m+[m[32m//         runtimeTenant: 'tenant-a',[m
+[32m+[m[32m//         request: expect.any(Object),[m
+[32m+[m[32m//         rawRequest: expect.any(Object),[m
+[32m+[m[32m//         rawInput: expect.any(Object)[m
+[32m+[m[32m//       })[m
+[32m+[m[32m//     );[m
+[32m+[m[32m//   });[m
+[32m+[m
+[32m+[m[32m//   it('createYogaContextFactory should create Ambiten GraphQL runtime context', async () => {[m
+[32m+[m[32m//     const request = new Request('https://example.com/graphql', {[m
+[32m+[m[32m//       method: 'POST',[m
+[32m+[m[32m//       headers: {[m
+[32m+[m[32m//         'x-tenant-id': 'tenant-a',[m
+[32m+[m[32m//         'x-request-id': 'req-1'[m
+[32m+[m[32m//       },[m
+[32m+[m[32m//       body: JSON.stringify({ query: '{ users { id } }' })[m
+[32m+[m[32m//     });[m
+[32m+[m
+[32m+[m[32m//     const factory = createYogaContextFactory([m
+[32m+[m[32m//       {[m
+[32m+[m[32m//         tenancy: { header: 'x-tenant-id' },[m
+[32m+[m[32m//         requestIdHeader: 'x-request-id'[m
+[32m+[m[32m//       },[m
+[32m+[m[32m//       async (_input, runtime) => ({[m
+[32m+[m[32m//         user: { id: 'user-2' },[m
+[32m+[m[32m//         runtimeRequestId: runtime.requestId[m
+[32m+[m[32m//       })[m
+[32m+[m[32m//     );[m
+[32m+[m
+[32m+[m[32m//     const context = await factory({ request });[m
+[32m+[m
+[32m+[m[32m//     expect(runWithAdapterContext).toHaveBeenCalledWith([m
+[32m+[m[32m//       expect.objectContaining({[m
+[32m+[m[32m//         headers: expect.objectContaining({[m
+[32m+[m[32m//           'x-tenant-id': 'tenant-a',[m
+[32m+[m[32m//           'x-request-id': 'req-1'[m
+[32m+[m[32m//         }),[m
+[32m+[m[32m//         url: 'https://example.com/graphql',[m
+[32m+[m[32m//         method: 'POST',[m
+[32m+[m[32m//         get: expect.any(Function)[m
+[32m+[m[32m//       }),[m
+[32m+[m[32m//       expect.any(Function),[m
+[32m+[m[32m//       expect.objectContaining({[m
+[32m+[m[32m//         tenancy: { header: 'x-tenant-id' },[m
+[32m+[m[32m//         requestIdHeader: 'x-request-id'[m
+[32m+[m[32m//       })[m
+[32m+[m[32m//     );[m
+[32m+[m
+[32m+[m[32m//     expect(context).toEqual([m
+[32m+[m[32m//       expect.objectContaining({[m
+[32m+[m[32m//         tenantId: 'tenant-a',[m
+[32m+[m[32m//         requestId: 'req-1',[m
+[32m+[m[32m//         dbName: 'tenant-db',[m
+[32m+[m[32m//         collectionName: 'users',[m
+[32m+[m[32m//         debug: true,[m
+[32m+[m[32m//         user: { id: 'user-2' },[m
+[32m+[m[32m//         runtimeRequestId: 'req-1',[m
+[32m+[m[32m//         request: expect.any(Object),[m
+[32m+[m[32m//         rawRequest: request,[m
+[32m+[m[32m//         rawInput: { request }[m
+[32m+[m[32m//       })[m
+[32m+[m[32m//     );[m
+[32m+[m[32m//   });[m
+[32m+[m[32m// });[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/__test__/yoga-adapter.spec.ts b/packages/adapter-graphql/__test__/yoga-adapter.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b5ec782[m
+[1m--- /dev/null[m
+[1m+++ b/packages/adapter-graphql/__test__/yoga-adapter.spec.ts[m
+[36m@@ -0,0 +1,458 @@[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  getAdapterRuntimeContext[m
+[32m+[m[32m} from '@ambiten/adapter-runtime';[m
+[32m+[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  createYogaAdapter[m
+[32m+[m[32m} from '../src/yoga';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+[32m+[m[32m  GraphqlExecutionArgsLike[m
+[32m+[m[32m} from '../src/types';[m
+[32m+[m
+[32m+[m[32mfunction delay([m
+[32m+[m[32m  milliseconds:[m
+[32m+[m[32m    number[m
+[32m+[m[32m): Promise<void> {[m
+[32m+[m[32m  return new Promise([m
+[32m+[m[32m    resolve =>[m
+[32m+[m[32m      setTimeout([m
+[32m+[m[32m        resolve,[m
+[32m+[m[32m        milliseconds[m
+[32m+[m[32m      )[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction createRequest([m
+[32m+[m[32m  tenantId:[m
+[32m+[m[32m    string,[m
+[32m+[m
+[32m+[m[32m  requestId:[m
+[32m+[m[32m    string[m
+[32m+[m[32m) {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    headers:[m
+[32m+[m[32m      new Map([[m
+[32m+[m[32m        [[m
+[32m+[m[32m          'x-tenant-id',[m
+[32m+[m[32m          tenantId[m
+[32m+[m[32m        ],[m
+[32m+[m
+[32m+[m[32m        [[m
+[32m+[m[32m          'x-request-id',[m
+[32m+[m[32m          requestId[m
+[32m+[m[32m        ][m
+[32m+[m[32m      ]),[m
+[32m+[m
+[32m+[m[32m    url:[m
+[32m+[m[32m      'http://localhost/graphql',[m
+[32m+[m
+[32m+[m[32m    method:[m
+[32m+[m[32m      'POST'[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdescribe([m
+[32m+[m[32m  'createYogaAdapter',[m
+[32m+[m[32m  () => {[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'keeps Ambiten context active throughout Yoga execution',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        let wrappedExecute:[m
+[32m+[m[32m          ([m
+[32m+[m[32m            args:[m
+[32m+[m[32m              GraphqlExecutionArgsLike[m
+[32m+[m[32m          ) => Promise<unknown>;[m
+[32m+[m
+[32m+[m[32m        const originalExecute =[m
+[32m+[m[32m          jest.fn([m
+[32m+[m[32m            async ([m
+[32m+[m[32m              args:[m
+[32m+[m[32m                GraphqlExecutionArgsLike[m
+[32m+[m[32m            ) => {[m
+[32m+[m[32m              const before =[m
+[32m+[m[32m                getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m              await Promise.resolve();[m
+[32m+[m[32m              await delay(5);[m
+[32m+[m
+[32m+[m[32m              const after =[m
+[32m+[m[32m                getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m              return {[m
+[32m+[m[32m                before:[m
+[32m+[m[32m                  before.tenantId,[m
+[32m+[m
+[32m+[m[32m                after:[m
+[32m+[m[32m                  after.tenantId,[m
+[32m+[m
+[32m+[m[32m                requestId:[m
+[32m+[m[32m                  after.requestId,[m
+[32m+[m
+[32m+[m[32m                context:[m
+[32m+[m[32m                  args.contextValue[m
+[32m+[m[32m              };[m
+[32m+[m[32m            }[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const plugin =[m
+[32m+[m[32m          createYogaAdapter({[m
+[32m+[m[32m            tenancy: {[m
+[32m+[m[32m              header:[m
+[32m+[m[32m                'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m              validate:[m
+[32m+[m[32m                async ([m
+[32m+[m[32m                  tenantId[m
+[32m+[m[32m                ) =>[m
+[32m+[m[32m                  tenantId ===[m
+[32m+[m[32m                  'tenant-a'[m
+[32m+[m[32m            }[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        plugin.onExecute?.({[m
+[32m+[m[32m          executeFn:[m
+[32m+[m[32m            originalExecute,[m
+[32m+[m
+[32m+[m[32m          setExecuteFn([m
+[32m+[m[32m            fn:[m
+[32m+[m[32m              ([m
+[32m+[m[32m                args:[m
+[32m+[m[32m                  GraphqlExecutionArgsLike[m
+[32m+[m[32m              ) => Promise<unknown>[m
+[32m+[m[32m          ) {[m
+[32m+[m[32m            wrappedExecute =[m
+[32m+[m[32m              fn;[m
+[32m+[m[32m          }[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        const result =[m
+[32m+[m[32m          await wrappedExecute!({[m
+[32m+[m[32m            contextValue: {[m
+[32m+[m[32m              request:[m
+[32m+[m[32m                createRequest([m
+[32m+[m[32m                  'tenant-a',[m
+[32m+[m[32m                  'req-a'[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m              applicationValue:[m
+[32m+[m[32m                'preserved'[m
+[32m+[m[32m            }[m
+[32m+[m[32m          }) as {[m
+[32m+[m[32m            before?: string;[m
+[32m+[m[32m            after?: string;[m
+[32m+[m[32m            requestId?: string;[m
+[32m+[m
+[32m+[m[32m            context?:[m
+[32m+[m[32m              Record<[m
+[32m+[m[32m                string,[m
+[32m+[m[32m                unknown[m
+[32m+[m[32m              >;[m
+[32m+[m[32m          };[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.before[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.after[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result.requestId[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'req-a'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result[m
+[32m+[m[32m            .context[m
+[32m+[m[32m            ?.applicationValue[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'preserved'[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result[m
+[32m+[m[32m            .context[m
+[32m+[m[32m            ?.tenantId[m
+[32m+[m[32m        ).toBe([m
+[32m+[m[32m          'tenant-a'[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'isolates concurrent Yoga executions',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        let wrappedExecute:[m
+[32m+[m[32m          ([m
+[32m+[m[32m            args:[m
+[32m+[m[32m              GraphqlExecutionArgsLike[m
+[32m+[m[32m          ) =>[m
+[32m+[m[32m            Promise<unknown>;[m
+[32m+[m
+[32m+[m[32m        const originalExecute =[m
+[32m+[m[32m          async () => {[m
+[32m+[m[32m            const before =[m
+[32m+[m[32m              getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m            await delay([m
+[32m+[m[32m              before.tenantId ===[m
+[32m+[m[32m              'tenant-a'[m
+[32m+[m[32m                ? 20[m
+[32m+[m[32m                : 5[m
+[32m+[m[32m            );[m
+[32m+[m
+[32m+[m[32m            const after =[m
+[32m+[m[32m              getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m            return {[m
+[32m+[m[32m              tenantId:[m
+[32m+[m[32m                after.tenantId,[m
+[32m+[m
+[32m+[m[32m              requestId:[m
+[32m+[m[32m                after.requestId[m
+[32m+[m[32m            };[m
+[32m+[m[32m          };[m
+[32m+[m
+[32m+[m[32m        const plugin =[m
+[32m+[m[32m          createYogaAdapter({[m
+[32m+[m[32m            tenancy: {[m
+[32m+[m[32m              header:[m
+[32m+[m[32m                'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m              validate:[m
+[32m+[m[32m                async () =>[m
+[32m+[m[32m                  true[m
+[32m+[m[32m            }[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        plugin.onExecute?.({[m
+[32m+[m[32m          executeFn:[m
+[32m+[m[32m            originalExecute,[m
+[32m+[m
+[32m+[m[32m          setExecuteFn([m
+[32m+[m[32m            fn:[m
+[32m+[m[32m              ([m
+[32m+[m[32m                args:[m
+[32m+[m[32m                  GraphqlExecutionArgsLike[m
+[32m+[m[32m              ) =>[m
+[32m+[m[32m                Promise<unknown>[m
+[32m+[m[32m          ) {[m
+[32m+[m[32m            wrappedExecute =[m
+[32m+[m[32m              fn;[m
+[32m+[m[32m          }[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        const [[m
+[32m+[m[32m          tenantA,[m
+[32m+[m[32m          tenantB[m
+[32m+[m[32m        ] =[m
+[32m+[m[32m          await Promise.all([[m
+[32m+[m[32m            wrappedExecute!({[m
+[32m+[m[32m              contextValue: {[m
+[32m+[m[32m                request:[m
+[32m+[m[32m                  createRequest([m
+[32m+[m[32m                    'tenant-a',[m
+[32m+[m[32m                    'req-a'[m
+[32m+[m[32m                  )[m
+[32m+[m[32m              }[m
+[32m+[m[32m            }),[m
+[32m+[m
+[32m+[m[32m            wrappedExecute!({[m
+[32m+[m[32m              contextValue: {[m
+[32m+[m[32m                request:[m
+[32m+[m[32m                  createRequest([m
+[32m+[m[32m                    'tenant-b',[m
+[32m+[m[32m                    'req-b'[m
+[32m+[m[32m                  )[m
+[32m+[m[32m              }[m
+[32m+[m[32m            })[m
+[32m+[m[32m          ]) as Array<{[m
+[32m+[m[32m            tenantId?: string;[m
+[32m+[m[32m            requestId?: string;[m
+[32m+[m[32m          }>;[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          tenantA[m
+[32m+[m[32m        ).toEqual({[m
+[32m+[m[32m          tenantId:[m
+[32m+[m[32m            'tenant-a',[m
+[32m+[m
+[32m+[m[32m          requestId:[m
+[32m+[m[32m            'req-a'[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          tenantB[m
+[32m+[m[32m        ).toEqual({[m
+[32m+[m[32m          tenantId:[m
+[32m+[m[32m            'tenant-b',[m
+[32m+[m
+[32m+[m[32m          requestId:[m
+[32m+[m[32m            'req-b'[m
+[32m+[m[32m        });[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'does not execute Yoga operation when tenant validation fails',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        let wrappedExecute:[m
+[32m+[m[32m          ([m
+[32m+[m[32m            args:[m
+[32m+[m[32m              GraphqlExecutionArgsLike[m
+[32m+[m[32m          ) =>[m
+[32m+[m[32m            Promise<unknown>;[m
+[32m+[m
+[32m+[m[32m        const originalExecute =[m
+[32m+[m[32m          jest.fn([m
+[32m+[m[32m            async () => ({[m
+[32m+[m[32m              executed:[m
+[32m+[m[32m                true[m
+[32m+[m[32m            })[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const plugin =[m
+[32m+[m[32m          createYogaAdapter({[m
+[32m+[m[32m            tenancy: {[m
+[32m+[m[32m              header:[m
+[32m+[m[32m                'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m              validate:[m
+[32m+[m[32m                async ([m
+[32m+[m[32m                  tenantId[m
+[32m+[m[32m                ) =>[m
+[32m+[m[32m                  tenantId ===[m
+[32m+[m[32m                  'tenant-a'[m
+[32m+[m[32m            }[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        plugin.onExecute?.({[m
+[32m+[m[32m          executeFn:[m
+[32m+[m[32m            originalExecute,[m
+[32m+[m
+[32m+[m[32m          setExecuteFn([m
+[32m+[m[32m            fn:[m
+[32m+[m[32m              ([m
+[32m+[m[32m                args:[m
+[32m+[m[32m                  GraphqlExecutionArgsLike[m
+[32m+[m[32m              ) =>[m
+[32m+[m[32m                Promise<unknown>[m
+[32m+[m[32m          ) {[m
+[32m+[m[32m            wrappedExecute =[m
+[32m+[m[32m              fn;[m
+[32m+[m[32m          }[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        await expect([m
+[32m+[m[32m          wrappedExecute!({[m
+[32m+[m[32m            contextValue: {[m
+[32m+[m[32m              request:[m
+[32m+[m[32m                createRequest([m
+[32m+[m[32m                  'unknown',[m
+[32m+[m[32m                  'req-x'[m
+[32m+[m[32m                )[m
+[32m+[m[32m            }[m
+[32m+[m[32m          })[m
+[32m+[m[32m        ).rejects.toThrow();[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          originalExecute[m
+[32m+[m[32m        ).not.toHaveBeenCalled();[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'wraps subscription execution',[m
+[32m+[m[32m      async () => {[m
+[32m+[m[32m        let wrappedSubscribe:[m
+[32m+[m[32m          ([m
+[32m+[m[32m            args:[m
+[32m+[m[32m              GraphqlExecutionArgsLike[m
+[32m+[m[32m          ) =>[m
+[32m+[m[32m            Promise<unknown>;[m
+[32m+[m
+[32m+[m[32m        const originalSubscribe =[m
+[32m+[m[32m          jest.fn([m
+[32m+[m[32m            async () => {[m
+[32m+[m[32m              const ctx =[m
+[32m+[m[32m                getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m              return {[m
+[32m+[m[32m                tenantId:[m
+[32m+[m[32m                  ctx.tenantId[m
+[32m+[m[32m              };[m
+[32m+[m[32m            }[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        const plugin =[m
+[32m+[m[32m          createYogaAdapter({[m
+[32m+[m[32m            tenancy: {[m
+[32m+[m[32m              header:[m
+[32m+[m[32m                'x-tenant-id',[m
+[32m+[m
+[32m+[m[32m              validate:[m
+[32m+[m[32m                async () =>[m
+[32m+[m[32m                  true[m
+[32m+[m[32m            }[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        plugin.onSubscribe?.({[m
+[32m+[m[32m          subscribeFn:[m
+[32m+[m[32m            originalSubscribe,[m
+[32m+[m
+[32m+[m[32m          setSubscribeFn([m
+[32m+[m[32m            fn:[m
+[32m+[m[32m              ([m
+[32m+[m[32m                args:[m
+[32m+[m[32m                  GraphqlExecutionArgsLike[m
+[32m+[m[32m              ) =>[m
+[32m+[m[32m                Promise<unknown>[m
+[32m+[m[32m          ) {[m
+[32m+[m[32m            wrappedSubscribe =[m
+[32m+[m[32m              fn;[m
+[32m+[m[32m          }[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        const result =[m
+[32m+[m[32m          await wrappedSubscribe!({[m
+[32m+[m[32m            contextValue: {[m
+[32m+[m[32m              request:[m
+[32m+[m[32m                createRequest([m
+[32m+[m[32m                  'tenant-a',[m
+[32m+[m[32m                  'req-a'[m
+[32m+[m[32m                )[m
+[32m+[m[32m            }[m
+[32m+[m[32m          });[m
+[32m+[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          result[m
+[32m+[m[32m        ).toEqual({[m
+[32m+[m[32m          tenantId:[m
+[32m+[m[32m            'tenant-a'[m
+[32m+[m[32m        });[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    it([m
+[32m+[m[32m      'rejects automatic GraphQL-wide transactions',[m
+[32m+[m[32m      () => {[m
+[32m+[m[32m        expect([m
+[32m+[m[32m          () =>[m
+[32m+[m[32m            createYogaAdapter({[m
+[32m+[m[32m              enableTransactions:[m
+[32m+[m[32m                true[m
+[32m+[m[32m            })[m
+[32m+[m[32m        ).toThrow([m
+[32m+[m[32m          /automatic GraphQL-wide transactions/[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m);[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/src/apollo.ts b/packages/adapter-graphql/src/apollo.ts[m
+[1mindex ce5d08c..f36b456 100644[m
+[1m--- a/packages/adapter-graphql/src/apollo.ts[m
+[1m+++ b/packages/adapter-graphql/src/apollo.ts[m
+[36m@@ -1,37 +1,522 @@[m
+[31m-import type { GraphqlAdapterOptions } from './types';[m
+[31m-import { toGraphqlAmbitenRequestLike } from './graphql-request';[m
+ import {[m
+[32m+[m[32m  getAdapterRuntimeContext[m
+[32m+[m[32m} from '@ambiten/adapter-runtime';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+[32m+[m[32m  GraphqlAdapterOptions,[m
+[32m+[m[32m  ApolloExecuteInputLike,[m
+[32m+[m[32m  ApolloHttpGraphQLRequestLike,[m
+[32m+[m[32m  ApolloServerLike[m
+[32m+[m[32m} from './types';[m
+[32m+[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  assertGraphqlAdapterOptions,[m
+[32m+[m[32m  bindGraphqlAsyncIterable,[m
+[32m+[m[32m  createGraphqlContextValue,[m
+   createGraphqlRuntimeContext,[m
+[32m+[m[32m  isAsyncIterable,[m
+[32m+[m[32m  isRecord,[m
+[32m+[m[32m  runWithGraphqlContext,[m
+[32m+[m[32m  toContextRecord,[m
+   type AmbitenGraphqlRuntimeContext[m
+ } from './graphql-context';[m
+ [m
+[31m-export function createApolloContextFactory<TContext extends Record<string, unknown> = Record<string, unknown>>([m
+[31m-  options: GraphqlAdapterOptions = {},[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  toGraphqlAmbitenRequestLike[m
+[32m+[m[32m} from './graphql-request';[m
+[32m+[m
+[32m+[m[32mtype ApolloExecuteFunction =[m
+[32m+[m[32m  ([m
+[32m+[m[32m    input:[m
+[32m+[m[32m      ApolloExecuteInputLike[m
+[32m+[m[32m  ) =>[m
+[32m+[m[32m    | unknown[m
+[32m+[m[32m    | Promise<unknown>;[m
+[32m+[m
+[32m+[m[32minterface InstalledApolloState {[m
+[32m+[m[32m  original:[m
+[32m+[m[32m  ApolloExecuteFunction;[m
+[32m+[m
+[32m+[m[32m  wrapped:[m
+[32m+[m[32m  ApolloExecuteFunction;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mconst installedServers =[m
+[32m+[m[32m  new WeakMap<[m
+[32m+[m[32m    object,[m
+[32m+[m[32m    InstalledApolloState[m
+[32m+[m[32m  >();[m
+[32m+[m
+[32m+[m[32mfunction asApolloExecuteInput([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): ApolloExecuteInputLike {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      value[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: invalid Apollo execution input.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const rawRequest =[m
+[32m+[m[32m    value.httpGraphQLRequest;[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      rawRequest[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: Apollo execution input is missing httpGraphQLRequest.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    typeof value.context !==[m
+[32m+[m[32m    'function'[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: Apollo execution input is missing its context factory.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const request:[m
+[32m+[m[32m    ApolloHttpGraphQLRequestLike = {[m
+[32m+[m[32m    method:[m
+[32m+[m[32m      typeof rawRequest.method ===[m
+[32m+[m[32m        'string'[m
+[32m+[m[32m        ? rawRequest.method[m
+[32m+[m[32m        : undefined,[m
+[32m+[m
+[32m+[m[32m    headers:[m
+[32m+[m[32m      rawRequest.headers,[m
+[32m+[m
+[32m+[m[32m    search:[m
+[32m+[m[32m      typeof rawRequest.search ===[m
+[32m+[m[32m        'string'[m
+[32m+[m[32m        ? rawRequest.search[m
+[32m+[m[32m        : undefined,[m
+[32m+[m
+[32m+[m[32m    body:[m
+[32m+[m[32m      rawRequest.body[m
+[32m+[m[32m  };[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    ...value,[m
+[32m+[m
+[32m+[m[32m    httpGraphQLRequest:[m
+[32m+[m[32m      request,[m
+[32m+[m
+[32m+[m[32m    context:[m
+[32m+[m[32m      value.context as[m
+[32m+[m[32m      () =>[m
+[32m+[m[32m        | unknown[m
+[32m+[m[32m        | Promise<unknown>[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction normalizeSearch([m
+[32m+[m[32m  search:[m
+[32m+[m[32m    string | undefined[m
+[32m+[m[32m):[m
+[32m+[m[32m  | URLSearchParams[m
+[32m+[m[32m  | undefined {[m
+[32m+[m[32m  if (!search) {[m
+[32m+[m[32m    return undefined;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return new URLSearchParams([m
+[32m+[m[32m    search.startsWith('?')[m
+[32m+[m[32m      ? search.slice(1)[m
+[32m+[m[32m      : search[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction toApolloAmbitenRequest([m
+[32m+[m[32m  request:[m
+[32m+[m[32m    ApolloHttpGraphQLRequestLike[m
+[32m+[m[32m) {[m
+[32m+[m[32m  return toGraphqlAmbitenRequestLike({[m
+[32m+[m[32m    headers:[m
+[32m+[m[32m      request.headers,[m
+[32m+[m
+[32m+[m[32m    method:[m
+[32m+[m[32m      request.method,[m
+[32m+[m
+[32m+[m[32m    query:[m
+[32m+[m[32m      normalizeSearch([m
+[32m+[m[32m        request.search[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m    body:[m
+[32m+[m[32m      request.body[m
+[32m+[m[32m  });[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction bindApolloResponse([m
+[32m+[m[32m  response:[m
+[32m+[m[32m    unknown,[m
+[32m+[m
+[32m+[m[32m  request:[m
+[32m+[m[32m    ReturnType<[m
+[32m+[m[32m      typeof toApolloAmbitenRequest[m
+[32m+[m[32m    >,[m
+[32m+[m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions[m
+[32m+[m[32m): unknown {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      response[m
+[32m+[m[32m    ) ||[m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      response.body[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return response;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const body =[m
+[32m+[m[32m    response.body;[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    body.kind !==[m
+[32m+[m[32m    'chunked' ||[m
+[32m+[m[32m    !isAsyncIterable([m
+[32m+[m[32m      body.asyncIterator[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return response;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const snapshot =[m
+[32m+[m[32m    getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    ...response,[m
+[32m+[m
+[32m+[m[32m    body: {[m
+[32m+[m[32m      ...body,[m
+[32m+[m
+[32m+[m[32m      asyncIterator:[m
+[32m+[m[32m        bindGraphqlAsyncIterable([m
+[32m+[m[32m          body.asyncIterator,[m
+[32m+[m[32m          request,[m
+[32m+[m[32m          options,[m
+[32m+[m[32m          snapshot[m
+[32m+[m[32m        )[m
+[32m+[m[32m    }[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction getApolloExecute([m
+[32m+[m[32m  server:[m
+[32m+[m[32m    ApolloServerLike[m
+[32m+[m[32m): ApolloExecuteFunction {[m
+[32m+[m[32m  const candidate =[m
+[32m+[m[32m    server[m
+[32m+[m[32m      .executeHTTPGraphQLRequest;[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    typeof candidate !==[m
+[32m+[m[32m    'function'[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: expected an Apollo-compatible server exposing executeHTTPGraphQLRequest().'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return candidate as unknown as[m
+[32m+[m[32m    ApolloExecuteFunction;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction setApolloExecute([m
+[32m+[m[32m  server:[m
+[32m+[m[32m    ApolloServerLike,[m
+[32m+[m
+[32m+[m[32m  execute:[m
+[32m+[m[32m    ApolloExecuteFunction[m
+[32m+[m[32m): void {[m
+[32m+[m[32m  ([m
+[32m+[m[32m    server as unknown as {[m
+[32m+[m[32m      executeHTTPGraphQLRequest:[m
+[32m+[m[32m      ApolloExecuteFunction;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  ).executeHTTPGraphQLRequest =[m
+[32m+[m[32m    execute;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport interface AmbitenApolloAdapter {[m
+[32m+[m[32m  readonly name:[m
+[32m+[m[32m  'apollo';[m
+[32m+[m
+[32m+[m[32m  install([m
+[32m+[m[32m    server:[m
+[32m+[m[32m      ApolloServerLike,[m
+[32m+[m
+[32m+[m[32m    options?:[m
+[32m+[m[32m      GraphqlAdapterOptions[m
+[32m+[m[32m  ): () => void;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport function createApolloAdapter():[m
+[32m+[m[32m  AmbitenApolloAdapter {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    name:[m
+[32m+[m[32m      'apollo',[m
+[32m+[m
+[32m+[m[32m    install([m
+[32m+[m[32m      server,[m
+[32m+[m[32m      options = {}[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      assertGraphqlAdapterOptions([m
+[32m+[m[32m        options[m
+[32m+[m[32m      );[m
+[32m+[m
+[32m+[m[32m      if ([m
+[32m+[m[32m        installedServers.has([m
+[32m+[m[32m          server[m
+[32m+[m[32m        )[m
+[32m+[m[32m      ) {[m
+[32m+[m[32m        throw new Error([m
+[32m+[m[32m          '@ambiten/adapter-graphql: Ambiten is already installed on this Apollo-compatible server.'[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m
+[32m+[m[32m      const original =[m
+[32m+[m[32m        getApolloExecute([m
+[32m+[m[32m          server[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m      const wrapped:[m
+[32m+[m[32m        ApolloExecuteFunction =[m
+[32m+[m[32m        async ([m
+[32m+[m[32m          rawInput[m
+[32m+[m[32m        ) => {[m
+[32m+[m[32m          const input =[m
+[32m+[m[32m            asApolloExecuteInput([m
+[32m+[m[32m              rawInput[m
+[32m+[m[32m            );[m
+[32m+[m
+[32m+[m[32m          const adaptedRequest =[m
+[32m+[m[32m            toApolloAmbitenRequest([m
+[32m+[m[32m              input[m
+[32m+[m[32m                .httpGraphQLRequest[m
+[32m+[m[32m            );[m
+[32m+[m
+[32m+[m[32m          return runWithGraphqlContext([m
+[32m+[m[32m            adaptedRequest,[m
+[32m+[m
+[32m+[m[32m            async () => {[m
+[32m+[m[32m              const originalContext =[m
+[32m+[m[32m                input.context;[m
+[32m+[m
+[32m+[m[32m              const nextContext =[m
+[32m+[m[32m                async () => {[m
+[32m+[m[32m                  const applicationContext =[m
+[32m+[m[32m                    toContextRecord([m
+[32m+[m[32m                      await originalContext()[m
+[32m+[m[32m                    );[m
+[32m+[m
+[32m+[m[32m                  return createGraphqlContextValue([m
+[32m+[m[32m                    applicationContext,[m
+[32m+[m
+[32m+[m[32m                    {[m
+[32m+[m[32m                      request:[m
+[32m+[m[32m                        adaptedRequest,[m
+[32m+[m
+[32m+[m[32m                      rawRequest:[m
+[32m+[m[32m                        input[m
+[32m+[m[32m                          .httpGraphQLRequest,[m
+[32m+[m
+[32m+[m[32m                      rawInput:[m
+[32m+[m[32m                        input[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                  );[m
+[32m+[m[32m                };[m
+[32m+[m
+[32m+[m[32m              /*[m
+[32m+[m[32m               * `input` is now a validated object type,[m
+[32m+[m[32m               * so spreading it is safe.[m
+[32m+[m[32m               */[m
+[32m+[m[32m              const nextInput:[m
+[32m+[m[32m                ApolloExecuteInputLike = {[m
+[32m+[m[32m                ...input,[m
+[32m+[m
+[32m+[m[32m                context:[m
+[32m+[m[32m                  nextContext[m
+[32m+[m[32m              };[m
+[32m+[m
+[32m+[m[32m              const response =[m
+[32m+[m[32m                await original.call([m
+[32m+[m[32m                  server,[m
+[32m+[m[32m                  nextInput[m
+[32m+[m[32m                );[m
+[32m+[m
+[32m+[m[32m              return bindApolloResponse([m
+[32m+[m[32m                response,[m
+[32m+[m[32m                adaptedRequest,[m
+[32m+[m[32m                options[m
+[32m+[m[32m              );[m
+[32m+[m[32m            },[m
+[32m+[m
+[32m+[m[32m            options[m
+[32m+[m[32m          );[m
+[32m+[m[32m        };[m
+[32m+[m
+[32m+[m[32m      setApolloExecute([m
+[32m+[m[32m        server,[m
+[32m+[m[32m        wrapped[m
+[32m+[m[32m      );[m
+[32m+[m
+[32m+[m[32m      installedServers.set([m
+[32m+[m[32m        server,[m
+[32m+[m[32m        {[m
+[32m+[m[32m          original,[m
+[32m+[m[32m          wrapped[m
+[32m+[m[32m        }[m
+[32m+[m[32m      );[m
+[32m+[m
+[32m+[m[32m      return () => {[m
+[32m+[m[32m        const state =[m
+[32m+[m[32m          installedServers.get([m
+[32m+[m[32m            server[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        if (!state) {[m
+[32m+[m[32m          return;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        const current =[m
+[32m+[m[32m          getApolloExecute([m
+[32m+[m[32m            server[m
+[32m+[m[32m          );[m
+[32m+[m
+[32m+[m[32m        /*[m
+[32m+[m[32m         * Do not overwrite another wrapper installed[m
+[32m+[m[32m         * after Ambiten.[m
+[32m+[m[32m         */[m
+[32m+[m[32m        if ([m
+[32m+[m[32m          current ===[m
+[32m+[m[32m          state.wrapped[m
+[32m+[m[32m        ) {[m
+[32m+[m[32m          setApolloExecute([m
+[32m+[m[32m            server,[m
+[32m+[m[32m            state.original[m
+[32m+[m[32m          );[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        installedServers.delete([m
+[32m+[m[32m          server[m
+[32m+[m[32m        );[m
+[32m+[m[32m      };[m
+[32m+[m[32m    }[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Legacy context-factory API.[m
+[32m+[m[32m *[m
+[32m+[m[32m * @deprecated[m
+[32m+[m[32m * Context creation does not preserve AmbitenContext throughout[m
+[32m+[m[32m * resolver execution. Use createApolloAdapter().[m
+[32m+[m[32m */[m
+[32m+[m[32mexport function createApolloContextFactory<[m
+[32m+[m[32m  TContext extends[m
+[32m+[m[32m  Record<string, unknown> =[m
+[32m+[m[32m  Record<string, unknown>[m
+[32m+[m[32m>([m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions = {},[m
+[32m+[m
+   extend?: ([m
+[31m-    input: { req?: any; request?: any },[m
+[31m-    runtime: AmbitenGraphqlRuntimeContext[m
+[31m-  ) => Promise<TContext> | TContext[m
+[32m+[m[32m    input: {[m
+[32m+[m[32m      req?: unknown;[m
+[32m+[m[32m      request?: unknown;[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    runtime:[m
+[32m+[m[32m      AmbitenGraphqlRuntimeContext[m
+[32m+[m[32m  ) =>[m
+[32m+[m[32m    | TContext[m
+[32m+[m[32m    | Promise<TContext>[m
+ ) {[m
+[31m-  return async (input: { req?: any; request?: any }) => {[m
+[31m-    const rawRequest = input.req ?? input.request;[m
+[31m-[m
+[31m-    const adaptedRequest = toGraphqlAmbitenRequestLike({[m
+[31m-      headers: rawRequest?.headers,[m
+[31m-      url: rawRequest?.url,[m
+[31m-      method: rawRequest?.method,[m
+[31m-      cookies: rawRequest?.cookies,[m
+[31m-      query: rawRequest?.query,[m
+[31m-      body: rawRequest?.body[m
+[31m-    });[m
+[31m-[m
+[31m-    return createGraphqlRuntimeContext<TContext>([m
+[32m+[m[32m  return async ([m
+[32m+[m[32m    input: {[m
+[32m+[m[32m      req?: unknown;[m
+[32m+[m[32m      request?: unknown;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  ) => {[m
+[32m+[m[32m    const rawRequest =[m
+[32m+[m[32m      input.req ??[m
+[32m+[m[32m      input.request;[m
+[32m+[m
+[32m+[m[32m    const requestRecord =[m
+[32m+[m[32m      isRecord([m
+[32m+[m[32m        rawRequest[m
+[32m+[m[32m      )[m
+[32m+[m[32m        ? rawRequest[m
+[32m+[m[32m        : {};[m
+[32m+[m
+[32m+[m[32m    const adaptedRequest =[m
+[32m+[m[32m      toGraphqlAmbitenRequestLike({[m
+[32m+[m[32m        headers:[m
+[32m+[m[32m          requestRecord.headers,[m
+[32m+[m
+[32m+[m[32m        url:[m
+[32m+[m[32m          typeof requestRecord.url ===[m
+[32m+[m[32m            'string'[m
+[32m+[m[32m            ? requestRecord.url[m
+[32m+[m[32m            : undefined,[m
+[32m+[m
+[32m+[m[32m        method:[m
+[32m+[m[32m          typeof requestRecord.method ===[m
+[32m+[m[32m            'string'[m
+[32m+[m[32m            ? requestRecord.method[m
+[32m+[m[32m            : undefined,[m
+[32m+[m
+[32m+[m[32m        cookies:[m
+[32m+[m[32m          isRecord([m
+[32m+[m[32m            requestRecord.cookies[m
+[32m+[m[32m          )[m
+[32m+[m[32m            ? requestRecord.cookies as[m
+[32m+[m[32m            Record<[m
+[32m+[m[32m              string,[m
+[32m+[m[32m              string | undefined[m
+[32m+[m[32m            >[m
+[32m+[m[32m            : undefined,[m
+[32m+[m
+[32m+[m[32m        query:[m
+[32m+[m[32m          requestRecord.query,[m
+[32m+[m
+[32m+[m[32m        body:[m
+[32m+[m[32m          requestRecord.body[m
+[32m+[m[32m      });[m
+[32m+[m
+[32m+[m[32m    return createGraphqlRuntimeContext([m
+       {[m
+[31m-        request: adaptedRequest,[m
+[32m+[m[32m        request:[m
+[32m+[m[32m          adaptedRequest,[m
+[32m+[m
+         rawRequest,[m
+[31m-        rawInput: input[m
+[32m+[m
+[32m+[m[32m        rawInput:[m
+[32m+[m[32m          input[m
+       },[m
+[32m+[m
+       options,[m
+[31m-      async (runtime) => (extend ? await extend(input, runtime) : ({} as TContext))[m
+[32m+[m
+[32m+[m[32m      async ([m
+[32m+[m[32m        runtime[m
+[32m+[m[32m      ) =>[m
+[32m+[m[32m        extend[m
+[32m+[m[32m          ? await extend([m
+[32m+[m[32m            input,[m
+[32m+[m[32m            runtime[m
+[32m+[m[32m          )[m
+[32m+[m[32m          : ({} as TContext)[m
+     );[m
+   };[m
+[31m-};[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/src/graphql-context.ts b/packages/adapter-graphql/src/graphql-context.ts[m
+[1mindex 1ecca61..0714dfd 100644[m
+[1m--- a/packages/adapter-graphql/src/graphql-context.ts[m
+[1m+++ b/packages/adapter-graphql/src/graphql-context.ts[m
+[36m@@ -1,10 +1,20 @@[m
+ import {[m
+[31m-  runWithAdapterContext,[m
+   getAdapterRuntimeContext,[m
+[32m+[m[32m  runWithAdapterContext[m
+[32m+[m[32m} from '@ambiten/adapter-runtime';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+   AdapterRuntimeContextSnapshot[m
+ } from '@ambiten/adapter-runtime';[m
+[31m-import type { GraphqlAdapterOptions } from './types';[m
+[31m-import type { AmbitenRequestLike } from '@ambiten/adapter-types';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+[32m+[m[32m  AmbitenRequestLike[m
+[32m+[m[32m} from '@ambiten/adapter-types';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+[32m+[m[32m  GraphqlAdapterOptions,[m
+[32m+[m[32m  GraphqlContextRecord[m
+[32m+[m[32m} from './types';[m
+ [m
+ export interface AmbitenGraphqlRuntimeContext {[m
+   tenantId?: string;[m
+[36m@@ -12,57 +22,489 @@[m [mexport interface AmbitenGraphqlRuntimeContext {[m
+   dbName?: string;[m
+   collectionName?: string;[m
+   debug?: boolean;[m
+[31m-  loggerMeta?: Record<string, unknown>;[m
+[31m-  meta?: AdapterRuntimeContextSnapshot['meta'];[m
+[31m-  request: AmbitenRequestLike;[m
+[31m-  rawRequest?: unknown;[m
+[31m-  rawInput?: unknown;[m
+[32m+[m
+[32m+[m[32m  loggerMeta?:[m
+[32m+[m[32m  Record<string, unknown>;[m
+[32m+[m
+[32m+[m[32m  meta?:[m
+[32m+[m[32m  Record<string, unknown>;[m
+[32m+[m
+[32m+[m[32m  request:[m
+[32m+[m[32m  AmbitenRequestLike;[m
+[32m+[m
+[32m+[m[32m  rawRequest?:[m
+[32m+[m[32m  unknown;[m
+[32m+[m
+[32m+[m[32m  rawInput?:[m
+[32m+[m[32m  unknown;[m
+[32m+[m[32m}[m
+[32m+[m[32m// export interface AmbitenGraphqlRuntimeContext {[m
+[32m+[m[32m//   tenantId?: string;[m
+[32m+[m[32m//   requestId?: string;[m
+[32m+[m[32m//   dbName?: string;[m
+[32m+[m[32m//   collectionName?: string;[m
+[32m+[m[32m//   debug?: boolean;[m
+[32m+[m
+[32m+[m[32m//   loggerMeta?:[m
+[32m+[m[32m//   Record<string, unknown>;[m
+[32m+[m
+[32m+[m[32m//   meta?:[m
+[32m+[m[32m//   AdapterRuntimeContextSnapshot[[m
+[32m+[m[32m//   'meta'[m
+[32m+[m[32m//   ];[m
+[32m+[m
+[32m+[m[32m//   request:[m
+[32m+[m[32m//   AmbitenRequestLike;[m
+[32m+[m
+[32m+[m[32m//   rawRequest?:[m
+[32m+[m[32m//   unknown;[m
+[32m+[m
+[32m+[m[32m//   rawInput?:[m
+[32m+[m[32m//   unknown;[m
+[32m+[m[32m// }[m
+[32m+[m
+[32m+[m[32mexport interface GraphqlRuntimeInput {[m
+[32m+[m[32m  request:[m
+[32m+[m[32m  AmbitenRequestLike;[m
+[32m+[m
+[32m+[m[32m  rawRequest?:[m
+[32m+[m[32m  unknown;[m
+[32m+[m
+[32m+[m[32m  rawInput?:[m
+[32m+[m[32m  unknown;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Converts core/runtime operation metadata into the[m
+[32m+[m[32m * transport-neutral metadata shape used by adapter resolvers.[m
+[32m+[m[32m *[m
+[32m+[m[32m * The adapter layer intentionally does not depend on the[m
+[32m+[m[32m * concrete AmbitenOperationMeta type.[m
+[32m+[m[32m */[m
+[32m+[m[32mfunction normalizeRuntimeMeta([m
+[32m+[m[32m  meta:[m
+[32m+[m[32m    AdapterRuntimeContextSnapshot['meta'][m
+[32m+[m[32m): Record<string, unknown> | undefined {[m
+[32m+[m[32m  if (!meta) {[m
+[32m+[m[32m    return undefined;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return Object.fromEntries([m
+[32m+[m[32m    Object.entries(meta)[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport function isRecord([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): value is GraphqlContextRecord {[m
+[32m+[m[32m  return Boolean([m
+[32m+[m[32m    value &&[m
+[32m+[m[32m    typeof value === 'object' &&[m
+[32m+[m[32m    !Array.isArray(value)[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport function toContextRecord([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): GraphqlContextRecord {[m
+[32m+[m[32m  return isRecord([m
+[32m+[m[32m    value[m
+[32m+[m[32m  )[m
+[32m+[m[32m    ? value[m
+[32m+[m[32m    : {};[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * GraphQL-wide automatic transactions are intentionally[m
+[32m+[m[32m * rejected.[m
+[32m+[m[32m *[m
+[32m+[m[32m * A GraphQL execution may resolve successfully while[m
+[32m+[m[32m * reporting resolver failures inside ExecutionResult.errors.[m
+[32m+[m[32m *[m
+[32m+[m[32m * The generic adapter runtime therefore cannot safely infer[m
+[32m+[m[32m * commit/rollback semantics for an entire GraphQL operation.[m
+[32m+[m[32m *[m
+[32m+[m[32m * Applications should place explicit transaction boundaries[m
+[32m+[m[32m * around the mutation/service workflow requiring atomicity.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport function assertGraphqlAdapterOptions([m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions[m
+[32m+[m[32m): void {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    options.enableTransactions[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new Error([m
+[32m+[m[32m      '@ambiten/adapter-graphql: automatic GraphQL-wide transactions are not supported. ' +[m
+[32m+[m[32m      'Use an explicit transaction boundary inside the mutation or application service.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+ }[m
+ [m
+[31m-export async function runWithGraphqlContext<T>([m
+[31m-  request: AmbitenRequestLike,[m
+[31m-  handler: () => T | Promise<T>,[m
+[31m-  options: GraphqlAdapterOptions = {}[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Establishes the Ambiten runtime around real GraphQL[m
+[32m+[m[32m * execution.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport function runWithGraphqlContext<T>([m
+[32m+[m[32m  request:[m
+[32m+[m[32m    AmbitenRequestLike,[m
+[32m+[m
+[32m+[m[32m  handler:[m
+[32m+[m[32m    () =>[m
+[32m+[m[32m      | T[m
+[32m+[m[32m      | Promise<T>,[m
+[32m+[m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions = {}[m
+ ): Promise<T> {[m
+[31m-  return runWithAdapterContext(request, handler, options);[m
+[32m+[m[32m  assertGraphqlAdapterOptions([m
+[32m+[m[32m    options[m
+[32m+[m[32m  );[m
+[32m+[m
+[32m+[m[32m  return runWithAdapterContext([m
+[32m+[m[32m    request,[m
+[32m+[m[32m    handler,[m
+[32m+[m[32m    options[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Builds the GraphQL-visible context value from the currently[m
+[32m+[m[32m * active Ambiten execution.[m
+[32m+[m[32m *[m
+[32m+[m[32m * This function does NOT establish an execution boundary.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport async function createGraphqlContextValue<[m
+[32m+[m[32m  TBase extends[m
+[32m+[m[32m  GraphqlContextRecord =[m
+[32m+[m[32m  GraphqlContextRecord,[m
+[32m+[m
+[32m+[m[32m  TExtra extends[m
+[32m+[m[32m  GraphqlContextRecord =[m
+[32m+[m[32m  GraphqlContextRecord[m
+[32m+[m[32m>([m
+[32m+[m[32m  base:[m
+[32m+[m[32m    TBase,[m
+[32m+[m
+[32m+[m[32m  input:[m
+[32m+[m[32m    GraphqlRuntimeInput,[m
+[32m+[m
+[32m+[m[32m  extend?: ([m
+[32m+[m[32m    runtime:[m
+[32m+[m[32m      AmbitenGraphqlRuntimeContext[m
+[32m+[m[32m  ) =>[m
+[32m+[m[32m    | TExtra[m
+[32m+[m[32m    | Promise<TExtra>[m
+[32m+[m[32m): Promise<[m
+[32m+[m[32m  TBase &[m
+[32m+[m[32m  TExtra &[m
+[32m+[m[32m  AmbitenGraphqlRuntimeContext[m
+[32m+[m[32m> {[m
+[32m+[m[32m  const ctx =[m
+[32m+[m[32m    getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m  const runtime:[m
+[32m+[m[32m    AmbitenGraphqlRuntimeContext = {[m
+[32m+[m[32m    tenantId:[m
+[32m+[m[32m      ctx.tenantId,[m
+[32m+[m
+[32m+[m[32m    requestId:[m
+[32m+[m[32m      ctx.requestId,[m
+[32m+[m
+[32m+[m[32m    dbName:[m
+[32m+[m[32m      ctx.dbName,[m
+[32m+[m
+[32m+[m[32m    collectionName:[m
+[32m+[m[32m      ctx.collectionName,[m
+[32m+[m
+[32m+[m[32m    debug:[m
+[32m+[m[32m      ctx.debug,[m
+[32m+[m
+[32m+[m[32m    loggerMeta:[m
+[32m+[m[32m      ctx.loggerMeta,[m
+[32m+[m
+[32m+[m[32m    meta:[m
+[32m+[m[32m      normalizeRuntimeMeta([m
+[32m+[m[32m        ctx.meta[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m    request:[m
+[32m+[m[32m      input.request,[m
+[32m+[m
+[32m+[m[32m    rawRequest:[m
+[32m+[m[32m      input.rawRequest,[m
+[32m+[m
+[32m+[m[32m    rawInput:[m
+[32m+[m[32m      input.rawInput[m
+[32m+[m[32m  };[m
+[32m+[m
+[32m+[m[32m  const extra =[m
+[32m+[m[32m    extend[m
+[32m+[m[32m      ? await extend([m
+[32m+[m[32m        runtime[m
+[32m+[m[32m      )[m
+[32m+[m[32m      : ({} as TExtra);[m
+[32m+[m
+[32m+[m[32m  /*[m
+[32m+[m[32m   * Runtime state wins intentionally.[m
+[32m+[m[32m   *[m
+[32m+[m[32m   * Application context cannot accidentally replace[m
+[32m+[m[32m   * tenantId/requestId/dbName/etc.[m
+[32m+[m[32m   */[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    ...base,[m
+[32m+[m[32m    ...extra,[m
+[32m+[m[32m    ...runtime[m
+[32m+[m[32m  } as[m
+[32m+[m[32m    TBase &[m
+[32m+[m[32m    TExtra &[m
+[32m+[m[32m    AmbitenGraphqlRuntimeContext;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport function isAsyncIterable<T>([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): value is AsyncIterable<T> {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !value ||[m
+[32m+[m[32m    typeof value !== 'object'[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return false;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const iterator =[m
+[32m+[m[32m    ([m
+[32m+[m[32m      value as Record<[m
+[32m+[m[32m        PropertyKey,[m
+[32m+[m[32m        unknown[m
+[32m+[m[32m      >[m
+[32m+[m[32m    )[Symbol.asyncIterator];[m
+[32m+[m
+[32m+[m[32m  return typeof iterator ===[m
+[32m+[m[32m    'function';[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Creates adapter options from an already-resolved,[m
+[32m+[m[32m * already-validated runtime snapshot.[m
+[32m+[m[32m *[m
+[32m+[m[32m * Tenant validation is intentionally not repeated for every[m
+[32m+[m[32m * streamed payload.[m
+[32m+[m[32m */[m
+[32m+[m[32mfunction optionsFromSnapshot([m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions,[m
+[32m+[m
+[32m+[m[32m  snapshot:[m
+[32m+[m[32m    AdapterRuntimeContextSnapshot[m
+[32m+[m[32m): GraphqlAdapterOptions {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    ...options,[m
+[32m+[m
+[32m+[m[32m    enableTransactions:[m
+[32m+[m[32m      false,[m
+[32m+[m
+[32m+[m[32m    /*[m
+[32m+[m[32m     * This execution identity has already passed the original[m
+[32m+[m[32m     * ingress resolution/validation boundary.[m
+[32m+[m[32m     */[m
+[32m+[m[32m    tenancy:[m
+[32m+[m[32m      undefined,[m
+[32m+[m
+[32m+[m[32m    resolvers: {[m
+[32m+[m[32m      ...options.resolvers,[m
+[32m+[m
+[32m+[m[32m      tenantId:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          snapshot.tenantId,[m
+[32m+[m
+[32m+[m[32m      requestId:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          snapshot.requestId,[m
+[32m+[m
+[32m+[m[32m      dbName:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          snapshot.dbName,[m
+[32m+[m
+[32m+[m[32m      collectionName:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          snapshot.collectionName,[m
+[32m+[m
+[32m+[m[32m      debug:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          snapshot.debug,[m
+[32m+[m
+[32m+[m[32m      loggerMeta:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          snapshot.loggerMeta,[m
+[32m+[m
+[32m+[m[32m      meta:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          normalizeRuntimeMeta([m
+[32m+[m[32m            snapshot.meta[m
+[32m+[m[32m          )[m
+[32m+[m[32m    }[m
+[32m+[m[32m  };[m
+ }[m
+ [m
+[31m-export async function createGraphqlRuntimeContext<TExtra extends Record<string, unknown> = Record<string, unknown>>([m
+[31m-  input: {[m
+[31m-    request: AmbitenRequestLike;[m
+[31m-    rawRequest?: unknown;[m
+[31m-    rawInput?: unknown;[m
+[31m-  },[m
+[31m-  options: GraphqlAdapterOptions = {},[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Re-establishes the same resolved Ambiten execution snapshot[m
+[32m+[m[32m * whenever a streaming GraphQL iterator advances.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport function bindGraphqlAsyncIterable<T>([m
+[32m+[m[32m  source:[m
+[32m+[m[32m    AsyncIterable<T>,[m
+[32m+[m
+[32m+[m[32m  request:[m
+[32m+[m[32m    AmbitenRequestLike,[m
+[32m+[m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions,[m
+[32m+[m
+[32m+[m[32m  snapshot:[m
+[32m+[m[32m    AdapterRuntimeContextSnapshot[m
+[32m+[m[32m): AsyncIterableIterator<T> {[m
+[32m+[m[32m  const iterator =[m
+[32m+[m[32m    source[[m
+[32m+[m[32m      Symbol.asyncIterator[m
+[32m+[m[32m    ]();[m
+[32m+[m
+[32m+[m[32m  const stableOptions =[m
+[32m+[m[32m    optionsFromSnapshot([m
+[32m+[m[32m      options,[m
+[32m+[m[32m      snapshot[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m  const run =[m
+[32m+[m[32m    <R>([m
+[32m+[m[32m      operation:[m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          | R[m
+[32m+[m[32m          | Promise<R>[m
+[32m+[m[32m    ): Promise<R> =>[m
+[32m+[m[32m      runWithAdapterContext([m
+[32m+[m[32m        request,[m
+[32m+[m[32m        operation,[m
+[32m+[m[32m        stableOptions[m
+[32m+[m[32m      );[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    async next([m
+[32m+[m[32m      value?: unknown[m
+[32m+[m[32m    ): Promise<[m
+[32m+[m[32m      IteratorResult<T>[m
+[32m+[m[32m    > {[m
+[32m+[m[32m      return run([m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          ([m
+[32m+[m[32m            iterator.next as ([m
+[32m+[m[32m              value?: unknown[m
+[32m+[m[32m            ) =>[m
+[32m+[m[32m              Promise<[m
+[32m+[m[32m                IteratorResult<T>[m
+[32m+[m[32m              >[m
+[32m+[m[32m          )(value)[m
+[32m+[m[32m      );[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    async return([m
+[32m+[m[32m      value?: unknown[m
+[32m+[m[32m    ): Promise<[m
+[32m+[m[32m      IteratorResult<T>[m
+[32m+[m[32m    > {[m
+[32m+[m[32m      if ([m
+[32m+[m[32m        typeof iterator.return !==[m
+[32m+[m[32m        'function'[m
+[32m+[m[32m      ) {[m
+[32m+[m[32m        return {[m
+[32m+[m[32m          done: true,[m
+[32m+[m[32m          value:[m
+[32m+[m[32m            value as T[m
+[32m+[m[32m        };[m
+[32m+[m[32m      }[m
+[32m+[m
+[32m+[m[32m      return run([m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          ([m
+[32m+[m[32m            iterator.return as ([m
+[32m+[m[32m              value?: unknown[m
+[32m+[m[32m            ) =>[m
+[32m+[m[32m              Promise<[m
+[32m+[m[32m                IteratorResult<T>[m
+[32m+[m[32m              >[m
+[32m+[m[32m          )(value)[m
+[32m+[m[32m      );[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    async throw([m
+[32m+[m[32m      error?: unknown[m
+[32m+[m[32m    ): Promise<[m
+[32m+[m[32m      IteratorResult<T>[m
+[32m+[m[32m    > {[m
+[32m+[m[32m      if ([m
+[32m+[m[32m        typeof iterator.throw !==[m
+[32m+[m[32m        'function'[m
+[32m+[m[32m      ) {[m
+[32m+[m[32m        throw error;[m
+[32m+[m[32m      }[m
+[32m+[m
+[32m+[m[32m      return run([m
+[32m+[m[32m        () =>[m
+[32m+[m[32m          ([m
+[32m+[m[32m            iterator.throw as ([m
+[32m+[m[32m              error?: unknown[m
+[32m+[m[32m            ) =>[m
+[32m+[m[32m              Promise<[m
+[32m+[m[32m                IteratorResult<T>[m
+[32m+[m[32m              >[m
+[32m+[m[32m          )(error)[m
+[32m+[m[32m      );[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    [Symbol.asyncIterator]() {[m
+[32m+[m[32m      return this;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Legacy compatibility helper.[m
+[32m+[m[32m *[m
+[32m+[m[32m * @deprecated[m
+[32m+[m[32m * Creating a GraphQL context value is not equivalent to[m
+[32m+[m[32m * wrapping resolver execution. Prefer createApolloAdapter()[m
+[32m+[m[32m * or createYogaAdapter().[m
+[32m+[m[32m */[m
+[32m+[m[32mexport function createGraphqlRuntimeContext<[m
+[32m+[m[32m  TExtra extends[m
+[32m+[m[32m  GraphqlContextRecord =[m
+[32m+[m[32m  GraphqlContextRecord[m
+[32m+[m[32m>([m
+[32m+[m[32m  input:[m
+[32m+[m[32m    GraphqlRuntimeInput,[m
+[32m+[m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions = {},[m
+[32m+[m
+   extend?: ([m
+[31m-    runtime: AmbitenGraphqlRuntimeContext[m
+[31m-  ) => Promise<TExtra> | TExtra[m
+[31m-): Promise<AmbitenGraphqlRuntimeContext & TExtra> {[m
+[32m+[m[32m    runtime:[m
+[32m+[m[32m      AmbitenGraphqlRuntimeContext[m
+[32m+[m[32m  ) =>[m
+[32m+[m[32m    | TExtra[m
+[32m+[m[32m    | Promise<TExtra>[m
+[32m+[m[32m): Promise<[m
+[32m+[m[32m  AmbitenGraphqlRuntimeContext &[m
+[32m+[m[32m  TExtra[m
+[32m+[m[32m> {[m
+   return runWithGraphqlContext([m
+     input.request,[m
+[31m-    async () => {[m
+[31m-      const ctx = getAdapterRuntimeContext();[m
+[31m-[m
+[31m-      const runtime: AmbitenGraphqlRuntimeContext = {[m
+[31m-        tenantId: ctx.tenantId,[m
+[31m-        requestId: ctx.requestId,[m
+[31m-        dbName: ctx.dbName,[m
+[31m-        collectionName: ctx.collectionName,[m
+[31m-        debug: ctx.debug,[m
+[31m-        loggerMeta: ctx.loggerMeta,[m
+[31m-        meta: ctx.meta,[m
+[31m-        request: input.request,[m
+[31m-        rawRequest: input.rawRequest,[m
+[31m-        rawInput: input.rawInput[m
+[31m-      };[m
+[31m-[m
+[31m-      const extra = extend ? await extend(runtime) : ({} as TExtra);[m
+[31m-[m
+[31m-      return {[m
+[31m-        ...runtime,[m
+[31m-        ...extra[m
+[31m-      };[m
+[31m-    },[m
+[32m+[m
+[32m+[m[32m    () =>[m
+[32m+[m[32m      createGraphqlContextValue([m
+[32m+[m[32m        {},[m
+[32m+[m[32m        input,[m
+[32m+[m[32m        extend[m
+[32m+[m[32m      ),[m
+[32m+[m
+     options[m
+   );[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/src/graphql-request.ts b/packages/adapter-graphql/src/graphql-request.ts[m
+[1mindex 51a53ed..178f5cf 100644[m
+[1m--- a/packages/adapter-graphql/src/graphql-request.ts[m
+[1m+++ b/packages/adapter-graphql/src/graphql-request.ts[m
+[36m@@ -1,70 +1,310 @@[m
+ import type { AmbitenRequestLike } from '@ambiten/adapter-types';[m
+ [m
+[32m+[m[32mtype NormalizedHeaders =[m
+[32m+[m[32m  Record<[m
+[32m+[m[32m    string,[m
+[32m+[m[32m    string |[m
+[32m+[m[32m    string[] |[m
+[32m+[m[32m    undefined[m
+[32m+[m[32m  >;[m
+[32m+[m
+[32m+[m[32mfunction isRecord([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): value is Record<string, unknown> {[m
+[32m+[m[32m  return Boolean([m
+[32m+[m[32m    value &&[m
+[32m+[m[32m    typeof value === 'object' &&[m
+[32m+[m[32m    !Array.isArray(value)[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction isPairIterable([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): value is Iterable<[m
+[32m+[m[32m  [unknown, unknown][m
+[32m+[m[32m> {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !value ||[m
+[32m+[m[32m    typeof value !== 'object'[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return false;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const iterator =[m
+[32m+[m[32m    ([m
+[32m+[m[32m      value as Record<[m
+[32m+[m[32m        PropertyKey,[m
+[32m+[m[32m        unknown[m
+[32m+[m[32m      >[m
+[32m+[m[32m    )[Symbol.iterator];[m
+[32m+[m
+[32m+[m[32m  return typeof iterator ===[m
+[32m+[m[32m    'function';[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction normalizeHeaderValue([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m):[m
+[32m+[m[32m  | string[m
+[32m+[m[32m  | string[][m
+[32m+[m[32m  | undefined {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    value === undefined[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return undefined;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    Array.isArray(value)[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return value.map([m
+[32m+[m[32m      item =>[m
+[32m+[m[32m        String(item)[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    value === null[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    return '';[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return String(value);[m
+[32m+[m[32m}[m
+[32m+[m
+ function normalizeHeaders([m
+   headers: unknown[m
+[31m-): Record<string, string | string[] | undefined> {[m
+[32m+[m[32m): NormalizedHeaders {[m
+   if (!headers) {[m
+     return {};[m
+   }[m
+ [m
+[31m-  if (typeof Headers !== 'undefined' && headers instanceof Headers) {[m
+[31m-    const result: Record<string, string> = {};[m
+[32m+[m[32m  const result:[m
+[32m+[m[32m    NormalizedHeaders = {};[m
+[32m+[m
+[32m+[m[32m  /*[m
+[32m+[m[32m   * Covers:[m
+[32m+[m[32m   *[m
+[32m+[m[32m   * - WHATWG Headers[m
+[32m+[m[32m   * - Map[m
+[32m+[m[32m   * - Apollo HeaderMap[m
+[32m+[m[32m   * - other iterable header containers[m
+[32m+[m[32m   */[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    isPairIterable([m
+[32m+[m[32m      headers[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    for ([m
+[32m+[m[32m      const [[m
+[32m+[m[32m        rawKey,[m
+[32m+[m[32m        rawValue[m
+[32m+[m[32m      ] of headers[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      const key =[m
+[32m+[m[32m        String([m
+[32m+[m[32m          rawKey[m
+[32m+[m[32m        ).toLowerCase();[m
+ [m
+[31m-    headers.forEach((value, key) => {[m
+[31m-      result[key.toLowerCase()] = value;[m
+[31m-    });[m
+[32m+[m[32m      result[key] =[m
+[32m+[m[32m        normalizeHeaderValue([m
+[32m+[m[32m          rawValue[m
+[32m+[m[32m        );[m
+[32m+[m[32m    }[m
+ [m
+     return result;[m
+   }[m
+ [m
+[31m-  if (typeof headers === 'object') {[m
+[31m-    const result: Record<string, string | string[] | undefined> = {};[m
+[31m-[m
+[31m-    for (const [key, value] of Object.entries(headers as Record<string, unknown>)) {[m
+[31m-      if (typeof value === 'string' || Array.isArray(value) || value === undefined) {[m
+[31m-        result[key.toLowerCase()] = value as string | string[] | undefined;[m
+[31m-      } else if (value != null) {[m
+[31m-        result[key.toLowerCase()] = String(value);[m
+[31m-      }[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    isRecord([m
+[32m+[m[32m      headers[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    for ([m
+[32m+[m[32m      const [[m
+[32m+[m[32m        key,[m
+[32m+[m[32m        value[m
+[32m+[m[32m      ] of Object.entries([m
+[32m+[m[32m        headers[m
+[32m+[m[32m      )[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      result[[m
+[32m+[m[32m        key.toLowerCase()[m
+[32m+[m[32m      ] =[m
+[32m+[m[32m        normalizeHeaderValue([m
+[32m+[m[32m          value[m
+[32m+[m[32m        );[m
+     }[m
+[31m-[m
+[31m-    return result;[m
+   }[m
+ [m
+[31m-  return {};[m
+[32m+[m[32m  return result;[m
+ }[m
+ [m
+ function normalizeCookies([m
+   cookies: unknown[m
+[31m-): Record<string, string> | undefined {[m
+[31m-  if (!cookies || typeof cookies !== 'object') {[m
+[32m+[m[32m):[m
+[32m+[m[32m  | Record<string, string>[m
+[32m+[m[32m  | undefined {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      cookies[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+     return undefined;[m
+   }[m
+ [m
+   return Object.fromEntries([m
+[31m-    Object.entries(cookies as Record<string, unknown>).map(([key, value]) => [[m
+[31m-      key,[m
+[31m-      value == null ? '' : String(value)[m
+[31m-    ])[m
+[32m+[m[32m    Object.entries([m
+[32m+[m[32m      cookies[m
+[32m+[m[32m    ).map([m
+[32m+[m[32m      ([key, value]) => [[m
+[32m+[m[32m        key,[m
+[32m+[m[32m        value == null[m
+[32m+[m[32m          ? ''[m
+[32m+[m[32m          : String(value)[m
+[32m+[m[32m      ][m
+[32m+[m[32m    )[m
+   );[m
+ }[m
+ [m
+[32m+[m[32mfunction appendQueryValue([m
+[32m+[m[32m  target:[m
+[32m+[m[32m    Record<[m
+[32m+[m[32m      string,[m
+[32m+[m[32m      string |[m
+[32m+[m[32m      string[] |[m
+[32m+[m[32m      undefined[m
+[32m+[m[32m    >,[m
+[32m+[m
+[32m+[m[32m  key:[m
+[32m+[m[32m    string,[m
+[32m+[m
+[32m+[m[32m  value:[m
+[32m+[m[32m    string[m
+[32m+[m[32m): void {[m
+[32m+[m[32m  const current =[m
+[32m+[m[32m    target[key];[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    current === undefined[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    target[key] =[m
+[32m+[m[32m      value;[m
+[32m+[m
+[32m+[m[32m    return;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    Array.isArray([m
+[32m+[m[32m      current[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    current.push([m
+[32m+[m[32m      value[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    return;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  target[key] = [[m
+[32m+[m[32m    current,[m
+[32m+[m[32m    value[m
+[32m+[m[32m  ];[m
+[32m+[m[32m}[m
+[32m+[m
+ function normalizeQuery([m
+   query: unknown[m
+[31m-): Record<string, string | string[] | undefined> | undefined {[m
+[31m-  if (!query || typeof query !== 'object') {[m
+[32m+[m[32m):[m
+[32m+[m[32m  | Record<[m
+[32m+[m[32m    string,[m
+[32m+[m[32m    string |[m
+[32m+[m[32m    string[] |[m
+[32m+[m[32m    undefined[m
+[32m+[m[32m  >[m
+[32m+[m[32m  | undefined {[m
+[32m+[m[32m  if (!query) {[m
+[32m+[m[32m    return undefined;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const result:[m
+[32m+[m[32m    Record<[m
+[32m+[m[32m      string,[m
+[32m+[m[32m      string |[m
+[32m+[m[32m      string[] |[m
+[32m+[m[32m      undefined[m
+[32m+[m[32m    > = {};[m
+[32m+[m
+[32m+[m[32m  /*[m
+[32m+[m[32m   * Covers URLSearchParams and[m
+[32m+[m[32m   * other pair iterables.[m
+[32m+[m[32m   */[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    isPairIterable([m
+[32m+[m[32m      query[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    for ([m
+[32m+[m[32m      const [[m
+[32m+[m[32m        rawKey,[m
+[32m+[m[32m        rawValue[m
+[32m+[m[32m      ] of query[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      appendQueryValue([m
+[32m+[m[32m        result,[m
+[32m+[m[32m        String(rawKey),[m
+[32m+[m[32m        String(rawValue)[m
+[32m+[m[32m      );[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    return result;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      query[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+     return undefined;[m
+   }[m
+ [m
+[31m-  const result: Record<string, string | string[] | undefined> = {};[m
+[32m+[m[32m  for ([m
+[32m+[m[32m    const [[m
+[32m+[m[32m      key,[m
+[32m+[m[32m      value[m
+[32m+[m[32m    ] of Object.entries([m
+[32m+[m[32m      query[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    if ([m
+[32m+[m[32m      typeof value ===[m
+[32m+[m[32m      'string' ||[m
+[32m+[m[32m      value === undefined[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      result[key] =[m
+[32m+[m[32m        value;[m
+[32m+[m
+[32m+[m[32m      continue;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    if ([m
+[32m+[m[32m      Array.isArray([m
+[32m+[m[32m        value[m
+[32m+[m[32m      )[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      result[key] =[m
+[32m+[m[32m        value.map([m
+[32m+[m[32m          item =>[m
+[32m+[m[32m            String(item)[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m      continue;[m
+[32m+[m[32m    }[m
+ [m
+[31m-  for (const [key, value] of Object.entries(query as Record<string, unknown>)) {[m
+[31m-    if (typeof value === 'string' || value === undefined) {[m
+[31m-      result[key] = value;[m
+[31m-    } else if (Array.isArray(value)) {[m
+[31m-      result[key] = value.map((item) => String(item));[m
+[31m-    } else if (value != null) {[m
+[31m-      result[key] = String(value);[m
+[32m+[m[32m    if ([m
+[32m+[m[32m      value != null[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      result[key] =[m
+[32m+[m[32m        String(value);[m
+     }[m
+   }[m
+ [m
+[36m@@ -75,36 +315,83 @@[m [mexport interface GraphqlRequestAdapterInput {[m
+   headers?: unknown;[m
+   url?: string;[m
+   method?: string;[m
+[31m-  cookies?: Record<string, string | undefined>;[m
+[31m-  params?: Record<string, string | undefined>;[m
+[32m+[m
+[32m+[m[32m  cookies?:[m
+[32m+[m[32m  Record<[m
+[32m+[m[32m    string,[m
+[32m+[m[32m    string | undefined[m
+[32m+[m[32m  >;[m
+[32m+[m
+[32m+[m[32m  params?:[m
+[32m+[m[32m  Record<[m
+[32m+[m[32m    string,[m
+[32m+[m[32m    string | undefined[m
+[32m+[m[32m  >;[m
+[32m+[m
+   query?: unknown;[m
+   body?: unknown;[m
+ }[m
+ [m
+ export function toGraphqlAmbitenRequestLike([m
+[31m-  input: GraphqlRequestAdapterInput[m
+[32m+[m[32m  input:[m
+[32m+[m[32m    GraphqlRequestAdapterInput[m
+ ): AmbitenRequestLike {[m
+[31m-  const headers = normalizeHeaders(input.headers);[m
+[31m-  const cookies = normalizeCookies(input.cookies);[m
+[32m+[m[32m  const headers =[m
+[32m+[m[32m    normalizeHeaders([m
+[32m+[m[32m      input.headers[m
+[32m+[m[32m    );[m
+ [m
+   const params =[m
+[31m-    input.params && typeof input.params === 'object'[m
+[32m+[m[32m    input.params &&[m
+[32m+[m[32m      typeof input.params ===[m
+[32m+[m[32m      'object'[m
+       ? Object.fromEntries([m
+[31m-        Object.entries(input.params).map(([key, value]) => [key, value ?? ''])[m
+[32m+[m[32m        Object.entries([m
+[32m+[m[32m          input.params[m
+[32m+[m[32m        ).map([m
+[32m+[m[32m          ([key, value]) => [[m
+[32m+[m[32m            key,[m
+[32m+[m[32m            value ?? ''[m
+[32m+[m[32m          ][m
+[32m+[m[32m        )[m
+       )[m
+       : {};[m
+ [m
+   return {[m
+     headers,[m
+[31m-    url: input.url,[m
+[31m-    method: input.method,[m
+[32m+[m
+[32m+[m[32m    url:[m
+[32m+[m[32m      input.url,[m
+[32m+[m
+[32m+[m[32m    method:[m
+[32m+[m[32m      input.method,[m
+[32m+[m
+     params,[m
+[31m-    cookies,[m
+[31m-    query: normalizeQuery(input.query),[m
+[31m-    body: input.body,[m
+[32m+[m
+[32m+[m[32m    cookies:[m
+[32m+[m[32m      normalizeCookies([m
+[32m+[m[32m        input.cookies[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m    query:[m
+[32m+[m[32m      normalizeQuery([m
+[32m+[m[32m        input.query[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m    body:[m
+[32m+[m[32m      input.body,[m
+[32m+[m
+     get(name: string) {[m
+[31m-      const value = headers[name.toLowerCase()];[m
+[31m-      return Array.isArray(value) ? value[0] : value;[m
+[32m+[m[32m      const value =[m
+[32m+[m[32m        headers[[m
+[32m+[m[32m        name.toLowerCase()[m
+[32m+[m[32m        ];[m
+[32m+[m
+[32m+[m[32m      return Array.isArray([m
+[32m+[m[32m        value[m
+[32m+[m[32m      )[m
+[32m+[m[32m        ? value[0][m
+[32m+[m[32m        : value;[m
+     }[m
+   };[m
+[31m-};[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/src/types.ts b/packages/adapter-graphql/src/types.ts[m
+[1mindex 4f65524..aa361a2 100644[m
+[1m--- a/packages/adapter-graphql/src/types.ts[m
+[1m+++ b/packages/adapter-graphql/src/types.ts[m
+[36m@@ -2,6 +2,9 @@[m [mimport type { AdapterContextOptions, AmbitenRequestLike } from '@ambiten/adapter[m
+ [m
+ export type GraphqlAdapterOptions = AdapterContextOptions;[m
+ [m
+[32m+[m[32mexport type GraphqlContextRecord =[m
+[32m+[m[32m  Record<string, unknown>;[m
+[32m+[m[41m  [m
+ export interface GraphqlExecutionInput {[m
+   request: AmbitenRequestLike;[m
+ }[m
+[36m@@ -9,3 +12,57 @@[m [mexport interface GraphqlExecutionInput {[m
+ export type GraphqlContextFactory<TSource = unknown, TResult = unknown> = ([m
+   input: TSource[m
+ ) => Promise<TResult> | TResult;[m
+[32m+[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Minimum structural contract Ambiten requires from[m
+[32m+[m[32m * Apollo Server.[m
+[32m+[m[32m *[m
+[32m+[m[32m * `never[]` intentionally allows framework-specific[m
+[32m+[m[32m * method signatures to remain assignable without[m
+[32m+[m[32m * importing Apollo's rapidly changing type surface.[m
+[32m+[m[32m *[m
+[32m+[m[32m * Internally the method is narrowed only after the[m
+[32m+[m[32m * incoming invocation has been validated.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport interface ApolloServerLike {[m
+[32m+[m[32m  executeHTTPGraphQLRequest:[m
+[32m+[m[32m    (...args: never[]) => unknown;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport interface ApolloHttpGraphQLRequestLike {[m
+[32m+[m[32m  method?: string;[m
+[32m+[m[32m  headers?: unknown;[m
+[32m+[m[32m  search?: string;[m
+[32m+[m[32m  body?: unknown;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport type ApolloExecuteInputLike =[m
+[32m+[m[32m  Record<string, unknown> & {[m
+[32m+[m[32m    httpGraphQLRequest:[m
+[32m+[m[32m      ApolloHttpGraphQLRequestLike;[m
+[32m+[m
+[32m+[m[32m    context:[m
+[32m+[m[32m      () =>[m
+[32m+[m[32m        | unknown[m
+[32m+[m[32m        | Promise<unknown>;[m
+[32m+[m[32m  };[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Structural Yoga plugin contract.[m
+[32m+[m[32m *[m
+[32m+[m[32m * The hook payload is deliberately unknown here.[m
+[32m+[m[32m * Each hook validates and narrows it internally.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport interface YogaPluginLike {[m
+[32m+[m[32m  onExecute?:[m
+[32m+[m[32m    (payload: unknown) => void;[m
+[32m+[m
+[32m+[m[32m  onSubscribe?:[m
+[32m+[m[32m    (payload: unknown) => void;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport type GraphqlExecutionArgsLike =[m
+[32m+[m[32m  Record<string, unknown> & {[m
+[32m+[m[32m    contextValue?: unknown;[m
+[32m+[m[32m  };[m
+\ No newline at end of file[m
+[1mdiff --git a/packages/adapter-graphql/src/yoga.ts b/packages/adapter-graphql/src/yoga.ts[m
+[1mindex 6227e25..e758aa9 100644[m
+[1m--- a/packages/adapter-graphql/src/yoga.ts[m
+[1m+++ b/packages/adapter-graphql/src/yoga.ts[m
+[36m@@ -1,32 +1,450 @@[m
+[31m-import type { GraphqlAdapterOptions } from './types';[m
+[31m-import { toGraphqlAmbitenRequestLike } from './graphql-request';[m
+ import {[m
+[32m+[m[32m  getAdapterRuntimeContext[m
+[32m+[m[32m} from '@ambiten/adapter-runtime';[m
+[32m+[m
+[32m+[m[32mimport type {[m
+[32m+[m[32m  GraphqlAdapterOptions,[m
+[32m+[m[32m  GraphqlExecutionArgsLike,[m
+[32m+[m[32m  YogaPluginLike[m
+[32m+[m[32m} from './types';[m
+[32m+[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  assertGraphqlAdapterOptions,[m
+[32m+[m[32m  bindGraphqlAsyncIterable,[m
+[32m+[m[32m  createGraphqlContextValue,[m
+   createGraphqlRuntimeContext,[m
+[32m+[m[32m  isAsyncIterable,[m
+[32m+[m[32m  isRecord,[m
+[32m+[m[32m  runWithGraphqlContext,[m
+[32m+[m[32m  toContextRecord,[m
+   type AmbitenGraphqlRuntimeContext[m
+ } from './graphql-context';[m
+ [m
+[31m-export function createYogaContextFactory<TContext extends Record<string, unknown> = Record<string, unknown>>([m
+[31m-  options: GraphqlAdapterOptions = {},[m
+[32m+[m[32mimport {[m
+[32m+[m[32m  toGraphqlAmbitenRequestLike[m
+[32m+[m[32m} from './graphql-request';[m
+[32m+[m
+[32m+[m[32mtype GraphqlExecuteFunction =[m
+[32m+[m[32m  ([m
+[32m+[m[32m    args:[m
+[32m+[m[32m      GraphqlExecutionArgsLike[m
+[32m+[m[32m  ) =>[m
+[32m+[m[32m    | unknown[m
+[32m+[m[32m    | Promise<unknown>;[m
+[32m+[m
+[32m+[m[32minterface YogaExecutionHookLike {[m
+[32m+[m[32m  executeFn:[m
+[32m+[m[32m  GraphqlExecuteFunction;[m
+[32m+[m
+[32m+[m[32m  setExecuteFn:[m
+[32m+[m[32m  ([m
+[32m+[m[32m    execute:[m
+[32m+[m[32m      GraphqlExecuteFunction[m
+[32m+[m[32m  ) => void;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32minterface YogaSubscriptionHookLike {[m
+[32m+[m[32m  subscribeFn:[m
+[32m+[m[32m  GraphqlExecuteFunction;[m
+[32m+[m
+[32m+[m[32m  setSubscribeFn:[m
+[32m+[m[32m  ([m
+[32m+[m[32m    subscribe:[m
+[32m+[m[32m      GraphqlExecuteFunction[m
+[32m+[m[32m  ) => void;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction asExecutionArgs([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): GraphqlExecutionArgsLike {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      value[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: invalid GraphQL execution arguments.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return value;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction asExecuteHook([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): YogaExecutionHookLike {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      value[m
+[32m+[m[32m    ) ||[m
+[32m+[m[32m    typeof value.executeFn !==[m
+[32m+[m[32m    'function' ||[m
+[32m+[m[32m    typeof value.setExecuteFn !==[m
+[32m+[m[32m    'function'[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: invalid Yoga execute hook.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    executeFn:[m
+[32m+[m[32m      value.executeFn as[m
+[32m+[m[32m      GraphqlExecuteFunction,[m
+[32m+[m
+[32m+[m[32m    setExecuteFn:[m
+[32m+[m[32m      value.setExecuteFn as[m
+[32m+[m[32m      ([m
+[32m+[m[32m        execute:[m
+[32m+[m[32m          GraphqlExecuteFunction[m
+[32m+[m[32m      ) => void[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction asSubscribeHook([m
+[32m+[m[32m  value: unknown[m
+[32m+[m[32m): YogaSubscriptionHookLike {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      value[m
+[32m+[m[32m    ) ||[m
+[32m+[m[32m    typeof value.subscribeFn !==[m
+[32m+[m[32m    'function' ||[m
+[32m+[m[32m    typeof value.setSubscribeFn !==[m
+[32m+[m[32m    'function'[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new TypeError([m
+[32m+[m[32m      '@ambiten/adapter-graphql: invalid Yoga subscribe hook.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    subscribeFn:[m
+[32m+[m[32m      value.subscribeFn as[m
+[32m+[m[32m      GraphqlExecuteFunction,[m
+[32m+[m
+[32m+[m[32m    setSubscribeFn:[m
+[32m+[m[32m      value.setSubscribeFn as[m
+[32m+[m[32m      ([m
+[32m+[m[32m        subscribe:[m
+[32m+[m[32m          GraphqlExecuteFunction[m
+[32m+[m[32m      ) => void[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction resolveYogaRequest([m
+[32m+[m[32m  contextValue:[m
+[32m+[m[32m    unknown[m
+[32m+[m[32m): {[m
+[32m+[m[32m  rawRequest:[m
+[32m+[m[32m  Record<string, unknown>;[m
+[32m+[m
+[32m+[m[32m  request:[m
+[32m+[m[32m  ReturnType<[m
+[32m+[m[32m    typeof toGraphqlAmbitenRequestLike[m
+[32m+[m[32m  >;[m
+[32m+[m[32m} {[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      contextValue[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new Error([m
+[32m+[m[32m      '@ambiten/adapter-graphql: Yoga execution context is unavailable.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const raw =[m
+[32m+[m[32m    contextValue.request;[m
+[32m+[m
+[32m+[m[32m  if ([m
+[32m+[m[32m    !isRecord([m
+[32m+[m[32m      raw[m
+[32m+[m[32m    )[m
+[32m+[m[32m  ) {[m
+[32m+[m[32m    throw new Error([m
+[32m+[m[32m      '@ambiten/adapter-graphql: Yoga execution context does not expose a request.'[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const requestUrl =[m
+[32m+[m[32m    typeof raw.url ===[m
+[32m+[m[32m      'string'[m
+[32m+[m[32m      ? raw.url[m
+[32m+[m[32m      : undefined;[m
+[32m+[m
+[32m+[m[32m  let query:[m
+[32m+[m[32m    URLSearchParams |[m
+[32m+[m[32m    undefined;[m
+[32m+[m
+[32m+[m[32m  if (requestUrl) {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      query =[m
+[32m+[m[32m        new URL([m
+[32m+[m[32m          requestUrl[m
+[32m+[m[32m        ).searchParams;[m
+[32m+[m[32m    } catch {[m
+[32m+[m[32m      query =[m
+[32m+[m[32m        undefined;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    rawRequest:[m
+[32m+[m[32m      raw,[m
+[32m+[m
+[32m+[m[32m    request:[m
+[32m+[m[32m      toGraphqlAmbitenRequestLike({[m
+[32m+[m[32m        headers:[m
+[32m+[m[32m          raw.headers,[m
+[32m+[m
+[32m+[m[32m        url:[m
+[32m+[m[32m          requestUrl,[m
+[32m+[m
+[32m+[m[32m        method:[m
+[32m+[m[32m          typeof raw.method ===[m
+[32m+[m[32m            'string'[m
+[32m+[m[32m            ? raw.method[m
+[32m+[m[32m            : undefined,[m
+[32m+[m
+[32m+[m[32m        query[m
+[32m+[m[32m      })[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32masync function executeWithAmbiten([m
+[32m+[m[32m  original:[m
+[32m+[m[32m    GraphqlExecuteFunction,[m
+[32m+[m
+[32m+[m[32m  rawArgs:[m
+[32m+[m[32m    unknown,[m
+[32m+[m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions[m
+[32m+[m[32m): Promise<unknown> {[m
+[32m+[m[32m  const args =[m
+[32m+[m[32m    asExecutionArgs([m
+[32m+[m[32m      rawArgs[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m  const {[m
+[32m+[m[32m    rawRequest,[m
+[32m+[m[32m    request[m
+[32m+[m[32m  } =[m
+[32m+[m[32m    resolveYogaRequest([m
+[32m+[m[32m      args.contextValue[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m  return runWithGraphqlContext([m
+[32m+[m[32m    request,[m
+[32m+[m
+[32m+[m[32m    async () => {[m
+[32m+[m[32m      const contextValue =[m
+[32m+[m[32m        await createGraphqlContextValue([m
+[32m+[m[32m          toContextRecord([m
+[32m+[m[32m            args.contextValue[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          {[m
+[32m+[m[32m            request,[m
+[32m+[m
+[32m+[m[32m            rawRequest,[m
+[32m+[m
+[32m+[m[32m            rawInput:[m
+[32m+[m[32m              args[m
+[32m+[m[32m          }[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m      const nextArgs:[m
+[32m+[m[32m        GraphqlExecutionArgsLike = {[m
+[32m+[m[32m        ...args,[m
+[32m+[m
+[32m+[m[32m        contextValue[m
+[32m+[m[32m      };[m
+[32m+[m
+[32m+[m[32m      const result =[m
+[32m+[m[32m        await original([m
+[32m+[m[32m          nextArgs[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m      if ([m
+[32m+[m[32m        !isAsyncIterable([m
+[32m+[m[32m          result[m
+[32m+[m[32m        )[m
+[32m+[m[32m      ) {[m
+[32m+[m[32m        return result;[m
+[32m+[m[32m      }[m
+[32m+[m
+[32m+[m[32m      const snapshot =[m
+[32m+[m[32m        getAdapterRuntimeContext();[m
+[32m+[m
+[32m+[m[32m      return bindGraphqlAsyncIterable([m
+[32m+[m[32m        result,[m
+[32m+[m[32m        request,[m
+[32m+[m[32m        options,[m
+[32m+[m[32m        snapshot[m
+[32m+[m[32m      );[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    options[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport function createYogaAdapter([m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions = {}[m
+[32m+[m[32m): YogaPluginLike {[m
+[32m+[m[32m  assertGraphqlAdapterOptions([m
+[32m+[m[32m    options[m
+[32m+[m[32m  );[m
+[32m+[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    onExecute([m
+[32m+[m[32m      rawHook[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      const {[m
+[32m+[m[32m        executeFn,[m
+[32m+[m[32m        setExecuteFn[m
+[32m+[m[32m      } =[m
+[32m+[m[32m        asExecuteHook([m
+[32m+[m[32m          rawHook[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m      setExecuteFn([m
+[32m+[m[32m        rawArgs =>[m
+[32m+[m[32m          executeWithAmbiten([m
+[32m+[m[32m            executeFn,[m
+[32m+[m[32m            rawArgs,[m
+[32m+[m[32m            options[m
+[32m+[m[32m          )[m
+[32m+[m[32m      );[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    onSubscribe([m
+[32m+[m[32m      rawHook[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      const {[m
+[32m+[m[32m        subscribeFn,[m
+[32m+[m[32m        setSubscribeFn[m
+[32m+[m[32m      } =[m
+[32m+[m[32m        asSubscribeHook([m
+[32m+[m[32m          rawHook[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m      setSubscribeFn([m
+[32m+[m[32m        rawArgs =>[m
+[32m+[m[32m          executeWithAmbiten([m
+[32m+[m[32m            subscribeFn,[m
+[32m+[m[32m            rawArgs,[m
+[32m+[m[32m            options[m
+[32m+[m[32m          )[m
+[32m+[m[32m      );[m
+[32m+[m[32m    }[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Legacy context-factory API.[m
+[32m+[m[32m *[m
+[32m+[m[32m * @deprecated[m
+[32m+[m[32m * Use createYogaAdapter(). Context creation alone does not[m
+[32m+[m[32m * preserve AmbitenContext throughout resolver execution.[m
+[32m+[m[32m */[m
+[32m+[m[32mexport function createYogaContextFactory<[m
+[32m+[m[32m  TContext extends[m
+[32m+[m[32m  Record<string, unknown> =[m
+[32m+[m[32m  Record<string, unknown>[m
+[32m+[m[32m>([m
+[32m+[m[32m  options:[m
+[32m+[m[32m    GraphqlAdapterOptions = {},[m
+[32m+[m
+   extend?: ([m
+[31m-    input: { request: Request },[m
+[31m-    runtime: AmbitenGraphqlRuntimeContext[m
+[31m-  ) => Promise<TContext> | TContext[m
+[32m+[m[32m    input: {[m
+[32m+[m[32m      request:[m
+[32m+[m[32m      unknown;[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    runtime:[m
+[32m+[m[32m      AmbitenGraphqlRuntimeContext[m
+[32m+[m[32m  ) =>[m
+[32m+[m[32m    | TContext[m
+[32m+[m[32m    | Promise<TContext>[m
+ ) {[m
+[31m-  return async (input: { request: Request }) => {[m
+[31m-    const adaptedRequest = toGraphqlAmbitenRequestLike({[m
+[31m-      headers: input.request.headers,[m
+[31m-      url: input.request.url,[m
+[31m-      method: input.request.method[m
+[31m-    });[m
+[31m-[m
+[31m-    return createGraphqlRuntimeContext<TContext>([m
+[32m+[m[32m  return async ([m
+[32m+[m[32m    input: {[m
+[32m+[m[32m      request:[m
+[32m+[m[32m      unknown;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  ) => {[m
+[32m+[m[32m    const rawRequest =[m
+[32m+[m[32m      isRecord([m
+[32m+[m[32m        input.request[m
+[32m+[m[32m      )[m
+[32m+[m[32m        ? input.request[m
+[32m+[m[32m        : {};[m
+[32m+[m
+[32m+[m[32m    const requestUrl =[m
+[32m+[m[32m      typeof rawRequest.url ===[m
+[32m+[m[32m        'string'[m
+[32m+[m[32m        ? rawRequest.url[m
+[32m+[m[32m        : undefined;[m
+[32m+[m
+[32m+[m[32m    let query:[m
+[32m+[m[32m      URLSearchParams |[m
+[32m+[m[32m      undefined;[m
+[32m+[m
+[32m+[m[32m    if (requestUrl) {[m
+[32m+[m[32m      try {[m
+[32m+[m[32m        query =[m
+[32m+[m[32m          new URL([m
+[32m+[m[32m            requestUrl[m
+[32m+[m[32m          ).searchParams;[m
+[32m+[m[32m      } catch {[m
+[32m+[m[32m        query =[m
+[32m+[m[32m          undefined;[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const adaptedRequest =[m
+[32m+[m[32m      toGraphqlAmbitenRequestLike({[m
+[32m+[m[32m        headers:[m
+[32m+[m[32m          rawRequest.headers,[m
+[32m+[m
+[32m+[m[32m        url:[m
+[32m+[m[32m          requestUrl,[m
+[32m+[m
+[32m+[m[32m        method:[m
+[32m+[m[32m          typeof rawRequest.method ===[m
+[32m+[m[32m            'string'[m
+[32m+[m[32m            ? rawRequest.method[m
+[32m+[m[32m            : undefined,[m
+[32m+[m
+[32m+[m[32m        query[m
+[32m+[m[32m      });[m
+[32m+[m
+[32m+[m[32m    return createGraphqlRuntimeContext([m
+       {[m
+[31m-        request: adaptedRequest,[m
+[31m-        rawRequest: input.request,[m
+[31m-        rawInput: input[m
+[32m+[m[32m        request:[m
+[32m+[m[32m          adaptedRequest,[m
+[32m+[m
+[32m+[m[32m        rawRequest:[m
+[32m+[m[32m          input.request,[m
+[32m+[m
+[32m+[m[32m        rawInput:[m
+[32m+[m[32m          input[m
+       },[m
+[32m+[m
+       options,[m
+[31m-      async (runtime) => (extend ? await extend(input, runtime) : ({} as TContext))[m
+[32m+[m
+[32m+[m[32m      async ([m
+[32m+[m[32m        runtime[m
+[32m+[m[32m      ) =>[m
+[32m+[m[32m        extend[m
+[32m+[m[32m          ? await extend([m
+[32m+[m[32m            input,[m
+[32m+[m[32m            runtime[m
+[32m+[m[32m          )[m
+[32m+[m[32m          : ({} as TContext)[m
+     );[m
+   };[m
+[31m-};[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+\ No newline at end of file[m

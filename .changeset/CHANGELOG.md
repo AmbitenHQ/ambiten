@@ -1,19 +1,9 @@
 ---
-"@ambiten/adapter-graphql": minor
+"@ambiten/adapter-fastify": patch
 ---
 
-Add execution-scoped Apollo Server and GraphQL Yoga adapters.
+Fix Fastify execution-context propagation by running route handlers inside the Ambiten adapter runtime boundary.
 
-GraphQL operations now execute inside the Ambiten adapter runtime boundary instead of creating a short-lived runtime only while the GraphQL context object is constructed.
+Previously, the adapter entered and exited `runWithAdapterContext()` during an empty `preHandler` hook before application handlers executed. This could cause tenant, request, transaction, and other execution-scoped state to be unavailable to downstream application code.
 
-The new `createApolloAdapter()` wraps Apollo-compatible HTTP GraphQL execution so tenant identity, request metadata, instrumentation state, and other Ambiten execution context remain active throughout asynchronous resolver and model execution.
-
-The new `createYogaAdapter()` integrates with Yoga-compatible execution and subscription hooks so queries, mutations, subscriptions, and streaming execution retain the correct Ambiten runtime boundary.
-
-The adapter now uses framework-neutral structural contracts instead of importing Apollo Server, GraphQL Yoga, or GraphQL framework types directly. This reduces framework coupling and avoids forcing application framework versions into the Ambiten dependency graph.
-
-Streaming and subscription continuations restore the already-resolved runtime snapshot without repeating ingress tenant resolution.
-
-Automatic GraphQL-wide transactions are rejected because GraphQL can report resolver failures through execution results without rejecting the execution promise. Use explicit transaction boundaries inside mutation workflows or application services instead.
-
-`createApolloContextFactory()` and `createYogaContextFactory()` remain available for compatibility but are deprecated because GraphQL context construction alone does not preserve the Ambiten runtime throughout resolver execution.
+Fastify route handlers now execute inside the Ambiten runtime boundary, preserving context throughout asynchronous service and model execution.
