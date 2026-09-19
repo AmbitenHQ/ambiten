@@ -115,11 +115,11 @@ function normalizeQuery(
   query: FastifyRequest['query']
 ):
   | Record<
-      string,
-      string
-        | string[]
-        | undefined
-    >
+    string,
+    string
+    | string[]
+    | undefined
+  >
   | undefined {
   if (
     !query ||
@@ -132,8 +132,8 @@ function normalizeQuery(
     Record<
       string,
       string
-        | string[]
-        | undefined
+      | string[]
+      | undefined
     > = {};
 
   for (
@@ -190,8 +190,8 @@ function toAmbitenRequestLike(
       req.headers as Record<
         string,
         string
-          | string[]
-          | undefined
+        | string[]
+        | undefined
       >,
 
     url:
@@ -222,7 +222,7 @@ function toAmbitenRequestLike(
     get(name: string) {
       const value =
         req.headers?.[
-          name.toLowerCase()
+        name.toLowerCase()
         ];
 
       return Array.isArray(
@@ -272,10 +272,15 @@ export function createFastifyAdapter():
     ): void {
       app.addHook(
         'onRoute',
-
         routeOptions => {
           const originalHandler =
             routeOptions.handler;
+
+          if (
+            typeof originalHandler !== 'function'
+          ) {
+            return;
+          }
 
           const existingWrapper =
             wrappedHandlers.get(
@@ -304,14 +309,12 @@ export function createFastifyAdapter():
 
               return runWithAdapterContext(
                 adaptedRequest,
-
                 () =>
                   originalHandler.call(
                     this,
                     request,
                     reply
                   ),
-
                 options
               );
             };
@@ -321,10 +324,6 @@ export function createFastifyAdapter():
             wrappedHandler
           );
 
-          /*
-           * Also recognize the wrapped function itself if
-           * Fastify exposes it again through onRoute.
-           */
           wrappedHandlers.set(
             wrappedHandler,
             wrappedHandler

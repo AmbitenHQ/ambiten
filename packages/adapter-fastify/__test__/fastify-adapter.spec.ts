@@ -1,149 +1,461 @@
-import { createFastifyAdapter } from '../src/fastify-adapter';
-import { runWithAdapterContext } from '@ambiten/adapter-runtime';
+import {
+  createFastifyAdapter
+} from '../src/fastify-adapter';
 
-jest.mock('@ambiten/adapter-runtime', () => ({
-  runWithAdapterContext: jest.fn()
-}));
+import {
+  runWithAdapterContext
+} from '@ambiten/adapter-runtime';
 
-describe('createFastifyAdapter', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
+jest.mock(
+  '@ambiten/adapter-runtime',
+  () => ({
+    runWithAdapterContext:
+      jest.fn()
+  })
+);
 
-    (runWithAdapterContext as jest.Mock).mockImplementation(
-      async (_req, handler) => handler()
-    );
-  });
+const mockedRunWithAdapterContext =
+  runWithAdapterContext as jest.MockedFunction<
+    typeof runWithAdapterContext
+  >;
 
-  it('should install Fastify preHandler hook and run with Ambiten adapter context', async () => {
-    let registeredHook: any;
+describe(
+  'createFastifyAdapter',
+  () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-    const app = {
-      addHook: jest.fn((_name, hook) => {
-        registeredHook = hook;
-      })
-    };
+      mockedRunWithAdapterContext
+        .mockImplementation(
+          async (
+            _request,
+            handler
+          ) => {
+            return await handler();
+          }
+        );
+    });
 
-    const adapter = createFastifyAdapter();
+    function createRequest(
+      headers:
+        Record<
+          string,
+          string
+        > = {
+          'x-tenant-id':
+            'tenant-a'
+        }
+    ) {
+      return {
+        headers,
+        method:
+          'GET',
+        url:
+          '/users',
+        params: {},
+        query: {},
+        body:
+          undefined
+      };
+    }
 
-    const options = {
-      tenancy: {
-        header: 'x-tenant-id'
-      },
-      requestIdHeader: 'x-request-id'
-    };
+    it(
+      'should install Fastify onRoute hook and run the route handler with Ambiten adapter context',
+      async () => {
+        const app = {
+          addHook:
+            jest.fn()
+        };
 
-    adapter.install(app as any, options);
+        const options = {
+          tenancy: {
+            header:
+              'x-tenant-id'
+          }
+        };
 
-    expect(app.addHook).toHaveBeenCalledWith(
-      'preHandler',
-      expect.any(Function)
-    );
+        const adapter =
+          createFastifyAdapter();
 
-    const request = {
-      headers: {
-        'x-tenant-id': 'tenant-a',
-        'x-request-id': 'req-1'
-      },
-      url: '/users',
-      method: 'GET',
-      params: {
-        id: '123'
-      },
-      query: {
-        search: 'alice'
-      },
-      cookies: {
-        session: 'abc'
-      },
-      body: {
-        active: true
+        adapter.install(
+          app as any,
+          options
+        );
+
+        expect(
+          app.addHook
+        ).toHaveBeenCalledWith(
+          'onRoute',
+          expect.any(
+            Function
+          )
+        );
+
+        const onRoute =
+          app.addHook.mock
+            .calls[0][1];
+
+        const originalHandler =
+          jest.fn(
+            async () => ({
+              ok: true
+            })
+          );
+
+        const routeOptions = {
+          handler:
+            originalHandler
+        };
+
+        /*
+         * Simulate Fastify registering
+         * the route.
+         */
+        onRoute(
+          routeOptions
+        );
+
+        expect(
+          routeOptions.handler
+        ).not.toBe(
+          originalHandler
+        );
+
+        const request =
+          createRequest();
+
+        const reply = {};
+
+        const result =
+          await routeOptions
+            .handler(
+              request as any,
+              reply as any
+            );
+
+        expect(
+          mockedRunWithAdapterContext
+        ).toHaveBeenCalledTimes(
+          1
+        );
+
+        expect(
+          mockedRunWithAdapterContext
+        ).toHaveBeenCalledWith(
+          expect.objectContaining({
+            method:
+              'GET',
+
+            url:
+              '/users',
+
+            headers:
+              request.headers
+          }),
+
+          expect.any(
+            Function
+          ),
+
+          options
+        );
+
+        expect(
+          originalHandler
+        ).toHaveBeenCalledTimes(
+          1
+        );
+
+        expect(
+          result
+        ).toEqual({
+          ok: true
+        });
       }
-    };
-
-    const reply = {};
-
-    await registeredHook(request, reply);
-
-    expect(runWithAdapterContext).toHaveBeenCalledWith(
-      expect.objectContaining({
-        headers: expect.objectContaining({
-          'x-tenant-id': 'tenant-a',
-          'x-request-id': 'req-1'
-        }),
-        url: '/users',
-        method: 'GET',
-        params: {
-          id: '123'
-        },
-        cookies: {
-          session: 'abc'
-        },
-        query: {
-          search: 'alice'
-        },
-        body: {
-          active: true
-        },
-        get: expect.any(Function)
-      }),
-      expect.any(Function),
-      options
     );
-  });
 
-  it('should support get(name) from normalized Fastify headers', async () => {
-    let registeredHook: any;
+    it(
+      'should support get(name) from normalized Fastify headers',
+      async () => {
+        const app = {
+          addHook:
+            jest.fn()
+        };
 
-    const app = {
-      addHook: jest.fn((_name, hook) => {
-        registeredHook = hook;
-      })
-    };
+        const adapter =
+          createFastifyAdapter();
 
-    createFastifyAdapter().install(app as any);
+        adapter.install(
+          app as any,
+          {}
+        );
 
-    const request = {
-      headers: {
-        'x-tenant-id': 'tenant-a'
-      },
-      url: '/users',
-      method: 'GET',
-      params: {},
-      query: {},
-      body: undefined
-    };
+        const onRoute =
+          app.addHook.mock
+            .calls[0][1];
 
-    await registeredHook(request, {});
+        const originalHandler =
+          jest.fn(
+            async () => ({
+              ok: true
+            })
+          );
 
-    const adaptedRequest = (runWithAdapterContext as jest.Mock).mock.calls[0][0];
+        const routeOptions = {
+          handler:
+            originalHandler
+        };
 
-    expect(adaptedRequest.get('x-tenant-id')).toBe('tenant-a');
-  });
+        onRoute(
+          routeOptions
+        );
 
-  it('should propagate runtime errors from runWithAdapterContext', async () => {
-    const error = new Error('Context failed');
+        const request = {
+          ...createRequest({
+            'x-tenant-id':
+              'tenant-a',
 
-    (runWithAdapterContext as jest.Mock).mockRejectedValueOnce(error);
+            'x-request-id':
+              'request-123'
+          })
+        };
 
-    let registeredHook: any;
+        await routeOptions
+          .handler(
+            request as any,
+            {} as any
+          );
 
-    const app = {
-      addHook: jest.fn((_name, hook) => {
-        registeredHook = hook;
-      })
-    };
+        const adaptedRequest =
+          mockedRunWithAdapterContext
+            .mock.calls[0][0];
 
-    createFastifyAdapter().install(app as any);
+        expect(
+          adaptedRequest.get?.(
+            'x-tenant-id'
+          )
+        ).toBe(
+          'tenant-a'
+        );
 
-    const request = {
-      headers: {},
-      url: '/users',
-      method: 'GET',
-      params: {},
-      query: {},
-      body: undefined
-    };
+        expect(
+          adaptedRequest.get?.(
+            'X-Tenant-Id'
+          )
+        ).toBe(
+          'tenant-a'
+        );
 
-    await expect(registeredHook(request, {})).rejects.toThrow('Context failed');
-  });
-});
+        expect(
+          adaptedRequest.get?.(
+            'x-request-id'
+          )
+        ).toBe(
+          'request-123'
+        );
+      }
+    );
+
+    it(
+      'should propagate runtime errors from runWithAdapterContext',
+      async () => {
+        const app = {
+          addHook:
+            jest.fn()
+        };
+
+        const runtimeError =
+          new Error(
+            'Tenant resolution failed.'
+          );
+
+        mockedRunWithAdapterContext
+          .mockRejectedValueOnce(
+            runtimeError
+          );
+
+        const adapter =
+          createFastifyAdapter();
+
+        adapter.install(
+          app as any,
+          {
+            tenancy: {
+              header:
+                'x-tenant-id'
+            }
+          }
+        );
+
+        const onRoute =
+          app.addHook.mock
+            .calls[0][1];
+
+        const originalHandler =
+          jest.fn(
+            async () => ({
+              ok: true
+            })
+          );
+
+        const routeOptions = {
+          handler:
+            originalHandler
+        };
+
+        onRoute(
+          routeOptions
+        );
+
+        await expect(
+          routeOptions.handler(
+            createRequest() as any,
+            {} as any
+          )
+        ).rejects.toThrow(
+          'Tenant resolution failed.'
+        );
+
+        /*
+         * Runtime failure happens before
+         * application execution.
+         */
+        expect(
+          originalHandler
+        ).not.toHaveBeenCalled();
+      }
+    );
+
+    it(
+      'should execute the actual route handler inside runWithAdapterContext',
+      async () => {
+        const app = {
+          addHook:
+            jest.fn()
+        };
+
+        let insideRuntime =
+          false;
+
+        mockedRunWithAdapterContext
+          .mockImplementation(
+            async (
+              _request,
+              handler
+            ) => {
+              insideRuntime =
+                true;
+
+              try {
+                return await handler();
+              } finally {
+                insideRuntime =
+                  false;
+              }
+            }
+          );
+
+        const adapter =
+          createFastifyAdapter();
+
+        adapter.install(
+          app as any,
+          {}
+        );
+
+        const onRoute =
+          app.addHook.mock
+            .calls[0][1];
+
+        const originalHandler =
+          jest.fn(
+            async () => {
+              expect(
+                insideRuntime
+              ).toBe(true);
+
+              await Promise.resolve();
+
+              expect(
+                insideRuntime
+              ).toBe(true);
+
+              return {
+                ok: true
+              };
+            }
+          );
+
+        const routeOptions = {
+          handler:
+            originalHandler
+        };
+
+        onRoute(
+          routeOptions
+        );
+
+        await routeOptions.handler(
+          createRequest() as any,
+          {} as any
+        );
+
+        expect(
+          insideRuntime
+        ).toBe(false);
+      }
+    );
+
+    it(
+      'should reuse an existing wrapper for the same route handler',
+      () => {
+        const app = {
+          addHook:
+            jest.fn()
+        };
+
+        const adapter =
+          createFastifyAdapter();
+
+        adapter.install(
+          app as any,
+          {}
+        );
+
+        const onRoute =
+          app.addHook.mock
+            .calls[0][1];
+
+        const originalHandler =
+          jest.fn();
+
+        const firstRoute = {
+          handler:
+            originalHandler
+        };
+
+        onRoute(
+          firstRoute
+        );
+
+        const wrapper =
+          firstRoute.handler;
+
+        const secondRoute = {
+          handler:
+            originalHandler
+        };
+
+        onRoute(
+          secondRoute
+        );
+
+        expect(
+          secondRoute.handler
+        ).toBe(
+          wrapper
+        );
+      }
+    );
+  }
+);
