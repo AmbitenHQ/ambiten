@@ -45,9 +45,9 @@
     "node": ">=20.11.0"
   },
   "devDependencies": {
-    "@changesets/changelog-git": "^0.2.1",
-    "@changesets/changelog-github": "^0.5.2",
-    "@changesets/cli": "^2.29.8",
+    "@changesets/changelog-git": "^1.0.0",
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^2.31.1",
     "@eslint/js": "^9.39.2",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.14",
@@ -74,5 +74,10 @@
     "minimist": "^1.2.8",
     "sharp": "^0.34.5",
     "tsx": "^4.21.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "human-id": "4.1.3"
+    }
   }
 }
