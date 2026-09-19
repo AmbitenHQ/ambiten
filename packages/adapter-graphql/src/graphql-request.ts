@@ -1,70 +1,310 @@
 import type { AmbitenRequestLike } from '@ambiten/adapter-types';
 
+type NormalizedHeaders =
+  Record<
+    string,
+    string |
+    string[] |
+    undefined
+  >;
+
+function isRecord(
+  value: unknown
+): value is Record<string, unknown> {
+  return Boolean(
+    value &&
+    typeof value === 'object' &&
+    !Array.isArray(value)
+  );
+}
+
+function isPairIterable(
+  value: unknown
+): value is Iterable<
+  [unknown, unknown]
+> {
+  if (
+    !value ||
+    typeof value !== 'object'
+  ) {
+    return false;
+  }
+
+  const iterator =
+    (
+      value as Record<
+        PropertyKey,
+        unknown
+      >
+    )[Symbol.iterator];
+
+  return typeof iterator ===
+    'function';
+}
+
+function normalizeHeaderValue(
+  value: unknown
+):
+  | string
+  | string[]
+  | undefined {
+  if (
+    value === undefined
+  ) {
+    return undefined;
+  }
+
+  if (
+    Array.isArray(value)
+  ) {
+    return value.map(
+      item =>
+        String(item)
+    );
+  }
+
+  if (
+    value === null
+  ) {
+    return '';
+  }
+
+  return String(value);
+}
+
 function normalizeHeaders(
   headers: unknown
-): Record<string, string | string[] | undefined> {
+): NormalizedHeaders {
   if (!headers) {
     return {};
   }
 
-  if (typeof Headers !== 'undefined' && headers instanceof Headers) {
-    const result: Record<string, string> = {};
+  const result:
+    NormalizedHeaders = {};
 
-    headers.forEach((value, key) => {
-      result[key.toLowerCase()] = value;
-    });
+  /*
+   * Covers:
+   *
+   * - WHATWG Headers
+   * - Map
+   * - Apollo HeaderMap
+   * - other iterable header containers
+   */
+  if (
+    isPairIterable(
+      headers
+    )
+  ) {
+    for (
+      const [
+        rawKey,
+        rawValue
+      ] of headers
+    ) {
+      const key =
+        String(
+          rawKey
+        ).toLowerCase();
 
-    return result;
-  }
-
-  if (typeof headers === 'object') {
-    const result: Record<string, string | string[] | undefined> = {};
-
-    for (const [key, value] of Object.entries(headers as Record<string, unknown>)) {
-      if (typeof value === 'string' || Array.isArray(value) || value === undefined) {
-        result[key.toLowerCase()] = value as string | string[] | undefined;
-      } else if (value != null) {
-        result[key.toLowerCase()] = String(value);
-      }
+      result[key] =
+        normalizeHeaderValue(
+          rawValue
+        );
     }
 
     return result;
   }
 
-  return {};
+  if (
+    isRecord(
+      headers
+    )
+  ) {
+    for (
+      const [
+        key,
+        value
+      ] of Object.entries(
+        headers
+      )
+    ) {
+      result[
+        key.toLowerCase()
+      ] =
+        normalizeHeaderValue(
+          value
+        );
+    }
+  }
+
+  return result;
 }
 
 function normalizeCookies(
   cookies: unknown
-): Record<string, string> | undefined {
-  if (!cookies || typeof cookies !== 'object') {
+):
+  | Record<string, string>
+  | undefined {
+  if (
+    !isRecord(
+      cookies
+    )
+  ) {
     return undefined;
   }
 
   return Object.fromEntries(
-    Object.entries(cookies as Record<string, unknown>).map(([key, value]) => [
-      key,
-      value == null ? '' : String(value)
-    ])
+    Object.entries(
+      cookies
+    ).map(
+      ([key, value]) => [
+        key,
+        value == null
+          ? ''
+          : String(value)
+      ]
+    )
   );
+}
+
+function appendQueryValue(
+  target:
+    Record<
+      string,
+      string |
+      string[] |
+      undefined
+    >,
+
+  key:
+    string,
+
+  value:
+    string
+): void {
+  const current =
+    target[key];
+
+  if (
+    current === undefined
+  ) {
+    target[key] =
+      value;
+
+    return;
+  }
+
+  if (
+    Array.isArray(
+      current
+    )
+  ) {
+    current.push(
+      value
+    );
+
+    return;
+  }
+
+  target[key] = [
+    current,
+    value
+  ];
 }
 
 function normalizeQuery(
   query: unknown
-): Record<string, string | string[] | undefined> | undefined {
-  if (!query || typeof query !== 'object') {
+):
+  | Record<
+    string,
+    string |
+    string[] |
+    undefined
+  >
+  | undefined {
+  if (!query) {
     return undefined;
   }
 
-  const result: Record<string, string | string[] | undefined> = {};
+  const result:
+    Record<
+      string,
+      string |
+      string[] |
+      undefined
+    > = {};
 
-  for (const [key, value] of Object.entries(query as Record<string, unknown>)) {
-    if (typeof value === 'string' || value === undefined) {
-      result[key] = value;
-    } else if (Array.isArray(value)) {
-      result[key] = value.map((item) => String(item));
-    } else if (value != null) {
-      result[key] = String(value);
+  /*
+   * Covers URLSearchParams and
+   * other pair iterables.
+   */
+  if (
+    isPairIterable(
+      query
+    )
+  ) {
+    for (
+      const [
+        rawKey,
+        rawValue
+      ] of query
+    ) {
+      appendQueryValue(
+        result,
+        String(rawKey),
+        String(rawValue)
+      );
+    }
+
+    return result;
+  }
+
+  if (
+    !isRecord(
+      query
+    )
+  ) {
+    return undefined;
+  }
+
+  for (
+    const [
+      key,
+      value
+    ] of Object.entries(
+      query
+    )
+  ) {
+    if (
+      typeof value ===
+      'string' ||
+      value === undefined
+    ) {
+      result[key] =
+        value;
+
+      continue;
+    }
+
+    if (
+      Array.isArray(
+        value
+      )
+    ) {
+      result[key] =
+        value.map(
+          item =>
+            String(item)
+        );
+
+      continue;
+    }
+
+    if (
+      value != null
+    ) {
+      result[key] =
+        String(value);
     }
   }
 
@@ -75,36 +315,83 @@ export interface GraphqlRequestAdapterInput {
   headers?: unknown;
   url?: string;
   method?: string;
-  cookies?: Record<string, string | undefined>;
-  params?: Record<string, string | undefined>;
+
+  cookies?:
+  Record<
+    string,
+    string | undefined
+  >;
+
+  params?:
+  Record<
+    string,
+    string | undefined
+  >;
+
   query?: unknown;
   body?: unknown;
 }
 
 export function toGraphqlAmbitenRequestLike(
-  input: GraphqlRequestAdapterInput
+  input:
+    GraphqlRequestAdapterInput
 ): AmbitenRequestLike {
-  const headers = normalizeHeaders(input.headers);
-  const cookies = normalizeCookies(input.cookies);
+  const headers =
+    normalizeHeaders(
+      input.headers
+    );
 
   const params =
-    input.params && typeof input.params === 'object'
+    input.params &&
+      typeof input.params ===
+      'object'
       ? Object.fromEntries(
-        Object.entries(input.params).map(([key, value]) => [key, value ?? ''])
+        Object.entries(
+          input.params
+        ).map(
+          ([key, value]) => [
+            key,
+            value ?? ''
+          ]
+        )
       )
       : {};
 
   return {
     headers,
-    url: input.url,
-    method: input.method,
+
+    url:
+      input.url,
+
+    method:
+      input.method,
+
     params,
-    cookies,
-    query: normalizeQuery(input.query),
-    body: input.body,
+
+    cookies:
+      normalizeCookies(
+        input.cookies
+      ),
+
+    query:
+      normalizeQuery(
+        input.query
+      ),
+
+    body:
+      input.body,
+
     get(name: string) {
-      const value = headers[name.toLowerCase()];
-      return Array.isArray(value) ? value[0] : value;
+      const value =
+        headers[
+        name.toLowerCase()
+        ];
+
+      return Array.isArray(
+        value
+      )
+        ? value[0]
+        : value;
     }
   };
-};
+}
