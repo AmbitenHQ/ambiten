@@ -2,26 +2,12 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": "@changesets/changelog-git",
   "commit": false,
-  "linked": [
-    [
-      "@ambiten/core",
-      "@ambiten/logger",
-      "@ambiten/create",
-      "@ambiten/adapter-runtime",
-      "@ambiten/adapter-types",
-      "@ambiten/adapter-express",
-      "@ambiten/adapter-fastify",
-      "@ambiten/adapter-graphql",
-      "@ambiten/adapter-nestjs",
-      "@ambiten/adapter-lambda"
-    ]
-  ],
+  "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "snapshot": {
     "useCalculatedVersion": true
   },
-  "ignore": [],
-  "npmClient": "npm"
+  "ignore": []
 }
