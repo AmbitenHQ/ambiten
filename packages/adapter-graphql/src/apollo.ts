@@ -25,6 +25,20 @@ import {
   toGraphqlAmbitenRequestLike
 } from './graphql-request';
 
+
+export interface AmbitenApolloAdapter {
+  readonly name:
+  'apollo';
+
+  install(
+    server:
+      ApolloServerLike,
+
+    options?:
+      GraphqlAdapterOptions
+  ): () => void;
+}
+
 type ApolloExecuteFunction =
   (
     input:
@@ -246,19 +260,6 @@ function setApolloExecute(
     }
   ).executeHTTPGraphQLRequest =
     execute;
-}
-
-export interface AmbitenApolloAdapter {
-  readonly name:
-  'apollo';
-
-  install(
-    server:
-      ApolloServerLike,
-
-    options?:
-      GraphqlAdapterOptions
-  ): () => void;
 }
 
 export function createApolloAdapter():
