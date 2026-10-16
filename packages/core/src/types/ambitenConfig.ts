@@ -1,10 +1,13 @@
 import { LoggerConfig } from '@ambiten/logger';
 import type { InitMultiTenancyOptions } from '../tanancy';
 import type { BootstrapModelOptions } from './ambiten.model.type';
-import type { SchemaDefinition } from './schema.type';
 import type { Document } from './document';
 import type { BootstrapClient } from './bootstrapClient.type';
-import type { TenantConfigResolver } from './tenant-config-resolver';
+import type {
+  TenantConfigResolver,
+  TenantConfigResolverModule
+} from './tenant-config-resolver';
+import { ModelConfigInput, SchemaConfigInput } from './config-module';
 
 
 export interface AmbitenLoggerSettings extends LoggerConfig {
@@ -40,9 +43,9 @@ export interface AmbitenConfig<
     options?: Record<string, any>;
   };
 
-  model?: BootstrapModelOptions<T>;
+  model?: ModelConfigInput<T>;
 
-  schema?: SchemaDefinition<T>;
+  schema?: SchemaConfigInput<T>;
 
   multiTenant?: {
     enabled?: boolean;
@@ -68,6 +71,8 @@ export interface AmbitenConfig<
      * that are not already registered.
      */
     tenantConfigResolver?: TenantConfigResolver;
+
+    tenantConfigResolverModule?: TenantConfigResolverModule;
 
     initOptions?: InitMultiTenancyOptions;
   };
@@ -109,3 +114,16 @@ export interface AmbitenConfig<
 
   configVersion?: string;
 };
+
+
+/**
+ * Model options supported by JSON-based bootstrap
+ * configuration.
+ *
+ * Live runtime objects remain programmatic-only.
+ */
+export type JsonBootstrapModelOptions =
+  Pick<
+    BootstrapModelOptions,
+    'collectionName' | 'gcConfig'
+  >;

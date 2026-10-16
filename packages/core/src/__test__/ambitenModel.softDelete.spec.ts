@@ -1,5 +1,8 @@
 import type { Collection, Db, Document } from 'mongodb';
-import { AmbitenModel, AmbitenSchema } from '../lib-core';
+import {
+	AmbitenModel
+} from '../lib-core/model/ambitenModelFactory';
+import { AmbitenSchema } from '../lib-core/schema/ambitenSchema'
 import { applySoftDelete } from '../plugins';
 import { AmbitenContext } from '../context';
 import { registerMockTenant } from './mock-helpers/mockMultitenant';

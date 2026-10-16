@@ -1,26 +1,131 @@
-import type {
-  Collection,
-  OptionalUnlessRequiredId,
-} from 'mongodb';
+import type { Collection, OptionalUnlessRequiredId } from 'mongodb';
 
 import type {
   SchemaDefinition,
   Document,
   Relationship,
-  GCConfig,
-} from '../types';
+  GCConfig
+} from '../../types';
 
 import type {
   AmbitenMiddlewareOperation,
   AmbitenMiddlewareContext,
   AmbitenMiddlewareHandler,
-} from '../types';
+} from '../../types';
+import {
+  normalizeSchemaDefinition
+} from '../schema/normalize-schema-definition';
+import {
+  assertSchemaJsonValue,
+  assertSchemaRuntimeDefault,
+  cloneSchemaJsonValue,
+  hasRuntimeDirective,
+  resolveSchemaRuntimeDefault
+} from '../schema/schema-runtime-default';
 
 
 type MiddlewareStore<T extends Document> = {
-  pre: Partial<Record<AmbitenMiddlewareOperation, AmbitenMiddlewareHandler<T>[]>>;
-  post: Partial<Record<AmbitenMiddlewareOperation, AmbitenMiddlewareHandler<T>[]>>;
+  pre: Partial<Record<AmbitenMiddlewareOperation,
+    AmbitenMiddlewareHandler<T>[]>>;
+  post: Partial<Record<AmbitenMiddlewareOperation,
+    AmbitenMiddlewareHandler<T>[]>>;
 };
+
+const FIELD_TYPE_ALIASES = {
+  string: String,
+  number: Number,
+  boolean: Boolean,
+  date: Date,
+  array: Array,
+  object: Object,
+} as const;
+
+type FieldTypeAlias = keyof typeof FIELD_TYPE_ALIASES;
+
+// function normalizeFieldType(
+//   field: string,
+//   type: unknown
+// ): Function {
+//   /*
+//    * Preserve executable programmatic constructors.
+//    *
+//    * This also allows existing custom constructor-based
+//    * definitions to continue through registration.
+//    */
+//   if (typeof type === 'function') {
+//     return type;
+//   }
+
+//   /*
+//    * JSON-compatible descriptors.
+//    */
+//   if (
+//     typeof type === 'string' &&
+//     Object.prototype.hasOwnProperty.call(
+//       FIELD_TYPE_ALIASES,
+//       type
+//     )
+//   ) {
+//     return FIELD_TYPE_ALIASES[type as FieldTypeAlias];
+//   }
+
+//   throw new Error(
+//     `Invalid schema type for field "${field}": ` +
+//     `${String(type)}. ` +
+//     'Expected a supported constructor or one of: ' +
+//     Object.keys(FIELD_TYPE_ALIASES).join(', ')
+//   );
+// }
+
+// function normalizeSchemaDefinition<T extends Document>(
+//   schemaDefinition: SchemaDefinition<T>
+// ): SchemaDefinition<T> {
+//   if (
+//     schemaDefinition === null ||
+//     typeof schemaDefinition !== 'object' ||
+//     Array.isArray(schemaDefinition)
+//   ) {
+//     throw new Error('Schema definition must be an object.');
+//   }
+
+//   const entries = Object.entries(schemaDefinition).map(
+//     ([field, rawOptions]) => {
+//       if (
+//         rawOptions === null ||
+//         typeof rawOptions !== 'object' ||
+//         Array.isArray(rawOptions)
+//       ) {
+//         throw new Error(
+//           `Schema field "${field}" must have an options object.`
+//         );
+//       }
+
+//       const options = { ...rawOptions } as Record<string, unknown>;
+
+//       if (
+//         options.required !== undefined &&
+//         typeof options.required !== 'boolean'
+//       ) {
+//         throw new Error(
+//           `Schema field "${field}" has an invalid required flag.`
+//         );
+//       }
+
+//       if (
+//         Object.prototype.hasOwnProperty.call(options, 'type') &&
+//         options.type !== undefined
+//       ) {
+//         options.type = normalizeFieldType(field, options.type);
+//       }
+
+//       return [field, options] as const;
+
+//     }
+//   );
+
+//   return Object.fromEntries(entries) as SchemaDefinition<T>;
+
+// }
 
 /**
  * The AmbitenSchema class allows you to define a schema for MongoDB documents.
@@ -53,7 +158,7 @@ export class AmbitenSchema<T extends Document> {
    * @param schemaDefinition - The schema definition for the document.
    */
   constructor(schemaDefinition: SchemaDefinition<T>) {
-    this.schemaDefinition = schemaDefinition;
+    this.schemaDefinition = normalizeSchemaDefinition(schemaDefinition);
   }
 
   /**
@@ -67,7 +172,49 @@ export class AmbitenSchema<T extends Document> {
    * Re-registers the schema definition.
    */
   registerSchema(schemaDefinition: SchemaDefinition<T>): void {
-    this.schemaDefinition = schemaDefinition;
+    this.schemaDefinition = normalizeSchemaDefinition(schemaDefinition);
+  }
+
+  private applyDefaults(doc: OptionalUnlessRequiredId<T>): void {
+    const target =
+      doc as Record<string, unknown>;
+
+    for (const [field, options] of Object.entries(this.schemaDefinition)
+    ) {
+      /*
+       * Defaults only apply to missing values.
+       *
+       * null, false, 0 and empty strings are explicit
+       * values and must never be replaced.
+       */
+      if (
+        target[field] !== undefined ||
+        !Object.prototype.hasOwnProperty.call(
+          options,
+          'default'
+        )
+      ) {
+        continue;
+      }
+
+      const configuredDefault = options?.default;
+
+
+      if (hasRuntimeDirective(configuredDefault)) {
+        assertSchemaRuntimeDefault(configuredDefault);
+        target[field] = resolveSchemaRuntimeDefault(configuredDefault);
+
+        continue;
+      }
+
+      assertSchemaJsonValue(
+        configuredDefault,
+        `field "${field}" default`
+      );
+
+      target[field] = cloneSchemaJsonValue(configuredDefault);
+
+    }
   }
 
   private validateUnknownFields(
@@ -88,27 +235,16 @@ export class AmbitenSchema<T extends Document> {
       // MongoDB-generated fields may need an allow-list.
       if (key === "_id") continue;
 
-      if (!(key in definition)) {
-        throw new Error(
-          `Unknown schema property "${key}".`
-        );
+      if (!Object.prototype.hasOwnProperty.call(definition, key)) {
+        throw new Error(`Unknown schema property "${key}".`);
       }
     }
   }
 
-  private validateRequiredFields(
-    doc: Record<string, unknown>
-  ): void {
-    for (const [field, options] of Object.entries(
-      this.schemaDefinition
-    )) {
-      if (
-        options.required === true &&
-        (doc)[field] === undefined
-      ) {
-        throw new Error(
-          `Required property "${field}" is missing.`
-        );
+  private validateRequiredFields(doc: Record<string, unknown>): void {
+    for (const [field, options] of Object.entries(this.schemaDefinition)) {
+      if (options?.required === true && (doc)[field] === undefined) {
+        throw new Error(`Required property "${field}" is missing.`);
       }
     }
   }
@@ -118,30 +254,90 @@ export class AmbitenSchema<T extends Document> {
   ): void {
     for (const [field, options] of Object.entries(
       this.schemaDefinition
-    )) {
-      const value = (doc as Document)[field];
-      if (value !== undefined && options.type) {
-        const expectedType = options.type;
-        const actualType = typeof value;
+    )
+    ) {
+      const expectedType = options?.type;
+      if (expectedType === undefined) {
+        continue;
+      }
 
-        if (expectedType === String && actualType !== 'string') {
-          throw new Error(
-            `Field "${field}" should be of type String, but got ${actualType}.`
-          );
+      const value = (doc as Document)[field];
+
+
+      if (value === undefined) {
+        continue;
+      }
+
+      let valid = false;
+
+      if (expectedType === String) {
+        valid = typeof value === 'string';
+      }
+
+      else if (expectedType === Number) {
+        valid = typeof value === 'number' && Number.isFinite(value);
+      }
+
+      else if (expectedType === Boolean) {
+        valid = typeof value === 'boolean';
+      }
+
+      else if (expectedType === Date) {
+        valid = value instanceof Date && !Number.isNaN(value.getTime());
+      }
+
+      else if (expectedType === Array) {
+        valid = Array.isArray(value);
+      }
+
+      else if (expectedType === Object) {
+        if (
+          value !== null &&
+          typeof value === 'object' &&
+          !Array.isArray(value)
+        ) {
+          const prototype = Object.getPrototypeOf(value);
+          valid =
+            prototype === Object.prototype ||
+            prototype === null;
         }
-        if (expectedType === Number && actualType !== 'number') {
+      }
+
+      else if (typeof expectedType === 'function') {
+        try {
+          valid = value instanceof expectedType;
+
+        } catch {
           throw new Error(
-            `Field "${field}" should be of type Number, but got ${actualType}.`
-          );
-        }
-        if (expectedType === Boolean && actualType !== 'boolean') {
-          throw new Error(
-            `Field "${field}" should be of type Boolean, but got ${actualType}.`
+            `Schema field "${field}" uses an unsupported constructor.`
           );
         }
       }
+
+      if (!valid) {
+        // const expectedName = expectedType.name || 'configured constructor';
+        const expectedName =
+          typeof expectedType === 'function'
+            ? expectedType.name || 'configured constructor'
+            : String(expectedType);
+
+        const actualType =
+          value === null
+            ? 'null'
+            : Array.isArray(value)
+              ? 'array'
+              : value instanceof Date
+                ? 'date'
+                : typeof value;
+
+        throw new Error(
+          `Field "${field}" should be of type ` +
+          `${expectedName}, but got ${actualType}.`
+        );
+      }
     }
   }
+
 
   /**
    * Adds a custom validator for a specific field.
@@ -156,16 +352,33 @@ export class AmbitenSchema<T extends Document> {
     this.validators[field] = fn;
   }
 
-  private validateStructure(doc: OptionalUnlessRequiredId<T>): void {
-    const definition = this.schemaDefinition
+  private validateStructure(
+    doc: OptionalUnlessRequiredId<T>
+  ): void {
+    const definition = this.schemaDefinition;
 
-    if (!definition || Object.keys(definition).length === 0) {
+    if (
+      !definition ||
+      Object.keys(definition).length === 0
+    ) {
       return;
     }
-    
+
+    /*
+     * First reject fields that do not belong to the schema.
+     *
+     * This avoids mutating an already-invalid document.
+     */
     this.validateUnknownFields(doc);
+
+    /*
+     * Defaults must exist before required/type validation.
+     */
+    this.applyDefaults(doc);
+
     this.validateRequiredFields(doc);
     this.validateFieldTypes(doc);
+
   }
 
   /**
@@ -400,7 +613,6 @@ export class AmbitenSchema<T extends Document> {
 export class Schema<T extends Document> extends AmbitenSchema<T> {
   constructor(schemaDefinition: SchemaDefinition<T>) {
     super(schemaDefinition);
-    this.registerSchema(schemaDefinition);
   }
 
   async create(data: OptionalUnlessRequiredId<T>): Promise<T> {

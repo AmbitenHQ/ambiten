@@ -1,4 +1,5 @@
 import type { AmbitenConfig } from "../types";
+import { jsonBootstrapDefaults } from "./jsonBootstrapDefaults";
 
 export interface LoggerFormatOptions {
   timestamp?: boolean | (() => string); // true = ISO, function = custom
@@ -22,65 +23,7 @@ export function DEFAULT_CONFIG_CONTENT(options: AmbitenConfig): string {
           'my-ambiten-app',
       },
     },
-    ...(options.multiTenant?.enabled
-      ? {
-        multiTenant: {
-          enabled: true,
-          headerKey: options.multiTenant.headerKey ?? 'x-tenant-id',
-          tenants: options.multiTenant.tenants ?? {},
-          initOptions: {
-            lazy: options.multiTenant.initOptions?.lazy ?? false,
-            retryAttempts:
-              (options.multiTenant.initOptions as any)?.retryAttempts ?? 3,
-          },
-        },
-      }
-      : {}),
-    ...(options.logger?.enabled
-      ? {
-        logger: {
-          enabled: true,
-          level: options.logger.level ?? 'info',
-          colorize: options.logger.colorize ?? true,
-          json: options.logger.json ?? false,
-          transportConfigs: [
-            {
-              "type": "console",
-              "options": {}
-            },
-            {
-              "type": "rotating-file",
-              "options": {
-                "filename": "./logs/ambiten.log",
-                "frequency": "hourly",
-                "maxSize": 200,
-                "compress": false,
-                "flushInterval": 1000
-              }
-            }
-          ],
-          enableMetrics:
-            typeof options.logger.enableMetrics === 'boolean'
-              ? {
-                enabled: options.logger.enableMetrics,
-                logInterval: 60000,
-              }
-              : options.logger.enableMetrics ?? {
-                enabled: false,
-                logInterval: 60000,
-              },
-          compress:
-            typeof options.logger.compress === 'boolean'
-              ? {
-                enabled: options.logger.compress,
-              }
-              : options.logger.compress ?? {
-                enabled: false,
-              },
-
-        }
-      }
-      : {}),
+    ...jsonBootstrapDefaults(options),
     ...(options.graphql?.enabled
       ? {
         graphql: {
@@ -93,8 +36,8 @@ export function DEFAULT_CONFIG_CONTENT(options: AmbitenConfig): string {
       }
       : {}),
     features: {
-      models: options.features?.models ?? './src/models',
-      schemas: options.features?.schemas ?? './src/schemas',
+      models: options.features?.models ?? './src/dtos/models',
+      schemas: options.features?.schemas ?? './src/dtos/schemas',
       ...(options.graphql?.enabled
         ? {
           typeDefs: options.features?.typeDefs ?? './src/graphql/typeDefs',
@@ -120,4 +63,4 @@ export function DEFAULT_CONFIG_CONTENT(options: AmbitenConfig): string {
   };
 
   return JSON.stringify(config, null, 2);
-}
+};

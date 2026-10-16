@@ -2,6 +2,8 @@ export interface BootstrapCliOptions {
   withGraphql?: boolean;
   withRedis?: boolean;
   logger?: boolean;
+  schema?: boolean;
+  model?: boolean;
   multiTenant?: boolean;
   uri?: string;
   rbac?: boolean;

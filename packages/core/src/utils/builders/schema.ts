@@ -1,4 +1,4 @@
-import { AmbitenSchema } from "../../lib-core";
+import { AmbitenSchema } from "../../lib-core/schema/ambitenSchema";
 import { Document, SchemaDefinition } from "../../types";
 
 /**

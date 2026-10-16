@@ -1,5 +1,5 @@
 import type { Db } from "mongodb";
-import { AmbitenClient } from "../lib-core";
+import { AmbitenClient } from "../lib-core/ambitenClient";
 
 
 describe("AmbitenClient.db()", () => {
@@ -249,17 +249,4 @@ describe("AmbitenClient.db()", () => {
 		);
 	});
 
-	afterAll(async () => {
-		let driver = new AmbitenClient({
-			uri: process.env.MONGODB_URI ?? 'mongodb://127.0.0.1:27017/ambiten_test',
-			options: { dbName: "testdb" },
-		});
-		await driver.connect();
-		await driver.dropDatabase();
-		await driver.disconnect();
-		await driver.close();
-		// Clean up any resources if necessary
-		driver = null as any; // Clear the driver instance
-		jest.clearAllMocks();
-	});
 });

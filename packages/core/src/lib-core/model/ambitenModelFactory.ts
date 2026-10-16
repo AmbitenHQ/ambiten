@@ -33,23 +33,23 @@ import type {
   AmbitenOperationMeta,
   AmbitenHookPayload,
   GCConfig,
-} from '../types';
-import { AmbitenClient } from './ambitenClient';
-import { AmbitenSchema } from './ambitenSchema';
+} from '../../types';
+import { AmbitenClient } from '../ambitenClient';
+import { AmbitenSchema } from '../schema/ambitenSchema';
 import EventEmitter from 'events';
 import { PubSub } from 'graphql-subscriptions';
-import { MultiTenantManager } from '../tanancy';
-import type { TenantConfig } from '../tanancy/MultiTenantManager';
-import { redis } from '../redis-manager';
+import { MultiTenantManager } from '../../tanancy';
+import type { TenantConfig } from '../../tanancy/MultiTenantManager';
+import { redis } from '../../redis-manager';
 import {
   DB_CHANGE_EVENT,
   AmbitenModelRegistry,
   ErrorType,
   createAmbitenError,
-} from '../utils';
-import { AmbitenContext, runManualTransaction } from '../context';
-import { measureQuery } from '../instrumentation';
-import { debugLog } from '../debug';
+} from '../../utils';
+import { AmbitenContext, runManualTransaction } from '../../context';
+import { measureQuery } from '../../instrumentation';
+import { debugLog } from '../../debug';
 
 const pubsub = new PubSub();
 

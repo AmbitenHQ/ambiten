@@ -1,4 +1,4 @@
-import type { AmbitenRequestLike, TenancyOptions } from './types.js';
+import type { AmbitenRequestLike, TenancyOptions } from './types';
 
 function readHeader(req: AmbitenRequestLike, name: string): string | undefined {
   const value = req.headers?.[name.toLowerCase()];

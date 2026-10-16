@@ -1,6 +1,11 @@
-import { AmbitenModel, AmbitenSchema } from "../lib-core";
+import {
+  AmbitenModel
+} from "../lib-core/model/ambitenModelFactory";
+import {
+  AmbitenSchema
+} from "../lib-core/schema/ambitenSchema";
 import { ObjectId } from "mongodb";
-import { Model } from "../utils";
+import { Model } from "../lib-core/model/model";
 import { DbProvider, Document } from "../types";
 
 

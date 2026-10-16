@@ -15,11 +15,11 @@ import { RedisService } from './redis-manager';
  */
 
 const isCjs =
-  typeof module !== 'undefined' &&
-  typeof module.exports !== 'undefined';
+	typeof module !== 'undefined' &&
+	typeof module.exports !== 'undefined';
 
 console.log(
-  `Ambiten Core Library Loaded [${isCjs ? 'CJS' : 'ESM'}].`
+	`Ambiten Core Library Loaded [${isCjs ? 'CJS' : 'ESM'}].`
 );
 
 export const initializeRedis = async (
@@ -58,10 +58,16 @@ export * from './types/index';
 export {
 	createAmbitenClientModule,
 	AmbitenClient,
+} from './lib-core/ambitenClient';
+export {
 	AmbitenModel,
+	Model
+} from './lib-core/model';
+export {
 	AmbitenSchema,
-	AmbitenBootstrapFactory
-} from './lib-core';
+	Schema
+} from './lib-core/schema/ambitenSchema';
+export { AmbitenBootstrapFactory } from './lib-core/bootstrap/ambitenBootstrap';
 export { AmbitenContext } from './context/ambitenContext'
 export {
 	runManualTransaction,
@@ -90,15 +96,14 @@ export type {
 	RegisteredTenantStatistics
 } from './tanancy/MultiTenantManager';
 
+export { createSchema } from './utils/builders/schema';
+export { createAmbitenError } from './utils/error/ambitenError-handler';
+export { configureAmbitenContext } from './utils/configureAmbitenContext';
 export {
-	Model,
-	createSchema,
-	createAmbitenError,
-	AuthService,
-	configureAmbitenContext,
 	AmbitenModelRegistry,
-	clearModelRegistryForTests,
-} from './utils'
+	clearModelRegistryForTests
+} from './utils/ModelRegistry';
+export { AuthService } from './utils/AuthUtils';
 
 export type { GeneratedProjectResult } from './init-cli/generate.project';
 export type { InitMultiTenancyOptions } from './tanancy/init/initMultiTenancy';

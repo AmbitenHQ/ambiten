@@ -51,6 +51,5 @@ describe('generateProject', () => {
 
   afterAll(async () => {
     jest.resetAllMocks();
-    // await new BufferedTransporter().stop();
   });
 });
