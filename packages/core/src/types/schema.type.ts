@@ -49,16 +49,6 @@ export type SchemaRuntimeContextKey =
  *
  * Add new runtime operations here as the ecosystem grows.
  */
-// export interface SchemaRuntimeDefaultMap {
-//   now: {};
-
-//   uuid: {};
-
-//   context: {
-//     key: SchemaRuntimeContextKey;
-//   };
-// }
-
 export interface SchemaRuntimeDefaultMap {
   now: unknown;
 
@@ -84,9 +74,9 @@ export interface SchemaRuntimeDefaultMap {
  */
 export type SchemaRuntimeDefault = {
   [K in keyof SchemaRuntimeDefaultMap]:
-    {
-      $runtime: K;
-    } & SchemaRuntimeDefaultMap[K];
+  {
+    $runtime: K;
+  } & SchemaRuntimeDefaultMap[K];
 }[keyof SchemaRuntimeDefaultMap];
 
 /**
@@ -105,8 +95,8 @@ export type SchemaJsonValue =
   | SchemaJsonPrimitive
   | SchemaJsonValue[]
   | {
-      [key: string]: SchemaJsonValue;
-    };
+    [key: string]: SchemaJsonValue;
+  };
 
 export type SchemaFieldDefault =
   | SchemaJsonValue
@@ -117,8 +107,8 @@ export type SchemaFieldDefault =
  */
 export interface SchemaFieldOptions {
   type?:
-    | SchemaFieldTypeName
-    | SchemaFieldConstructor;
+  | SchemaFieldTypeName
+  | SchemaFieldConstructor;
 
   required?: boolean;
 
@@ -147,7 +137,7 @@ export type SchemaDefinition<
  * MongoDB schema types.
  */
 export const SchemaType = {
-	Types: { ObjectId },
+  Types: { ObjectId },
 } as const;
 
 

@@ -66,15 +66,52 @@ jobs:
       - name: Build
         run: pnpm build:ordered
 
+      - name: Prepare packages sequentially
+        run: pnpm -r --workspace-concurrency=1 --if-present run prepack
+
+      - name: Check whether this release run is current
+        id: release_head
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          latest_sha="$(git ls-remote origin refs/heads/main | cut -f1)"
+          test -n "$latest_sha"
+
+          if [ "$GITHUB_SHA" = "$latest_sha" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping outdated release run for $GITHUB_SHA"
+          fi
+
       - name: Create Release PR or Publish
+        if: steps.release_head.outputs.current == 'true'
         uses: changesets/action@v1
         with:
-          version: pnpm changeset version
-          publish: pnpm release
+          version: pnpm run version-packages
+          publish: pnpm run release
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AMBITEN_SECRET: ${{ secrets.AMBITENHQ_SECRET }}
           AMBITEN_REPO_SECRET: ${{ secrets.AMBITEN_REPO_SECRET }}
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}  
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          npm_config_ignore_scripts: "true"
+
+      # - name: Build
+      #   run: pnpm build:ordered
+
+      # - name: Create Release PR or Publish
+      #   uses: changesets/action@v1
+      #   with:
+      #     version: pnpm changeset version
+      #     publish: pnpm release
+      #     commit: "chore(release): version packages"
+      #     title: "chore(release): version packages"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     AMBITEN_SECRET: ${{ secrets.AMBITENHQ_SECRET }}
+      #     AMBITEN_REPO_SECRET: ${{ secrets.AMBITEN_REPO_SECRET }}
+      #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}  

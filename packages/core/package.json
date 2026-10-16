@@ -60,8 +60,7 @@
     "release": "pnpm changeset version",
     "test": "node ../../scripts/run-jest.cjs --detectOpenHandles --coverage",
     "prepack": "pnpm clean && pnpm build && pnpm run verify:exports",
-    "postbuild:esm": "node scripts/add-esm-type.js",
-    "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
+    "postbuild:esm": "node scripts/add-esm-type.js"
   },
   "release": {
     "branches": [
