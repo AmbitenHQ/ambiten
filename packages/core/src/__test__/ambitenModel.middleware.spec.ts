@@ -5,7 +5,10 @@ import type {
   Filter,
   UpdateFilter
 } from 'mongodb';
-import { AmbitenModel, AmbitenSchema } from '../lib-core';
+import {
+  AmbitenModel
+} from '../lib-core/model/ambitenModelFactory';
+import { AmbitenSchema } from '../lib-core/schema/ambitenSchema'
 import type { DbProvider } from '../types';
 import { MultiTenantManager } from '../tanancy';
 import { AmbitenContext } from '../context';

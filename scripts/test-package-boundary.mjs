@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readdirSync,
@@ -11,460 +12,177 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const packages = ["adapter-types", "core", "adapter-runtime", "adapter-express"];
+const packageIds = packages.map((name) => "@ambiten/" + name);
+const artifactsDir = path.join(root, ".integration-artifacts");
 
-const root = path.resolve(__dirname, "..");
-const pnpm = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
-
-function run(command, args, cwd, env = process.env) {
+function run(command, args, cwd, capture = false, options = {}) {
   const result = spawnSync(command, args, {
     cwd,
-    env,
+    env: process.env,
     encoding: "utf8",
-    stdio: "pipe",
+    stdio: capture ? "pipe" : "inherit",
+    windowsHide: true,
+    ...options,
   });
-
-  if (result.stdout) {
-    process.stdout.write(result.stdout);
+  if (result.error) {
+    throw new Error(`Unable to start ${command}: ${result.error.message}`, {
+      cause: result.error,
+    });
   }
-
-  if (result.stderr) {
-    process.stderr.write(result.stderr);
-  }
-
   if (result.status !== 0) {
+    if (capture) {
+      if (result.stdout) process.stdout.write(result.stdout);
+      if (result.stderr) process.stderr.write(result.stderr);
+    }
     throw new Error(
-      `Command failed (${result.status}): ${command} ${args.join(" ")}`
+      `Command failed (${result.status ?? result.signal}): ${command} ${args.join(" ")}`
     );
   }
-
   return result;
 }
 
-function toFileSpecifier(filePath) {
-  return `file:${filePath.replace(/\\/g, "/")}`;
-}
-
-const artifactsDir = path.join(
-  root,
-  ".integration-artifacts"
-);
-
-rmSync(artifactsDir, {
-  recursive: true,
-  force: true,
-});
-
-mkdirSync(artifactsDir, {
-  recursive: true,
-});
-
-console.log("\nPacking Ambiten packages...\n");
-
-for (const packageName of [
-  "core",
-  "adapter-runtime",
-  "adapter-express",
-]) {
-  run(
-    pnpm,
-    [
-      "--dir",
-      path.join(root, "packages", packageName),
-      "pack",
-      "--pack-destination",
-      artifactsDir,
-    ],
-    root
-  );
-}
-
-const packedFiles = readdirSync(artifactsDir);
-
-function findPackage(prefix) {
-  const filename = packedFiles.find(
-    (file) =>
-      file.startsWith(prefix) &&
-      file.endsWith(".tgz")
-  );
-
-  assert.ok(
-    filename,
-    `Unable to find packed package ${prefix}`
-  );
-
-  return path.join(artifactsDir, filename);
-}
-
-const corePackage = findPackage("ambiten-core-");
-
-const runtimePackage = findPackage(
-  "ambiten-adapter-runtime-"
-);
-
-const expressPackage = findPackage(
-  "ambiten-adapter-express-"
-);
-
-const integrationRoot = mkdtempSync(
-  path.join(tmpdir(), "ambiten-package-integration-")
-);
-
-function createFixture(name, type, sourceName, source) {
-  const directory = path.join(
-    integrationRoot,
-    name
-  );
-
-  mkdirSync(directory, {
-    recursive: true,
-  });
-
-  const coreSpec = toFileSpecifier(corePackage);
-  const runtimeSpec =
-    toFileSpecifier(runtimePackage);
-  const expressSpec =
-    toFileSpecifier(expressPackage);
-
-  const packageJson = {
-    name: `ambiten-integration-${name}`,
-    private: true,
-    type,
-    dependencies: {
-      "@ambiten/core": coreSpec,
-      "@ambiten/adapter-runtime": runtimeSpec,
-      "@ambiten/adapter-express": expressSpec,
-      express: "^5.2.1",
-    },
-
-    // Important for local tarball tests.
-    // adapter-express's packed workspace:^ dependency
-    // otherwise resolves runtime from npm.
-    pnpm: {
-      overrides: {
-        "@ambiten/core": coreSpec,
-        "@ambiten/adapter-runtime": runtimeSpec,
-      },
-    },
-  };
-
-  writeFileSync(
-    path.join(directory, "package.json"),
-    JSON.stringify(packageJson, null, 2)
-  );
-
-  writeFileSync(
-    path.join(directory, sourceName),
-    source
-  );
-
-  return {
-    directory,
-    sourceName,
-  };
-}
-
-const esmFixture = createFixture(
-  "esm",
-  "module",
-  "index.mjs",
-  `
-import assert from "node:assert/strict";
-import { once } from "node:events";
-import express from "express";
-
-import {
-  AmbitenContext
-} from "@ambiten/core";
-
-import {
-  createExpressAdapter
-} from "@ambiten/adapter-express";
-
-import {
-  getAdapterRuntimeContext
-} from "@ambiten/adapter-runtime";
-
-//
-// 1. Verify conditional package resolution.
-//
-
-assert.match(
-  import.meta.resolve("@ambiten/core"),
-  /[\\\\/]dist[\\\\/]esm[\\\\/]index\\.js$/
-);
-
-assert.match(
-  import.meta.resolve("@ambiten/adapter-runtime"),
-  /[\\\\/]dist[\\\\/]esm[\\\\/]index\\.js$/
-);
-
-assert.match(
-  import.meta.resolve("@ambiten/adapter-express"),
-  /[\\\\/]dist[\\\\/]esm[\\\\/]index\\.js$/
-);
-
-//
-// 2. Build a real Express application.
-//
-
-const app = express();
-
-const adapter = createExpressAdapter();
-
-await adapter.install(app, {
-  tenancy: {
-    header: "x-tenant-id",
-
-    validate(tenantId) {
-      return tenantId === "tenant-esm";
+function runPnpm(args, cwd, capture = false) {
+  // npm_execpath is optional: pnpm exec does not always provide it.
+  // Prefer a direct entrypoint when one is available.
+  const entry = process.env.npm_execpath;
+  if (entry && /pnpm/i.test(entry) && existsSync(entry)) {
+    if (/\.(?:c?js|mjs)$/i.test(entry)) {
+      return run(process.execPath, [entry, ...args], cwd, capture);
+    }
+    if (/\.exe$/i.test(entry)) {
+      return run(entry, args, cwd, capture);
     }
   }
-});
-
-//
-// 3. Read context from BOTH sides.
-//
-// AmbitenContext comes directly from core.
-// getAdapterRuntimeContext comes through adapter-runtime.
-//
-// If runtime accidentally loads Core CJS while this application
-// loads Core ESM, these values will diverge.
-//
-
-app.get("/context", async (_req, res) => {
-
-  // Intentionally cross an async boundary.
-  // This also verifies AsyncLocalStorage propagation.
-  await new Promise((resolve) =>
-    setTimeout(resolve, 10)
-  );
-
-  const applicationContext =
-    AmbitenContext.get();
-
-  const adapterContext =
-    getAdapterRuntimeContext();
-
-  res.json({
-    applicationTenant:
-      applicationContext.tenantId,
-
-    adapterTenant:
-      adapterContext.tenantId
-  });
-});
-
-//
-// 4. Start on an ephemeral port.
-//
-
-const server = app.listen(
-  0,
-  "127.0.0.1"
-);
-
-await once(server, "listening");
-
-const address = server.address();
-
-assert.ok(
-  address &&
-  typeof address === "object"
-);
-
-try {
-
-  const response = await fetch(
-    \`http://127.0.0.1:\${address.port}/context\`,
-    {
-      headers: {
-        "x-tenant-id": "tenant-esm"
+  if (process.platform === "win32") {
+    // A .cmd shim needs cmd.exe. Quote each argument, including paths
+    // containing spaces, and disable command-processor AutoRun hooks.
+    const quote = (value) => {
+      const text = String(value);
+      if (/["%\r\n]/.test(text)) {
+        throw new Error("Unsupported character in pnpm command argument: " + text);
       }
-    }
-  );
-
-  assert.equal(
-    response.status,
-    200
-  );
-
-  const body = await response.json();
-
-  assert.deepEqual(
-    body,
-    {
-      applicationTenant: "tenant-esm",
-      adapterTenant: "tenant-esm"
-    }
-  );
-
-  console.log(
-    "✅ ESM package-boundary context test passed"
-  );
-
-} finally {
-
-  server.close();
-
-  await once(server, "close");
+      return '"' + text.replace(/(\\+)$/, "$1$1") + '"';
+    };
+    const commandLine = ["pnpm.cmd", ...args].map(quote).join(" ");
+    return run(
+      process.env.ComSpec || "cmd.exe",
+      ["/d", "/s", "/v:off", "/c", '"' + commandLine + '"'],
+      cwd,
+      capture,
+      { windowsVerbatimArguments: true }
+    );
+  }
+  return run("pnpm", args, cwd, capture);
 }
-`
-);
 
-const cjsFixture = createFixture(
-  "cjs",
-  "commonjs",
-  "index.cjs",
-  `
-const assert =
-  require("node:assert/strict");
+function toFileSpecifier(filename) {
+  return "file:" + filename.replace(/\\/g, "/");
+}
 
-const { once } =
-  require("node:events");
+function findPackage(prefix) {
+  const matches = readdirSync(artifactsDir).filter(
+    (file) => file.startsWith(prefix) && file.endsWith(".tgz")
+  );
+  assert.equal(matches.length, 1, `Expected exactly one tarball for ${prefix}`);
+  return path.join(artifactsDir, matches[0]);
+}
 
-const express =
-  require("express");
+function fixtureSource(format) {
+  const header = format === "esm" ? String.raw`
+import assert from "node:assert/strict";
+import { once } from "node:events";
+const resolvePackage = (id) => import.meta.resolve(id);
+const loadPackage = (id) => import(id);
+` : String.raw`
+const assert = require("node:assert/strict");
+const { once } = require("node:events");
+const resolvePackage = (id) => require.resolve(id);
+const loadPackage = (id) => require(id);
+`;
 
-const {
-  AmbitenContext
-} = require("@ambiten/core");
+  // String.raw avoids double-escaping regular expressions and fixture code.
+  const expected = format === "esm" ? String.raw`{
+    "@ambiten/core": /[\\/]dist[\\/]esm[\\/]index\.js$/,
+    "@ambiten/adapter-types": /[\\/]dist[\\/]esm[\\/]index\.js$/,
+    "@ambiten/adapter-runtime": /[\\/]dist[\\/]esm[\\/]index\.js$/,
+    "@ambiten/adapter-express": /[\\/]dist[\\/]esm[\\/]index\.js$/,
+  }` : String.raw`{
+    "@ambiten/core": /[\\/]dist[\\/]cjs[\\/]index\.cjs$/,
+    "@ambiten/adapter-types": /[\\/]dist[\\/]cjs[\\/]index\.js$/,
+    "@ambiten/adapter-runtime": /[\\/]dist[\\/]cjs[\\/]index\.js$/,
+    "@ambiten/adapter-express": /[\\/]dist[\\/]cjs[\\/]index\.js$/,
+  }`;
 
-const {
-  createExpressAdapter
-} = require("@ambiten/adapter-express");
+  const configuration = "\nconst expected = " + expected + ";\n" +
+    "const tenantId = " + JSON.stringify("tenant-" + format) + ";\n";
 
-const {
-  getAdapterRuntimeContext
-} = require("@ambiten/adapter-runtime");
-
+  return header + configuration + String.raw`
 async function main() {
+  // Print ALL entrypoints before loading packages. Static package imports
+  // would fail before these useful diagnostics can run.
+  for (const [id, pattern] of Object.entries(expected)) {
+    const resolved = resolvePackage(id);
+    console.log(id + " -> " + resolved);
+    assert.match(resolved, pattern, "Wrong conditional export for " + id);
+  }
 
-  //
-  // 1. Verify CJS conditional exports.
-  //
-
-  assert.match(
-    require.resolve("@ambiten/core"),
-    /[\\\\/]dist[\\\\/]cjs[\\\\/]index\\.cjs$/
-  );
-
-  assert.match(
-    require.resolve(
-      "@ambiten/adapter-runtime"
-    ),
-    /[\\\\/]dist[\\\\/]cjs[\\\\/]index\\.js$/
-  );
-
-  assert.match(
-    require.resolve(
-      "@ambiten/adapter-express"
-    ),
-    /[\\\\/]dist[\\\\/]cjs[\\\\/]index\\.js$/
-  );
-
-  //
-  // 2. Real Express application.
-  //
+  // Load adapter-types explicitly, before adapters can import it transitively.
+  await loadPackage("@ambiten/adapter-types");
+  const { AmbitenContext } = await loadPackage("@ambiten/core");
+  const { getAdapterRuntimeContext } = await loadPackage("@ambiten/adapter-runtime");
+  const { createExpressAdapter } = await loadPackage("@ambiten/adapter-express");
+  const expressModule = await loadPackage("express");
+  const express = expressModule.default ?? expressModule;
 
   const app = express();
-
-  const adapter =
-    createExpressAdapter();
-
+  const adapter = createExpressAdapter();
   await adapter.install(app, {
     tenancy: {
       header: "x-tenant-id",
+      validate(value) { return value === tenantId; },
+    },
+  });
 
-      validate(tenantId) {
-        return tenantId === "tenant-cjs";
-      }
+  app.get("/context", async (_req, res, next) => {
+    try {
+      // Verify request context propagation through an async boundary.
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      const applicationContext = AmbitenContext.get();
+      const adapterContext = getAdapterRuntimeContext();
+      res.json({
+        applicationTenant: applicationContext.tenantId,
+        adapterTenant: adapterContext.tenantId,
+      });
+    } catch (error) {
+      next(error);
     }
   });
 
-  app.get(
-    "/context",
-    async (_req, res) => {
-
-      // Verify context survives await.
-      await new Promise((resolve) =>
-        setTimeout(resolve, 10)
-      );
-
-      const applicationContext =
-        AmbitenContext.get();
-
-      const adapterContext =
-        getAdapterRuntimeContext();
-
-      res.json({
-        applicationTenant:
-          applicationContext.tenantId,
-
-        adapterTenant:
-          adapterContext.tenantId
+  const server = app.listen(0, "127.0.0.1");
+  try {
+    await once(server, "listening");
+    const address = server.address();
+    assert.ok(address && typeof address === "object");
+    const response = await fetch("http://127.0.0.1:" + address.port + "/context", {
+      headers: { "x-tenant-id": tenantId },
+      signal: AbortSignal.timeout(10000),
+    });
+    const bodyText = await response.text();
+    assert.equal(response.status, 200, bodyText);
+    assert.deepEqual(JSON.parse(bodyText), {
+      applicationTenant: tenantId,
+      adapterTenant: tenantId,
+    });
+    console.log("Package-boundary context test passed: " + tenantId);
+  } finally {
+    if (server.listening) {
+      await new Promise((resolve, reject) => {
+        server.close((error) => error ? reject(error) : resolve());
+        server.closeAllConnections();
       });
     }
-  );
-
-  const server = app.listen(
-    0,
-    "127.0.0.1"
-  );
-
-  await once(
-    server,
-    "listening"
-  );
-
-  const address =
-    server.address();
-
-  assert.ok(
-    address &&
-    typeof address === "object"
-  );
-
-  try {
-
-    const response = await fetch(
-      \`http://127.0.0.1:\${address.port}/context\`,
-      {
-        headers: {
-          "x-tenant-id": "tenant-cjs"
-        }
-      }
-    );
-
-    assert.equal(
-      response.status,
-      200
-    );
-
-    const body =
-      await response.json();
-
-    assert.deepEqual(
-      body,
-      {
-        applicationTenant: "tenant-cjs",
-        adapterTenant: "tenant-cjs"
-      }
-    );
-
-    console.log(
-      "✅ CJS package-boundary context test passed"
-    );
-
-  } finally {
-
-    server.close();
-
-    await once(
-      server,
-      "close"
-    );
   }
 }
 
@@ -472,42 +190,86 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-`
-);
-
-for (const fixture of [
-  esmFixture,
-  cjsFixture,
-]) {
-  console.log(
-    `\n📥 Installing ${fixture.sourceName} fixture...\n`
-  );
-
-  run(
-    pnpm,
-    [
-      "install",
-      "--no-frozen-lockfile",
-    ],
-    fixture.directory
-  );
-
-  console.log(
-    `\nRunning ${fixture.sourceName}...\n`
-  );
-
-  run(
-    process.execPath,
-    [fixture.sourceName],
-    fixture.directory
-  );
+`;
 }
 
-console.log(
-  "\n✅ All Ambiten package-boundary integration tests passed.\n"
-);
+function createFixture(integrationRoot, format, specifications, pnpmMajor) {
+  const directory = path.join(integrationRoot, format);
+  const sourceName = format === "esm" ? "index.mjs" : "index.cjs";
+  mkdirSync(directory, { recursive: true });
+  const manifest = {
+    name: "ambiten-integration-" + format,
+    private: true,
+    type: format === "esm" ? "module" : "commonjs",
+    dependencies: { ...specifications, express: "^5.2.1" },
+  };
+  // Override ALL four packages, including adapter-types transitively.
+  // pnpm <=10 reads this from package.json; pnpm >=11 uses workspace YAML.
+  if (pnpmMajor < 11) {
+    manifest.pnpm = { overrides: { ...specifications } };
+  }
+  writeFileSync(path.join(directory, "package.json"),
+    JSON.stringify(manifest, null, 2) + "\n");
 
-rmSync(integrationRoot, {
-  recursive: true,
-  force: true,
-});
+  // Give each temporary fixture its own pnpm workspace root.
+  let workspace = "packages:\n  - '.'\n";
+  if (pnpmMajor >= 11) {
+    workspace += "overrides:\n" + Object.entries(specifications).map(
+      ([id, spec]) => "  " + JSON.stringify(id) + ": " + JSON.stringify(spec)
+    ).join("\n") + "\n";
+  }
+  writeFileSync(path.join(directory, "pnpm-workspace.yaml"), workspace);
+  writeFileSync(path.join(directory, sourceName), fixtureSource(format));
+  return { directory, sourceName };
+}
+
+let integrationRoot;
+let succeeded = false;
+try {
+  const version = runPnpm(["--version"], root, true).stdout.trim();
+  const pnpmMajor = Number(version.split(".")[0]);
+  assert.ok(Number.isInteger(pnpmMajor) && pnpmMajor > 0,
+    "Could not determine pnpm version: " + version);
+  console.log("Using pnpm " + version);
+
+  // Use existing package build scripts, including adapter-types' ESM fixer.
+  // --skip-build is for callers that already completed a full build.
+  if (!process.argv.includes("--skip-build")) {
+    for (const name of packages) {
+      console.log("\nBuilding @ambiten/" + name + "...");
+      runPnpm(["--dir", path.join(root, "packages", name), "run", "build"], root);
+    }
+  }
+
+  rmSync(artifactsDir, { recursive: true, force: true });
+  mkdirSync(artifactsDir, { recursive: true });
+  for (const name of packages) {
+    console.log("\nPacking @ambiten/" + name + "...");
+    runPnpm(["--dir", path.join(root, "packages", name), "pack",
+      "--pack-destination", artifactsDir], root);
+  }
+  const specifications = Object.fromEntries(packages.map((name) => [
+    "@ambiten/" + name,
+    toFileSpecifier(findPackage("ambiten-" + name + "-")),
+  ]));
+
+  integrationRoot = mkdtempSync(path.join(tmpdir(), "ambiten-package-integration-"));
+  for (const format of ["esm", "cjs"]) {
+    const fixture = createFixture(integrationRoot, format, specifications, pnpmMajor);
+    console.log("\nInstalling " + format + " fixture...");
+    runPnpm(["install", "--no-frozen-lockfile"], fixture.directory);
+    runPnpm(["why", "@ambiten/adapter-types"], fixture.directory);
+    console.log("\nRunning " + fixture.sourceName + "...");
+    run(process.execPath, [fixture.sourceName], fixture.directory);
+  }
+  succeeded = true;
+  console.log("\nAll Ambiten package-boundary integration tests passed.");
+} finally {
+  if (integrationRoot) {
+    if (succeeded) {
+      rmSync(integrationRoot, { recursive: true, force: true });
+    } else {
+      console.error("Fixtures retained for inspection: " + integrationRoot);
+    }
+  }
+}

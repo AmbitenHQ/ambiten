@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "pnpm run build:ordered & pnpm test:integration:packages",
+    "build": "pnpm run build:ordered && pnpm test:integration:packages",
     "build:ordered": "node scripts/build-all.js --build --clean --verify",
     "test:integration:packages": "node scripts/test-package-boundary.mjs",
     "test": "pnpm --recursive test",
@@ -52,8 +52,8 @@
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.14",
     "@types/node": "^24.10.4",
-    "@typescript-eslint/eslint-plugin": "^8.51.0",
-    "@typescript-eslint/parser": "^8.51.0",
+    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/parser": "^8.70.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "figlet": "^1.9.4",
@@ -74,10 +74,5 @@
     "minimist": "^1.2.8",
     "sharp": "^0.34.5",
     "tsx": "^4.21.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "human-id": "4.1.3"
-    }
   }
 }

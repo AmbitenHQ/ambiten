@@ -1,5 +1,5 @@
 import { createAmbitenError, ErrorType } from "../utils";
-import { AmbitenClient } from "../lib-core";
+import { AmbitenClient } from "../lib-core/ambitenClient";
 import { Collection, MongoClient } from "mongodb";
 import { Document } from "../types";
 
@@ -42,6 +42,12 @@ describe('AmbitenClient', () => {
 	const dbName = 'test';
 
 	beforeEach(async () => {
+		jest
+			.spyOn(MongoClient.prototype, 'connect')
+			.mockImplementation(async function (this: MongoClient) {
+				return this;
+			});
+
 		driver = new AmbitenClient({ uri, options: { dbName } });
 
 		// Replace network-related methods with no-op mocks
@@ -56,18 +62,28 @@ describe('AmbitenClient', () => {
 	});
 
 	afterEach(async () => {
-		jest.clearAllMocks();
-		await driver.disconnect();
-		await driver.close();
+		try {
+			await driver.disconnect();
+			await driver.close();
+		} finally {
+			jest.restoreAllMocks();
+			jest.clearAllMocks();
+		}
 	});
 
-	afterAll(async () => {
-		await driver.dropDatabase();
-		await driver.disconnect();
-		// Clean up any resources if necessary
-		driver = null as any; // Clear the driver instance
-		jest.clearAllMocks();
-	});
+	// afterEach(async () => {
+	// 	jest.clearAllMocks();
+	// 	await driver.disconnect();
+	// 	await driver.close();
+	// });
+
+	// afterAll(async () => {
+	// 	await driver.dropDatabase();
+	// 	await driver.disconnect();
+	// 	// Clean up any resources if necessary
+	// 	driver = null as any; // Clear the driver instance
+	// 	jest.clearAllMocks();
+	// });
 
 	it('should initialize MongoClient with correct URI', async () => {
 		const MongoClient = jest.fn().mockImplementation(async () => {
@@ -108,7 +124,7 @@ describe('AmbitenClient', () => {
 		const cause = 'DB_NAME_ERROR';
 		const error = new Error(message).stack;
 
-		console.log = jest.fn();
+		jest.spyOn(console, 'log').mockImplementation(() => { });
 		console.log(`[${cause}]:, ${error}`);
 
 		expect(console.log).toHaveBeenCalled();
@@ -178,10 +194,10 @@ describe('AmbitenClient', () => {
 			uri: uri,
 			options: { dbName }
 		});
-		Object.defineProperty(
-			client, 'client', {
+
+		Object.defineProperty(client, '_client', {
 			value: { db: mockDb },
-			writable: true
+			writable: true,
 		});
 
 		const log = jest.spyOn(console, 'log').mockImplementation(() => { });
@@ -362,18 +378,46 @@ describe('AmbitenClient', () => {
 	});
 
 	it('should call client.close and log to the console on close()', async () => {
-		// const mockClose = {
-		// 	close: jest.fn().mockResolvedValue(undefined)
-		// }
-		const client = new AmbitenClient({ uri: uri, options: { dbName } });
-		// Object.defineProperty(client, 'client', { value: { close: mockClose } });
-		const closeCLient = await client.close();
-		const clientLog = jest.spyOn(console, 'log').mockImplementation(() => { });
-		const clientDb = client === undefined || null
+		const client = new AmbitenClient({
+			uri,
+			options: { dbName },
+		});
 
-		expect(clientDb).toBeNull();
-		expect(clientLog).toHaveBeenCalledWith('[info]: Disconnected from MongoDB');
+		await client.connect();
+
+		const mongoClient = await client.client();
+
+		const closeSpy = jest
+			.spyOn(mongoClient, 'close')
+			.mockResolvedValue(undefined);
+
+		const logSpy = jest
+			.spyOn(console, 'log')
+			.mockImplementation(() => { });
+
+		await client.close();
+
+		expect(closeSpy).toHaveBeenCalledTimes(1);
+		expect(client.isConnected()).toBe(false);
+
+		expect(logSpy).toHaveBeenCalledWith(
+			'[info]: Disconnected from MongoDB'
+		);
 	});
+
+	// it('should call client.close and log to the console on close()', async () => {
+	// 	// const mockClose = {
+	// 	// 	close: jest.fn().mockResolvedValue(undefined)
+	// 	// }
+	// 	const client = new AmbitenClient({ uri: uri, options: { dbName } });
+	// 	// Object.defineProperty(client, 'client', { value: { close: mockClose } });
+	// 	const closeCLient = await client.close();
+	// 	const clientLog = jest.spyOn(console, 'log').mockImplementation(() => { });
+	// 	const clientDb = client === undefined || null
+
+	// 	expect(clientDb).toBeNull();
+	// 	expect(clientLog).toHaveBeenCalledWith('[info]: Disconnected from MongoDB');
+	// });
 
 	//Integration test for connection and disconnection
 	it('should connect and disconnect successfully', async () => {

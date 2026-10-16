@@ -1,103 +1,61 @@
-/* Integration test: ensure AmbitenBootstrap.initialize completes when Redis is absent.
-	 This test mocks the Redis layer to simulate an unreachable Redis server and
-	 verifies that initialize() resolves (doesn't hang or throw). */
 import { AmbitenBootstrapFactory } from '../lib-core';
+import { redis } from '../redis-manager/redisClient';
+import { createBootstrapFixture } from './mock-helpers/bootstrapFixture';
 
-
-jest.setTimeout(20000);
-
-// Mock the redis manager so calls to redis.get(...) will reject / fail
 jest.mock('../redis-manager/redisClient', () => ({
 	redis: {
-		get: jest.fn().mockResolvedValue({
-			isOpen: false,
-			connect: jest.fn().mockRejectedValue(new Error('ECONNREFUSED')),
-			disconnect: jest.fn(),
-			publish: jest.fn(),
-		}),
 		isOpen: false,
-		disconnect: jest.fn(),
+		get: jest.fn(),
+		getClient: jest.fn(),
+		disconnect: jest.fn().mockResolvedValue(undefined),
 	},
 }));
 
-// Mock the config loader to provide a minimal config that enables Redis
-jest.mock('../config/loadAmbitenConfig', () => ({
-	loadAmbitenConfig: jest.fn().mockResolvedValue({
-		projectName: 'test-app',
-		mongoClient: {
-			connect: jest.fn().mockResolvedValue(undefined),
-			close: jest.fn().mockResolvedValue(undefined),
-			client: jest.fn().mockResolvedValue({
-				collectionName: jest.fn(),
-				dbName: jest.fn()
-			}),
-			collection: jest.fn()
-		},
-		provider: {
-			connect: jest.fn().mockResolvedValue(undefined),
-			close: jest.fn().mockResolvedValue(undefined),
-			client: jest.fn().mockResolvedValue({
-				collectionName: jest.fn(),
-				dbName: jest.fn()
-			}),
-			collection: jest.fn()
-		},
-		connection: {
-			uri: 'mongodb://localhost:27017/Ambiten_test',
-			options: { dbName: 'Ambiten_test' },
-		},
-		features: {
-			useRedisCache: true,
-			redisUri: 'redis://127.0.0.1:9999'
-		},
-		logger: { enabled: false },
-	}),
-}));
-
-jest.mock('../lib-core/ambitenClient', () => ({
-	AmbitenClient: class {
-		private uri: string | undefined;
-		constructor(uri?: string, _opts?: any) {
-			this.uri = uri;
-		}
-		async connect() {
-			// no-op: pretend connect succeeded
-			return Promise.resolve();
-		}
-		async disconnect() {
-			return Promise.resolve();
-		}
-		getCollection(name: string) {
-			// return a fake collection identifier
-			return name;
-		}
-		get client() {
-			// minimal shape used by AmbitenBootstrap
-			return {
-				db: () => ({ collection: () => ({}) }),
-			};
-		}
-	}
-}));
-
-describe('AmbitenBootstrapFactory (integration) - redis absent', () => {
-	let bootstrap: Awaited<ReturnType<typeof AmbitenBootstrapFactory.create>>;
-	let warnSpy: jest.SpyInstance;
+describe('AmbitenBootstrapFactory with the offline Redis fallback', () => {
+	let runtime:
+		| Awaited<ReturnType<typeof AmbitenBootstrapFactory.create>>
+		| undefined;
 
 	beforeEach(() => {
-		warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => { });
+		jest.mocked(redis.get).mockResolvedValue(null);
+
+		jest.mocked(redis.getClient).mockResolvedValue({
+			isOpen: false,
+		});
+
+		jest.mocked(redis.disconnect).mockResolvedValue(undefined);
 	});
 
 	afterEach(async () => {
-		await bootstrap?.shutdown?.();
-		warnSpy.mockRestore();
-		jest.clearAllMocks();
+		try {
+			await runtime?.shutdown();
+		} finally {
+			runtime = undefined;
+			jest.clearAllMocks();
+		}
 	});
 
-	it('initializes cleanly when Redis cannot be reached', async () => {
-		bootstrap = await AmbitenBootstrapFactory.create();
+	it('initializes with an offline cache and shuts down cleanly', async () => {
+		const { config, provider } = createBootstrapFixture();
 
-		await expect(bootstrap.shutdown()).resolves.not.toThrow();
-	})
+		config.features = {
+			useRedisCache: true,
+			redisUri: 'redis://127.0.0.1:9999',
+		};
 
+		runtime = await AmbitenBootstrapFactory.create({ config });
+
+		expect(redis.get).toHaveBeenCalledWith(
+			config.features.redisUri
+		);
+
+		expect(redis.isOpen).toBe(false);
+		expect(provider.connect).toHaveBeenCalledTimes(1);
+		expect(runtime.getMongoClient()).toBe(provider);
+
+		await runtime.shutdown();
+		runtime = undefined;
+
+		expect(provider.close).toHaveBeenCalledTimes(1);
+	});
 });

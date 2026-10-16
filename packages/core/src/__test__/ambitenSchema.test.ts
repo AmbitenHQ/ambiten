@@ -1,5 +1,5 @@
 import { Collection } from "mongodb";
-import { AmbitenSchema } from "../lib-core";
+import { AmbitenSchema } from "../lib-core/schema/ambitenSchema";
 import { Document, Relationship, SchemaDefinition } from "../types";
 
 

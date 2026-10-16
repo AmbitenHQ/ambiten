@@ -1,4 +1,3 @@
-export * from './builders/createModel';
 export * from './builders/schema';
 export * from './ensureModelNameSafe';
 export * from './ModelRegistry';

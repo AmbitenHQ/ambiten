@@ -1,4 +1,4 @@
-import { AmbitenModel } from '../lib-core';
+import { AmbitenModel } from '../lib-core/model/ambitenModelFactory';
 import type { Document } from '../types';
 
 const modelRegistry = new Set<AmbitenModel<any>>();

@@ -33,12 +33,6 @@ module.exports = {
 				amd: 'graphql',
 				root: 'graphql',
 			},
-			'express': {
-				commonjs: 'express',
-				commonjs2: 'express',
-				amd: 'express',
-				root: 'express',
-			},
 			// Prevent bundling node_modules
 			buffer: 'commonjs buffer',
 			fs: 'commonjs fs',

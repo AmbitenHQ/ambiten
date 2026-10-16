@@ -58,7 +58,7 @@
     "clean": "rimraf dist",
     "typedoc": "typedoc --options typedoc.json",
     "release": "pnpm changeset version",
-    "test": "jest --detectOpenHandles --coverage",
+    "test": "node ../../scripts/run-jest.cjs --detectOpenHandles --coverage",
     "prepack": "pnpm clean && pnpm build && pnpm run verify:exports",
     "postbuild:esm": "node scripts/add-esm-type.js",
     "publish": "pnpm --recursive publish --access public --tag latest --no-git-checks"
@@ -105,8 +105,6 @@
     "@graphql-tools/schema": "10.0.23",
     "ajv": ">=8.18.0",
     "ajv-formats": "3.0.1",
-    "express": "^5.1.0",
-    "express-serve-static-core": "^0.1.1",
     "dotenv": "16.4.7",
     "graphql": "16.11.0",
     "graphql-http": "1.22.4",
@@ -115,7 +113,7 @@
     "graphql-tag": "2.12.6",
     "graphql-ws": "5.16.2",
     "jsonwebtoken": "9.0.2",
-    "mongodb": "^5 || ^6",
+    "mongodb": "^5 || ^7",
     "redis": "4.7.1",
     "ws": ">=8.20.1"
   },

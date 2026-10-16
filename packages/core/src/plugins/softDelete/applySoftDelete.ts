@@ -1,5 +1,5 @@
 import type { Document, Filter, UpdateFilter } from 'mongodb';
-import type { AmbitenModel } from '../../lib-core';
+import type { AmbitenModel } from '../../lib-core/model/ambitenModelFactory';
 import type { SoftDeleteOptions } from './types';
 
 const DEFAULTS: Required<SoftDeleteOptions> = {

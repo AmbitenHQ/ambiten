@@ -1,7 +1,7 @@
 import type { Db, Document } from "mongodb";
-import { Model } from '../utils/builders';
+import { Model } from '../lib-core/model/model';
 import { MultiTenantManager } from "./MultiTenantManager";
-import type { AmbitenSchema } from "../lib-core";
+import type { AmbitenSchema } from "../lib-core/schema/ambitenSchema";
 import type { DbProvider, ModelContext } from "../types";
 import { AmbitenContext } from "../context";
 

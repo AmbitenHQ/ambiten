@@ -43,7 +43,12 @@
           "type": "object",
           "description": "Mapping of tenant IDs to MongoDB URIs.",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\s*mongodb(?:\\+srv)?://"
+          },
+          "propertyNames": {
+            "type": "string",
+            "pattern": "\\S"
           }
         },
         "initOptions": {
@@ -63,6 +68,10 @@
             }
           },
           "additionalProperties": true
+        },
+        "tenantConfigResolverModule": {
+          "$ref": "#/definitions/tenantConfigResolverModule",
+          "description": "Local JavaScript module exporting a TenantConfigResolver. Imported when multi-tenancy is enabled; its path is relative to this config file."
         }
       },
       "additionalProperties": false
@@ -102,10 +111,56 @@
                 ]
               },
               "options": {
-                "type": "object"
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  }
+                },
+                "additionalProperties": true
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "file"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "options": {
+                      "type": "object",
+                      "properties": {
+                        "filename": {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        }
+                      },
+                      "required": [
+                        "filename"
+                      ],
+                      "additionalProperties": true
+                    }
+                  },
+                  "required": [
+                    "options"
+                  ]
+                }
+              }
+            ]
           }
         },
         "formatOptions": {
@@ -162,6 +217,10 @@
           "default": {
             "enabled": false
           }
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
         }
       },
       "additionalProperties": true
@@ -189,17 +248,41 @@
       },
       "additionalProperties": false
     },
+    "schema": {
+      "description": "Inline document schema definition or a module exporting a schema definition object.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/inlineSchemaDefinition"
+        },
+        {
+          "$ref": "#/definitions/configModuleReference"
+        }
+      ]
+    },
+    "model": {
+      "description": "Inline bootstrap model options or a module exporting model options. Bootstrap binds the loaded schema and provider.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/inlineModelOptions"
+        },
+        {
+          "$ref": "#/definitions/configModuleReference"
+        }
+      ]
+    },
     "features": {
       "type": "object",
       "description": "Optional feature paths and integrations.",
       "properties": {
         "models": {
           "type": "string",
-          "default": "./src/models"
+          "default": "./src/models",
+          "description": "Directory for generated model source files. The model property selects the runtime model configuration."
         },
         "schemas": {
           "type": "string",
-          "default": "./src/schemas"
+          "default": "./src/schemas",
+          "description": "Directory for generated schema source files. The schema property selects the runtime schema definition."
         },
         "typeDefs": {
           "type": "string",
@@ -273,6 +356,223 @@
       "type": "string",
       "default": "1.0.0",
       "description": "Version of the Ambiten config format."
+    }
+  },
+  "definitions": {
+    "schemaRuntimeNowDefault": {
+      "type": "object",
+      "properties": {
+        "$runtime": {
+          "const": "now"
+        }
+      },
+      "required": [
+        "$runtime"
+      ],
+      "additionalProperties": false
+    },
+    "schemaRuntimeUuidDefault": {
+      "type": "object",
+      "properties": {
+        "$runtime": {
+          "const": "uuid"
+        }
+      },
+      "required": [
+        "$runtime"
+      ],
+      "additionalProperties": false
+    },
+    "schemaRuntimeContextDefault": {
+      "type": "object",
+      "properties": {
+        "$runtime": {
+          "const": "context"
+        },
+        "key": {
+          "type": "string",
+          "enum": [
+            "tenantId",
+            "requestId",
+            "dbName",
+            "collectionName"
+          ]
+        }
+      },
+      "required": [
+        "$runtime",
+        "key"
+      ],
+      "additionalProperties": false
+    },
+    "schemaRuntimeDefault": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/schemaRuntimeNowDefault"
+        },
+        {
+          "$ref": "#/definitions/schemaRuntimeUuidDefault"
+        },
+        {
+          "$ref": "#/definitions/schemaRuntimeContextDefault"
+        }
+      ]
+    },
+    "schemaJsonLiteral": {
+      "anyOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/schemaJsonLiteral"
+          }
+        },
+        {
+          "type": "object",
+          "not": {
+            "required": [
+              "$runtime"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/schemaJsonLiteral"
+          }
+        }
+      ]
+    },
+    "schemaFieldDefault": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/schemaRuntimeDefault"
+        },
+        {
+          "$ref": "#/definitions/schemaJsonLiteral"
+        }
+      ]
+    },
+    "schemaFieldOptions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "number",
+            "boolean",
+            "date",
+            "array",
+            "object"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "default": {
+          "$ref": "#/definitions/schemaFieldDefault"
+        }
+      },
+      "additionalProperties": true
+    },
+    "tenantConfigResolverModule": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Path to a local runtime JavaScript module (.mjs, .cjs or compiled .js)."
+        },
+        "exportName": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "default": "default",
+          "description": "Name of the exported resolver function."
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "inlineSchemaDefinition": {
+      "type": "object",
+      "description": "Ambiten document schema definition.",
+      "additionalProperties": {
+        "$ref": "#/definitions/schemaFieldOptions"
+      }
+    },
+    "inlineModelOptions": {
+      "type": "object",
+      "description": "JSON-compatible bootstrap model options.",
+      "properties": {
+        "collectionName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Collection name used by the bootstrap model."
+        },
+        "gcConfig": {
+          "type": "object",
+          "properties": {
+            "ttl": {
+              "type": "number",
+              "minimum": 0
+            },
+            "indexName": {
+              "type": "string"
+            },
+            "createdAtField": {
+              "type": "string"
+            },
+            "updatedAtField": {
+              "type": "string"
+            },
+            "enableGC": {
+              "type": "boolean"
+            },
+            "field": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ttl"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "collectionName"
+      ],
+      "additionalProperties": false
+    },
+    "configModuleReference": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "description": "Path to the module file, relative to this config file. Use compiled JavaScript in production or a registered TypeScript loader for .ts development modules."
+        },
+        "exportName": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S",
+          "default": "default",
+          "description": "Name of the exported schema definition or model options object."
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
     }
   }
 }

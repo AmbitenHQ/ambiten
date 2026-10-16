@@ -1,29 +1,27 @@
 <div style="display: flex; align-items: center;">
-<p >
+<p>
   <img
     src="https://raw.githubusercontent.com/AmbitenHQ/ambiten/main/assets/ambiten-mark-192x192.png"
     width="56"
     alt="Ambiten"
-  />  
-</p> <h2> @ambiten/adapter-graphql</h2>
-</div>  
+  />
+</p>
+<h2>@ambiten/adapter-graphql</h2>
+</div>
 
 <p align="center">
-  <strong>GraphQL integration for the Ambiten runtime.</strong>
+  <strong>GraphQL execution integration for the Ambiten runtime.</strong>
 </p>
 
 <p align="center">
-  Establish context-aware execution boundaries for GraphQL queries, mutations, subscriptions, and resolver pipelines while preserving runtime continuity across the Ambiten ecosystem.
+  Preserve tenant identity, request metadata, runtime state, and execution continuity across GraphQL resolvers, services, models, subscriptions, and streaming operations.
 </p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/@ambiten/adapter-graphql">
     <img src="https://img.shields.io/npm/v/@ambiten/adapter-graphql?style=flat-square" alt="npm version" />
   </a>
-  <!-- <a href="https://ambiten.dev">
-    <img src="https://img.shields.io/badge/docs-ambiten.dev-22c55e?style=flat-square" alt="documentation" />
-  </a> -->
-    <a href="https://github.com/AmbitenHQ/ambiten/stargazers">
+  <a href="https://github.com/AmbitenHQ/ambiten/stargazers">
     <img src="https://img.shields.io/github/stars/AmbitenHQ/ambiten?style=flat-square&color=1E88E5" alt="GitHub stars" />
   </a>
 </p>
@@ -34,110 +32,550 @@
 
 `@ambiten/adapter-graphql` connects GraphQL execution to the Ambiten runtime.
 
-The adapter establishes execution boundaries for queries, mutations, and subscriptions so runtime context remains available throughout resolver execution. Tenant information, request metadata, transactions, logging, instrumentation, and runtime services can then participate consistently across GraphQL operations.
+The adapter establishes an Ambiten execution boundary around the actual GraphQL operation so runtime context remains active while resolvers, nested asynchronous calls, application services, and models execute.
 
-The adapter does not replace GraphQL. It allows GraphQL execution to participate fully in the Ambiten runtime model.
+This allows tenant identity, request metadata, logging, instrumentation, and other execution-scoped state to move through the application without being passed manually through every resolver.
+
+The package currently provides integrations for:
+
+- Apollo Server
+- GraphQL Yoga
+
+The GraphQL server may change.
+
+The Ambiten execution model does not.
+
+---
 
 ## Installation
+
+Install the GraphQL adapter:
 
 ```bash
 npm install @ambiten/adapter-graphql
 ```
 
-If you are starting a new application, installing the core runtime is also recommended:
+Most applications will also use the Ambiten core runtime:
 
 ```bash
 npm install @ambiten/core @ambiten/adapter-graphql
 ```
 
-## Quick Start
+Install the GraphQL server separately according to your application.
+
+## Apollo Server
+
+```bash
+npm install @apollo/server graphql
+```
+
+## GraphQL Yoga
+
+```bash
+npm install graphql-yoga graphql
+```
+
+`@ambiten/adapter-graphql` does not require Ambiten applications to adopt a particular GraphQL server internally.
+
+### Apollo Server
+
+Use `createApolloAdapter()` to establish the Ambiten runtime around Apollo GraphQL execution.
 
 ```ts
 import {
-  AmbitenBootstrapFactory
-} from "@ambiten/core";
+  ApolloServer
+} from "@apollo/server";
 
 import {
-  createGraphQLAdapter
+  startStandaloneServer
+} from "@apollo/server/standalone";
+
+import {
+  createApolloAdapter
 } from "@ambiten/adapter-graphql";
 
-const adapter = createGraphQLAdapter();
+import {
+  MultiTenantManager
+} from "@ambiten/core";
 
-const bootstrap =
-  await AmbitenBootstrapFactory.create({
-    adapter
+const server =
+  new ApolloServer({
+    typeDefs,
+    resolvers
   });
+
+const adapter =
+  createApolloAdapter();
+
+adapter.install(
+  server,
+  {
+    tenancy: {
+      header:
+        "x-tenant-id",
+
+      validate:
+        async (
+          tenantId
+        ) => {
+          const tenant =
+            await MultiTenantManager
+              .resolveTenant(
+                tenantId
+              );
+
+          if (!tenant) {
+            throw new Error(
+              `Tenant with ID "${tenantId}" not found.`
+            );
+          }
+
+          return true;
+        }
+    }
+  }
+);
+
+await startStandaloneServer(
+  server,
+  {
+    listen: {
+      port: 4000
+    }
+  }
+);
 ```
 
-Once installed, GraphQL operations automatically participate in the Ambiten execution model.
+The application does not need to interact with adapter-runtime internals.
 
-## What the Adapter Provides
-
-The adapter acts as the bridge between GraphQL execution and the runtime.
-
-It can establish request-scoped context, initialize tenant boundaries, propagate request metadata, participate in transaction-aware execution flows, and expose runtime state to resolvers, services, and models.
-
-This allows resolver code to remain focused on business logic while execution concerns remain coordinated by the runtime.
-
-## Runtime Flow
+The execution flow becomes:
 
 ```text
-GraphQL Request
-        ↓
-GraphQL Adapter
-        ↓
+HTTP Request
+      ↓
+Apollo Server
+      ↓
+createApolloAdapter()
+      ↓
+Ambiten Adapter Runtime
+      ↓
+Tenant Resolution
+      ↓
 AmbitenContext
-        ↓
+      ↓
 Resolvers
-        ↓
-Models & Services
-        ↓
+      ↓
+Services
+      ↓
+AmbitenModel
+      ↓
 MongoDB
 ```
 
-The adapter creates the execution boundary. The runtime then carries execution state throughout the remainder of the operation lifecycle.
+The Ambiten context remains active until GraphQL execution completes.
 
-## Resolver Context
+### GraphQL Yoga
 
-GraphQL applications often require execution state to flow across multiple resolver layers.
+Use `createYogaAdapter()` as a Yoga plugin.
 
-The adapter automatically makes runtime context available throughout resolver execution so tenant information, request metadata, transactions, logging, and instrumentation remain consistent regardless of how deeply nested a resolver chain becomes.
+```ts
+import {
+  createSchema,
+  createYoga
+} from "graphql-yoga";
 
-```text
-Query
-  ↓
-Resolver
-  ↓
-Nested Resolver
-  ↓
-Service
-  ↓
-Model
+import {
+  createYogaAdapter
+} from "@ambiten/adapter-graphql";
+
+import {
+  MultiTenantManager
+} from "@ambiten/core";
+
+const yoga =
+  createYoga({
+    schema:
+      createSchema({
+        typeDefs,
+        resolvers
+      }),
+
+    plugins: [
+      createYogaAdapter({
+        tenancy: {
+          header:
+            "x-tenant-id",
+
+          validate:
+            async (
+              tenantId
+            ) => {
+              const tenant =
+                await MultiTenantManager
+                  .resolveTenant(
+                    tenantId
+                  );
+
+              if (!tenant) {
+                throw new Error(
+                  `Tenant with ID "${tenantId}" not found.`
+                );
+              }
+
+              return true;
+            }
+        }
+      })
+    ]
+  });
 ```
 
-Execution context remains attached throughout the entire flow.
+Yoga queries, mutations, subscriptions, and supported streaming execution enter the same Ambiten runtime model.
 
-## Multi-Tenancy
+## Runtime Flow
 
-When multi-tenancy is enabled, tenant information can be resolved during GraphQL execution and made available throughout the active runtime context.
+Regardless of the GraphQL server, the execution architecture remains consistent:
 
 ```text
 GraphQL Request
+        ↓
+Apollo Server / GraphQL Yoga
+        ↓
+Ambiten GraphQL Adapter
+        ↓
+Adapter Runtime
         ↓
 Tenant Resolution
         ↓
 AmbitenContext
         ↓
-Tenant-Aware Execution
+Resolver
+        ↓
+Application Service
+        ↓
+AmbitenModel
+        ↓
+Effective ModelContext
+        ↓
+Tenant Infrastructure
+        ↓
+MongoDB
 ```
 
-This allows models and services to operate against the correct tenant boundary without manually passing tenant identifiers between resolvers.
+The adapter owns the framework execution boundary.
 
-## Subscriptions
+Application code remains focused on GraphQL and business logic.
 
-The adapter also supports runtime-aware subscription execution.
+## Resolver Execution
 
-Subscription events can participate in the same execution model used by queries and mutations, allowing tenant information, instrumentation, logging, and runtime metadata to remain consistent across real-time GraphQL workflows.
+Resolvers do not need to manually forward tenant identity or request metadata through application layers.
+
+```ts
+export const resolvers = {
+  Query: {
+    users:
+      async () => {
+        return UserModel.find(
+          {}
+        );
+      }
+  },
+
+  Mutation: {
+    createUser:
+      async (
+        _parent,
+        args
+      ) => {
+        return UserModel.create(
+          args.input
+        );
+      }
+  }
+};
+```
+
+Conceptually:
+
+```text
+Resolver
+   ↓
+Service
+   ↓
+Nested async work
+   ↓
+AmbitenModel
+   ↓
+MongoDB
+```
+
+The active Ambiten execution context remains available throughout the chain.
+
+## Multi-Tenancy
+
+Tenant identity can be resolved at the GraphQL ingress boundary.
+
+```ts
+createApolloAdapter()
+  .install(
+    server,
+    {
+      tenancy: {
+        header:
+          "x-tenant-id",
+
+        validate:
+          async (
+            tenantId
+          ) => {
+            const tenant =
+              await MultiTenantManager
+                .resolveTenant(
+                  tenantId
+                );
+
+            return Boolean(
+              tenant
+            );
+          }
+      }
+    }
+  );
+```
+
+or with Yoga:
+
+```ts
+createYogaAdapter({
+  tenancy: {
+    header:
+      "x-tenant-id",
+
+    validate:
+      async (
+        tenantId
+      ) => {
+        const tenant =
+          await MultiTenantManager
+            .resolveTenant(
+              tenantId
+            );
+
+        return Boolean(
+          tenant
+        );
+      }
+  }
+});
+```
+
+Once resolved, the tenant identity becomes part of the active Ambiten execution.
+
+Models and services can then participate in tenant-aware infrastructure resolution without manually receiving the tenant ID through resolver arguments.
+
+Tenant resolution does not replace authentication or authorization.
+
+Applications remain responsible for deciding whether a caller is permitted to act for a resolved tenant.
+
+## Application Context
+
+Ambiten does not replace the normal GraphQL context object.
+
+Application-specific values such as:
+
+- authenticated users
+- DataLoaders
+- API clients
+- feature flags
+- domain services
+
+can continue to use the framework's normal GraphQL context.
+
+Ambiten separately maintains execution-scoped runtime state such as:
+
+```text
+tenantId
+requestId
+dbName
+collectionName
+debug
+logger metadata
+runtime metadata
+```
+
+Conceptually:
+
+```text
+GraphQL Context
+→ application data
+→ authenticated user
+→ loaders
+→ services
+
+AmbitenContext
+→ execution identity
+→ tenant identity
+→ request metadata
+→ infrastructure state
+```
+
+The two contexts can coexist.
+
+## Concurrent Execution
+
+Ambiten uses execution-scoped context propagation so concurrent GraphQL operations remain isolated.
+
+```text
+Operation A
+tenant-a
+request-a
+        ↓
+resolver chain
+        ↓
+tenant-a remains active
+
+
+Operation B
+tenant-b
+request-b
+        ↓
+resolver chain
+        ↓
+tenant-b remains active
+```
+
+One operation does not need to manually protect itself from another operation's runtime state.
+
+## Subscriptions and Streaming
+
+The GraphQL adapter supports runtime continuity for subscription and streaming execution.
+
+A subscription may outlive the initial GraphQL execution call, so Ambiten restores the already-resolved execution snapshot when the asynchronous iterator continues.
+
+Conceptually:
+
+```text
+GraphQL Subscription
+        ↓
+Tenant resolved once
+        ↓
+Execution snapshot
+        ↓
+Async iterator
+        ↓
+next()
+        ↓
+Ambiten execution restored
+        ↓
+resolver / service / model work
+```
+
+This preserves execution identity without treating each emitted payload as a new ingress request.
+
+## Transactions
+
+Automatic GraphQL-operation-wide transactions are intentionally not supported through:
+
+```ts
+enableTransactions: true
+```
+
+GraphQL may complete an operation successfully at the transport level while still reporting resolver failures in the GraphQL result.
+
+For that reason, transaction ownership should remain aligned with the business workflow rather than the entire GraphQL operation.
+
+Use an explicit transaction boundary inside the mutation or application service that requires atomicity.
+
+```text
+Mutation Resolver
+        ↓
+Application Service
+        ↓
+Explicit Transaction Boundary
+        ↓
+Model A
+        ↓
+Model B
+        ↓
+Commit / Rollback
+```
+
+This keeps transaction semantics aligned with the actual unit of work.
+
+## Framework-Neutral Design
+
+`@ambiten/adapter-graphql` intentionally keeps its runtime integration independent from GraphQL framework type hierarchies.
+
+Internally, framework-specific requests are normalized into Ambiten's adapter request contract:
+
+```text
+Apollo ─────┐
+            │
+Yoga ───────┤
+            ↓
+AmbitenRequestLike
+            ↓
+Adapter Runtime
+            ↓
+AmbitenContext
+```
+
+This reduces coupling between Ambiten and framework release cycles while preserving a stable execution model.
+
+Applications remain free to choose and upgrade their GraphQL server independently.
+
+## Legacy Context Factories
+
+Earlier versions exposed:
+
+```ts
+createApolloContextFactory()
+createYogaContextFactory()
+```
+
+These APIs may remain available for compatibility, but they are not the recommended integration path for new applications.
+
+Creating a GraphQL context object is not the same as keeping the Ambiten runtime active while resolvers execute.
+
+For new applications, use:
+
+```ts
+createApolloAdapter()
+```
+
+or:
+
+```ts
+createYogaAdapter()
+```
+
+These APIs establish the runtime around actual GraphQL execution.
+
+## Execution Boundary
+
+The central rule is simple:
+
+```text
+GraphQL context creation
+≠
+GraphQL execution
+```
+
+Ambiten therefore establishes its runtime around:
+
+```text
+GraphQL Operation
+        ↓
+Resolvers
+        ↓
+Services
+        ↓
+Models
+```
+
+rather than only around the earlier context-construction lifecycle.
+
+This ensures execution state remains available where application work actually happens.
 
 ## Documentation
 
@@ -145,11 +583,13 @@ Complete documentation is available at:
 
 https://docs.ambiten.dev
 
-## Related Packages
+### Related Packages
 
-* `@ambiten/core`
-* `@ambiten/logger`
-* `@ambiten/create`
+- @ambiten/core
+- @ambiten/adapter-runtime
+- @ambiten/adapter-types
+- @ambiten/logger
+- @ambiten/create
 
 ## License
 

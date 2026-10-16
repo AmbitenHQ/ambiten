@@ -1,7 +1,7 @@
 import type { AmbitenConfig } from '../types';
 
 export function generateMainTS(options: AmbitenConfig): string {
-  return `import { run } from './core/initAmbiten';
+  return `import { run } from './core/init.runtime';
 
 async function main() {
   const app = await run();

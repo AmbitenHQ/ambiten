@@ -14,7 +14,7 @@ import { generateGCRunner } from '../generateGCRunnerFile';
 
 function buildPackageJson(options: AmbitenConfig) {
   const dependencies: Record<string, string> = {
-    '@ambiten/core': '^1.0.0',
+    '@ambiten/core': 'latest',
     mongodb: '^6.14.2',
   };
 
@@ -113,7 +113,9 @@ export async function generateAppStructure(
   const coreDir = path.join(srcDir, 'core');
   const utilsDir = path.join(srcDir, 'utils');
   const typesDir = path.join(srcDir, 'types');
-  const modelsDir = path.join(srcDir, 'models');
+  const dtoDir = path.join(srcDir, 'dtos')
+  const modelsDir = path.join(dtoDir, 'model');
+  const schemaDir = path.join(dtoDir, 'schema');
   const graphqlDir = path.join(srcDir, 'graphql');
   const gcDir = path.join(srcDir, 'gc');
 
@@ -131,6 +133,9 @@ export async function generateAppStructure(
 
   await fs.ensureDir(modelsDir);
   logger?.addDir(modelsDir);
+  
+  await fs.ensureDir(schemaDir);
+  logger?.addDir(schemaDir);
 
   if (options.graphql?.enabled) {
     await fs.ensureDir(graphqlDir);
@@ -146,9 +151,9 @@ export async function generateAppStructure(
   await fs.writeFile(mainPath, generateMainTS(options));
   logger?.addFile(mainPath);
 
-  const initAmbitenPath = path.join(coreDir, 'initAmbiten.ts');
-  await fs.writeFile(initAmbitenPath, generateInitAmbitenTS());
-  logger?.addFile(initAmbitenPath);
+  const initAmbitenRuntimePath = path.join(coreDir, 'init.runtime.ts');
+  await fs.writeFile(initAmbitenRuntimePath, generateInitAmbitenTS());
+  logger?.addFile(initAmbitenRuntimePath);
 
   const helperPath = path.join(utilsDir, 'helper.ts');
   await fs.writeFile(helperPath, `export function noop(): void {}\n`);

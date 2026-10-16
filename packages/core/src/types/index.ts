@@ -14,3 +14,4 @@ export * from './bootstrapClient.type';
 export * from './middleware/types';
 export * from './tenant-config-resolver';
 export * from './ambiten-runtime-type';
+export * from './config-module';

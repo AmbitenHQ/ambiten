@@ -15,15 +15,44 @@ const IS_CI = String(process.env.CI || "").toLowerCase() === "true";
 const DEFAULT_CONCURRENCY = IS_CI ? 4 : 1;
 const CONCURRENCY = Number(process.env.PNPM_WORKSPACE_CONCURRENCY || DEFAULT_CONCURRENCY);
 
+function execPnpmSync(args, options) {
+  const entry = process.env.npm_execpath;
+  // Lifecycle scripts receive pnpm's actual entrypoint. Launch JS with Node,
+  // avoiding the Windows .cmd shim and shell argument parsing entirely.
+  if (entry && /^pnpm(?:\.(?:c?js|mjs|exe))?$/i.test(path.basename(entry)) && fs.existsSync(entry)) {
+    if (/\.(?:c?js|mjs)$/i.test(entry)) {
+      return execFileSync(process.execPath, [entry, ...args], {
+        ...options,
+        windowsHide: true,
+      });
+    }
+    if (/\.exe$/i.test(entry) || (process.platform !== "win32" && !path.extname(entry))) {
+      return execFileSync(entry, args, { ...options, windowsHide: true });
+    }
+  }
+
+  if (process.platform === "win32") {
+    // Direct `node scripts/build-all.js` has no guaranteed npm_execpath.
+    // Run the shim through cmd.exe with quoted arguments and delayed expansion off.
+    const quote = (value) => {
+      const text = String(value);
+      if (/["%\r\n\0]/.test(text)) {
+        throw new Error("Unsupported character in pnpm command argument. Run this build through pnpm run build:ordered to use its direct entrypoint.");
+      }
+      return '"' + text.replace(/(\\+)$/, "$1$1") + '"';
+    };
+    const commandLine = ["pnpm.cmd", ...args].map(quote).join(" ");
+    return execFileSync(
+      process.env.ComSpec || "cmd.exe",
+      ["/d", "/s", "/v:off", "/c", '"' + commandLine + '"'],
+      { ...options, windowsHide: true, windowsVerbatimArguments: true }
+    );
+  }
+  return execFileSync("pnpm", args, options);
+}
+
 function runPnpm(args, { capture = false } = {}) {
-  console.log(`\n▶ ${PNPM} ${args.join(" ")}`);
-  const t0 = Date.now();
-  const out = execFileSync(PNPM, args, {
-    cwd: ROOT,
-    stdio: capture ? "pipe" : "inherit",
-    encoding: capture ? "utf8" : undefined,
-  });
-  return { out, ms: Date.now() - t0 };
+  return runPnpmInDir(ROOT, args, { capture });
 }
 
 function toFilterArgs(filters) {
@@ -178,10 +207,11 @@ function runPnpmInDir(pkgDir, args, { capture = false } = {}) {
   const t0 = Date.now();
 
   try {
-    const out = execFileSync(PNPM, args, {
+    const out = execPnpmSync(args, {
       cwd: pkgDir,
       stdio: capture ? "pipe" : "inherit",
       encoding: "utf8",
+      maxBuffer: 32 * 1024 * 1024,
     });
 
     return { out: capture ? out : "", ms: Date.now() - t0 };
@@ -365,4 +395,3 @@ try {
   console.error(e?.stack || e);
   process.exit(1);
 }
-

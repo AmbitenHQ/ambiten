@@ -1,5 +1,5 @@
 export * from './ambitenClient';
-export * from './ambitenModelFactory';
-export * from './ambitenSchema';
-export * from './bootstrap';
+export * from './model/ambitenModelFactory';
+export * from './schema/ambitenSchema';
+export * from './bootstrap/ambitenBootstrap';
 

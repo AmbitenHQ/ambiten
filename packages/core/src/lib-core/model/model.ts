@@ -1,6 +1,7 @@
-import { AmbitenModel, AmbitenClient } from "../../lib-core"
-import { AmbitenModelOptions, Document } from "../../types"; // Ensure the correct path to the document module
-
+import { AmbitenModelOptions } from "../../types/ambiten.model.type";
+import { AmbitenClient } from "../ambitenClient";
+import { AmbitenModel } from './ambitenModelFactory'
+import type { Document } from "../../types/document";
 
 /**
  * Parameters for creating a new model.
@@ -35,11 +36,11 @@ type CreateModelParams<T extends Document = any> = AmbitenModelOptions<T>;
  * } read docs for more details on what context options you can provide
  * });
  */
-export const Model = <T extends Document = any>(
-  options: CreateModelParams<T>
+export const Model = <T extends Document = Document>(
+	options: CreateModelParams<T>
 ): AmbitenModel<T> => {
-  return new AmbitenModel<T>({
-    ...options,
-    provider: options.provider ?? AmbitenClient.init()
-  });
+	return new AmbitenModel<T>({
+		...options,
+		provider: options.provider ?? AmbitenClient.init()
+	});
 }

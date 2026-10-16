@@ -1,4 +1,8 @@
-import { AmbitenClient, AmbitenModel, AmbitenSchema } from '../lib-core';
+import {
+	AmbitenClient
+} from '../lib-core/ambitenClient';
+import { AmbitenModel } from '../lib-core/model/ambitenModelFactory';
+import { AmbitenSchema } from '../lib-core/schema/ambitenSchema'
 import { AmbitenContext } from '../context';
 import { MultiTenantManager } from '../tanancy';
 
