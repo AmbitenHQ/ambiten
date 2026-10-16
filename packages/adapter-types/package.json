@@ -1,6 +1,6 @@
 {
   "name": "@ambiten/adapter-types",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ambiten multi-tenancy adapter types",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -27,7 +27,7 @@
   "scripts": {
     "build:esm": "tsc -b tsconfig.esm.json --force",
     "build:cjs": "tsc -b tsconfig.json -force && node scripts/fix-esm-extensions.mjs",
-    "build": "pnpm run clean && pnpm run build:esm && pnpm run build:cjs ", 
+    "build": "pnpm run clean && pnpm run build:esm && pnpm run build:cjs ",
     "changeset": "pnpm run changeset",
     "release": "pnpm changeset version",
     "clean": "rimraf dist",
