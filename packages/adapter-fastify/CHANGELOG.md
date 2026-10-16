@@ -1,5 +1,13 @@
 # @ambiten/adapter-fastify
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [d96aaf8]
+  - @ambiten/adapter-types@1.0.2
+  - @ambiten/adapter-runtime@2.0.0
+
 ## 1.0.5
 
 ### Patch Changes
